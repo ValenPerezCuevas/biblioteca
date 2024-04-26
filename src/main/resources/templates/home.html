@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saludo y Menú</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <style>
+        /* Agregar estilos personalizados aquí si es necesario */
+        /* Ocultar el menú lateral por defecto */
+        #sidebar {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Menú superior -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+        <a class="navbar-brand" href="#">Tu Logo</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Inicio <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Opción 1</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Opción 2</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Opción 3</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+
+<!-- Menú lateral -->
+<aside class="container-fluid" id="sidebar">
+    <div class="row">
+        <nav class="col-md-2 bg-light sidebar">
+            <div class="sidebar-sticky">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">
+                            Opción 1
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            Opción 2
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            Opción 3
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+</aside>
+
+<!-- Botón para mostrar el menú lateral -->
+<button id="sidebarToggle">Mostrar Menú</button>
+
+<script src="/js/bootstrap.bundle.min.js"></script>
+<script>
+    // Mostrar el menú lateral cuando pasas el ratón por encima
+    document.getElementById('sidebarToggle').addEventListener('mouseover', function() {
+        document.getElementById('sidebar').style.display = 'block';
+    });
+
+    // Ocultar el menú lateral cuando quitas el ratón
+    document.getElementById('sidebar').addEventListener('mouseleave', function() {
+        document.getElementById('sidebar').style.display = 'none';
+    });
+</script>
+
+
+
+
+</body>
+</html>
