@@ -5,8 +5,9 @@
     <title>Lista de Libros</title>
 </head>
 <body>
+
 <h1>Lista de Libros</h1>
-<table border="1">
+<table>
     <thead>
     <tr>
         <th>ID</th>
@@ -18,14 +19,14 @@
     </tr>
     </thead>
     <tbody>
-    <!-- Iterar sobre la lista de libros -->
+
     <tr th:each="libro : ${libros}">
         <!-- Mostrar los detalles de cada libro -->
-        <td th:text="${libro.idLibros}"></td>
+        <td th:text="${libro.id_libros}"></td>
         <td th:text="${libro.titulo}"></td>
         <td th:text="${libro.genero}"></td>
         <td th:text="${libro.autor}"></td>
-        <td th:text="${libro.anoPublicacion}"></td>
+        <td th:text="${libro.ano_publicacion}"></td>
         <td th:text="${libro.editorial}"></td>
     </tr>
     </tbody>
