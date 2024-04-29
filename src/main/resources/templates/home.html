@@ -1,94 +1,146 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Saludo y Menú</title>
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <!-- Enlace a Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        /* Agregar estilos personalizados aquí si es necesario */
-        /* Ocultar el menú lateral por defecto */
-        #sidebar {
-            display: none;
+        /* Estilos personalizados */
+
+        /* Fondo y colores de texto */
+        body {
+            background-color: #FFEDDB; /* Beige claro */
+            color: #BF9270; /* Marrón medio */
+        }
+
+        /* Estilos para el aside */
+        aside {
+            background-color: #EDCDBB; /* Marrón suave */
+            color: #BF9270; /* Marrón medio */
+            padding: 20px;
+            height: 100vh;
+        }
+
+        /* Estilos para los carruseles */
+        .carousel-item {
+            text-align: center;
+            padding: 50px;
+        }
+
+        /* Estilos para el footer */
+        footer {
+            background-color: #EDCDBB; /* Marrón suave */
+            color: #BF9270; /* Marrón medio */
+            padding: 20px 0;
+            text-align: center;
         }
     </style>
 </head>
 <body>
 
-<!-- Menú superior -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container">
-        <a class="navbar-brand" href="#">Tu Logo</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Inicio <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Opción 1</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Opción 2</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Opción 3</a>
-                </li>
+<div class="container-fluid">
+    <div class="row">
+        <!-- Aside en la parte izquierda -->
+        <aside class="col-md-3">
+            <h2>Menú</h2>
+            <ul>
+                <li>Opción 1</li>
+                <li>Opción 2</li>
+                <li>Opción 3</li>
             </ul>
+        </aside>
+        <!-- Carruseles a la derecha -->
+        <div class="col-md-9">
+            <div id="carouselExampleControls1" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <h2>Carrusel 1</h2>
+                        <p>Contenido del carrusel 1...</p>
+                    </div>
+                    <div class="carousel-item">
+                        <h2>Carrusel 2</h2>
+                        <p>Contenido del carrusel 2...</p>
+                    </div>
+                    <div class="carousel-item">
+                        <h2>Carrusel 3</h2>
+                        <p>Contenido del carrusel 3...</p>
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls1" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Anterior</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls1" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Siguiente</span>
+                </button>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div id="carouselExampleControls1" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <h2>Carrusel 1</h2>
+                        <p>Contenido del carrusel 1...</p>
+                    </div>
+                    <div class="carousel-item">
+                        <h2>Carrusel 2</h2>
+                        <p>Contenido del carrusel 2...</p>
+                    </div>
+                    <div class="carousel-item">
+                        <h2>Carrusel 3</h2>
+                        <p>Contenido del carrusel 3...</p>
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls1" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Anterior</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls1" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Siguiente</span>
+                </button>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div id="carouselExampleControls1" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <h2>Carrusel 1</h2>
+                        <p>Contenido del carrusel 1...</p>
+                    </div>
+                    <div class="carousel-item">
+                        <h2>Carrusel 2</h2>
+                        <p>Contenido del carrusel 2...</p>
+                    </div>
+                    <div class="carousel-item">
+                        <h2>Carrusel 3</h2>
+                        <p>Contenido del carrusel 3...</p>
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls1" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Anterior</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls1" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Siguiente</span>
+                </button>
+            </div>
         </div>
     </div>
-</nav>
+    <!-- Footer -->
+    <footer class="row">
+        <div class="col-md-12">
+            <p>&copy; 2024 Todos los derechos reservados.</p>
+        </div>
+    </footer>
+</div>
 
-
-
-<!-- Menú lateral -->
-<aside class="container-fluid" id="sidebar">
-    <div class="row">
-        <nav class="col-md-2 bg-light sidebar">
-            <div class="sidebar-sticky">
-                <ul class="nav flex-column">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="#">
-                            Opción 1
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            Opción 2
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            Opción 3
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    </div>
-</aside>
-
-<!-- Botón para mostrar el menú lateral -->
-<button id="sidebarToggle">Mostrar Menú</button>
-
-<script src="/js/bootstrap.bundle.min.js"></script>
-<script>
-    // Mostrar el menú lateral cuando pasas el ratón por encima
-    document.getElementById('sidebarToggle').addEventListener('mouseover', function() {
-        document.getElementById('sidebar').style.display = 'block';
-    });
-
-    // Ocultar el menú lateral cuando quitas el ratón
-    document.getElementById('sidebar').addEventListener('mouseleave', function() {
-        document.getElementById('sidebar').style.display = 'none';
-    });
-</script>
-
-
-
+<!-- Scripts de Bootstrap y JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>

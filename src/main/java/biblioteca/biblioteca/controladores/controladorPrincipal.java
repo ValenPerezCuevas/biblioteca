@@ -10,6 +10,11 @@ public class controladorPrincipal {
         return "home";
     }
 
+    @GetMapping("/prueba")
+    public String prueba(){
+        return "DiseñoPc";
+    }
+
 
 
 }
