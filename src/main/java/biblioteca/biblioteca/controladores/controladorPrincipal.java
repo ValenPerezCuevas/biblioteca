@@ -10,11 +10,16 @@ public class controladorPrincipal {
         return "home";
     }
 
-    @GetMapping("/prueba")
-    public String prueba(){
-        return "DiseñoPc";
+    @GetMapping("/admin")
+    public String adminitrar(){
+        return "admin";
     }
+    @GetMapping("/usuarios")
+    public String usuarios(){ return "usuarios";}
 
+
+    @GetMapping("/listar")
+    public String libros(){ return "listar";}
 
 
 }
