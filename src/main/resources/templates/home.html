@@ -8,139 +8,253 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         /* Estilos personalizados */
-
+        @import url('https://fonts.googleapis.com/css2?family=Caesar+Dressing&display=swap');
         /* Fondo y colores de texto */
         body {
             background-color: #FFEDDB; /* Beige claro */
             color: #BF9270; /* Marrón medio */
+            font-family: 'Caesar Dressing', cursive;
         }
 
         /* Estilos para el aside */
         aside {
-            background-color: #EDCDBB; /* Marrón suave */
-            color: #BF9270; /* Marrón medio */
+            background-color: #E3B7A0;
+            color: #BF9270;
             padding: 20px;
             height: 100vh;
         }
 
-        /* Estilos para los carruseles */
-        .carousel-item {
-            text-align: center;
-            padding: 50px;
-        }
-
         /* Estilos para el footer */
         footer {
-            background-color: #EDCDBB; /* Marrón suave */
-            color: #BF9270; /* Marrón medio */
+            background-color: #FFEDDB;
+            color: #BF9270;
             padding: 20px 0;
             text-align: center;
         }
+
+        footer p {
+            font-size: 3vh;
+        }
+
+        nav {
+            background-color: #E3B7A0;
+            font-size: 3.5vh;
+        }
+
+        article {
+            background-color: #EDCDBB;
+        }
+
+        ul {
+            list-style: none;
+        }
+        .box {
+            border: 1px solid #000; /* Borde negro */
+            width: 100px; /* Ancho deseado */
+            height: 100px; /* Altura deseada */
+            margin: 5px; /* Margen entre las cajas */
+            display: flex; /* Activar flexbox */
+            justify-content: center; /* Centrar contenido horizontalmente */
+            align-items: center; /* Centrar contenido verticalmente */
+        }
+
+
     </style>
 </head>
 <body>
+<nav class="navbar navbar-expand-lg p-4 vh-15">
+    <div class="container-fluid">
+        <img src="/imagenes/logo.png" alt="Logo" width="200" height="200">
+        <div class="navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav w-100 d-flex justify-content-around ">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Mis listas</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Descubre</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" aria-disabled="true">Mis Datos</a>
+                </li>
+            </ul>
+        </div>
 
+    </div>
+</nav>
+
+
+</div>
 <div class="container-fluid">
     <div class="row">
         <!-- Aside en la parte izquierda -->
-        <aside class="col-md-3">
-            <h2>Menú</h2>
-            <ul>
-                <li>Opción 1</li>
-                <li>Opción 2</li>
-                <li>Opción 3</li>
-            </ul>
-        </aside>
-        <!-- Carruseles a la derecha -->
-        <div class="col-md-9">
-            <div id="carouselExampleControls1" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <h2>Carrusel 1</h2>
-                        <p>Contenido del carrusel 1...</p>
-                    </div>
-                    <div class="carousel-item">
-                        <h2>Carrusel 2</h2>
-                        <p>Contenido del carrusel 2...</p>
-                    </div>
-                    <div class="carousel-item">
-                        <h2>Carrusel 3</h2>
-                        <p>Contenido del carrusel 3...</p>
-                    </div>
-                </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls1" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Anterior</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls1" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Siguiente</span>
-                </button>
-            </div>
-        </div>
-        <div class="col-md-9">
-            <div id="carouselExampleControls1" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <h2>Carrusel 1</h2>
-                        <p>Contenido del carrusel 1...</p>
-                    </div>
-                    <div class="carousel-item">
-                        <h2>Carrusel 2</h2>
-                        <p>Contenido del carrusel 2...</p>
-                    </div>
-                    <div class="carousel-item">
-                        <h2>Carrusel 3</h2>
-                        <p>Contenido del carrusel 3...</p>
-                    </div>
-                </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls1" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Anterior</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls1" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Siguiente</span>
-                </button>
-            </div>
-        </div>
-        <div class="col-md-9">
-            <div id="carouselExampleControls1" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <h2>Carrusel 1</h2>
-                        <p>Contenido del carrusel 1...</p>
-                    </div>
-                    <div class="carousel-item">
-                        <h2>Carrusel 2</h2>
-                        <p>Contenido del carrusel 2...</p>
-                    </div>
-                    <div class="carousel-item">
-                        <h2>Carrusel 3</h2>
-                        <p>Contenido del carrusel 3...</p>
-                    </div>
-                </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls1" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Anterior</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls1" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Siguiente</span>
-                </button>
-            </div>
-        </div>
-    </div>
-    <!-- Footer -->
-    <footer class="row">
-        <div class="col-md-12">
-            <p>&copy; 2024 Todos los derechos reservados.</p>
-        </div>
-    </footer>
-</div>
+        <aside class="col-md-3 p-4 d-flex flex-column  align-items-center ">
+            <!-- Agregando la clase p-4 para el margen -->
 
-<!-- Scripts de Bootstrap y JavaScript -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+            <div>
+                <nav class="navbar">
+                    <div class="container-fluid m-2">
+                        <form class="d-flex" role="search">
+                            <input class="form-control me-2" type="search" placeholder="Introduce un título"
+                                   aria-label="Búsqueda">
+                            <button class="btn btn-outline-success" type="submit">Buscar</button>
+                        </form>
+                    </div>
+                </nav>
+            </div>
+
+            <div class="m-2">
+                <h4>Listas</h4>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">
+                        Usuario
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+                    <label class="form-check-label" for="flexCheckChecked">
+                        Número Lista
+                    </label>
+                </div>
+
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+                    <label class="form-check-label" for="flexCheckChecked">
+                        Nombre Listas
+                    </label>
+                </div>
+
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+                    <label class="form-check-label" for="flexCheckChecked">
+                        Cantidad de Libros
+                    </label>
+                </div>
+
+
+            </div>
+
+            <div class="m-2">
+                <h4>Usuario</h4>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">
+                        Nombre usuario
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+                    <label class="form-check-label" for="flexCheckChecked">
+                        Fecha Registro
+                    </label>
+                </div>
+
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+                    <label class="form-check-label" for="flexCheckChecked">
+                        NºListas
+                    </label>
+                </div>
+
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+                    <label class="form-check-label" for="flexCheckChecked">
+                        Fecha Creación
+                    </label>
+                </div>
+
+
+            </div>
+
+            <div class="m-2">
+                <h4>Libros</h4>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">
+                        Titulo
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+                    <label class="form-check-label" for="flexCheckChecked">
+                        Genero
+                    </label>
+                </div>
+
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+                    <label class="form-check-label" for="flexCheckChecked">
+                        Autor
+                    </label>
+                </div>
+
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+                    <label class="form-check-label" for="flexCheckChecked">
+                        Año de publicación
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+                    <label class="form-check-label" for="flexCheckChecked">
+                        Editorial
+                    </label>
+                </div>
+
+
+            </div>
+
+
+        </aside>
+        <div class="container col-lg-9 d-flex flex-column justify-content-center align-items-center">
+            <div class="row col-md-3">
+                <div class="d-flex flex-nowrap justify-content-between">
+                    <div class="box">1</div>
+                    <div class="box">2</div>
+                    <div class="box">3</div>
+                    <div class="box">4</div>
+                    <div class="box">5</div>
+                    <div class="box">6</div>
+                </div>
+            </div>
+            <div class="row col-lg-3">
+                <div class="d-flex flex-nowrap justify-content-between">
+                    <div class="box">1</div>
+                    <div class="box">2</div>
+                    <div class="box">3</div>
+                    <div class="box">4</div>
+                    <div class="box">5</div>
+                    <div class="box">6</div>
+                </div>
+            </div>
+            <div class="row col-lg-3">
+                <div class="d-flex flex-nowrap justify-content-between">
+                    <div class="box">1</div>
+                    <div class="box">2</div>
+                    <div class="box">3</div>
+                    <div class="box">4</div>
+                    <div class="box">5</div>
+                    <div class="box">6</div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Footer -->
+        <footer class="row d-flex vh-15">
+            <div class="d-flex justify-content-center">
+                <p class="vh-3">"La lectura es un viaje que te lleva a mundos desconocidos"</p>
+
+
+            </div>
+        </footer>
+    </div>
+
+    <!-- Scripts de Bootstrap y JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>
