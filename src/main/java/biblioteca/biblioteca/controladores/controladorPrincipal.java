@@ -14,8 +14,8 @@ public class controladorPrincipal {
     public String adminitrar(){
         return "admin";
     }
-    @GetMapping("/usuarios")
-    public String usuarios(){ return "usuarios";}
+//    @GetMapping("/usuarios")
+//    public String usuarios(){ return "usuarios";}
 
 
     @GetMapping("/listar")

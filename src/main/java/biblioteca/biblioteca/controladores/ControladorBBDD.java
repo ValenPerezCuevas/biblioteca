@@ -22,4 +22,11 @@ public class ControladorBBDD {
         model.addAttribute("libros", jdbcTemplate.queryForList(sql));
         return "listar";
     }
+
+    @GetMapping("/usuarios")
+    public String obtenerTodosLosUsuarios(Model model){
+        String sql = "SELECT * FROM usuarios";
+        model.addAttribute("usuarios",jdbcTemplate.queryForList(sql));
+        return "usuarios";
+    }
 }
