@@ -1,6 +1,6 @@
 
 $(document).ready(function() {
-    // Tu objeto JSON con las frases y autores
+
     let frases = [
             {
                 "frase": "No hay mayor tormenta que la que crea la propia mente.",
