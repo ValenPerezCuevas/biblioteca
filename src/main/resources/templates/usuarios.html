@@ -79,39 +79,33 @@
         </div>
     </nav>
 </header>
-<div class="container" style="width: 90%;"> <!-- Contenedor con ancho del 90% -->
+<div class="container" style="width: 90%;">
     <h1 class="text-center mb-4">Lore Librarian</h1>
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <th>Nombre</th>
-            <th>Contraseña</th>
-            <th>Id_Rol</th>
-            <th>Acciones</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="usuario : ${usuarios}">
+    <div class="container">
+        <table class="table table-striped mx-auto">
+            <tr class="text-center">
+                <th class="text-center">Nombre</th>
+                <th class="text-center">Contraseña</th>
+                <th class="text-center">Id_Rol</th>
+                <th class="text-center">Acciones</th>
+            </tr>
+            <tbody>
+            <tr th:each="usuario : ${usuarios}">
+                <td th:text="${usuario.nombre}" class="text-center"></td>
+                <td th:text="${usuario.contrasena}" class="text-center"></td>
+                <td th:text="${usuario.id_rol}" class="text-center"></td>
+                <td class="text-center">
+                    <div class="btn-group" role="group" aria-label="Acciones">
+                        <button type="button" class="btn btn-info">Ver Portada</button>
+                        <button type="button" class="btn btn-success">Añadir</button>
+                        <button type="button" class="btn btn-danger">X</button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 
-
-
-
-
-
-            <td th:text="${usuario.nombre}"></td>
-            <td th:text="${usuario.contrasena}"></td>
-            <td th:text="${usuario.id_rol}"></td>
-
-            <td>
-                <div class="btn-group" role="group" aria-label="Acciones">
-                    <button type="button" class="btn btn-info">Ver Portada</button>
-                    <button type="button" class="btn btn-success">Añadir</button>
-                    <button type="button" class="btn btn-danger">X</button>
-                </div>
-            </td>
-        </tr>
-        </tbody>
-    </table>
 </div>
 
 <!-- Scripts de Bootstrap -->
