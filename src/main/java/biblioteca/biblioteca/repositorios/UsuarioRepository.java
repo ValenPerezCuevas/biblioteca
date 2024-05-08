@@ -15,8 +15,5 @@ public class UsuarioRepository {
         this.jdbcTemplate=jdbcTemplate;
     }
 
-    public List<Usuario> findAll(){
-        String sql = "SELECT * FROM usuarios";
-        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Usuario.class));
-    }
+
 }

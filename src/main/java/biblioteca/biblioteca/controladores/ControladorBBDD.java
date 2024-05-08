@@ -29,4 +29,6 @@ public class ControladorBBDD {
         model.addAttribute("usuarios",jdbcTemplate.queryForList(sql));
         return "usuarios";
     }
+
+
 }

@@ -12,7 +12,7 @@ public class controladorLogin {
     @PostMapping("/login")
     public String Checklogin(){ return "home";}
 
-    @GetMapping("/registrar")
+    @GetMapping("//crearUsuario")
     public String Registrarusuario(){ return "crearUsuario";}
 
 

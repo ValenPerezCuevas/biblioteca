@@ -16,8 +16,5 @@ public class LibroRepository {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public List<Libro> findAll() {
-        String sql = "SELECT * FROM libros";
-        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Libro.class));
-    }
+
 }
