@@ -1,0 +1,22 @@
+ECOSISTEMA
+-Se clona el repositorio con el enlace.
+-Se comprueba que están todos los archivos
+
+SISTEMA DE RAMAS
+1.	Se sincroniza el trabajo desde la rama master
+git fetch --all
+2.	Si es necesario se pullean los cambios a master
+git pull
+3.	Nos cambiamos a la rama que se nos ha asignado el trabajo
+git checkout issue#1
+4.	Trabajamos en la rama hasta que acabemos con el trabajo a desempeñar. Cada cambio significativo debe ir asociado a un commit
+git add .
+git commit –m “Cambios en la plantilla libros. Añadido método borrado”
+5.	Una vez acabemos las implementaciones subimos nuestra rama
+git push origin issue#1
+6.	Cuando tengamos subido nuestra rama necesitamos fusionarla con la principal:
+git merge –no-ff –m “Fusiono issue#1 con develop” issue#1
+
+7.	Se pueden dar dos casos:
+a.	No hay conflictos: simplemente se sube y listo
+b.	Hay conflictos: se tiene que ir a InteliJ en la parte de commit. Hay que resolver los conflictos y finalizar el commit. Revisamos en la parte de las ramas que todo este correcto.
