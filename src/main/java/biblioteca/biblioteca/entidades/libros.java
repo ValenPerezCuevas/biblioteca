@@ -1,13 +1,17 @@
 package biblioteca.biblioteca.entidades;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import lombok.Data;
 
+@Entity
 @Data
-public class Libro {
-    private int idLibros;
+public class libros {
+    @Id
+    private int id_libros;
     private String titulo;
     private String genero;
     private String autor;
-    private Integer anoPublicacion;
+    private Integer ano_Publicacion;
     private String editorial;
 }

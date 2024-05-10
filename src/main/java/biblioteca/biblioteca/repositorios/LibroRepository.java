@@ -1,20 +1,15 @@
 package biblioteca.biblioteca.repositorios;
 
-import biblioteca.biblioteca.entidades.Libro;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.core.JdbcTemplate;
+import biblioteca.biblioteca.entidades.libros;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
-public class LibroRepository {
+public interface LibroRepository extends JpaRepository<libros, Long> {
 
-    private final JdbcTemplate jdbcTemplate;
 
-    public LibroRepository(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
-    }
 
 
 }
