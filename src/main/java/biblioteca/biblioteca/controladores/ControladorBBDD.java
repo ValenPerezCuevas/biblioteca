@@ -1,7 +1,9 @@
 package biblioteca.biblioteca.controladores;
 
+
+import biblioteca.biblioteca.repositorios.LibroRepository;
+import biblioteca.biblioteca.repositorios.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,24 +11,24 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class ControladorBBDD {
 
-    private final JdbcTemplate jdbcTemplate;
+    private final LibroRepository libroRepository;
+    private final UsuarioRepository usuarioRepository;
 
     @Autowired
-    public ControladorBBDD(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
+    public ControladorBBDD(LibroRepository libroRepository, UsuarioRepository usuarioRepository) {
+        this.libroRepository = libroRepository;
+        this.usuarioRepository = usuarioRepository;
     }
 
     @GetMapping("/listado")
     public String obtenerTodosLosLibros(Model model){
-        String sql = "SELECT * FROM libros";
-        model.addAttribute("libros", jdbcTemplate.queryForList(sql));
+       model.addAttribute("libros", libroRepository.findAll());
         return "listar";
     }
 
     @GetMapping("/usuarios")
     public String obtenerTodosLosUsuarios(Model model){
-        String sql = "SELECT * FROM usuarios";
-        model.addAttribute("usuarios",jdbcTemplate.queryForList(sql));
+       model.addAttribute("usuarios",usuarioRepository.findAll());
         return "usuarios";
     }
 
