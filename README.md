@@ -17,7 +17,7 @@ git add .
 git commit –m “Cambios en la plantilla libros. Añadido método borrado”
 5.	Una vez acabemos las implementaciones subimos nuestra rama
 git push origin issue#1
-6.	Cuando tengamos subido nuestra rama necesitamos fusionarla con la principal:
+6.	Cuando tengamos subido nuestra rama necesitamos fusionarla con la principal desde master:
 git merge –no-ff –m “Fusiono issue#1 con develop” issue#1
 
 7.	Se pueden dar dos casos:
