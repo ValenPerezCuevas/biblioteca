@@ -41,7 +41,7 @@ Mandar formulario de agregar usuario
  */
 
     @PostMapping("/agregarUsuario")
-    public String guardarUsuario(@ModelAttribute ("nuevoUsuario") usuarios usuario, Model model) {
+    public String guardarUsuario(@ModelAttribute ("nuevoUsuario") usuarios usuario) {
         usuarioRepository.save(usuario);
         return "redirect:/usuarios";
     }

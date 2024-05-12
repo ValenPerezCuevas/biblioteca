@@ -137,7 +137,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="idRolUsuario" class="form-label">ID del Rol</label>
-                        <input type="number" class="form-control" id="idRolUsuario" th:field="*{id_rol}" required>
+                        <input type="number" class="form-control" id="idRolUsuario" th:field="*{id_rol}" min="0" max="2" required>
                     </div>
                     <button type="submit" class="btn btn-primary">Crear Usuario</button>
                 </form>
