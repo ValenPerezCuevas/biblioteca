@@ -33,7 +33,7 @@ public class controladorUsuario {
     public String obtenerTodosLosUsuarios(Model model) {
         model.addAttribute("listaUsuarios", usuarioRepository.findAll());
         model.addAttribute("nuevoUsuario", new usuarios());
-
+        model.addAttribute("usuarioModificado", new usuarios());
         return "usuarios";
     }
 
@@ -62,6 +62,19 @@ Eliminar datos
 Modificar datos
 */
 
+    @GetMapping("/modificarUsuario/{id}")
+    public String mostrarFormularioDeModificar(@PathVariable("id") Integer id, Model model) {
+        usuarios usuario = usuarioRepository.findById(Long.valueOf(id))
+                .orElseThrow(() -> new IllegalArgumentException("Usuario inválido con ID: " + id));
+        model.addAttribute("usuarioModificado", usuario);
+        return "usuarios";  // Nombre de la vista que contiene el modal
+    }
+
+    @PostMapping("/modificarUsuario")
+    public String modificarUsuario(@ModelAttribute("usuarioModificado") usuarios usuario) {
+        usuarioRepository.save(usuario);
+        return "redirect:/usuarios";
+    }
 
 
 }
