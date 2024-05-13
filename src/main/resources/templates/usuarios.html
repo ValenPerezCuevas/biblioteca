@@ -111,9 +111,12 @@
                 <td class="text-center">
                     <div class="btn-group" role="group" aria-label="Acciones">
                         <button type="button" class="btn btn-success">Modificar</button>
-                        <button type="button" class="btn btn-danger">X</button>
+                        <form th:action="@{'/eliminarUsuario/' + ${usuario.id_usuario}}" method="post" onsubmit="return confirm('¿Estás seguro de que quieres eliminar este usuario?');">
+                            <button type="submit" class="btn btn-danger">X</button>
+                        </form>
                     </div>
                 </td>
+
             </tr>
             </tbody>
         </table>
@@ -121,7 +124,8 @@
 
 </div>
 
-<!-- Modal -->
+<!-- Modales -->
+<!-- Modal crear usuario -->
 <div class="modal fade" id="crearUsuarioModal" tabindex="-1" aria-labelledby="crearUsuarioModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -151,8 +155,9 @@
 </div>
 
 
-
 <!-- Scripts de Bootstrap -->
+
 <!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>-->
+
 </body>
 </html>
