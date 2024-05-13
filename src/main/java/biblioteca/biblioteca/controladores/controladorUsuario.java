@@ -25,13 +25,15 @@ public class controladorUsuario {
         this.usuarioRepository = usuarioRepository;
 
     }
-/*
-Mostrar todos los usuarios
- */
+
+    /*
+    Mostrar todos los usuarios
+     */
     @GetMapping("/usuarios")
     public String obtenerTodosLosUsuarios(Model model) {
         model.addAttribute("listaUsuarios", usuarioRepository.findAll());
         model.addAttribute("nuevoUsuario", new usuarios());
+
         return "usuarios";
     }
 
@@ -42,7 +44,7 @@ Mandar formulario de agregar usuario
  */
 
     @PostMapping("/agregarUsuario")
-    public String guardarUsuario(@ModelAttribute ("nuevoUsuario") usuarios usuario) {
+    public String guardarUsuario(@ModelAttribute("nuevoUsuario") usuarios usuario) {
         usuarioRepository.save(usuario);
         return "redirect:/usuarios";
     }
@@ -51,9 +53,15 @@ Mandar formulario de agregar usuario
 Eliminar datos
  */
     @PostMapping("/eliminarUsuario/{id}")
-    public String eliminarUsuario(@PathVariable("id") Long id){
+    public String eliminarUsuario(@PathVariable("id") Long id) {
         usuarioRepository.deleteById(id);
         return "redirect:/usuarios";
     }
+
+    /*
+Modificar datos
+*/
+
+
 
 }
