@@ -4,19 +4,23 @@
     <meta charset="UTF-8">
     <title>Lista de Usuario</title>
     <!-- Enlace a Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+<!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">-->
+    <link href="/css/bootstrap.css" rel="stylesheet">
+    <link href="/css/bootstrap-grid.css" rel="stylesheet">
+    <link href="/css/bootstrap-reboot.css" rel="stylesheet">
+    <link href="/css/bootstrap-utilities.css" rel="stylesheet">
     <!-- Estilos personalizados -->
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Caesar+Dressing&display=swap');
-        body {
-            background-color: #FFEDDB; /* Beige claro */
-            color: #BF9270; /* Marrón medio */
-            font-family: 'Caesar Dressing', cursive;
-        }
+        /*@import url('https://fonts.googleapis.com/css2?family=Caesar+Dressing&display=swap');*/
+        /*body {*/
+        /*    background-color: #FFEDDB; !* Beige claro *!*/
+        /*    color: #BF9270; !* Marrón medio *!*/
+        /*    font-family: 'Caesar Dressing', cursive;*/
+        /*}*/
 
-        header{
-            background-color: #FFEDDB;
-        }
+        /*header{*/
+        /*    background-color: #FFEDDB;*/
+        /*}*/
 
         /* Estilos para la tabla */
         table {
@@ -106,10 +110,16 @@
                 <td th:text="${usuario.id_rol}" class="text-center"></td>
                 <td class="text-center">
                     <div class="btn-group" role="group" aria-label="Acciones">
-                        <button type="button" class="btn btn-success">Modificar</button>
-                        <button type="button" class="btn btn-danger">X</button>
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modificarUsuarioModal" data-id="${usuario.id_usuario}">
+                            Modificar
+                        </button>
+
+                        <form th:action="@{'/eliminarUsuario/' + ${usuario.id_usuario}}" method="post" onsubmit="return confirm('¿Estás seguro de que quieres eliminar este usuario?');">
+                            <button type="submit" class="btn btn-danger">X</button>
+                        </form>
                     </div>
                 </td>
+
             </tr>
             </tbody>
         </table>
@@ -117,7 +127,8 @@
 
 </div>
 
-<!-- Modal -->
+<!-- Modales -->
+<!-- Modal crear usuario -->
 <div class="modal fade" id="crearUsuarioModal" tabindex="-1" aria-labelledby="crearUsuarioModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -145,10 +156,60 @@
         </div>
     </div>
 </div>
+<!-- Modal de modificar usuario -->
 
-
+<div class="modal fade" id="modificarUsuarioModal" tabindex="-1" aria-labelledby="modificarUsuarioModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modificarUsuarioModalLabel">Modificar Usuario</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+            <div class="modal-body">
+                <form action="#" th:action="@{/modificarUsuario}" th:object="${usuarioModificado}" method="post">
+                    <div class="mb-3">
+                        <label for="nombreUsuario2" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" id="nombreUsuario2" th:field="*{nombre}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="contrasenaUsuario2" class="form-label">Contraseña</label>
+                        <input type="password" class="form-control" id="contrasenaUsuario2" th:field="*{contrasena}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="idRolUsuario2" class="form-label">ID del Rol</label>
+                        <input type="number" class="form-control" id="idRolUsuario2" th:field="*{id_rol}" min="0" max="2" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Modificar Usuario</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- Scripts de Bootstrap -->
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        let modificarUsuarioModal = document.getElementById('modificarUsuarioModal');
+        modificarUsuarioModal.addEventListener('show.bs.modal', function (event) {
+            let button = event.relatedTarget;
+            let id = button.getAttribute('data-id');
+            let modalTitle = modificarUsuarioModal.querySelector('.modal-title');
+            let modalBodyInput = modificarUsuarioModal.querySelector('.modal-body');
+
+            fetch(`/modificarUsuario/${id}`)
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('nombreUsuario2').value = data.nombre;
+                    document.getElementById('contrasenaUsuario2').value = data.contrasena;
+                    document.getElementById('idRolUsuario2').value = data.id_rol;
+                });
+        });
+    });
+</script>
+
+
 </body>
 </html>

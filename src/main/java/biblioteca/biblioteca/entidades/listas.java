@@ -1,8 +1,7 @@
 package biblioteca.biblioteca.entidades;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
 
 import java.sql.Timestamp;
@@ -11,6 +10,7 @@ import java.sql.Timestamp;
 @Data
 public class listas {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id_lista;
     private Integer id_usuario;
     private String nombre_lista;
@@ -18,4 +18,7 @@ public class listas {
     private Timestamp actualizado_desde;
     private Integer creado_por;
     private Integer actualizado_por;
+
+
+
 }
