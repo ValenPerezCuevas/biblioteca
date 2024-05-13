@@ -107,7 +107,9 @@
                 <td class="text-center">
                     <div class="btn-group" role="group" aria-label="Acciones">
                         <button type="button" class="btn btn-success">Modificar</button>
-                        <button type="button" class="btn btn-danger">X</button>
+                        <form th:action="@{'/eliminarUsuario/' + ${usuario.id_usuario}}" method="post" style="display: inline">
+                        <button type="submit" class="btn btn-danger" onclick="return confirm('¿Estás seguro de que quieres eliminar este usuario?;')">X</button>
+                        </form>
                     </div>
                 </td>
             </tr>
