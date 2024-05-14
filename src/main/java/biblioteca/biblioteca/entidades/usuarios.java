@@ -13,7 +13,9 @@ public class usuarios {
     private Integer id_usuario;
     private String nombre;
     private String contrasena;
-    private Integer id_rol;
-
+    @ManyToOne
+    @JoinColumn(name = "id_rol")
+    // Nombre de la columna en la tabla usuarios que hace referencia al idRol en la tabla roles
+    private roles rol;
 
 }

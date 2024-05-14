@@ -1,13 +1,16 @@
 package biblioteca.biblioteca.repositorios;
 
-import biblioteca.biblioteca.entidades.usuarios;
+import biblioteca.biblioteca.entidades.libros;
+import biblioteca.biblioteca.entidades.roles;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
-public interface UsuarioRepository extends JpaRepository<usuarios, Long> {
-    usuarios save(usuarios usuario);
+public interface RolesRepository extends JpaRepository<roles, Long> {
+
+
+
 
 }
