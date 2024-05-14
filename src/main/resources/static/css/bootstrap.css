@@ -430,6 +430,7 @@ caption {
 th {
   text-align: inherit;
   text-align: -webkit-match-parent;
+  background-color: #BF9270;
 }
 
 thead,
@@ -1893,7 +1894,7 @@ progress {
 }
 
 .table-group-divider {
-  border-top: calc(var(--bs-border-width) * 2) solid currentcolor;
+  border-top: calc(var(--bs-border-width) * 3) solid currentcolor;
 }
 
 .caption-top {
