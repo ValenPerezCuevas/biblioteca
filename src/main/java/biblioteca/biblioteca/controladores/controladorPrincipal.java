@@ -16,9 +16,6 @@ public class controladorPrincipal {
     }
 
 
-    @GetMapping("/listar")
-    public String libros(){ return "listar";}
-
 
 
 

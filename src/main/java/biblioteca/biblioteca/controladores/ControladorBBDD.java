@@ -21,13 +21,6 @@ public class ControladorBBDD {
         this.listasRepository = listasRepository;
     }
 
-    @GetMapping("/listado")
-    public String obtenerTodosLosLibros(Model model){
-       model.addAttribute("libros", libroRepository.findAll());
-        return "listar";
-    }
-
-
 
     @GetMapping("/listas")
     public String obtenerTodasLasListas(Model model){
