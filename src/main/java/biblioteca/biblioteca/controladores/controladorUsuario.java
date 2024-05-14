@@ -23,9 +23,9 @@ public class controladorUsuario {
 
     }
 
-    /*
-    Mostrar todos los usuarios
-     */
+    /**********************************************************************************
+     * Mostrar datos de los usuarios
+     * *********************************************************************************/
     @GetMapping("/usuarios")
     public String obtenerTodosLosUsuarios(Model model) {
         model.addAttribute("listaUsuarios", usuarioRepository.findAll());
@@ -35,10 +35,9 @@ public class controladorUsuario {
     }
 
 
-
-    /*
-Mandar formulario de agregar usuario
- */
+    /**********************************************************************************
+     * Mandar formulario de agregar usuario
+     * * *********************************************************************************/
 
     @PostMapping("/agregarUsuario")
     public String guardarUsuario(@ModelAttribute("nuevoUsuario") usuarios usuario) {
@@ -46,28 +45,23 @@ Mandar formulario de agregar usuario
         return "redirect:/usuarios";
     }
 
-    /*
-Eliminar datos
- */
+    /**********************************************************************************
+     * Eliminar datos
+     * * *********************************************************************************/
     @PostMapping("/eliminarUsuario/{id}")
     public String eliminarUsuario(@PathVariable("id") Long id) {
         usuarioRepository.deleteById(id);
         return "redirect:/usuarios";
     }
 
-    /*
-Modificar datos
-*/
-
+    /**********************************************************************************
+     * Modificar datos
+     * * *********************************************************************************/
     @GetMapping("/modificarUsuario/{id}")
     @ResponseBody
     public usuarios mostrarFormularioDeModificar(@PathVariable("id") Integer id, Model model) {
         usuarios usuario = usuarioRepository.findById(Long.valueOf(id))
                 .orElseThrow(() -> new IllegalArgumentException("Usuario inválido con ID: " + id));
-
-
-
-//        model.addAttribute("usuarioModificado", usuario);
         return usuario;
     }
 

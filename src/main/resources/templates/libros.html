@@ -118,6 +118,24 @@
         </tr>
         </tbody>
     </table>
+    <!-- Controles de Paginación -->
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            <li class="page-item" th:if="${paginaActual > 1}">
+                <a class="page-link" href="@{/listado(pagina=${paginaActual - 1})}" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            <li th:each="num : ${#numbers.sequence(1, totalPaginas)}" class="page-item" th:classappend="${num == paginaActual} ? 'active'">
+                <a class="page-link" th:href="@{/listado(pagina=${num})}" th:text="${num}"></a>
+            </li>
+            <li class="page-item" th:if="${paginaActual < totalPaginas}">
+                <a class="page-link" href="@{/listado(pagina=${paginaActual + 1})}" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
 </div>
 
 <!-- Scripts de Bootstrap -->
