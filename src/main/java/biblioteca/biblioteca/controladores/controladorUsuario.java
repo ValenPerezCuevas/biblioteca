@@ -6,10 +6,7 @@ import biblioteca.biblioteca.repositorios.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 
@@ -63,11 +60,15 @@ Modificar datos
 */
 
     @GetMapping("/modificarUsuario/{id}")
-    public String mostrarFormularioDeModificar(@PathVariable("id") Integer id, Model model) {
+    @ResponseBody
+    public usuarios mostrarFormularioDeModificar(@PathVariable("id") Integer id, Model model) {
         usuarios usuario = usuarioRepository.findById(Long.valueOf(id))
                 .orElseThrow(() -> new IllegalArgumentException("Usuario inválido con ID: " + id));
-        model.addAttribute("usuarioModificado", usuario);
-        return "usuarios";  // Nombre de la vista que contiene el modal
+
+
+
+//        model.addAttribute("usuarioModificado", usuario);
+        return usuario;
     }
 
     @PostMapping("/modificarUsuario")
