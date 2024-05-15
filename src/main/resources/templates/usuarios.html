@@ -114,6 +114,7 @@
                                 Modificar
                             </button>
 
+
                             <form th:action="@{'/eliminarUsuario/' + ${usuario.id_usuario}}" method="post" onsubmit="return confirm('¿Estás seguro de que quieres eliminar este usuario?');">
                                 <button type="submit" class="btn btn-danger">X</button>
                             </form>
@@ -181,9 +182,10 @@
                     </div>
                     <div class="mb-3">
                         <label for="rolUsuario2" class="form-label">Rol</label>
-                        <select class="form-select" id="rolUsuario2" name="rol.nombre_rol" required>
-                            <option th:each="rol : ${listaRoles}" th:value="${rol.nombre_rol}" th:text="${rol.nombre_rol}" th:selected="${rol.nombre_rol == usuario.rol.nombre_rol}"></option>
+                        <select class="form-select" id="rolUsuario2" name="rol.id_rol" required>
+                            <option th:each="rol : ${listaRoles}" th:value="${rol.id_rol}" th:text="${rol.nombre_rol}" th:selected="${rol.id_rol == usuario.rol.id_rol}"></option>
                         </select>
+
                     </div>
                     <button type="submit" class="btn btn-primary">Modificar Usuario</button>
                 </form>
@@ -200,27 +202,26 @@
     document.addEventListener('DOMContentLoaded', function () {
         let modificarUsuarioModal = document.getElementById('modificarUsuarioModal');
         modificarUsuarioModal.addEventListener('show.bs.modal', function (event) {
-            let button = event.relatedTarget;
+            let button = event.relatedTarget; //
             let id = button.getAttribute('data-id');
+
+
             fetch(`/modificarUsuario/${id}`)
-                .then(response => response.text())
-                .then(text => {
-                    return JSON.parse(text);
-                })
+                .then(response => response.json())
                 .then(data => {
-                    document.getElementById('idUsuario').value = data.id_usuario;
+                    document.getElementById('idUsuario').value = data.id;
                     document.getElementById('nombreUsuario2').value = data.nombre;
                     document.getElementById('contrasenaUsuario2').value = data.contrasena;
-                    document.getElementById('idRolUsuario2').value = data.id_rol;
+                    document.getElementById('rolUsuario2').value = data.rol.id_rol;
                 })
                 .catch(error => {
-                    console.error('Error parsing JSON:', error);
+                    console.error('Error fetching data:', error);
                 });
-
         });
     });
 
 </script>
+
 
 
 </body>
