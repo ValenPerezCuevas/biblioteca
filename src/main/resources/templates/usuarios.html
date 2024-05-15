@@ -95,33 +95,31 @@
     <h1 class="text-center mb-4">Lore Librarian</h1>
     <div class="container table-responsive">
         <table class="table table-striped mx-auto">
+            <thead>
+                <tr class="text-center active">
+                    <th class="text-center">Nombre</th>
+                    <th class="text-center">Contraseña</th>
+                    <th class="text-center">Rol</th>
+                    <th class="text-center">Acciones</th>
+                </tr>
+            </thead>
+            <tbody class="table-group-divider">
+                <tr th:each="usuario : ${listaUsuarios}">
+                    <td th:text="${usuario.nombre}" class="text-center"></td>
+                    <td th:text="${usuario.contrasena}" class="text-center"></td>
+                    <td th:text="${usuario.rol.nombre_rol}" class="text-center"></td>
+                    <td class="text-center">
+                        <div class="btn-group" role="group" aria-label="Acciones">
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modificarUsuarioModal" data-id="${usuario.id_usuario}">
+                                Modificar
+                            </button>
 
-            <tr class="text-center">
-                <th class="text-center">Nombre</th>
-                <th class="text-center">Contraseña</th>
-                <th class="text-center">Id_Rol</th>
-                <th class="text-center">Acciones</th>
-            </tr>
-            <tbody>
-            <tr th:each="usuario : ${listaUsuarios}">
-                <td th:text="${usuario.nombre}" class="text-center"></td>
-                <td th:text="${usuario.contrasena}" class="text-center"></td>
-                <td th:text="${usuario.id_rol}" class="text-center"></td>
-                <td class="text-center">
-                    <div class="btn-group" role="group" aria-label="Acciones">
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                data-bs-target="#modificarUsuarioModal" th:data-id="${usuario.id_usuario}">
-                            Modificar
-                        </button>
-
-                        <form th:action="@{'/eliminarUsuario/' + ${usuario.id_usuario}}" method="post"
-                              onsubmit="return confirm('¿Estás seguro de que quieres eliminar este usuario?');">
-                            <button type="submit" class="btn btn-danger">X</button>
-                        </form>
-                    </div>
-                </td>
-
-            </tr>
+                            <form th:action="@{'/eliminarUsuario/' + ${usuario.id_usuario}}" method="post" onsubmit="return confirm('¿Estás seguro de que quieres eliminar este usuario?');">
+                                <button type="submit" class="btn btn-danger">X</button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
             </tbody>
         </table>
     </div>
@@ -151,7 +149,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="idRolUsuario" class="form-label">ID del Rol</label>
-                        <input type="number" class="form-control" id="idRolUsuario" th:field="*{id_rol}" min="0" max="2"
+                        <input type="number" class="form-control" id="idRolUsuario" th:field="*{rol}" min="0" max="2"
                                required>
                     </div>
                     <button type="submit" class="btn btn-primary">Crear Usuario</button>
@@ -182,9 +180,10 @@
                         <input type="password" class="form-control" id="contrasenaUsuario2" name="contrasena" required>
                     </div>
                     <div class="mb-3">
-                        <label for="idRolUsuario2" class="form-label">ID del Rol</label>
-                        <input type="number" class="form-control" id="idRolUsuario2" name="id_rol" min="0" max="2"
-                               required>
+                        <label for="rolUsuario2" class="form-label">Rol</label>
+                        <select class="form-select" id="rolUsuario2" name="rol.nombre_rol" required>
+                            <option th:each="rol : ${listaRoles}" th:value="${rol.nombre_rol}" th:text="${rol.nombre_rol}" th:selected="${rol.nombre_rol == usuario.rol.nombre_rol}"></option>
+                        </select>
                     </div>
                     <button type="submit" class="btn btn-primary">Modificar Usuario</button>
                 </form>
