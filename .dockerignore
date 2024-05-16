@@ -23,6 +23,8 @@
 **/docker-compose*
 **/compose.y*ml
 **/target
+**/build
+**/bin
 **/Dockerfile*
 **/node_modules
 **/npm-debug.log
