@@ -1,38 +1,73 @@
-# Utilizamos una imagen de OpenJDK como base
-FROM openjdk:17-jdk-slim AS build
+# Create a stage for resolving and downloading dependencies.
+FROM eclipse-temurin:17-jdk-jammy as deps
 
-# Definimos el directorio de trabajo
-WORKDIR /app
+WORKDIR /build
 
-# Copiamos los archivos necesarios al directorio de trabajo
-COPY .mvn/wrapper/maven-wrapper.jar .mvn/wrapper/maven-wrapper.properties .mvn/wrapper/
+# Descargar Maven
+RUN apt-get update && \
+    apt-get install -y maven
 
-# Copiamos el archivo pom.xml
+# Descargar las dependencias
 COPY pom.xml .
+RUN mvn dependency:go-offline -DskipTests
 
-# Copiamos el resto del código
-COPY src ./src
+################################################################################
 
-# Descargamos las dependencias
-RUN apt-get update && apt-get install -y maven
-RUN mvn -N io.takari:maven:wrapper
+# use the relevant app server, e.g., using tomcat (https://hub.docker.com/_/tomcat/) as a base image.
+FROM deps as package
 
-# Descargamos las dependencias
-RUN ./mvnw dependency:go-offline
+WORKDIR /build
 
-# Empaquetamos la aplicación
-RUN ./mvnw package -DskipTests
+COPY ./src src/
+RUN mvn package -DskipTests && \
+    mv target/$(mvn help:evaluate -Dexpression=project.artifactId -q -DforceStdout)-$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout).jar target/app.jar
 
-# Segunda etapa para optimizar la imagen final
-FROM openjdk:17-jdk-slim
+################################################################################
 
-WORKDIR /app
+# Create a stage for extracting the application into separate layers.
+# Take advantage of Spring Boot's layer tools and Docker's caching by extracting
+# the packaged application into separate layers that can be copied into the final stage.
+# See Spring's docs for reference:
+# https://docs.spring.io/spring-boot/docs/current/reference/html/container-images.html
+FROM package as extract
 
-COPY --from=build /app/target/*.jar app.jar
+WORKDIR /build
 
-# Exponemos el puerto
-EXPOSE 8080
+RUN java -Djarmode=layertools -jar target/app.jar extract --destination target/extracted
 
-# Comando de inicio
-CMD ["java", "-jar", "app.jar"]
+################################################################################
 
+# Create a new stage for running the application that contains the minimal
+# runtime dependencies for the application. This often uses a different base
+# image from the install or build stage where the necessary files are copied
+# from the install stage.
+#
+# The example below uses eclipse-turmin's JRE image as the foundation for running the app.
+# By specifying the "17-jre-jammy" tag, it will also use whatever happens to be the
+# most recent version of that tag when you build your Dockerfile.
+# If reproducability is important, consider using a specific digest SHA, like
+# eclipse-temurin@sha256:99cede493dfd88720b610eb8077c8688d3cca50003d76d1d539b0efc8cca72b4.
+FROM eclipse-temurin:17-jre-jammy AS final
+
+# Create a non-privileged user that the app will run under.
+# See https://docs.docker.com/go/dockerfile-user-best-practices/
+ARG UID=10001
+RUN adduser \
+    --disabled-password \
+    --gecos "" \
+    --home "/nonexistent" \
+    --shell "/sbin/nologin" \
+    --no-create-home \
+    --uid "${UID}" \
+    appuser
+USER appuser
+
+# Copy the executable from the "package" stage.
+COPY --from=extract build/target/extracted/dependencies/ ./
+COPY --from=extract build/target/extracted/spring-boot-loader/ ./
+COPY --from=extract build/target/extracted/snapshot-dependencies/ ./
+COPY --from=extract build/target/extracted/application/ ./
+
+EXPOSE 8081
+
+ENTRYPOINT [ "java", "org.springframework.boot.loader.launch.JarLauncher" ]
