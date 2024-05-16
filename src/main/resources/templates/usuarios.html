@@ -110,18 +110,36 @@
                     <td th:text="${usuario.rol.nombre_rol}" class="text-center"></td>
                     <td class="text-center">
                         <div class="btn-group" role="group" aria-label="Acciones">
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modificarUsuarioModal" th:attr="data-id=${usuario.id_usuario}">
+                            <button type="button" title="Modificar usuario" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modificarUsuarioModal" th:attr="data-id=${usuario.id_usuario}">
                                 Modificar
                             </button>
 
                             <form th:action="@{'/eliminarUsuario/' + ${usuario.id_usuario}}" method="post" onsubmit="return confirm('¿Estás seguro de que quieres eliminar este usuario?');">
-                                <button type="submit" class="btn btn-danger">X</button>
+                                <button type="submit" class="btn btn-danger" title="Eliminar usuario">X</button>
                             </form>
                         </div>
                     </td>
                 </tr>
             </tbody>
         </table>
+        <!-- Controles de Paginación -->
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+                <li class="page-item" th:if="${paginaActual > 1}">
+                    <a class="page-link" th:href="@{/usuarios(pagina=${paginaActual - 1})}" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <li th:each="num : ${#numbers.sequence(1, totalPaginas)}" class="page-item" th:classappend="${num == paginaActual} ? 'active'">
+                    <a class="page-link" th:href="@{/usuarios(pagina=${num})}" th:text="${num}"></a>
+                </li>
+                <li class="page-item" th:if="${paginaActual < totalPaginas}">
+                    <a class="page-link" th:href="@{/usuarios(pagina=${paginaActual + 1})}" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
     </div>
 
 </div>
