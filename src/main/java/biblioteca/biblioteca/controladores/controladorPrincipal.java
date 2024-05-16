@@ -15,6 +15,11 @@ public class controladorPrincipal {
         return "admin";
     }
 
+    @GetMapping("/descubre")
+    public String descubrir(){
+        return "descubre";
+    }
+
 
 
 
