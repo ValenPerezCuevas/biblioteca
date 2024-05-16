@@ -8,8 +8,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class controladorLibro {
@@ -20,11 +19,9 @@ public class controladorLibro {
         this.libroRepository = libroRepository;
     }
 
-    @GetMapping("/listar")
-    public String libros() {
-        return "libros";
-    }
-
+    /**********************************************************************************
+     * Mostrar datos de los libros + paginación
+     * *********************************************************************************/
     @GetMapping("/listado")
     public String obtenerTodosLosLibros(
             @RequestParam(name = "pagina", required = false, defaultValue = "0") int pagina,
@@ -36,6 +33,26 @@ public class controladorLibro {
         model.addAttribute("libros", paginaLibros.getContent());
         model.addAttribute("paginaActual", pagina);
         model.addAttribute("totalPaginas", paginaLibros.getTotalPages());
+        model.addAttribute("libro", new libros());
+
         return "libros";
+    }
+
+    /**********************************************************************************
+     * Método para agregar un libro
+     * *********************************************************************************/
+    @PostMapping("/agregarLibro")
+    public String guardarLibro(@ModelAttribute("libro") libros libro) {
+        libroRepository.save(libro);
+        return "redirect:/listado";
+    }
+
+    /**********************************************************************************
+     * Método para eliminar un libro
+     * *********************************************************************************/
+    @PostMapping("/eliminarLibro/{id}")
+    public String eliminarLibro(@PathVariable("id") Long id) {
+        libroRepository.deleteById(id);
+        return "redirect:/listado";
     }
 }

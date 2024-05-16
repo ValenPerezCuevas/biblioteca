@@ -10,7 +10,6 @@
     <link href="/css/bootstrap-utilities.css" rel="stylesheet">
     <!-- Estilos personalizados -->
     <style>
-
         /* Estilos para la tabla */
         table {
             width: 100%;
@@ -18,24 +17,20 @@
             margin-top: 20px;
             text-align: center;
         }
-
         th, td {
             padding: 8px;
             text-align: left;
             border-bottom: 1px solid #BF9270; /* Marrón medio */
         }
-
         /* Estilos para la cabecera de la tabla */
         th {
             background-color: #EDCDBB; /* Marrón suave */
             color: #000000;
         }
-
         /* Estilos para filas alternas */
         tr:nth-child(even) {
             background-color: #E3B7A0; /* Melocotón claro */
         }
-
     </style>
 </head>
 <body>
@@ -44,41 +39,42 @@
 <div th:replace="header :: header"></div>
 
 <div class="container" style="width: 90%;"> <!-- Contenedor con ancho del 90% -->
-
+    <h1 class="text-center mb-4">Pergaminos del saber</h1>
     <div class="container my-4">
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#crearLibroModal">
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#añadirLibroModal">
             Añadir nuevo libro
         </button>
     </div>
 
-    <h1 class="text-center mb-4">Pergaminos del saber</h1>
     <div class="container table-responsive">
         <table class="table table-striped">
             <thead>
-                <tr>
-                    <th>Título</th>
-                    <th>Género</th>
-                    <th>Autor</th>
-                    <th>Año de Publicación</th>
-                    <th>Editorial</th>
-                    <th>Acciones</th>
-                </tr>
+            <tr>
+                <th>Título</th>
+                <th>Género</th>
+                <th>Autor</th>
+                <th>Año de Publicación</th>
+                <th>Editorial</th>
+                <th>Acciones</th>
+            </tr>
             </thead>
             <tbody class="table-group-divider">
-                <tr th:each="libro : ${libros}">
-                    <td th:text="${libro.titulo}"></td>
-                    <td th:text="${libro.genero}"></td>
-                    <td th:text="${libro.autor}"></td>
-                    <td th:text="${libro.ano_Publicacion}"></td>
-                    <td th:text="${libro.editorial}"></td>
-                    <td>
-                        <div class="btn-group" role="group" aria-label="Acciones">
-                            <button type="button" class="btn btn-info">Ver Portada</button>
-                            <button type="button" class="btn btn-primary">Modificar</button>
-                            <button type="button" class="btn btn-danger">X</button>
-                        </div>
-                    </td>
-                </tr>
+            <tr th:each="libro : ${libros}">
+                <td th:text="${libro.titulo}"></td>
+                <td th:text="${libro.genero}"></td>
+                <td th:text="${libro.autor}"></td>
+                <td th:text="${libro.ano_Publicacion}"></td>
+                <td th:text="${libro.editorial}"></td>
+                <td>
+                    <div class="btn-group" role="group" aria-label="Acciones">
+                        <button type="button" class="btn btn-info">Ver Portada</button>
+                        <button type="button" class="btn btn-primary">Modificar</button>
+                        <form th:action="@{'/eliminarLibro/' + ${libro.id_libros}}" method="post" onsubmit="return confirm('¿Estás seguro de que quieres eliminar este libro?');">
+                        <button type="submit" class="btn btn-danger" title="Eliminar libro">X</button>
+                    </form>
+                    </div>
+                </td>
+            </tr>
             </tbody>
         </table>
         <!-- Controles de Paginación -->
@@ -108,6 +104,43 @@
         </div>
     </footer>
 
+</div>
+
+<!-- Modal añadir libro -->
+<div class="modal fade" id="añadirLibroModal" tabindex="-1" aria-labelledby="añadirLibroModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="añadirLibroModalLabel">Añadir Libro</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+            <div class="modal-body">
+                <form th:action="@{/agregarLibro}" th:object="${libro}" method="post">
+                    <div class="mb-3">
+                        <label for="nombreLibro" class="form-label">Titulo</label>
+                        <input type="text" class="form-control" id="nombreLibro" th:field="*{titulo}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="generoLibro" class="form-label">Genero</label>
+                        <input type="text" class="form-control" id="generoLibro" th:field="*{genero}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="autorLibro" class="form-label">Autor</label>
+                        <input class="form-control" id="autorLibro" th:field="*{autor}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="ano_PublicacionLibro" class="form-label">Año de publicación</label>
+                        <input class="form-control" id="ano_PublicacionLibro" th:field="*{ano_Publicacion}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editorialLibro" class="form-label">Editorial</label>
+                        <input class="form-control" id="editorialLibro" th:field="*{editorial}" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Añadir Libro</button>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
 
 <!-- Scripts de Bootstrap -->
