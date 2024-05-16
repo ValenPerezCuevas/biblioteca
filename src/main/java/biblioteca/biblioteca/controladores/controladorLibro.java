@@ -36,6 +36,26 @@ public class controladorLibro {
         model.addAttribute("libros", paginaLibros.getContent());
         model.addAttribute("paginaActual", pagina);
         model.addAttribute("totalPaginas", paginaLibros.getTotalPages());
+        model.addAttribute("libro", new libros());
+
         return "libros";
+    }
+
+    /**********************************************************************************
+     * Método para agregar un libro
+     * *********************************************************************************/
+    @PostMapping("/agregarLibro")
+    public String guardarLibro(@ModelAttribute("libro") libros libro) {
+        libroRepository.save(libro);
+        return "redirect:/listado";
+    }
+
+    /**********************************************************************************
+     * Método para eliminar un libro
+     * *********************************************************************************/
+    @PostMapping("/eliminarLibro/{id}")
+    public String eliminarLibro(@PathVariable("id") Long id) {
+        libroRepository.deleteById(id);
+        return "redirect:/listado";
     }
 }
