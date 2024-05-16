@@ -4,19 +4,12 @@
     <meta charset="UTF-8">
     <title>Lista de Libros</title>
     <!-- Enlace a Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/bootstrap.css" rel="stylesheet">
+    <link href="/css/bootstrap-grid.css" rel="stylesheet">
+    <link href="/css/bootstrap-reboot.css" rel="stylesheet">
+    <link href="/css/bootstrap-utilities.css" rel="stylesheet">
     <!-- Estilos personalizados -->
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Caesar+Dressing&display=swap');
-        body {
-            background-color: #FFEDDB; /* Beige claro */
-            color: #BF9270; /* Marrón medio */
-            font-family: 'Caesar Dressing', cursive;
-        }
-
-        header{
-            background-color: #FFEDDB;
-        }
 
         /* Estilos para la tabla */
         table {
@@ -41,17 +34,12 @@
         /* Estilos para filas alternas */
         tr:nth-child(even) {
             background-color: #E3B7A0; /* Melocotón claro */
-
-
         }
+
         nav {
             background-color: #E3B7A0;
             font-size: 3.2vh;
         }
-
-
-
-
 
     </style>
 </head>
@@ -83,6 +71,13 @@
     </nav>
 </header>
 <div class="container" style="width: 90%;"> <!-- Contenedor con ancho del 90% -->
+
+    <div class="container my-4">
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#crearLibroModal">
+            Añadir nuevo libro
+        </button>
+    </div>
+
     <h1 class="text-center mb-4">Pergaminos del saber</h1>
     <table class="table table-striped">
         <thead>
