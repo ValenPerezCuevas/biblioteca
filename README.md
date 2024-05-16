@@ -17,7 +17,6 @@ git checkout issue#1
 
 5.	Trabajamos en la rama hasta que acabemos con el trabajo a desempeñar. Cada cambio significativo debe ir asociado a un commit:
 git add .
-
 git commit –m “Cambios en la plantilla libros. Añadido método borrado”
 
 
@@ -26,7 +25,6 @@ git push origin issue#1
 
 8.	Cuando tengamos subido nuestra rama necesitamos fusionarla con la principal desde master:
 git merge –no-ff –m “Fusiono issue#1 con develop” issue#1
-
 git push origin master
 
 
