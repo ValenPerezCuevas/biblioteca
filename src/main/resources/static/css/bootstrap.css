@@ -1893,6 +1893,12 @@ progress {
   vertical-align: bottom;
 }
 
+/* Estilos para la cabecera de la tabla */
+.thead {
+  background-color: #0a53be;
+  color: #000000;
+}
+
 .table-group-divider {
   border-top: calc(var(--bs-border-width) * 3) solid currentcolor;
 }
