@@ -1,6 +1,7 @@
 package biblioteca.biblioteca.controladores;
 
 
+import biblioteca.biblioteca.entidades.roles;
 import biblioteca.biblioteca.entidades.usuarios;
 import biblioteca.biblioteca.repositorios.RolesRepository;
 import biblioteca.biblioteca.repositorios.UsuarioRepository;
@@ -34,6 +35,8 @@ public class controladorUsuario {
         model.addAttribute("listaUsuarios", usuarioRepository.findAll());
         model.addAttribute("nuevoUsuario", new usuarios());
         model.addAttribute("usuarioModificado", new usuarios());
+        model.addAttribute("listaRoles", rolesRepository.findAll()); // Agregar lista de roles al modelo
+
         return "usuarios";
     }
 
@@ -43,7 +46,10 @@ public class controladorUsuario {
      * * *********************************************************************************/
 
     @PostMapping("/agregarUsuario")
-    public String guardarUsuario(@ModelAttribute("nuevoUsuario") usuarios usuario) {
+    public String guardarUsuario(@ModelAttribute("nuevoUsuario") usuarios usuario, @RequestParam("rol.id_rol") Long id) {
+        roles rol = rolesRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Rol no encontrado"));
+        usuario.setRol(rol);
         usuarioRepository.save(usuario);
         return "redirect:/usuarios";
     }

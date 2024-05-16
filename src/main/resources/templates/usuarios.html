@@ -149,9 +149,14 @@
                                required>
                     </div>
                     <div class="mb-3">
-                        <label for="idRolUsuario" class="form-label">ID del Rol</label>
-                        <input type="number" class="form-control" id="idRolUsuario" th:field="*{rol}" min="0" max="2"
-                               required>
+<!--                        COMENTARIO ARANCHA: así estaba antes.-->
+<!--                        <label for="idRolUsuario" class="form-label">Rol</label>-->
+<!--                        <input type="number" class="form-control" id="idRolUsuario" th:field="*{rol}" min="0" max="2"-->
+<!--                               required>-->
+                        <label for="rolUsuario" class="form-label">Rol</label>
+                        <select class="form-select" id="rolUsuario" name="rol.id_rol" required>
+                            <option th:each="rol : ${listaRoles}" th:value="${rol.id_rol}" th:text="${rol.nombre_rol}"></option>
+                        </select>
                     </div>
                     <button type="submit" class="btn btn-primary">Crear Usuario</button>
                 </form>
@@ -183,7 +188,11 @@
                     <div class="mb-3">
                         <label for="rolUsuario2" class="form-label">Rol</label>
                         <select class="form-select" id="rolUsuario2" name="rol.id_rol" required>
-                            <option th:each="rol : ${listaRoles}" th:value="${rol.id_rol}" th:text="${rol.nombre_rol}" th:selected="${rol.id_rol == usuario.rol.id_rol}"></option>
+                            <option th:each="rol : ${listaRoles}"
+                                    th:value="${rol.id_rol}"
+                                    th:text="${rol.nombre_rol}"
+                                    th:selected="${usuario != null and usuario.rol != null and rol.id_rol == usuario.rol.id_rol}">
+                            </option>
                         </select>
 
                     </div>
