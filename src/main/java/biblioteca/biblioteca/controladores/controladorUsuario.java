@@ -74,10 +74,9 @@ public class controladorUsuario {
         return ResponseEntity.ok(usuario);
     }
 
-
     @PostMapping("/modificarUsuario")
-    public String modificarUsuario(@ModelAttribute("usuarioModificado") usuarios usuario) {
-        usuarioRepository.save(usuario);
+    public String modificarUsuario(@ModelAttribute("usuarioModificado") usuarios usuarioModificado) {
+        usuarioRepository.save(usuarioModificado);
         return "redirect:/usuarios";
     }
 

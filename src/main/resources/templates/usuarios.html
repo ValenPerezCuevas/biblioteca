@@ -110,10 +110,9 @@
                     <td th:text="${usuario.rol.nombre_rol}" class="text-center"></td>
                     <td class="text-center">
                         <div class="btn-group" role="group" aria-label="Acciones">
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modificarUsuarioModal" data-id="${usuario.id_usuario}">
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modificarUsuarioModal" th:attr="data-id=${usuario.id_usuario}">
                                 Modificar
                             </button>
-
 
                             <form th:action="@{'/eliminarUsuario/' + ${usuario.id_usuario}}" method="post" onsubmit="return confirm('¿Estás seguro de que quieres eliminar este usuario?');">
                                 <button type="submit" class="btn btn-danger">X</button>
@@ -149,10 +148,6 @@
                                required>
                     </div>
                     <div class="mb-3">
-<!--                        COMENTARIO ARANCHA: así estaba antes.-->
-<!--                        <label for="idRolUsuario" class="form-label">Rol</label>-->
-<!--                        <input type="number" class="form-control" id="idRolUsuario" th:field="*{rol}" min="0" max="2"-->
-<!--                               required>-->
                         <label for="rolUsuario" class="form-label">Rol</label>
                         <select class="form-select" id="rolUsuario" name="rol.id_rol" required>
                             <option th:each="rol : ${listaRoles}" th:value="${rol.id_rol}" th:text="${rol.nombre_rol}"></option>
@@ -176,7 +171,7 @@
             </div>
             <div class="modal-body">
                 <form action="#" th:action="@{/modificarUsuario}" th:object="${usuarioModificado}" method="post">
-                    <input type="hidden"  id="idUsuario" name="id_usuario"/>
+                    <input type="hidden" id="idUsuario" name="id_usuario" th:value="${usuarioModificado.id_usuario}" />
                     <div class="mb-3">
                         <label for="nombreUsuario2" class="form-label">Nombre</label>
                         <input type="text" class="form-control" id="nombreUsuario2" name="nombre" required>
@@ -218,7 +213,7 @@
             fetch(`/modificarUsuario/${id}`)
                 .then(response => response.json())
                 .then(data => {
-                    document.getElementById('idUsuario').value = data.id;
+                    document.getElementById('idUsuario').value = data.id_usuario;
                     document.getElementById('nombreUsuario2').value = data.nombre;
                     document.getElementById('contrasenaUsuario2').value = data.contrasena;
                     document.getElementById('rolUsuario2').value = data.rol.id_rol;
