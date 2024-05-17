@@ -1,14 +1,18 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
 <head>
     <meta charset="UTF-8">
     <title>Listas</title>
     <!-- Enlace a Bootstrap CSS -->
+    <!-- Enlace a Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
     <!--<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">-->
     <link href="/css/bootstrap.css" rel="stylesheet">
     <link href="/css/bootstrap-grid.css" rel="stylesheet">
     <link href="/css/bootstrap-reboot.css" rel="stylesheet">
     <link href="/css/bootstrap-utilities.css" rel="stylesheet">
+
 
     <!-- Estilos personalizados -->
     <style>
@@ -17,10 +21,9 @@
         .card {
             box-sizing: border-box;
             --border-radius: 0.75rem;
-            --primary-color: #7257fa;
+            --primary-color: #d1752b;
             --secondary-color: #3c3852;
             width: 90%;
-            font-family: "Arial";
             padding: 2em;
             cursor: pointer;
             border-radius: var(--border-radius);
@@ -28,13 +31,12 @@
             border: 1px solid white;
             box-shadow: 2px 3px 20px black, 0 0 60px #8a4d0f inset;
             backdrop-filter: blur(6px);
-            filter: url(#wavy2);
+            /* filter: url(#wavy2); */   /* Comentario corregido */
             position: relative;
         }
         .card-body {
-           filter:none;
-       }
-
+            filter:none;
+        }
 
         .card:hover {
             border: 1px solid black;
@@ -48,20 +50,12 @@
             margin-top: 1.1em;
         }
 
-        .card .card__content {
-            color: var(--secondary-color);
-            font-size: 0.86rem;
-        }
+
 
         .card .card__title {
             padding: 0;
             font-size: 1.3rem;
             font-weight: bold;
-        }
-
-        .card .card__date {
-            color: #6e6b80;
-            font-size: 0.8rem;
         }
 
         .card .card__arrow {
@@ -77,9 +71,6 @@
             justify-content: center;
             align-items: center;
             transition: all 0.5s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
 
         .card svg {
@@ -107,11 +98,9 @@
             text-align: center;
         }
 
-
-
         .titulo p {
             color: black;
-            font-size: 3rem;
+            font-size: 4rem;
             align-items: center;
         }
 
@@ -119,7 +108,12 @@
             display: none;
             position: absolute;
         }
+        .text-container {
+            position: relative;
+            z-index: 2; /* Asegura que el texto esté por encima del efecto */
+        }
     </style>
+
     <script src="../static/js/footer.js"></script>
 </head>
 <body>
@@ -131,13 +125,14 @@
 <div class="titulo text-center">
     <p>Listas</p>
 </div>
+
+
 <svg class="filter">
     <filter id="wavy2">
         <feTurbulence x="0" y="0" baseFrequency="0.02" numOctaves="5" seed="1"></feTurbulence>
         <feDisplacementMap in="SourceGraphic" scale="20"></feDisplacementMap>
     </filter>
 </svg>
-
 <div class="container-fluid">
     <div class="row">
         <div class="container col-lg-9 d-flex flex-column justify-content-center align-items-center" id="containerListas">
@@ -145,16 +140,22 @@
                 <div th:each="lista : ${listas}" class="col-md-4 mb-4">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title card__title text-center" th:text="${lista.nombre_lista}"></h5>
-                            <p class="card-text">ID Lista: <span th:text="${lista.id_lista}"></span></p>
-                            <p class="card-text">ID Usuario: <span th:text="${lista.id_usuario}"></span></p>
-                            <p class="card-text card__date">Creado Desde : <span th:text="${lista.creado_desde}"></span></p>
-                            <p class="card-text">Actualizado Desde: <span th:text="${lista.actualizado_desde}"></span></p>
-                            <p class="card-text">Creado Por: <span th:text="${lista.creado_por}"></span></p>
-                            <p class="card-text">Actualizado Por: <span th:text="${lista.actualizado_por}"></span></p>
-                            <div class="btn-group" role="group" aria-label="Acciones">
-                                <button type="button" class="btn btn-success">Modificar</button>
-                                <button type="button" class="btn btn-danger">X</button>
+                            <div class="text-container">
+                                <h5 class="card-title card__title text-center" th:text="${lista.nombre_lista}"></h5>
+                                <p class="card-text">ID Lista: <span th:text="${lista.id_lista}"></span></p>
+                                <p class="card-text">ID Usuario: <span th:text="${lista.id_usuario}"></span></p>
+                                <p class="card-text">Creado Desde : <span th:text="${lista.creado_desde}"></span></p>
+                                <p class="card-text">Actualizado Desde: <span th:text="${lista.actualizado_desde}"></span></p>
+                                <p class="card-text">Creado Por: <span th:text="${lista.creado_por}"></span></p>
+                                <p class="card-text">Actualizado Por: <span th:text="${lista.actualizado_por}"></span></p>
+                                <div class="btn-group" role="group" aria-label="Acciones">
+                                    <div class="btn-group" role="group" aria-label="Acciones">
+                                        <button type="button" title="Modificar Lista" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modificarListaModal" th:attr="data-id=${lista.id_lista}">
+                                            Modificar
+                                        </button>
+                                    </div>
+                                    <button type="button" class="btn btn-danger">X</button>
+                                </div>
                             </div>
                         </div>
                         <div class="card__arrow">
@@ -168,18 +169,61 @@
         </div>
     </div>
 </div>
-
-        <!-- Footer -->
-        <footer class="row d-flex vh-15">
-            <div class="d-flex justify-content-center">
-                <p id="frase"></p>
+<!-- Modal de modificar lista
+<div class="modal fade" id="modificarListaModal" tabindex="-1" aria-labelledby="modificarListaModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modificarListaModalLabel">Modificar Lista</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
             </div>
-        </footer>
+            <div class="modal-body">
+                <form action="#" th:action="@{/modificarLista}" th:object="${listaModificada}" method="post">
+                    <input type="hidden" id="idLista" name="idLista" th:value="${listaModificada.id_lista}" />
+                    <div class="mb-3">
+                        <label for="nombreLista2" class="form-label">Nombre de la Lista</label>
+                        <input type="text" class="form-control" id="nombreLista2" name="nombre_lista" th:value="${listaModificada.nombre_lista}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="idUsuario2" class="form-label">ID de Usuario</label>
+                        <input type="text" class="form-control" id="idUsuario2" name="id_usuario" th:value="${listaModificada.id_usuario}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="creadoDesde2" class="form-label">Creado Desde</label>
+                        <input type="text" class="form-control" id="creadoDesde2" name="creado_desde" th:value="${listaModificada.creado_desde}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="actualizadoDesde2" class="form-label">Actualizado Desde</label>
+                        <input type="text" class="form-control" id="actualizadoDesde2" name="actualizado_desde" th:value="${listaModificada.actualizado_desde}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="creadoPor2" class="form-label">Creado Por</label>
+                        <input type="text" class="form-control" id="creadoPor2" name="creado_por" th:value="${listaModificada.creado_por}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="actualizadoPor2" class="form-label">Actualizado Por</label>
+                        <input type="text" class="form-control" id="actualizadoPor2" name="actualizado_por" th:value="${listaModificada.actualizado_por}" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Modificar Lista</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+-->
+<!-- Footer -->
+<footer class="row d-flex vh-15">
+    <div class="d-flex justify-content-center">
+        <p id="frase"></p>
+    </div>
+</footer>
 
 <!-- Scripts de Bootstrap -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="/js/footer.js"></script>
+
 
 </body>
 </html>
