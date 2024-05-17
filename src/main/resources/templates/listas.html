@@ -124,6 +124,11 @@
 <br>
 <div class="titulo text-center">
     <p>Listas</p>
+    <div class="container my-4">
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#crearListaModal">
+            Crear Nueva Lista
+        </button>
+    </div>
 </div>
 
 
@@ -149,12 +154,15 @@
                                 <p class="card-text">Creado Por: <span th:text="${lista.creado_por}"></span></p>
                                 <p class="card-text">Actualizado Por: <span th:text="${lista.actualizado_por}"></span></p>
                                 <div class="btn-group" role="group" aria-label="Acciones">
-                                    <div class="btn-group" role="group" aria-label="Acciones">
+
                                         <button type="button" title="Modificar Lista" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modificarListaModal" th:attr="data-id=${lista.id_lista}">
                                             Modificar
                                         </button>
-                                    </div>
-                                    <button type="button" class="btn btn-danger">X</button>
+                                    <form th:action="@{'/eliminarLista/' + ${lista.id_lista}}" method="post" onsubmit="return confirm('¿Estás seguro de que quieres eliminar esta lista?');">
+                                        <button type="submit" class="btn btn-danger" title="Eliminar lista">X</button>
+                                    </form>
+
+
                                 </div>
                             </div>
                         </div>
@@ -169,55 +177,51 @@
         </div>
     </div>
 </div>
-<!-- Modal de modificar lista
-<div class="modal fade" id="modificarListaModal" tabindex="-1" aria-labelledby="modificarListaModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="modificarListaModalLabel">Modificar Lista</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-            </div>
-            <div class="modal-body">
-                <form action="#" th:action="@{/modificarLista}" th:object="${listaModificada}" method="post">
-                    <input type="hidden" id="idLista" name="idLista" th:value="${listaModificada.id_lista}" />
-                    <div class="mb-3">
-                        <label for="nombreLista2" class="form-label">Nombre de la Lista</label>
-                        <input type="text" class="form-control" id="nombreLista2" name="nombre_lista" th:value="${listaModificada.nombre_lista}" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="idUsuario2" class="form-label">ID de Usuario</label>
-                        <input type="text" class="form-control" id="idUsuario2" name="id_usuario" th:value="${listaModificada.id_usuario}" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="creadoDesde2" class="form-label">Creado Desde</label>
-                        <input type="text" class="form-control" id="creadoDesde2" name="creado_desde" th:value="${listaModificada.creado_desde}" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="actualizadoDesde2" class="form-label">Actualizado Desde</label>
-                        <input type="text" class="form-control" id="actualizadoDesde2" name="actualizado_desde" th:value="${listaModificada.actualizado_desde}" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="creadoPor2" class="form-label">Creado Por</label>
-                        <input type="text" class="form-control" id="creadoPor2" name="creado_por" th:value="${listaModificada.creado_por}" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="actualizadoPor2" class="form-label">Actualizado Por</label>
-                        <input type="text" class="form-control" id="actualizadoPor2" name="actualizado_por" th:value="${listaModificada.actualizado_por}" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Modificar Lista</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
--->
+
 <!-- Footer -->
 <footer class="row d-flex vh-15">
     <div class="d-flex justify-content-center">
         <p id="frase"></p>
     </div>
 </footer>
+
+<!-- Modal de crear lista -->
+<div class="modal fade" id="crearListaModal" tabindex="-1" aria-labelledby="crearListaModal"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="crearListaModallabel">Crear Lista</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+            <div class="modal-body">
+<!--                <form action="#" th:action="@{/modificarLista}" th:object="${nuevaLista}" method="post">-->
+<!--                    <input type="hidden" id="idUsuario" name="id_usuario" th:value="${usuarioModificado.id_usuario}" />-->
+<!--                    <div class="mb-3">-->
+<!--                        <label for="nombreUsuario2" class="form-label">Nombre</label>-->
+<!--                        <input type="text" class="form-control" id="nombreUsuario2" name="nombre" required>-->
+<!--                    </div>-->
+<!--                    <div class="mb-3">-->
+<!--                        <label for="contrasenaUsuario2" class="form-label">Contraseña</label>-->
+<!--                        <input type="password" class="form-control" id="contrasenaUsuario2" name="contrasena" required>-->
+<!--                    </div>-->
+<!--                    <div class="mb-3">-->
+<!--                        <label for="rolUsuario2" class="form-label">Rol</label>-->
+<!--                        <select class="form-select" id="rolUsuario2" name="rol.id_rol" required>-->
+<!--                            <option th:each="rol : ${listaRoles}"-->
+<!--                                    th:value="${rol.id_rol}"-->
+<!--                                    th:text="${rol.nombre_rol}"-->
+<!--                                    th:selected="${usuario != null and usuario.rol != null and rol.id_rol == usuario.rol.id_rol}">-->
+<!--                            </option>-->
+<!--                        </select>-->
+
+<!--                    </div>-->
+<!--                    <button type="submit" class="btn btn-primary">Modificar Usuario</button>-->
+<!--                </form>-->
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- Scripts de Bootstrap -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>

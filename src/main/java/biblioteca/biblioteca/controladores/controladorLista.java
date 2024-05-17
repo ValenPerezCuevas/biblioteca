@@ -1,5 +1,6 @@
 package biblioteca.biblioteca.controladores;
 
+import biblioteca.biblioteca.entidades.libros;
 import biblioteca.biblioteca.entidades.listas;
 import biblioteca.biblioteca.repositorios.LibroRepository;
 import biblioteca.biblioteca.repositorios.ListasRepository;
@@ -25,8 +26,20 @@ public class controladorLista {
     @GetMapping("/listas")
     public String obtenerTodasLasListas(Model model){
         model.addAttribute("listas", listasRepository.findAll());
+        model.addAttribute("listas", new listas());
+        model.addAttribute("listasModificado", new listas());
         return "listas";
     }
+
+    /**********************************************************************************
+     * Método para agregar una lista
+     * *********************************************************************************/
+    @PostMapping("/agregarLista")
+    public String guardarLista(@ModelAttribute("lista") listas lista) {
+        listasRepository.save(lista);
+        return "redirect:/listado";
+    }
+
     /**********************************************************************************
      * Eliminar datos
      * * *********************************************************************************/
