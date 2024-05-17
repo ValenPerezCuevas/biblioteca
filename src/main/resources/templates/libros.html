@@ -27,6 +27,7 @@
         th {
             background-color: #EDCDBB; /* Marrón suave */
             color: #000000;
+            cursor: pointer;
         }
         /* Estilos para filas alternas */
         tr:nth-child(even) {
@@ -51,15 +52,15 @@
         <table class="table table-striped">
             <thead>
             <tr>
-                <th>Título</th>
-                <th>Género</th>
-                <th>Autor</th>
-                <th>Año de Publicación</th>
-                <th>Editorial</th>
+<!--                 ordenar columnas:-->
+                <th data-sort="titulo">Título</th>
+                <th data-sort="genero">Género</th>
+                <th data-sort="autor">Autor</th>
+                <th data-sort="ano_Publicacion">Año de Publicación</th>
+                <th data-sort="editorial">Editorial</th>
                 <th>Acciones</th>
-            </tr>
             </thead>
-            <tbody class="table-group-divider">
+            <tbody class="table-group-divider" id="tabla-libros">
             <tr th:each="libro : ${libros}">
                 <td th:text="${libro.titulo}"></td>
                 <td th:text="${libro.genero}"></td>
@@ -79,19 +80,20 @@
             </tr>
             </tbody>
         </table>
+
         <!-- Controles de Paginación -->
         <nav aria-label="Page navigation example">
             <ul class="pagination justify-content-center">
                 <li class="page-item" th:class="${paginaActual == 0} ? 'disabled'">
-                    <a class="page-link" th:href="@{/listado(pagina=0)}" aria-label="Previous">
+                    <a class="page-link" th:href="@{/listado(pagina=0, sortBy=${sortBy}, sortOrder=${sortOrder})}" aria-label="Previous">
                         <span aria-hidden="true">&laquo;</span>
                     </a>
                 </li>
                 <li th:each="num : ${#numbers.sequence(0, totalPaginas - 1)}" class="page-item" th:classappend="${num == paginaActual} ? 'active'">
-                    <a class="page-link" th:href="@{/listado(pagina=${num})}" th:text="${num + 1}"></a>
+                    <a class="page-link" th:href="@{/listado(pagina=${num}, sortBy=${sortBy}, sortOrder=${sortOrder})}" th:text="${num + 1}"></a>
                 </li>
                 <li class="page-item" th:class="${paginaActual == totalPaginas - 1} ? 'disabled'">
-                    <a class="page-link" th:href="@{/listado(pagina=${totalPaginas - 1})}" aria-label="Next">
+                    <a class="page-link" th:href="@{/listado(pagina=${totalPaginas - 1}, sortBy=${sortBy}, sortOrder=${sortOrder})}" aria-label="Next">
                         <span aria-hidden="true">&raquo;</span>
                     </a>
                 </li>
@@ -191,6 +193,7 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
+        // script modificar libro
         let modificarModal = document.getElementById('modificarLibroModal');
         modificarModal.addEventListener('show.bs.modal', function (event) {
             let button = event.relatedTarget;
@@ -206,8 +209,24 @@
                     document.querySelector('#modificarLibroModal input[name="ano_Publicacion"]').value = data.ano_Publicacion;
                     document.querySelector('#modificarLibroModal input[name="editorial"]').value = data.editorial;
                 });
+        }); //fin script modificar libro
+
+        const table = document.querySelector('table');
+        table.addEventListener('click', function (event) {
+            if (event.target.tagName === 'TH') {
+                const sortBy = event.target.getAttribute('data-sort');
+                let sortOrder = event.target.getAttribute('data-order');
+
+                // Cambiar el orden
+                sortOrder = sortOrder === 'asc' ? 'desc' : 'asc';
+                event.target.setAttribute('data-order', sortOrder);
+
+                const url = `/listado?sortBy=${sortBy}&sortOrder=${sortOrder}`;
+                window.location.href = url;
+            }
         });
     });
+
 </script>
 
 
