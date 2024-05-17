@@ -53,11 +53,11 @@
             <thead>
             <tr>
 <!--                 ordenar columnas:-->
-                <th data-sort="titulo">Título</th>
-                <th data-sort="genero">Género</th>
-                <th data-sort="autor">Autor</th>
-                <th data-sort="ano_Publicacion">Año de Publicación</th>
-                <th data-sort="editorial">Editorial</th>
+                <th data-sort="titulo" th:data-order="${sortBy == 'titulo' and sortOrder == 'asc' ? 'desc' : 'asc'}">Título</th>
+                <th data-sort="genero" th:data-order="${sortBy == 'genero' and sortOrder == 'asc' ? 'desc' : 'asc'}">Género</th>
+                <th data-sort="autor" th:data-order="${sortBy == 'autor' and sortOrder == 'asc' ? 'desc' : 'asc'}">Autor</th>
+                <th data-sort="ano_Publicacion" th:data-order="${sortBy == 'ano_Publicacion' and sortOrder == 'asc' ? 'desc' : 'asc'}">Año de Publicación</th>
+                <th data-sort="editorial" th:data-order="${sortBy == 'editorial' and sortOrder == 'asc' ? 'desc' : 'asc'}">Editorial</th>
                 <th>Acciones</th>
             </thead>
             <tbody class="table-group-divider" id="tabla-libros">
@@ -211,19 +211,15 @@
                 });
         }); //fin script modificar libro
 
-        const table = document.querySelector('table');
-        table.addEventListener('click', function (event) {
-            if (event.target.tagName === 'TH') {
-                const sortBy = event.target.getAttribute('data-sort');
-                let sortOrder = event.target.getAttribute('data-order');
-
-                // Cambiar el orden
-                sortOrder = sortOrder === 'asc' ? 'desc' : 'asc';
-                event.target.setAttribute('data-order', sortOrder);
+        const headers = document.querySelectorAll('th[data-sort]');
+        headers.forEach(header => {
+            header.addEventListener('click', function () {
+                const sortBy = this.getAttribute('data-sort');
+                let sortOrder = this.getAttribute('data-order');
 
                 const url = `/listado?sortBy=${sortBy}&sortOrder=${sortOrder}`;
                 window.location.href = url;
-            }
+            });
         });
     });
 
