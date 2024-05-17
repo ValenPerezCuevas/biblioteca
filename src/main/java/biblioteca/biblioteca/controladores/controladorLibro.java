@@ -1,11 +1,13 @@
 package biblioteca.biblioteca.controladores;
 
 import biblioteca.biblioteca.entidades.libros;
+import biblioteca.biblioteca.entidades.usuarios;
 import biblioteca.biblioteca.repositorios.LibroRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -57,4 +59,21 @@ public class controladorLibro {
         libroRepository.deleteById(id);
         return "redirect:/listado";
     }
+    /**********************************************************************************
+     * Modificar datos de libro
+     * * *********************************************************************************/
+    @GetMapping("/modificarLibro/{id}")
+    @ResponseBody
+    public ResponseEntity<libros> mostrarFormularioDeModificarLibro(@PathVariable("id") Long id) {
+        libros libro = libroRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Libro no encontrado"));
+        return ResponseEntity.ok(libro);
+    }
+
+    @PostMapping("/modificarLibro")
+    public String modificarLibro(@ModelAttribute("libroModificado") libros libroModificado) {
+        libroRepository.save(libroModificado);
+        return "redirect:/listado";
+    }
+
 }
