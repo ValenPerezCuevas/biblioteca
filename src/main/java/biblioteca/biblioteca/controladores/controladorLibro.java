@@ -38,6 +38,7 @@ public class controladorLibro {
         model.addAttribute("paginaActual", pagina);
         model.addAttribute("totalPaginas", paginaLibros.getTotalPages());
         model.addAttribute("libro", new libros());
+        model.addAttribute("libroModificado", new libros());
 
         return "libros";
     }
