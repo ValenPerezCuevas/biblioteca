@@ -44,8 +44,8 @@ public class controladorUsuario {
         model.addAttribute("paginaActual", pagina);
         model.addAttribute("totalPaginas", paginaUsuarios.getTotalPages());
 
-//        model.addAttribute("listaUsuarios", usuarioRepository.findAll());
-        model.addAttribute("nuevoUsuario", new usuarios());
+
+
         model.addAttribute("usuarioModificado", new usuarios());
         model.addAttribute("listaRoles", rolesRepository.findAll()); // Agregar lista de roles al modelo
 

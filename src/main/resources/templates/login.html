@@ -1,32 +1,38 @@
-
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-
+    <title>Login y Registro</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Caesar+Dressing&display=swap');
-
         body {
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             height: 100vh;
             background-color: #FFEDDB;
             font-family: 'Caesar Dressing', cursive;
+            padding: 10px;
+        }
+        h1 {
+            color: black;
+            text-align: center;
+        }
+        .card {
+            color: white;
+            margin-bottom: 20px;
+            width: 350px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            padding: 15px;
         }
         .form-signin {
             width: 100%;
-            max-width: 330px;
-            padding: 15px;
             margin: auto;
         }
         .form-signin .form-control {
-            position: relative;
-            box-sizing: border-box;
             height: auto;
             padding: 10px;
             font-size: 16px;
@@ -34,39 +40,40 @@
         .form-signin input[type="text"],
         .form-signin input[type="password"] {
             margin-bottom: 10px;
-            border-bottom-right-radius: 0;
-            border-bottom-left-radius: 0;
         }
         .form-signin input[type="text"]:focus,
         .form-signin input[type="password"]:focus {
             z-index: 2;
         }
-        .form-signin label {
-            font-weight: normal;
-        }
         .form-signin button[type="submit"] {
             margin-top: 10px;
-            border-top-left-radius: 0;
-            border-top-right-radius: 0;
         }
     </style>
 </head>
-
-<body class="text-center">
-<div class="card bg-dark-subtle text-white mx-auto mt-5" style="max-width: 500px;">
+<body>
+<div class="card">
     <div class="card-body">
-        <img class="mb-4" src="/imagenes/logoLogin.png" width="200" height="200">
-        <form class="form-signin" method="post" action="/login">
-            <label for="inputUsername" class="sr-only">Usuario</label>
-            <input type="text" id="inputUsername" name="username" class="form-control" placeholder="Usuario" required autofocus>
-            <label for="inputPassword" class="sr-only">Contraseña</label>
-            <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Contraseña" required>
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Logear</button>
-            <a th:href="@{/crearUsuario}" class="btn btn-lg btn-primary btn-block">Crear nuevo Usuario</a>
-
+        <form class="form-signin" method="post" action="/login" th:object="${usuarioModificado}">
+            <h1>Login</h1>
+            <input type="text" id="inputUsername" name="nombre" th:field="*{nombre}" class="form-control" placeholder="Usuario" required autofocus>
+            <input type="password" id="inputPassword" name="contrasena" th:field="*{contrasena}" class="form-control" placeholder="Contraseña" required>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Ingresar</button>
         </form>
-        <p class="mt-5 mb-3 text-muted">&copy; Alexandria</p>
     </div>
 </div>
+<div class="card">
+    <div class="card-body">
+        <form class="form-signin" method="post" action="/registrar" th:object="${nuevoUsuario}">
+            <h1>Registrar Usuario</h1>
+            <input type="text" id="inputNewUsername" name="nombre" th:field="*{nombre}" class="form-control" placeholder="Usuario" required>
+            <input type="password" id="inputNewPassword" name="contrasena" th:field="*{contrasena}" class="form-control" placeholder="Contraseña" required>
+            <select class="form-select" id="rolUsuario" name="rol.id_rol" required>
+                <option th:each="rol : ${listaRoles}" th:value="${rol.id_rol}" th:text="${rol.nombre_rol}"></option>
+            </select>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Registrar</button>
+        </form>
+    </div>
+</div>
+<p class="mt-5 mb-3 text-muted">&copy; Alexandria</p>
 </body>
 </html>
