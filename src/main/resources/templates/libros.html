@@ -18,7 +18,7 @@
             cursor: pointer;
         }
 
-        .btn {
+        .btn-height {
             min-height: 62px; /* Ajusta este valor según sea necesario */
         }
 
@@ -58,10 +58,10 @@
                 <td th:text="${libro.editorial}"></td>
                 <td>
                     <div class="btn-group" role="group" aria-label="Acciones">
-                        <button type="button" class="btn btn-info">Ver Portada</button>
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modificarLibroModal" th:attr="data-id=${libro.id_libros}">Modificar</button>
+                        <button type="button" class="btn btn-info btn-height">Ver Portada</button>
+                        <button type="button" class="btn btn-primary btn-height" data-bs-toggle="modal" data-bs-target="#modificarLibroModal" th:attr="data-id=${libro.id_libros}">Modificar</button>
                         <form th:action="@{'/eliminarLibro/' + ${libro.id_libros}}" method="post" onsubmit="return confirm('¿Estás seguro de que quieres eliminar este libro?');">
-                            <button type="submit" class="btn btn-danger" title="Eliminar libro">X</button>
+                            <button type="submit" class="btn btn-danger btn-height" title="Eliminar libro">X</button>
                         </form>
                     </div>
                 </td>
