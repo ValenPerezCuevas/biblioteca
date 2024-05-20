@@ -18,7 +18,7 @@ public class AuthController {
     @GetMapping("/login")
     public String showLoginForm(Model model) {
         model.addAttribute("usuario", new usuarios());
-        return "login"; // Asegúrate de que la plantilla unificada se llame "login.html"
+        return "login";
     }
 
     @PostMapping("/login")
@@ -26,7 +26,7 @@ public class AuthController {
         usuarios foundUsuario = usuarioRepository.findByNombre(usuario.getNombre());
         if (foundUsuario != null && foundUsuario.getContrasena().equals(usuario.getContrasena())) {
             session.setAttribute("usuario", foundUsuario);
-            return "redirect:/home"; // Cambia esto a la página principal de tu aplicación después del login exitoso
+            return "redirect:/"; //
         }
         model.addAttribute("error", "Usuario o contraseña incorrectos");
         return "login"; // Volver a la plantilla unificada en caso de error

@@ -50,7 +50,13 @@
         }
     </style>
 </head>
+
 <body class="text-center">
+<!--<header id="main-header">-->
+<!--    <div th:replace="header :: header"></div>-->
+<!--    <h1>Bienvenido a Nuestro Sitio</h1>-->
+<!--</header>-->
+
 <div class="form-container">
     <div id="login-form" class="form-content">
         <h1>Iniciar Sesión</h1>
@@ -84,8 +90,8 @@
 
 <script>
     function toggleForms() {
-        var loginForm = document.getElementById('login-form');
-        var registerForm = document.getElementById('register-form');
+        let loginForm = document.getElementById('login-form');
+        let registerForm = document.getElementById('register-form');
         if (loginForm.style.display === 'none') {
             loginForm.style.display = 'block';
             registerForm.style.display = 'none';
@@ -97,3 +103,5 @@
 </script>
 </body>
 </html>
+
+
