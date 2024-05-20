@@ -5,140 +5,103 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Administración</title>
     <!-- Enlace a Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        /* Estilos personalizados */
-        @import url('https://fonts.googleapis.com/css2?family=Caesar+Dressing&display=swap');
-        /* Fondo y colores de texto */
-        body {
-            background-color: #FFEDDB; /* Beige claro */
-            color: #BF9270; /* Marrón medio */
-            font-family: 'Caesar Dressing', cursive;
-        }
-
-        header{
-            height: 20vh;
-        }
-
-        /* Estilos para el aside */
-        aside {
-            background-color: #E3B7A0;
-            color: #BF9270;
-            padding: 20px;
-            height: 100vh;
-        }
-
-        /* Estilos para el footer */
-        footer {
-            background-color: #FFEDDB;
-            color: #BF9270;
-            padding: 20px 0;
-            text-align: center;
-        }
-
-        footer p {
-            font-size: 3vh;
-        }
-
-        nav {
-            background-color: #E3B7A0;
-            font-size: 3.2vh;
-        }
-
-        article {
-            background-color: #EDCDBB;
-        }
-
-        ul {
-            list-style: none;
-        }
-
-        .box {
-            border: 1px solid #000; /* Borde negro */
-            width: 250px; /* Ancho deseado */
-            height: 250px; /* Altura deseada */
-            margin: 5px; /* Margen entre las cajas */
-            display: flex; /* Activar flexbox */
-            justify-content: center; /* Centrar contenido horizontalmente */
-            align-items: center; /* Centrar contenido verticalmente */
-        }
-
-        .checkbox-wrapper input[type="checkbox"] {
-            visibility: hidden;
-            display: none;
-        }
-
-        .checkbox-wrapper *,
-        .checkbox-wrapper ::after,
-        .checkbox-wrapper ::before {
-            box-sizing: border-box;
-            user-select: none;
-        }
-
-        .checkbox-wrapper {
-            position: relative;
-            display: block;
-            overflow: hidden;
-        }
-
-        .checkbox-wrapper .label {
-            cursor: pointer;
-        }
-
-        .checkbox-wrapper .check {
-            width: 50px;
-            height: 50px;
-            position: absolute;
-            opacity: 0;
-        }
-
-        .checkbox-wrapper .label svg {
-            vertical-align: middle;
-        }
-
-        .checkbox-wrapper .path1 {
-            stroke-dasharray: 400;
-            stroke-dashoffset: 400;
-            transition: .5s stroke-dashoffset;
-            opacity: 0;
-        }
-
-        .checkbox-wrapper .check:checked + label svg g path {
-            stroke-dashoffset: 0;
-            opacity: 1;
-        }
-    </style>
+    <!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">-->
+    <link href="/css/bootstrap.css" rel="stylesheet">
+    <link href="/css/bootstrap-grid.css" rel="stylesheet">
+    <link href="/css/bootstrap-reboot.css" rel="stylesheet">
+    <link href="/css/bootstrap-utilities.css" rel="stylesheet">
 </head>
+
+<style>
+    /* Estilos personalizados */
+    @import url('https://fonts.googleapis.com/css2?family=Caesar+Dressing&display=swap');
+
+
+    /* Estilos para el aside */
+    aside {
+        background-color: #E3B7A0;
+        color: #BF9270;
+        padding: 20px;
+        height: 100vh;
+    }
+
+    footer p {
+        font-size: 3vh;
+    }
+
+    nav {
+        background-color: #E3B7A0;
+        font-size: 3.2vh;
+    }
+
+    article {
+        background-color: #EDCDBB;
+    }
+
+    ul {
+        list-style: none;
+    }
+
+    .box {
+        border: 1px solid #000; /* Borde negro */
+        width: 250px; /* Ancho deseado */
+        height: 250px; /* Altura deseada */
+        margin: 5px; /* Margen entre las cajas */
+        display: flex; /* Activar flexbox */
+        justify-content: center; /* Centrar contenido horizontalmente */
+        align-items: center; /* Centrar contenido verticalmente */
+    }
+
+    .checkbox-wrapper input[type="checkbox"] {
+        visibility: hidden;
+        display: none;
+    }
+
+    .checkbox-wrapper *,
+    .checkbox-wrapper ::after,
+    .checkbox-wrapper ::before {
+        box-sizing: border-box;
+        user-select: none;
+    }
+
+    .checkbox-wrapper {
+        position: relative;
+        display: block;
+        overflow: hidden;
+    }
+
+    .checkbox-wrapper .label {
+        cursor: pointer;
+    }
+
+    .checkbox-wrapper .check {
+        width: 50px;
+        height: 50px;
+        position: absolute;
+        opacity: 0;
+    }
+
+    .checkbox-wrapper .label svg {
+        vertical-align: middle;
+    }
+
+    .checkbox-wrapper .path1 {
+        stroke-dasharray: 400;
+        stroke-dashoffset: 400;
+        transition: .5s stroke-dashoffset;
+        opacity: 0;
+    }
+
+    .checkbox-wrapper .check:checked + label svg g path {
+        stroke-dashoffset: 0;
+        opacity: 1;
+    }
+</style>
+
 <body>
-<header>
-    <nav class="navbar navbar-expand-lg p-4">
-        <div class="container-fluid">
-            <div class="navbar-collapse" id="navbarNav">
-                <img class="align-self-lg-start" src="/imagenes/logo.png" alt="Logo" width="200" height="200">
-                <ul class="navbar-nav w-100 d-flex justify-content-around ">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/usuarios">Usuarios</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/listado">Libros</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/admin">Mis Datos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/login">Iniciar Sesión</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/listas">Listas</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-</header>
+
+<!-- Incluir el encabezado compartido -->
+<div th:replace="header :: header"></div>
 
 </div>
 <div class="container-fluid">

@@ -11,28 +11,17 @@
     <!-- Estilos personalizados -->
     <style>
 
-        /* Estilos para la tabla */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-            text-align: center;
-        }
-        th, td {
-            padding: 8px;
-            text-align: left;
-            border-bottom: 1px solid #BF9270; /* Marrón medio */
-        }
         /* Estilos para la cabecera de la tabla */
         th {
             background-color: #EDCDBB; /* Marrón suave */
             color: #000000;
             cursor: pointer;
         }
-        /* Estilos para filas alternas */
-        tr:nth-child(even) {
-            background-color: #E3B7A0; /* Melocotón claro */
+
+        .btn-height {
+            min-height: 62px; /* Ajusta este valor según sea necesario */
         }
+
     </style>
 </head>
 <body>
@@ -56,7 +45,7 @@
                 <th data-sort="titulo" th:data-order="${sortBy == 'titulo' and sortOrder == 'asc' ? 'desc' : 'asc'}">Título</th>
                 <th data-sort="genero" th:data-order="${sortBy == 'genero' and sortOrder == 'asc' ? 'desc' : 'asc'}">Género</th>
                 <th data-sort="autor" th:data-order="${sortBy == 'autor' and sortOrder == 'asc' ? 'desc' : 'asc'}">Autor</th>
-                <th data-sort="ano_Publicacion" th:data-order="${sortBy == 'ano_Publicacion' and sortOrder == 'asc' ? 'desc' : 'asc'}">Año de Publicación</th>
+                <th data-sort="anoPublicacion" th:data-order="${sortBy == 'anoPublicacion' and sortOrder == 'asc' ? 'desc' : 'asc'}">Año de Publicación</th>
                 <th data-sort="editorial" th:data-order="${sortBy == 'editorial' and sortOrder == 'asc' ? 'desc' : 'asc'}">Editorial</th>
                 <th>Acciones</th>
             </thead>
@@ -65,14 +54,14 @@
                 <td th:text="${libro.titulo}"></td>
                 <td th:text="${libro.genero}"></td>
                 <td th:text="${libro.autor}"></td>
-                <td th:text="${libro.ano_Publicacion}"></td>
+                <td th:text="${libro.anoPublicacion}"></td>
                 <td th:text="${libro.editorial}"></td>
                 <td>
                     <div class="btn-group" role="group" aria-label="Acciones">
-                        <button type="button" class="btn btn-info">Ver Portada</button>
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modificarLibroModal" th:attr="data-id=${libro.id_libros}">Modificar</button>
+                        <button type="button" class="btn btn-info btn-height">Ver Portada</button>
+                        <button type="button" class="btn btn-primary btn-height" data-bs-toggle="modal" data-bs-target="#modificarLibroModal" th:attr="data-id=${libro.id_libros}">Modificar</button>
                         <form th:action="@{'/eliminarLibro/' + ${libro.id_libros}}" method="post" onsubmit="return confirm('¿Estás seguro de que quieres eliminar este libro?');">
-                            <button type="submit" class="btn btn-danger" title="Eliminar libro">X</button>
+                            <button type="submit" class="btn btn-danger btn-height" title="Eliminar libro">X</button>
                         </form>
                     </div>
                 </td>
@@ -133,8 +122,8 @@
                         <input class="form-control" id="autorLibro" th:field="*{autor}" required>
                     </div>
                     <div class="mb-3">
-                        <label for="ano_PublicacionLibro" class="form-label">Año de publicación</label>
-                        <input class="form-control" id="ano_PublicacionLibro" th:field="*{ano_Publicacion}" required>
+                        <label for="anoPublicacionLibro" class="form-label">Año de publicación</label>
+                        <input class="form-control" id="anoPublicacionLibro" th:field="*{anoPublicacion}" required>
                     </div>
                     <div class="mb-3">
                         <label for="editorialLibro" class="form-label">Editorial</label>
@@ -171,8 +160,8 @@
                         <input class="form-control" id="autorLibro" th:field="*{autor}" required>
                     </div>
                     <div class="mb-3">
-                        <label for="ano_PublicacionLibro" class="form-label">Año de publicación</label>
-                        <input class="form-control" id="ano_PublicacionLibro" th:field="*{ano_Publicacion}" required>
+                        <label for="anoPublicacionLibro" class="form-label">Año de publicación</label>
+                        <input class="form-control" id="anoPublicacionLibro" th:field="*{anoPublicacion}" required>
                     </div>
                     <div class="mb-3">
                         <label for="editorialLibro" class="form-label">Editorial</label>
@@ -206,7 +195,7 @@
                     document.querySelector('#modificarLibroModal input[name="titulo"]').value = data.titulo;
                     document.querySelector('#modificarLibroModal input[name="genero"]').value = data.genero;
                     document.querySelector('#modificarLibroModal input[name="autor"]').value = data.autor;
-                    document.querySelector('#modificarLibroModal input[name="ano_Publicacion"]').value = data.ano_Publicacion;
+                    document.querySelector('#modificarLibroModal input[name="anoPublicacion"]').value = data.anoPublicacion;
                     document.querySelector('#modificarLibroModal input[name="editorial"]').value = data.editorial;
                 });
         }); //fin script modificar libro
