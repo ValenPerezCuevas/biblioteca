@@ -119,7 +119,7 @@
             height: 50px;
             margin-left: auto;
             margin-right: auto;
-            margin-top: 7vh;
+            margin-top: 4%;
             overflow: hidden;
             border: 1px solid #000;
             background-color: #BF9270; /* Marrón medio */
@@ -157,7 +157,6 @@
             text-align: center;
             width: 101%;
             font-weight: 300;
-            position: absolute;
             font-size: 2vh;
             padding-top: 3px;
             overflow: hidden;
@@ -183,6 +182,44 @@
                 mask-position: 0 0;
             }
         }
+        /*estilo titulo texto */
+        .text-animated {
+            color:  #E3B7A0; /* Melocotón claro */
+            font-weight: 500;
+            left: 50%;
+            letter-spacing: 5px;
+            position: absolute;
+            text-transform: uppercase;
+            top: 35%;
+            transform: translate(-50%, -50%);
+        }
+
+        .text-animated::before {
+            animation: type 4s steps(24) normal;
+            border-right: 1px solid #000;
+            color: #BF9270; /* Marrón medio */
+            content: 'Listas';
+            height: 100%;
+            left: 0;
+            position: absolute;
+            overflow: hidden;
+            text-transform: uppercase;
+            top: 0;
+            width: 100%;
+            white-space: nowrap;
+        }
+
+        @keyframes type {
+            0% {
+                width: 0;
+            }
+
+            100% {
+                width: 100%;
+                border-right: none;
+            }
+        }
+
     </style>
 
     <script src="../static/js/footer.js"></script>
@@ -194,8 +231,8 @@
 
 <br>
 <div class="titulo text-center">
-    <p>Listas</p>
-    <div class="button-container-subrayado my-3">
+    <h1 class="text-center mb-4 text-animated">Listas</h1>
+    <div class="button-container-subrayado ">
         <span class="mas">Crear Nueva Lista</span>
         <button type="button" name="Hover" data-bs-toggle="modal" data-bs-target="#crearListaModal">
             Crear Nueva Lista
