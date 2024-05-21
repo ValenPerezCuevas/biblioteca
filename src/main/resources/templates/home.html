@@ -18,12 +18,45 @@
         color: black;
     }
 
-
+    /*header{*/
+    /*    background-color: #FFEDDB;*/
+    /*}*/
+    /*nav {*/
+    /*    background-color: #E3B7A0;*/
+    /*    font-size: 3.2vh;*/
+    /*}*/
 </style>
 <body>
 
-<!-- Incluir el encabezado compartido -->
-<div th:replace="header :: header"></div>
+<header>
+    <nav class="navbar navbar-expand-lg p-4">
+        <div class="container-fluid">
+            <div class="navbar-collapse" id="navbarNav">
+                <img class="align-self-lg-start" src="/imagenes/logo.png" alt="Logo" width="300" height="300">
+                <ul class="navbar-nav w-100 d-flex justify-content-around ">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/usuarios">Usuarios</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/listado">Libros</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin">Mis Datos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/descubre">Descubre</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/listas">Listas</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
 
 <div class="container mt-4"> <!-- Agregamos un margen superior para separar el carrusel del encabezado -->
 

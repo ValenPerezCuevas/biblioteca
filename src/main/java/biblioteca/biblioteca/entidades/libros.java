@@ -1,6 +1,5 @@
 package biblioteca.biblioteca.entidades;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.Data;
@@ -13,7 +12,6 @@ public class libros {
     private String titulo;
     private String genero;
     private String autor;
-    @Column(name = "ano_Publicacion")
-    private Integer anoPublicacion;
+    private Integer ano_Publicacion;
     private String editorial;
 }

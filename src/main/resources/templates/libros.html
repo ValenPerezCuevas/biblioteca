@@ -17,9 +17,9 @@
             color: #000000;
             cursor: pointer;
         }
-
-        .btn-height {
-            min-height: 62px; /* Ajusta este valor según sea necesario */
+        /* Estilos para filas alternas */
+        tr:nth-child(even) {
+            background-color: #E3B7A0; /* Melocotón claro */
         }
         /*ESTILO BOTONES*/
         .button-container-subrayado {
@@ -192,10 +192,18 @@
                 <td th:text="${libro.editorial}"></td>
                 <td>
                     <div class="btn-group" role="group" aria-label="Acciones">
-                        <button type="button" class="btn btn-info btn-height">Ver Portada</button>
-                        <button type="button" class="btn btn-primary btn-height" data-bs-toggle="modal" data-bs-target="#modificarLibroModal" th:attr="data-id=${libro.id_libros}">Modificar</button>
+                        <!-- Nueva línea corregida -->
+                        <button type="button" class="btn btn-info" th:attr="onclick='mostrarPortada(' + ${libro.id_libros} + ')'">
+                            Ver Portada
+                        </button>
+
+
+
+
+
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modificarLibroModal" th:attr="data-id=${libro.id_libros}">Modificar</button>
                         <form th:action="@{'/eliminarLibro/' + ${libro.id_libros}}" method="post" onsubmit="return confirm('¿Estás seguro de que quieres eliminar este libro?');">
-                            <button type="submit" class="btn btn-danger btn-height" title="Eliminar libro">X</button>
+                            <button type="submit" class="btn btn-danger" title="Eliminar libro">X</button>
                         </form>
                     </div>
                 </td>
@@ -307,7 +315,20 @@
         </div>
     </div>
 </div>
-
+<!-- Modal ver portada del libro -->
+<div class="modal fade" id="verPortadaModal" tabindex="-1" aria-labelledby="verPortadaModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="verPortadaModalLabel">Portada del Libro</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+            <div class="modal-body text-center">
+                <img id="portadaLibro" src="" alt="Portada del libro" class="img-fluid">
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- Scripts de Bootstrap -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
@@ -346,6 +367,19 @@
             });
         });
     });
+
+    function mostrarPortada(libroId) {
+        fetch('/portada/' + libroId)
+            .then(response => response.json())
+            .then(data => {
+                let portadaUrl = data.url;
+                document.getElementById('portadaLibro').src = portadaUrl;
+                new bootstrap.Modal(document.getElementById('verPortadaModal')).show();
+            })
+            .catch(error => console.error('Error fetching the portada:', error));
+    }
+
+
 
 </script>
 
