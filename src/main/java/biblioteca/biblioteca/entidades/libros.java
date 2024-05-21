@@ -12,6 +12,6 @@ public class libros {
     private String titulo;
     private String genero;
     private String autor;
-    private Integer ano_Publicacion;
+    private Integer anoPublicacion;
     private String editorial;
 }
