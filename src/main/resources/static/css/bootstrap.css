@@ -3990,7 +3990,7 @@ header {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-evenly;
   padding: var(--bs-navbar-padding-y) var(--bs-navbar-padding-x);
   background-color: #E3B7A0;
   font-size: 3.2vh;

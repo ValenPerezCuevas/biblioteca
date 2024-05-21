@@ -5,6 +5,7 @@ import biblioteca.biblioteca.entidades.listas;
 import biblioteca.biblioteca.repositorios.LibroRepository;
 import biblioteca.biblioteca.repositorios.ListasRepository;
 import biblioteca.biblioteca.repositorios.UsuarioRepository;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,10 +25,11 @@ public class controladorLista {
     }
 
     @GetMapping("/listas")
-    public String obtenerTodasLasListas(Model model){
+    public String obtenerTodasLasListas(Model model, HttpServletRequest request){
         model.addAttribute("listas", listasRepository.findAll());
         model.addAttribute("listas", new listas());
         model.addAttribute("listasModificado", new listas());
+        model.addAttribute("requestURI", request.getRequestURI());
         return "listas";
     }
 

@@ -11,7 +11,7 @@
     <link href="/css/bootstrap-reboot.css" rel="stylesheet">
     <link href="/css/bootstrap-utilities.css" rel="stylesheet">
 
-    <!-- Enlace a FontAwesome -->
+    <!-- Enlace a FontAwesome (iconos) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-lhK1IB8sQ1i1LBwOzFcKdZRN+vxZ+RTO1QTj1Pbj8tcMpzv9+53tQrFJr2PGbd2x" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
@@ -28,29 +28,36 @@
 <header>
     <nav class="navbar navbar-expand-lg p-4">
         <div class="container-fluid">
-            <div class="navbar-collapse" id="navbarNav">
+            <a class="navbar-brand" href="#">
                 <img class="align-self-lg-start" src="/imagenes/logo.png" alt="Logo" width="200" height="200">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse" id="navbarNav">
                 <ul class="navbar-nav nav-pills w-100 d-flex justify-content-around ">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/">Home</a>
+                        <a class="nav-link" th:classappend="${requestURI == '/' ? 'active' : ''}" aria-current="page" href="/">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/usuarios">Usuarios</a>
+                        <a class="nav-link" th:classappend="${requestURI == '/usuarios' ? 'active' : ''}" href="/usuarios">Usuarios</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/listado">Libros</a>
+                        <a class="nav-link" th:classappend="${requestURI == '/listado' ? 'active' : ''}" href="/listado">Libros</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/listas">Listas</a>
+                        <a class="nav-link" th:classappend="${requestURI == '/listas' ? 'active' : ''}" href="/listas">Listas</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/descubre">Descubre</a>
+                        <a class="nav-link" th:classappend="${requestURI == '/descubre' ? 'active' : ''}" href="/descubre">Descubre</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/admin">Mis Datos</a>
+                        <a class="nav-link" th:classappend="${requestURI == '/admin' ? 'active' : ''}" href="/admin">Mis Datos</a>
                     </li>
                 </ul>
 
+<!--  th:classappend: Thymeleaf usa esta expresión para agregar la clase active al elemento si la condición se cumple.
+${#httpServletRequest.requestURI}: Obtiene la URI de la solicitud actual.-->
                 <!-- Aquí comienza la sección de inicio de sesión / cierre de sesión -->
 
                 <!-- Sección para login-->

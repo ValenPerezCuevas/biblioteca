@@ -6,6 +6,7 @@ import biblioteca.biblioteca.entidades.roles;
 import biblioteca.biblioteca.entidades.usuarios;
 import biblioteca.biblioteca.repositorios.RolesRepository;
 import biblioteca.biblioteca.repositorios.UsuarioRepository;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -34,12 +35,14 @@ public class controladorUsuario {
      * *********************************************************************************/
     @GetMapping("/usuarios")
     public String obtenerTodosLosUsuarios(
+            HttpServletRequest request,
             Model model,
             @RequestParam(name = "pagina", required = false, defaultValue = "0") int pagina,
             @RequestParam(name = "tamanio", required = false, defaultValue = "10") int tamanio
     ) {
         Pageable pageable = PageRequest.of(pagina, tamanio);
         Page<usuarios> paginaUsuarios = usuarioRepository.findAll(pageable);
+        model.addAttribute("requestURI", request.getRequestURI());
         model.addAttribute("listaUsuarios", paginaUsuarios.getContent());
         model.addAttribute("paginaActual", pagina);
         model.addAttribute("totalPaginas", paginaUsuarios.getTotalPages());
