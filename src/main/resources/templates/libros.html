@@ -196,14 +196,9 @@
                         <button type="button" class="btn btn-info" th:attr="onclick='mostrarPortada(' + ${libro.id_libros} + ')'">
                             Ver Portada
                         </button>
-
-
-
-
-
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modificarLibroModal" th:attr="data-id=${libro.id_libros}">Modificar</button>
                         <form th:action="@{'/eliminarLibro/' + ${libro.id_libros}}" method="post" onsubmit="return confirm('¿Estás seguro de que quieres eliminar este libro?');">
-                            <button type="submit" class="btn btn-danger" title="Eliminar libro">X</button>
+                            <button type="submit" class="btn btn-danger" title="Eliminar libro" style="height: 64px">X</button>
                         </form>
                     </div>
                 </td>
@@ -315,6 +310,7 @@
         </div>
     </div>
 </div>
+
 <!-- Modal ver portada del libro -->
 <div class="modal fade" id="verPortadaModal" tabindex="-1" aria-labelledby="verPortadaModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
