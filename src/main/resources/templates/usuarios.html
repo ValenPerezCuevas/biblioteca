@@ -47,6 +47,9 @@
             border-bottom: 1px solid #BF9270; /* Marrón medio */
         }
 
+        th {
+            cursor: pointer;
+        }
 
         /* Estilos para filas alternas */
         tr:nth-child(even) {
@@ -124,10 +127,20 @@
         <table class="table table-striped mx-auto">
             <thead>
                 <tr class="text-center active">
-                    <th class="text-center" style="background-color: #BF9270">Nombre</th>
-                    <th class="text-center" style="background-color: #BF9270">Contraseña</th>
-                    <th class="text-center" style="background-color: #BF9270">Rol</th>
-                    <th class="text-center" style="background-color: #BF9270">Acciones</th>
+                    <th class="text-center" data-sort="nombre" th:data-order="${sortBy == 'nombre' and sortOrder == 'asc' ? 'desc' : 'asc'}" >
+                        Nombre
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-up" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M11.5 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L11 2.707V14.5a.5.5 0 0 0 .5.5m-7-14a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L4 13.293V1.5a.5.5 0 0 1 .5-.5"/>
+                        </svg>
+                    </th>
+                    <th class="text-center" >Contraseña</th>
+                    <th class="text-center" data-sort="rol" th:data-order="${sortBy == 'rol' and sortOrder == 'asc' ? 'desc' : 'asc'}">
+                        Rol
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-up" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M11.5 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L11 2.707V14.5a.5.5 0 0 0 .5.5m-7-14a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L4 13.293V1.5a.5.5 0 0 1 .5-.5"/>
+                        </svg>
+                    </th>
+                    <th class="text-center" >Acciones</th>
                 </tr>
             </thead>
             <tbody class="table-group-divider">
@@ -154,15 +167,15 @@
         <nav aria-label="Page navigation example">
             <ul class="pagination justify-content-center">
                 <li class="page-item" th:class="${paginaActual == 0} ? 'disabled'">
-                    <a class="page-link" th:href="@{/usuarios(pagina=0)}" aria-label="Previous">
+                    <a class="page-link" th:href="@{/usuarios(pagina=0, sortBy=${sortBy}, sortOrder=${sortOrder})}" aria-label="Previous">
                         <span aria-hidden="true">&laquo;</span>
                     </a>
                 </li>
                 <li th:each="num : ${#numbers.sequence(0, totalPaginas - 1)}" class="page-item" th:classappend="${num == paginaActual} ? 'active'">
-                    <a class="page-link" th:href="@{/usuarios(pagina=${num})}" th:text="${num + 1}"></a>
+                    <a class="page-link" th:href="@{/usuarios(pagina=${num}, sortBy=${sortBy}, sortOrder=${sortOrder})}" th:text="${num + 1}"></a>
                 </li>
                 <li class="page-item" th:class="${paginaActual == totalPaginas - 1} ? 'disabled'">
-                    <a class="page-link" th:href="@{/usuarios(pagina=${totalPaginas - 1})}" aria-label="Next">
+                    <a class="page-link" th:href="@{/usuarios(pagina=${totalPaginas - 1}, sortBy=${sortBy}, sortOrder=${sortOrder})}" aria-label="Next">
                         <span aria-hidden="true">&raquo;</span>
                     </a>
                 </li>
@@ -259,6 +272,7 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
+        //script modificar usuario
         let modificarUsuarioModal = document.getElementById('modificarUsuarioModal');
         modificarUsuarioModal.addEventListener('show.bs.modal', function (event) {
             let button = event.relatedTarget; //
@@ -276,7 +290,19 @@
                 .catch(error => {
                     console.error('Error fetching data:', error);
                 });
+        }); // fin script modificar usuario
+
+        const headers = document.querySelectorAll('th[data-sort]');
+        headers.forEach(header => {
+            header.addEventListener('click', function () {
+                const sortBy = this.getAttribute('data-sort');
+                let sortOrder = this.getAttribute('data-order');
+
+                const url = `/usuarios?sortBy=${sortBy}&sortOrder=${sortOrder}`;
+                window.location.href = url;
+            });
         });
+
     });
 
 </script>
