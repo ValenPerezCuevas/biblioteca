@@ -100,11 +100,11 @@ public class controladorLibro {
     /**********************************************************************************
      * Mostrar portada
      * * *********************************************************************************/
-    @GetMapping("/{id_libros}")
+    @GetMapping("/portada/{id_libros}")
     public ResponseEntity<?> getPortada(@PathVariable("id_libros") Integer id_libros) {
         Optional<libros> libro = libroRepository.findById(Long.valueOf(id_libros));
         if (libro.isPresent()) {
-            String portadaUrl = "/resources/static/Imagenes libros/" + id_libros + ".jpg";
+            String portadaUrl = "/imagenes/Imagenes_libros/" + id_libros + ".jpg";
             Map<String, String> response = new HashMap<>();
             response.put("url", portadaUrl);
             return ResponseEntity.ok(response);
