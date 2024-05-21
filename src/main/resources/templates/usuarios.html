@@ -183,7 +183,8 @@
                 <tr th:each="usuario : ${listaUsuarios}">
                     <td th:text="${usuario.nombre}" class="text-center"></td>
                     <td th:text="${usuario.contrasena}" class="text-center"></td>
-                    <td th:text="${usuario.rol.nombre_rol}" class="text-center"></td>
+                    <td th:text="${usuario.rol.nombre_rol != null ? usuario.rol.nombre_rol : 'Sin Rol'}" class="text-center"></td>
+
                     <td class="text-center">
                         <div class="btn-group" role="group" aria-label="Acciones">
                             <button type="button" title="Modificar usuario" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modificarUsuarioModal" th:attr="data-id=${usuario.id_usuario}">
