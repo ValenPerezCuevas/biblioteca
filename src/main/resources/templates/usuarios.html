@@ -11,6 +11,27 @@
     <link href="/css/bootstrap-utilities.css" rel="stylesheet">
     <!-- Estilos personalizados -->
     <style>
+        @keyframes ani {
+            from {
+                -webkit-mask-position: 0 0;
+                mask-position: 0 0;
+            }
+            to {
+                -webkit-mask-position: 100% 0;
+                mask-position: 100% 0;
+            }
+        }
+
+        @keyframes ani2 {
+            from {
+                -webkit-mask-position: 100% 0;
+                mask-position: 100% 0;
+            }
+            to {
+                -webkit-mask-position: 0 0;
+                mask-position: 0 0;
+            }
+        }
 
         /* Estilos para la tabla */
         table {
@@ -31,6 +52,56 @@
         tr:nth-child(even) {
             background-color: #E3B7A0; /* Melocotón claro */
         }
+        .button-container-subrayado {
+            position: relative;
+            width: 100px;
+            height: 50px;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 7vh;
+            overflow: hidden;
+            border: 1px solid #000;
+            background-color: #BF9270; /* Marrón medio */
+
+            font-weight: 300;
+            transition: 0.5s;
+            letter-spacing: 1px;
+            border-radius: 8px;
+        }
+        .button-container-subrayado button {
+            width: 101%;
+            height: 100%;
+            font-weight: 300;
+            font-size: 2vh;
+            letter-spacing: 1px;
+            background-color:  #E3B7A0; /* Melocotón claro */
+            -webkit-mask: url("https://raw.githubusercontent.com/robin-dela/css-mask-animation/master/img/urban-sprite.png");
+            mask: url("https://raw.githubusercontent.com/robin-dela/css-mask-animation/master/img/urban-sprite.png");
+            -webkit-mask-size: 3000% 100%;
+            mask-size: 3000% 100%;
+            border: none;
+            color: black;
+            cursor: pointer;
+
+            animation: ani2 0.7s steps(29) forwards;
+        }
+        .button-container-subrayado button:hover {
+
+            animation: ani 0.7s steps(29) forwards;
+        }
+
+        .mas {
+            position: absolute;
+            color: black;
+            text-align: center;
+            width: 101%;
+            font-weight: 300;
+            position: absolute;
+            font-size: 2vh;
+            padding-top: 3px;
+            overflow: hidden;
+        }
+
 
     </style>
 </head>
@@ -41,8 +112,9 @@
 
 <div class="container" style="width: 90%;">
     <h1 class="text-center mb-4">Lore Librarian</h1>
-    <div class="container my-4">
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#crearUsuarioModal">
+    <div class="my-3 button-container-subrayado">
+        <span class="mas">Crear Nuevo Usuario</span>
+        <button type="button"  name="Hover" data-bs-toggle="modal" data-bs-target="#crearUsuarioModal">
             Crear Nuevo Usuario
         </button>
     </div>
