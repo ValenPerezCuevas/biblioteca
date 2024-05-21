@@ -3,6 +3,7 @@ package biblioteca.biblioteca.controladores;
 import biblioteca.biblioteca.entidades.libros;
 import biblioteca.biblioteca.entidades.usuarios;
 import biblioteca.biblioteca.repositorios.LibroRepository;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -33,6 +34,7 @@ public class controladorLibro {
             @RequestParam(name = "tamanio", required = false, defaultValue = "10") int tamanio,
             @RequestParam(defaultValue = "titulo") String sortBy,
             @RequestParam(defaultValue = "asc") String sortOrder,
+            HttpServletRequest request,
             Model model
     ) {
         Pageable pageable = PageRequest.of(pagina, tamanio,
@@ -45,6 +47,7 @@ public class controladorLibro {
         model.addAttribute("sortOrder", sortOrder);
         model.addAttribute("libro", new libros());
         model.addAttribute("libroModificado", new libros());
+        model.addAttribute("requestURI", request.getRequestURI());
 
         return "libros";
     }
