@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -38,14 +39,19 @@ public class controladorUsuario {
             HttpServletRequest request,
             Model model,
             @RequestParam(name = "pagina", required = false, defaultValue = "0") int pagina,
-            @RequestParam(name = "tamanio", required = false, defaultValue = "10") int tamanio
+            @RequestParam(name = "tamanio", required = false, defaultValue = "10") int tamanio,
+            @RequestParam(defaultValue = "rol") String sortBy,
+            @RequestParam(defaultValue = "asc") String sortOrder
     ) {
-        Pageable pageable = PageRequest.of(pagina, tamanio);
+        Pageable pageable = PageRequest.of(pagina, tamanio,
+                Sort.by(sortOrder.equals("asc") ? Sort.Direction.ASC : Sort.Direction.DESC, sortBy));
         Page<usuarios> paginaUsuarios = usuarioRepository.findAll(pageable);
         model.addAttribute("requestURI", request.getRequestURI());
         model.addAttribute("listaUsuarios", paginaUsuarios.getContent());
         model.addAttribute("paginaActual", pagina);
         model.addAttribute("totalPaginas", paginaUsuarios.getTotalPages());
+        model.addAttribute("sortBy", sortBy);
+        model.addAttribute("sortOrder", sortOrder);
 
 //        model.addAttribute("listaUsuarios", usuarioRepository.findAll());
         model.addAttribute("nuevoUsuario", new usuarios());
