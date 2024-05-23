@@ -45,16 +45,22 @@ public class controladorLibro {
             @RequestParam(name = "tamanio", required = false, defaultValue = "10") int tamanio,
             @RequestParam(defaultValue = "titulo") String sortBy,
             @RequestParam(defaultValue = "asc") String sortOrder,
-            @RequestParam(name = "buscar", required = false) String buscar,
+            @RequestParam(name = "buscarTitulo", required = false) String buscarTitulo,
+            @RequestParam(name = "buscarAutor", required = false) String buscarAutor,
             HttpServletRequest request,
             Model model
     ) {
         Pageable pageable = PageRequest.of(pagina, tamanio,
                 Sort.by(sortOrder.equals("asc") ? Sort.Direction.ASC : Sort.Direction.DESC, sortBy));
-        Page<libros> paginaLibros = libroRepository.findAll(pageable);
+        Page<libros> paginaLibros;
 
-        if (buscar != null && !buscar.isEmpty()) {
-            paginaLibros = libroRepository.findByTituloContainingIgnoreCase(buscar, pageable);
+        // Código para filtro de búsqueda:
+        if ((buscarTitulo != null && !buscarTitulo.isEmpty()) || (buscarAutor != null && !buscarAutor.isEmpty())) {
+            if (buscarTitulo != null && !buscarTitulo.isEmpty()) {
+                paginaLibros = libroRepository.findByTituloContainingIgnoreCase(buscarTitulo, pageable);
+            } else {
+                paginaLibros = libroRepository.findByAutorContainingIgnoreCase(buscarAutor, pageable);
+            }
         } else {
             paginaLibros = libroRepository.findAll(pageable);
         }
