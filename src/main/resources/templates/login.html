@@ -100,7 +100,14 @@
             registerForm.style.display = 'block';
         }
     }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        if (window.location.hash === '#register-form') {
+            toggleForms();
+        }
+    });
 </script>
+
 </body>
 </html>
 
