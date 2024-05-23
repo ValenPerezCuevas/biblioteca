@@ -267,10 +267,9 @@
                                         <button type="button" title="Modificar Lista" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modificarListaModal" th:attr="data-id=${lista.id_lista}">
                                             Modificar
                                         </button>
-                                    <form th:action="@{'/listas/eliminarLista/' + ${lista.id_lista}}" method="post" onsubmit="return confirm('¿Estás seguro de que quieres eliminar esta lista?');">
+                                    <form th:action="@{'/eliminarLista/' + ${lista.id_lista}}" method="post" onsubmit="return confirm('¿Estás seguro de que quieres eliminar esta lista?');">
                                         <button type="submit" class="btn btn-danger" title="Eliminar lista">X</button>
                                     </form>
-
 
 
                                 </div>

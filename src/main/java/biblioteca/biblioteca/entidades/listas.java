@@ -1,5 +1,6 @@
 package biblioteca.biblioteca.entidades;
 
+
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -17,5 +18,7 @@ public class listas {
     private Timestamp actualizado_desde;
     private Integer creado_por;
     private Integer actualizado_por;
-}
 
+
+
+}

@@ -1,14 +1,11 @@
 package biblioteca.biblioteca.controladores;
 
-import biblioteca.biblioteca.entidades.LibrosListas;
 import biblioteca.biblioteca.entidades.libros;
 import biblioteca.biblioteca.entidades.listas;
 import biblioteca.biblioteca.repositorios.LibroRepository;
-import biblioteca.biblioteca.repositorios.LibrosListasRepository;
 import biblioteca.biblioteca.repositorios.ListasRepository;
 import biblioteca.biblioteca.repositorios.UsuarioRepository;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,18 +17,19 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class controladorLista {
 
     private final ListasRepository listasRepository;
-    private final LibrosListasRepository librosListasRepository;
 
     @Autowired
-    public controladorLista(ListasRepository listasRepository, LibrosListasRepository librosListasRepository) {
+    public controladorLista(ListasRepository listasRepository) {
+
         this.listasRepository = listasRepository;
-        this.librosListasRepository = librosListasRepository;
     }
 
-    @GetMapping
-    public String obtenerTodasLasListas(Model model, HttpServletRequest request) {
+    @GetMapping("/listas")
+    public String obtenerTodasLasListas(Model model, HttpServletRequest request){
         model.addAttribute("listas", listasRepository.findAll());
+        model.addAttribute("listas", new listas());
         model.addAttribute("listasModificado", new listas());
+        model.addAttribute("requestURI", request.getRequestURI());
         return "listas";
     }
 
@@ -48,7 +46,7 @@ public class controladorLista {
      * Eliminar datos
      * * *********************************************************************************/
     @PostMapping("/eliminarLista/{id}")
-    public String eliminarLista(@PathVariable("id") Long id, Model model) {
+    public String eliminarLista(@PathVariable("id") Long id) {
         listasRepository.deleteById(id);
         return "redirect:/listas";
     }
