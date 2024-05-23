@@ -191,8 +191,9 @@
                                 Modificar
                             </button>
 
-                            <form th:action="@{'/eliminarUsuario/' + ${usuario.id_usuario}}" method="post" onsubmit="return confirm('¿Estás seguro de que quieres eliminar este usuario?');">
-                                <button type="submit" class="btn btn-danger" title="Eliminar usuario">X</button>
+                            <form th:action="@{'/eliminarUsuario/' + ${usuario.id_usuario}}" method="post" title="Eliminar usuario"
+                                  onsubmit="return confirm('¿Estás seguro de que quieres eliminar este usuario?');">
+                                <button type="submit" class="btn btn-danger">X</button>
                             </form>
                         </div>
                     </td>
