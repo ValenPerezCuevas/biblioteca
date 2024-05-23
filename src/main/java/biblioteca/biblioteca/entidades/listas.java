@@ -12,7 +12,7 @@ public class listas {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id_lista;
-
+    private Integer id_usuario;
     private String nombre_lista;
     private Timestamp creado_desde;
     private Timestamp actualizado_desde;
