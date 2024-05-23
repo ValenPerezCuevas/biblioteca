@@ -27,8 +27,6 @@
             height: 50px;
             margin-left: 10px;
             margin-right: 10px;
-            margin-top: 7%;
-            margin-bottom: 1%;
             overflow: hidden;
             border: 1px solid #000;
             background-color: #BF9270; /* Marrón medio */
@@ -65,7 +63,6 @@
             text-align: center;
             width: 101%;
             font-weight: 300;
-            position: absolute;
             font-size:1.9vh;
             padding-top: 4px;
             overflow: hidden;
@@ -92,6 +89,12 @@
             }
         }
         /*estilo titulo texto */
+        .text-animated-container {
+            position: relative;
+            height: 70px;
+            margin: 20px;
+        }
+
         .text-animated {
             color:  #E3B7A0; /* Melocotón claro */
             font-weight: 500;
@@ -143,7 +146,9 @@
 <div th:replace="header :: header"></div>
 
 <div class="container" style="width: 90%;"> <!-- Contenedor con ancho del 90% -->
-    <h1 class="text-center mb-4 text-animated">Pergaminos del saber</h1>
+    <div class="text-animated-container">
+        <h1 class="text-center mb-4 text-animated">Pergaminos del saber</h1>
+    </div>
 
     <!-- Contenedor para los botones -->
     <div class="d-flex justify-content-center mb-4">
@@ -157,6 +162,10 @@
         <!-- Botones filtro de búsqueda -->
         <div class="button-container-subrayado">
             <span class="mas">Buscar libro por título</span>
+            <!--
+                data-bs-toggle indica que elemento activa o desactiva el colapso
+                data-bs-target indica qué elemento se colapsa
+            -->
             <button type="button" name="Hover" data-bs-toggle="collapse" data-bs-target="#buscarForm">
                 Buscar libro por título
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
