@@ -37,33 +37,49 @@
             <div class="navbar-collapse collapse" id="navbarNav">
                 <ul class="navbar-nav nav-pills w-100 d-flex justify-content-around ">
                     <li class="nav-item">
-                        <a class="nav-link btnSubrayado btnfos-2" th:classappend="${requestURI == '/' ? 'active' : ''}" aria-current="page" href="/">Home</a>
+                        <a class="nav-link btn" th:classappend="${requestURI == '/' ? 'active' : ''}" aria-current="page" href="/">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link btnSubrayado btnfos-2" th:classappend="${requestURI == '/usuarios' ? 'active' : ''}" href="/usuarios">Usuarios</a>
+                        <a class="nav-link" th:classappend="${requestURI == '/usuarios' ? 'active' : ''}" href="/usuarios">Usuarios</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link btnSubrayado btnfos-2" th:classappend="${requestURI == '/listado' ? 'active' : ''}" href="/listado">Libros</a>
+                        <a class="nav-link" th:classappend="${requestURI == '/listado' ? 'active' : ''}" href="/listado">Libros</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link btnSubrayado btnfos-2" th:classappend="${requestURI == '/listas' ? 'active' : ''}" href="/listas">Listas</a>
+                        <a class="nav-link" th:classappend="${requestURI == '/listas' ? 'active' : ''}" href="/listas">Listas</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/admin">Mis Datos</a>
+                        <a class="nav-link" th:classappend="${requestURI == '/admin' ? 'active' : ''}" href="/admin">Mis Datos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/listas">Listas</a>
+                        <a class="nav-link" th:classappend="${requestURI == '/descubre' ? 'active' : ''}" href="/descubre">Descubre</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/login">Login</a>
-                    </li>
+<!--                    <li class="nav-item">-->
+<!--                        <a class="nav-link" href="/login">Login</a>-->
+<!--                    </li>-->
                 </ul>
                 <!-- Aquí comienza la sección de inicio de sesión / cierre de sesión -->
-                <ul class="nav navbar-nav navbar-right">
-                    <th:block th:unless="${isLoggedIn}">
-                        <span class="navbar-text">
-                    Bienvenido, <span th:if="${session.usuario != null}" th:text="${session.usuario.nombre}">Usuario</span>  <a href="/logout" class="nav-link d-inline p-0">Cerrar sesión</a>
-                </span>
+                <ul class="nav navbar-nav navbar-right cajaLogin"
+                    style="border-radius: 10px;
+                         border: 2px solid #BF9270;
+                         padding: 5px">
+                    <th:block th:if="${session.usuario == null}">
+                        <li class="nav-item" style="font-weight: bold">
+                            <a class="nav-link" href="/login">Iniciar sesión</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/login#register-form">Registrarse</a>
+                        </li>
+                    </th:block>
+                    <th:block th:if="${session.usuario != null}">
+                        <li class="nav-item" style="font-weight: bold">
+                            <span class="navbar-text">
+                                Bienvenido, <span th:text="${session.usuario.nombre}">Usuario</span>
+                            </span>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/logout">Cerrar sesión</a>
+                        </li>
                     </th:block>
                 </ul>
 <!--                Sección para login-->
