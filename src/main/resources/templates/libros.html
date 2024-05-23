@@ -25,9 +25,9 @@
             position: relative;
             width: 100px;
             height: 50px;
-            margin-left: auto;
-            margin-right: auto;
-            margin-top: 10%;
+            margin-left: 10px;
+            margin-right: 10px;
+            margin-top: 7%;
             margin-bottom: 1%;
             overflow: hidden;
             border: 1px solid #000;
@@ -145,18 +145,30 @@
 
 <div class="container" style="width: 90%;"> <!-- Contenedor con ancho del 90% -->
     <h1 class="text-center mb-4 text-animated">Pergaminos del saber</h1>
-    <div class="button-container-subrayado ">
-        <span class="mas">Añadir nuevo libro</span>
-        <button type="button"  name="Hover"  class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#añadirLibroModal">
-            Añadir nuevo libro
-        </button>
+
+    <!-- Contenedor para los botones -->
+    <div class="d-flex justify-content-center mb-4">
+        <div class="button-container-subrayado">
+            <span class="mas">Añadir nuevo libro</span>
+            <button type="button" name="Hover" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#añadirLibroModal">
+                Añadir nuevo libro
+            </button>
+        </div>
+
+        <div class="button-container-subrayado">
+            <span class="mas">Buscar libro</span>
+            <button type="button" name="Hover" class="btn btn-primary" data-bs-toggle="collapse" data-bs-target="#buscarForm">
+                Buscar libro
+            </button>
+        </div>
     </div>
 
-    <!-- Filtro de búsqueda -->
-    <form th:action="@{/listado}" method="get" class="d-flex justify-content-center mb-4">
-        <input type="text" name="buscar" class="form-control" placeholder="Buscar libro por título" th:value="${buscar}">
-        <button type="submit" class="btn btn-primary ms-2">Buscar</button>
-    </form>
+    <div id="buscarForm" class="collapse mb-4">
+        <form th:action="@{/listado}" method="get" class="d-flex justify-content-center">
+            <input type="text" name="buscar" class="form-control" placeholder="Buscar libro por título" th:value="${buscar}">
+            <button type="submit" class="btn btn-primary ms-2" style="background-color:  #E3B7A0; color: black; border-color: black">Buscar</button>
+        </form>
+    </div>
 
     <div class="container table-responsive">
         <table class="table table-striped">
