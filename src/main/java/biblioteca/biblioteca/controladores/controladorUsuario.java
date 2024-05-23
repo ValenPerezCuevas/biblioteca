@@ -17,6 +17,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
 @Controller
 
 public class controladorUsuario {
@@ -40,11 +43,23 @@ public class controladorUsuario {
             Model model,
             @RequestParam(name = "pagina", required = false, defaultValue = "0") int pagina,
             @RequestParam(name = "tamanio", required = false, defaultValue = "10") int tamanio,
-            @RequestParam(defaultValue = "rol") String sortBy,
-            @RequestParam(defaultValue = "asc") String sortOrder
+            @RequestParam(defaultValue = "rol,nombre") String sortBy,
+            @RequestParam(defaultValue = "asc,asc") String sortOrder
     ) {
-        Pageable pageable = PageRequest.of(pagina, tamanio,
-                Sort.by(sortOrder.equals("asc") ? Sort.Direction.ASC : Sort.Direction.DESC, sortBy));
+        // dos métodos de ordenación por defecto 1ro rol y 2do nombre:
+        String[] sortProperties = sortBy.split(",");
+        String[] sortDirections = sortOrder.split(",");
+
+        Sort sort = Sort.by(
+                IntStream.range(0, sortProperties.length)
+                        .mapToObj(i -> new Sort.Order(
+                                sortDirections[i].equalsIgnoreCase("asc") ? Sort.Direction.ASC : Sort.Direction.DESC,
+                                sortProperties[i]
+                        ))
+                        .collect(Collectors.toList())
+        );
+
+        Pageable pageable = PageRequest.of(pagina, tamanio, sort);
         Page<usuarios> paginaUsuarios = usuarioRepository.findAll(pageable);
         model.addAttribute("requestURI", request.getRequestURI());
         model.addAttribute("listaUsuarios", paginaUsuarios.getContent());
