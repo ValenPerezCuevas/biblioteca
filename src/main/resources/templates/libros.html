@@ -10,7 +10,6 @@
     <link href="/css/bootstrap-utilities.css" rel="stylesheet">
     <!-- Estilos personalizados -->
     <style>
-
         /* Estilos para la cabecera de la tabla */
         th {
             background-color: #EDCDBB; /* Marrón suave */
@@ -130,6 +129,13 @@
             }
         }
 
+        #verPortadaModal img {
+            max-width: 100%;
+            height: auto;
+            width: 350px;
+            height: 550px;
+            object-fit: cover;
+        }
     </style>
 </head>
 <body>
@@ -150,7 +156,7 @@
         <table class="table table-striped">
             <thead>
             <tr>
-<!--                 ordenar columnas:-->
+                <!--                 ordenar columnas:-->
                 <th data-sort="titulo" th:data-order="${sortBy == 'titulo' and sortOrder == 'asc' ? 'desc' : 'asc'}">
                     Título
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-up" viewBox="0 0 16 16">
@@ -374,11 +380,7 @@
             })
             .catch(error => console.error('Error fetching the portada:', error));
     }
-
-
-
 </script>
-
 
 </body>
 </html>
