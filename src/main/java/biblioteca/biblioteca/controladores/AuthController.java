@@ -1,5 +1,6 @@
 package biblioteca.biblioteca.controladores;
 
+import biblioteca.biblioteca.entidades.roles;
 import biblioteca.biblioteca.entidades.usuarios;
 import biblioteca.biblioteca.repositorios.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,6 +51,9 @@ public class AuthController {
             model.addAttribute("error", "El nombre de usuario ya está en uso");
             return "crearUsuario";
         }
+        roles rolUsuario = new roles();
+        rolUsuario.setId_rol(2);
+        usuario.setRol(rolUsuario);
         usuarioRepository.save(usuario);
         return "redirect:/login";
     }
