@@ -152,11 +152,17 @@
         </button>
     </div>
 
+    <!-- Filtro de búsqueda -->
+    <form th:action="@{/listado}" method="get" class="d-flex justify-content-center mb-4">
+        <input type="text" name="buscar" class="form-control" placeholder="Buscar libro por título" th:value="${buscar}">
+        <button type="submit" class="btn btn-primary ms-2">Buscar</button>
+    </form>
+
     <div class="container table-responsive">
         <table class="table table-striped">
             <thead>
             <tr>
-                <!--                 ordenar columnas:-->
+                <!-- ordenar columnas:-->
                 <th data-sort="titulo" th:data-order="${sortBy == 'titulo' and sortOrder == 'asc' ? 'desc' : 'asc'}">
                     Título
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-up" viewBox="0 0 16 16">

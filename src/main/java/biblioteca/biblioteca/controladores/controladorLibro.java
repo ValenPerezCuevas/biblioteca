@@ -28,6 +28,7 @@ public class controladorLibro {
 
     @Value("${ruta.imagenes}")
     private String rutaImagenes;
+
     @Autowired
     public controladorLibro(LibroRepository libroRepository){
         this.libroRepository = libroRepository;
@@ -44,12 +45,20 @@ public class controladorLibro {
             @RequestParam(name = "tamanio", required = false, defaultValue = "10") int tamanio,
             @RequestParam(defaultValue = "titulo") String sortBy,
             @RequestParam(defaultValue = "asc") String sortOrder,
+            @RequestParam(name = "buscar", required = false) String buscar,
             HttpServletRequest request,
             Model model
     ) {
         Pageable pageable = PageRequest.of(pagina, tamanio,
                 Sort.by(sortOrder.equals("asc") ? Sort.Direction.ASC : Sort.Direction.DESC, sortBy));
         Page<libros> paginaLibros = libroRepository.findAll(pageable);
+
+        if (buscar != null && !buscar.isEmpty()) {
+            paginaLibros = libroRepository.findByTituloContainingIgnoreCase(buscar, pageable);
+        } else {
+            paginaLibros = libroRepository.findAll(pageable);
+        }
+
         model.addAttribute("libros", paginaLibros.getContent());
         model.addAttribute("paginaActual", pagina);
         model.addAttribute("totalPaginas", paginaLibros.getTotalPages());
