@@ -3,27 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <title>Home</title>
+<!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">-->
     <link href="/css/bootstrap.css" rel="stylesheet">
     <link href="/css/bootstrap-grid.css" rel="stylesheet">
     <link href="/css/bootstrap-reboot.css" rel="stylesheet">
     <link href="/css/bootstrap-utilities.css" rel="stylesheet">
+
 </head>
+
 <style>
+    /*@import url('https://fonts.googleapis.com/css2?family=Caesar+Dressing&display=swap');*/
     body{
         background-color: #BF9270;
         color: black;
     }
+
+    /*header{*/
+    /*    background-color: #FFEDDB;*/
+    /*}*/
+    /*nav {*/
+    /*    background-color: #E3B7A0;*/
+    /*    font-size: 3.2vh;*/
+    /*}*/
 </style>
 <body>
 
-    <div th:replace="header :: header"></div>
+<!-- Incluir el encabezado compartido -->
+<div th:replace="header :: header"></div>
 
 
+<div class="container mt-4"> <!-- Agregamos un margen superior para separar el carrusel del encabezado -->
 
-<div class="container mt-4">
     <h2>Bienvenido a Alexandría</h2>
     <p>Aquí podrás acceder al conocimiento de centenares de libros y podrás clasificarlos a tu gusto.
-        Descubre nuevas listas tendencias y mucho más</p>
+    Descubre nuevas listas tendencias y mucho más</p>
     <h4>"Entra libremente y por tu propia voluntad y deja parte de la felicidad que traes contigo" ("Drácula", Bram Stoker)</h4>
     <div id="carouselExample" class="carousel slide">
         <div class="carousel-inner">
@@ -31,7 +44,7 @@
                 <img src="/imagenes/carrusel2.jpg" class="d-block w-100" alt="..." loading="lazy">
             </div>
             <div class="carousel-item">
-                <img src="/imagenes/carrusel1.jpg" class="d-block w-100" alt="..." loading="lazy" >
+                <img src="/imagenes/carrusel1.jpg"  class="d-block w-100" alt="..." loading="lazy" >
             </div>
             <div class="carousel-item">
                 <img src="/imagenes/carrusel3.jpg" class="d-block w-100" alt="..." loading="lazy">
@@ -49,5 +62,6 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>

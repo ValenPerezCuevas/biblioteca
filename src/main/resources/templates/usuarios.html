@@ -11,6 +11,27 @@
     <link href="/css/bootstrap-utilities.css" rel="stylesheet">
     <!-- Estilos personalizados -->
     <style>
+        @keyframes ani {
+            from {
+                -webkit-mask-position: 0 0;
+                mask-position: 0 0;
+            }
+            to {
+                -webkit-mask-position: 100% 0;
+                mask-position: 100% 0;
+            }
+        }
+
+        @keyframes ani2 {
+            from {
+                -webkit-mask-position: 100% 0;
+                mask-position: 100% 0;
+            }
+            to {
+                -webkit-mask-position: 0 0;
+                mask-position: 0 0;
+            }
+        }
 
         /* Estilos para la tabla */
         table {
@@ -26,10 +47,99 @@
             border-bottom: 1px solid #BF9270; /* Marrón medio */
         }
 
+        th {
+            cursor: pointer;
+        }
 
         /* Estilos para filas alternas */
         tr:nth-child(even) {
             background-color: #E3B7A0; /* Melocotón claro */
+        }
+
+
+        .button-container-subrayado {
+            position: relative;
+            width: 100px;
+            height: 50px;
+            margin-left: auto;
+            margin-right: auto;
+            overflow: hidden;
+            border: 1px solid #000;
+            background-color: #BF9270; /* Marrón medio */
+            font-weight: 300;
+            transition: 0.5s;
+            letter-spacing: 1px;
+            border-radius: 8px;
+            margin-top:10%;
+        }
+        .button-container-subrayado button {
+            width: 101%;
+            height: 100%;
+            font-weight: 300;
+            font-size: 2vh;
+            letter-spacing: 1px;
+            background-color:  #E3B7A0; /* Melocotón claro */
+            -webkit-mask: url("https://raw.githubusercontent.com/robin-dela/css-mask-animation/master/img/urban-sprite.png");
+            mask: url("https://raw.githubusercontent.com/robin-dela/css-mask-animation/master/img/urban-sprite.png");
+            -webkit-mask-size: 3000% 100%;
+            mask-size: 3000% 100%;
+            border: none;
+            color: black;
+            cursor: pointer;
+            animation: ani2 0.7s steps(29) forwards;
+        }
+        .button-container-subrayado button:hover {
+
+            animation: ani 0.7s steps(29) forwards;
+        }
+
+        .mas {
+            position: absolute;
+            color: black;
+            text-align: center;
+            width: 101%;
+            font-weight: 300;
+            position: absolute;
+            font-size: 2vh;
+            padding-top: 3px;
+            overflow: hidden;
+        }
+/*estilo titulo texto */
+        .text-animated {
+            color:  #E3B7A0; /* Melocotón claro */
+            font-weight: 500;
+            left: 50%;
+            letter-spacing: 5px;
+            position: absolute;
+            text-transform: uppercase;
+            top: 35%;
+            transform: translate(-50%, -50%);
+        }
+
+        .text-animated::before {
+            animation: type 4s steps(24) normal;
+            border-right: 1px solid #000;
+            color: #BF9270; /* Marrón medio */
+            content: 'Lore Librarian';
+            height: 100%;
+            left: 0;
+            position: absolute;
+            overflow: hidden;
+            text-transform: uppercase;
+            top: 0;
+            width: 100%;
+            white-space: nowrap;
+        }
+
+        @keyframes type {
+            0% {
+                width: 0;
+            }
+
+            100% {
+                width: 100%;
+                border-right: none;
+            }
         }
 
     </style>
@@ -40,9 +150,10 @@
 <div th:replace="header :: header"></div>
 
 <div class="container" style="width: 90%;">
-    <h1 class="text-center mb-4">Lore Librarian</h1>
-    <div class="container my-4">
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#crearUsuarioModal">
+    <h1 class="text-center mb-4 text-animated">Lore Librarian</h1>
+    <div class=" button-container-subrayado">
+        <span class="mas">Crear Nuevo Usuario</span>
+        <button type="button"  name="Hover" data-bs-toggle="modal" data-bs-target="#crearUsuarioModal">
             Crear Nuevo Usuario
         </button>
     </div>
@@ -52,17 +163,28 @@
         <table class="table table-striped mx-auto">
             <thead>
                 <tr class="text-center active">
-                    <th class="text-center" style="background-color: #BF9270">Nombre</th>
-                    <th class="text-center" style="background-color: #BF9270">Contraseña</th>
-                    <th class="text-center" style="background-color: #BF9270">Rol</th>
-                    <th class="text-center" style="background-color: #BF9270">Acciones</th>
+                    <th class="text-center" data-sort="nombre" th:data-order="${sortBy == 'nombre' and sortOrder == 'asc' ? 'desc' : 'asc'}" >
+                        Nombre
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-up" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M11.5 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L11 2.707V14.5a.5.5 0 0 0 .5.5m-7-14a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L4 13.293V1.5a.5.5 0 0 1 .5-.5"/>
+                        </svg>
+                    </th>
+                    <th class="text-center" >Contraseña</th>
+                    <th class="text-center" data-sort="rol" th:data-order="${sortBy == 'rol' and sortOrder == 'asc' ? 'desc' : 'asc'}">
+                        Rol
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-up" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M11.5 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L11 2.707V14.5a.5.5 0 0 0 .5.5m-7-14a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L4 13.293V1.5a.5.5 0 0 1 .5-.5"/>
+                        </svg>
+                    </th>
+                    <th class="text-center" >Acciones</th>
                 </tr>
             </thead>
             <tbody class="table-group-divider">
                 <tr th:each="usuario : ${listaUsuarios}">
                     <td th:text="${usuario.nombre}" class="text-center"></td>
                     <td th:text="${usuario.contrasena}" class="text-center"></td>
-                    <td th:text="${usuario.rol.nombre_rol}" class="text-center"></td>
+                    <td th:text="${usuario.rol.nombre_rol != null ? usuario.rol.nombre_rol : 'Sin Rol'}" class="text-center"></td>
+
                     <td class="text-center">
                         <div class="btn-group" role="group" aria-label="Acciones">
                             <button type="button" title="Modificar usuario" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modificarUsuarioModal" th:attr="data-id=${usuario.id_usuario}">
@@ -82,15 +204,15 @@
         <nav aria-label="Page navigation example">
             <ul class="pagination justify-content-center">
                 <li class="page-item" th:class="${paginaActual == 0} ? 'disabled'">
-                    <a class="page-link" th:href="@{/usuarios(pagina=0)}" aria-label="Previous">
+                    <a class="page-link" th:href="@{/usuarios(pagina=0, sortBy=${sortBy}, sortOrder=${sortOrder})}" aria-label="Previous">
                         <span aria-hidden="true">&laquo;</span>
                     </a>
                 </li>
                 <li th:each="num : ${#numbers.sequence(0, totalPaginas - 1)}" class="page-item" th:classappend="${num == paginaActual} ? 'active'">
-                    <a class="page-link" th:href="@{/usuarios(pagina=${num})}" th:text="${num + 1}"></a>
+                    <a class="page-link" th:href="@{/usuarios(pagina=${num}, sortBy=${sortBy}, sortOrder=${sortOrder})}" th:text="${num + 1}"></a>
                 </li>
                 <li class="page-item" th:class="${paginaActual == totalPaginas - 1} ? 'disabled'">
-                    <a class="page-link" th:href="@{/usuarios(pagina=${totalPaginas - 1})}" aria-label="Next">
+                    <a class="page-link" th:href="@{/usuarios(pagina=${totalPaginas - 1}, sortBy=${sortBy}, sortOrder=${sortOrder})}" aria-label="Next">
                         <span aria-hidden="true">&raquo;</span>
                     </a>
                 </li>
@@ -187,6 +309,7 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
+        //script modificar usuario
         let modificarUsuarioModal = document.getElementById('modificarUsuarioModal');
         modificarUsuarioModal.addEventListener('show.bs.modal', function (event) {
             let button = event.relatedTarget; //
@@ -204,7 +327,19 @@
                 .catch(error => {
                     console.error('Error fetching data:', error);
                 });
+        }); // fin script modificar usuario
+
+        const headers = document.querySelectorAll('th[data-sort]');
+        headers.forEach(header => {
+            header.addEventListener('click', function () {
+                const sortBy = this.getAttribute('data-sort');
+                let sortOrder = this.getAttribute('data-order');
+
+                const url = `/usuarios?sortBy=${sortBy}&sortOrder=${sortOrder}`;
+                window.location.href = url;
+            });
         });
+
     });
 
 </script>

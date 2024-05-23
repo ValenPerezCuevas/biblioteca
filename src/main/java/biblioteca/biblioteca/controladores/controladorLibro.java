@@ -3,20 +3,31 @@ package biblioteca.biblioteca.controladores;
 import biblioteca.biblioteca.entidades.libros;
 import biblioteca.biblioteca.entidades.usuarios;
 import biblioteca.biblioteca.repositorios.LibroRepository;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
+
+
+
 @Controller
 public class controladorLibro {
     private final LibroRepository libroRepository;
 
+    @Value("${ruta.imagenes}")
+    private String rutaImagenes;
     @Autowired
     public controladorLibro(LibroRepository libroRepository){
         this.libroRepository = libroRepository;
@@ -33,6 +44,7 @@ public class controladorLibro {
             @RequestParam(name = "tamanio", required = false, defaultValue = "10") int tamanio,
             @RequestParam(defaultValue = "titulo") String sortBy,
             @RequestParam(defaultValue = "asc") String sortOrder,
+            HttpServletRequest request,
             Model model
     ) {
         Pageable pageable = PageRequest.of(pagina, tamanio,
@@ -45,6 +57,7 @@ public class controladorLibro {
         model.addAttribute("sortOrder", sortOrder);
         model.addAttribute("libro", new libros());
         model.addAttribute("libroModificado", new libros());
+        model.addAttribute("requestURI", request.getRequestURI());
 
         return "libros";
     }
@@ -84,4 +97,19 @@ public class controladorLibro {
         return "redirect:/listado";
     }
 
+    /**********************************************************************************
+     * Mostrar portada
+     * * *********************************************************************************/
+    @GetMapping("/portada/{id_libros}")
+    public ResponseEntity<?> getPortada(@PathVariable("id_libros") Integer id_libros) {
+        Optional<libros> libro = libroRepository.findById(Long.valueOf(id_libros));
+        if (libro.isPresent()) {
+            String portadaUrl = "/imagenes/Imagenes_libros/" + id_libros + ".jpg";
+            Map<String, String> response = new HashMap<>();
+            response.put("url", portadaUrl);
+            return ResponseEntity.ok(response);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Libro no encontrado");
+        }
+    }
 }

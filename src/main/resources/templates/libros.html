@@ -11,18 +11,6 @@
     <!-- Estilos personalizados -->
     <style>
 
-        /* Estilos para la tabla */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-            text-align: center;
-        }
-        th, td {
-            padding: 8px;
-            text-align: left;
-            border-bottom: 1px solid #BF9270; /* Marrón medio */
-        }
         /* Estilos para la cabecera de la tabla */
         th {
             background-color: #EDCDBB; /* Marrón suave */
@@ -33,6 +21,115 @@
         tr:nth-child(even) {
             background-color: #E3B7A0; /* Melocotón claro */
         }
+        /*ESTILO BOTONES*/
+        .button-container-subrayado {
+            position: relative;
+            width: 100px;
+            height: 50px;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 10%;
+            margin-bottom: 1%;
+            overflow: hidden;
+            border: 1px solid #000;
+            background-color: #BF9270; /* Marrón medio */
+            font-weight: 300;
+            transition: 0.5s;
+            letter-spacing: 1px;
+            border-radius: 8px;
+        }
+        .button-container-subrayado button {
+            width: 101%;
+            height: 100%;
+            font-weight: 300;
+            font-size: 1.9vh;
+            letter-spacing: 1px;
+            background-color:  #E3B7A0; /* Melocotón claro */
+            -webkit-mask: url("https://raw.githubusercontent.com/robin-dela/css-mask-animation/master/img/urban-sprite.png");
+            mask: url("https://raw.githubusercontent.com/robin-dela/css-mask-animation/master/img/urban-sprite.png");
+            -webkit-mask-size: 3000% 100%;
+            mask-size: 3000% 100%;
+            border: none;
+            color: black;
+            cursor: pointer;
+
+            animation: ani2 0.7s steps(29) forwards;
+        }
+        .button-container-subrayado button:hover {
+
+            animation: ani 0.7s steps(29) forwards;
+        }
+
+        .mas {
+            position: absolute;
+            color: black;
+            text-align: center;
+            width: 101%;
+            font-weight: 300;
+            position: absolute;
+            font-size:1.9vh;
+            padding-top: 4px;
+            overflow: hidden;
+        }
+        @keyframes ani {
+            from {
+                -webkit-mask-position: 0 0;
+                mask-position: 0 0;
+            }
+            to {
+                -webkit-mask-position: 100% 0;
+                mask-position: 100% 0;
+            }
+        }
+
+        @keyframes ani2 {
+            from {
+                -webkit-mask-position: 100% 0;
+                mask-position: 100% 0;
+            }
+            to {
+                -webkit-mask-position: 0 0;
+                mask-position: 0 0;
+            }
+        }
+        /*estilo titulo texto */
+        .text-animated {
+            color:  #E3B7A0; /* Melocotón claro */
+            font-weight: 500;
+            left: 50%;
+            letter-spacing: 5px;
+            position: absolute;
+            text-transform: uppercase;
+            top: 35%;
+            transform: translate(-50%, -50%);
+        }
+
+        .text-animated::before {
+            animation: type 4s steps(24) normal;
+            border-right: 1px solid #000;
+            color: #BF9270; /* Marrón medio */
+            content: 'Pergaminos del saber';
+            height: 100%;
+            left: 0;
+            position: absolute;
+            overflow: hidden;
+            text-transform: uppercase;
+            top: 0;
+            width: 100%;
+            white-space: nowrap;
+        }
+
+        @keyframes type {
+            0% {
+                width: 0;
+            }
+
+            100% {
+                width: 100%;
+                border-right: none;
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -41,9 +138,10 @@
 <div th:replace="header :: header"></div>
 
 <div class="container" style="width: 90%;"> <!-- Contenedor con ancho del 90% -->
-    <h1 class="text-center mb-4">Pergaminos del saber</h1>
-    <div class="container my-4">
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#añadirLibroModal">
+    <h1 class="text-center mb-4 text-animated">Pergaminos del saber</h1>
+    <div class="button-container-subrayado ">
+        <span class="mas">Añadir nuevo libro</span>
+        <button type="button"  name="Hover"  class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#añadirLibroModal">
             Añadir nuevo libro
         </button>
     </div>
@@ -53,26 +151,54 @@
             <thead>
             <tr>
 <!--                 ordenar columnas:-->
-                <th data-sort="titulo" th:data-order="${sortBy == 'titulo' and sortOrder == 'asc' ? 'desc' : 'asc'}">Título</th>
-                <th data-sort="genero" th:data-order="${sortBy == 'genero' and sortOrder == 'asc' ? 'desc' : 'asc'}">Género</th>
-                <th data-sort="autor" th:data-order="${sortBy == 'autor' and sortOrder == 'asc' ? 'desc' : 'asc'}">Autor</th>
-                <th data-sort="ano_Publicacion" th:data-order="${sortBy == 'ano_Publicacion' and sortOrder == 'asc' ? 'desc' : 'asc'}">Año de Publicación</th>
-                <th data-sort="editorial" th:data-order="${sortBy == 'editorial' and sortOrder == 'asc' ? 'desc' : 'asc'}">Editorial</th>
-                <th>Acciones</th>
+                <th data-sort="titulo" th:data-order="${sortBy == 'titulo' and sortOrder == 'asc' ? 'desc' : 'asc'}">
+                    Título
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-up" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M11.5 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L11 2.707V14.5a.5.5 0 0 0 .5.5m-7-14a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L4 13.293V1.5a.5.5 0 0 1 .5-.5"/>
+                    </svg>
+                </th>
+                <th data-sort="genero" th:data-order="${sortBy == 'genero' and sortOrder == 'asc' ? 'desc' : 'asc'}">
+                    Género
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-up" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M11.5 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L11 2.707V14.5a.5.5 0 0 0 .5.5m-7-14a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L4 13.293V1.5a.5.5 0 0 1 .5-.5"/>
+                    </svg>
+                </th>
+                <th data-sort="autor" th:data-order="${sortBy == 'autor' and sortOrder == 'asc' ? 'desc' : 'asc'}">
+                    Autor
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-up" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M11.5 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L11 2.707V14.5a.5.5 0 0 0 .5.5m-7-14a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L4 13.293V1.5a.5.5 0 0 1 .5-.5"/>
+                    </svg>
+                </th>
+                <th data-sort="anoPublicacion" th:data-order="${sortBy == 'anoPublicacion' and sortOrder == 'asc' ? 'desc' : 'asc'}">
+                    Año de Publicación
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-up" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M11.5 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L11 2.707V14.5a.5.5 0 0 0 .5.5m-7-14a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L4 13.293V1.5a.5.5 0 0 1 .5-.5"/>
+                    </svg>
+                </th>
+                <th data-sort="editorial" th:data-order="${sortBy == 'editorial' and sortOrder == 'asc' ? 'desc' : 'asc'}">
+                    Editorial
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-up" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M11.5 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L11 2.707V14.5a.5.5 0 0 0 .5.5m-7-14a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L4 13.293V1.5a.5.5 0 0 1 .5-.5"/>
+                    </svg>
+                </th>
+                <th></th>
             </thead>
             <tbody class="table-group-divider" id="tabla-libros">
             <tr th:each="libro : ${libros}">
                 <td th:text="${libro.titulo}"></td>
                 <td th:text="${libro.genero}"></td>
                 <td th:text="${libro.autor}"></td>
-                <td th:text="${libro.ano_Publicacion}"></td>
+                <td th:text="${libro.anoPublicacion}"></td>
                 <td th:text="${libro.editorial}"></td>
                 <td>
                     <div class="btn-group" role="group" aria-label="Acciones">
-                        <button type="button" class="btn btn-info">Ver Portada</button>
+                        <!-- Nueva línea corregida -->
+                        <button type="button" class="btn btn-info" th:attr="onclick='mostrarPortada(' + ${libro.id_libros} + ')'">
+                            Ver Portada
+                        </button>
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modificarLibroModal" th:attr="data-id=${libro.id_libros}">Modificar</button>
                         <form th:action="@{'/eliminarLibro/' + ${libro.id_libros}}" method="post" onsubmit="return confirm('¿Estás seguro de que quieres eliminar este libro?');">
-                            <button type="submit" class="btn btn-danger" title="Eliminar libro">X</button>
+                            <button type="submit" class="btn btn-danger" title="Eliminar libro" style="height: 64px">X</button>
                         </form>
                     </div>
                 </td>
@@ -133,8 +259,8 @@
                         <input class="form-control" id="autorLibro" th:field="*{autor}" required>
                     </div>
                     <div class="mb-3">
-                        <label for="ano_PublicacionLibro" class="form-label">Año de publicación</label>
-                        <input class="form-control" id="ano_PublicacionLibro" th:field="*{ano_Publicacion}" required>
+                        <label for="anoPublicacionLibro" class="form-label">Año de publicación</label>
+                        <input class="form-control" id="anoPublicacionLibro" th:field="*{anoPublicacion}" required>
                     </div>
                     <div class="mb-3">
                         <label for="editorialLibro" class="form-label">Editorial</label>
@@ -171,8 +297,8 @@
                         <input class="form-control" id="autorLibro" th:field="*{autor}" required>
                     </div>
                     <div class="mb-3">
-                        <label for="ano_PublicacionLibro" class="form-label">Año de publicación</label>
-                        <input class="form-control" id="ano_PublicacionLibro" th:field="*{ano_Publicacion}" required>
+                        <label for="anoPublicacionLibro" class="form-label">Año de publicación</label>
+                        <input class="form-control" id="anoPublicacionLibro" th:field="*{anoPublicacion}" required>
                     </div>
                     <div class="mb-3">
                         <label for="editorialLibro" class="form-label">Editorial</label>
@@ -185,6 +311,20 @@
     </div>
 </div>
 
+<!-- Modal ver portada del libro -->
+<div class="modal fade" id="verPortadaModal" tabindex="-1" aria-labelledby="verPortadaModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="verPortadaModalLabel">Portada del Libro</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+            <div class="modal-body text-center">
+                <img id="portadaLibro" src="" alt="Portada del libro" class="img-fluid">
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- Scripts de Bootstrap -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
@@ -206,11 +346,12 @@
                     document.querySelector('#modificarLibroModal input[name="titulo"]').value = data.titulo;
                     document.querySelector('#modificarLibroModal input[name="genero"]').value = data.genero;
                     document.querySelector('#modificarLibroModal input[name="autor"]').value = data.autor;
-                    document.querySelector('#modificarLibroModal input[name="ano_Publicacion"]').value = data.ano_Publicacion;
+                    document.querySelector('#modificarLibroModal input[name="anoPublicacion"]').value = data.anoPublicacion;
                     document.querySelector('#modificarLibroModal input[name="editorial"]').value = data.editorial;
                 });
         }); //fin script modificar libro
 
+        // script ordenar tabla
         const headers = document.querySelectorAll('th[data-sort]');
         headers.forEach(header => {
             header.addEventListener('click', function () {
@@ -222,6 +363,19 @@
             });
         });
     });
+
+    function mostrarPortada(libroId) {
+        fetch('/portada/' + libroId)
+            .then(response => response.json())
+            .then(data => {
+                let portadaUrl = data.url;
+                document.getElementById('portadaLibro').src = portadaUrl;
+                new bootstrap.Modal(document.getElementById('verPortadaModal')).show();
+            })
+            .catch(error => console.error('Error fetching the portada:', error));
+    }
+
+
 
 </script>
 

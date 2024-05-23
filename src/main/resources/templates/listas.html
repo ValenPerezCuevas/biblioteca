@@ -112,6 +112,114 @@
             position: relative;
             z-index: 2; /* Asegura que el texto esté por encima del efecto */
         }
+        /*ESTILO BOTONES*/
+        .button-container-subrayado {
+            position: relative;
+            width: 100px;
+            height: 50px;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 4%;
+            overflow: hidden;
+            border: 1px solid #000;
+            background-color: #BF9270; /* Marrón medio */
+
+            font-weight: 300;
+            transition: 0.5s;
+            letter-spacing: 1px;
+            border-radius: 8px;
+        }
+        .button-container-subrayado button {
+            width: 101%;
+            height: 100%;
+            font-weight: 300;
+            font-size: 2vh;
+            letter-spacing: 1px;
+            background-color:  #E3B7A0; /* Melocotón claro */
+            -webkit-mask: url("https://raw.githubusercontent.com/robin-dela/css-mask-animation/master/img/urban-sprite.png");
+            mask: url("https://raw.githubusercontent.com/robin-dela/css-mask-animation/master/img/urban-sprite.png");
+            -webkit-mask-size: 3000% 100%;
+            mask-size: 3000% 100%;
+            border: none;
+            color: black;
+            cursor: pointer;
+
+            animation: ani2 0.7s steps(29) forwards;
+        }
+        .button-container-subrayado button:hover {
+
+            animation: ani 0.7s steps(29) forwards;
+        }
+
+        .mas {
+            position: absolute;
+            color: black;
+            text-align: center;
+            width: 101%;
+            font-weight: 300;
+            font-size: 2vh;
+            padding-top: 3px;
+            overflow: hidden;
+        }
+        @keyframes ani {
+            from {
+                -webkit-mask-position: 0 0;
+                mask-position: 0 0;
+            }
+            to {
+                -webkit-mask-position: 100% 0;
+                mask-position: 100% 0;
+            }
+        }
+
+        @keyframes ani2 {
+            from {
+                -webkit-mask-position: 100% 0;
+                mask-position: 100% 0;
+            }
+            to {
+                -webkit-mask-position: 0 0;
+                mask-position: 0 0;
+            }
+        }
+        /*estilo titulo texto */
+        .text-animated {
+            color:  #E3B7A0; /* Melocotón claro */
+            font-weight: 500;
+            left: 50%;
+            letter-spacing: 5px;
+            position: absolute;
+            text-transform: uppercase;
+            top: 35%;
+            transform: translate(-50%, -50%);
+        }
+
+        .text-animated::before {
+            animation: type 4s steps(24) normal;
+            border-right: 1px solid #000;
+            color: #BF9270; /* Marrón medio */
+            content: 'Listas';
+            height: 100%;
+            left: 0;
+            position: absolute;
+            overflow: hidden;
+            text-transform: uppercase;
+            top: 0;
+            width: 100%;
+            white-space: nowrap;
+        }
+
+        @keyframes type {
+            0% {
+                width: 0;
+            }
+
+            100% {
+                width: 100%;
+                border-right: none;
+            }
+        }
+
     </style>
 
     <script src="../static/js/footer.js"></script>
@@ -123,9 +231,10 @@
 
 <br>
 <div class="titulo text-center">
-    <p>Listas</p>
-    <div class="container my-4">
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#crearListaModal">
+    <h1 class="text-center mb-4 text-animated">Listas</h1>
+    <div class="button-container-subrayado ">
+        <span class="mas">Crear Nueva Lista</span>
+        <button type="button" name="Hover" data-bs-toggle="modal" data-bs-target="#crearListaModal">
             Crear Nueva Lista
         </button>
     </div>
