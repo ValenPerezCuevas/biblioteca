@@ -27,8 +27,6 @@
             height: 50px;
             margin-left: 10px;
             margin-right: 10px;
-            margin-top: 7%;
-            margin-bottom: 1%;
             overflow: hidden;
             border: 1px solid #000;
             background-color: #BF9270; /* Marrón medio */
@@ -65,7 +63,6 @@
             text-align: center;
             width: 101%;
             font-weight: 300;
-            position: absolute;
             font-size:1.9vh;
             padding-top: 4px;
             overflow: hidden;
@@ -92,6 +89,12 @@
             }
         }
         /*estilo titulo texto */
+        .text-animated-container {
+            position: relative;
+            height: 70px;
+            margin: 20px;
+        }
+
         .text-animated {
             color:  #E3B7A0; /* Melocotón claro */
             font-weight: 500;
@@ -143,13 +146,15 @@
 <div th:replace="header :: header"></div>
 
 <div class="container" style="width: 90%;"> <!-- Contenedor con ancho del 90% -->
-    <h1 class="text-center mb-4 text-animated">Pergaminos del saber</h1>
+    <div class="text-animated-container">
+        <h1 class="text-center mb-4 text-animated">Pergaminos del saber</h1>
+    </div>
 
     <!-- Contenedor para los botones -->
     <div class="d-flex justify-content-center mb-4">
         <div class="button-container-subrayado">
             <span class="mas">Añadir nuevo libro</span>
-            <button type="button" name="Hover" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#añadirLibroModal">
+            <button type="button" name="Hover" data-bs-toggle="modal" data-bs-target="#añadirLibroModal">
                 Añadir nuevo libro
             </button>
         </div>
@@ -157,18 +162,29 @@
         <!-- Botones filtro de búsqueda -->
         <div class="button-container-subrayado">
             <span class="mas">Buscar libro por título</span>
-            <button type="button" name="Hover" class="btn btn-primary" data-bs-toggle="collapse" data-bs-target="#buscarForm">
+            <!--
+                data-bs-toggle indica que elemento activa o desactiva el colapso
+                data-bs-target indica qué elemento se colapsa
+            -->
+            <button type="button" name="Hover" data-bs-toggle="collapse" data-bs-target="#buscarForm">
                 Buscar libro por título
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+                </svg>
             </button>
         </div>
         <div class="button-container-subrayado">
             <span class="mas">Buscar libro por autor</span>
-            <button type="button" name="Hover" class="btn btn-primary" data-bs-toggle="collapse" data-bs-target="#buscarForm1">
+            <button type="button" name="Hover" data-bs-toggle="collapse" data-bs-target="#buscarForm1">
                 Buscar libro por autor
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+                </svg>
             </button>
         </div>
     </div>
 
+    <!-- Filtros de búsqueda -->
     <div id="buscarForm" class="collapse mb-4">
         <form th:action="@{/listado}" method="get" class="d-flex justify-content-center">
             <input type="text" name="buscarTitulo" class="form-control" placeholder="Escribe un título" th:value="${buscarTitulo}">
@@ -236,7 +252,12 @@
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modificarLibroModal"
                                 title="Modificar libro" th:attr="data-id=${libro.id_libros}">Modificar</button>
                         <form th:action="@{'/eliminarLibro/' + ${libro.id_libros}}" method="post" onsubmit="return confirm('¿Estás seguro de que quieres eliminar este libro?');">
-                            <button type="submit" class="btn btn-danger" title="Eliminar libro" style="height: 64px">X</button>
+                            <button type="submit" class="btn btn-danger" title="Eliminar libro" style="height: 64px">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
+                                    <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
+                                </svg>
+                            </button>
                         </form>
                     </div>
                 </td>

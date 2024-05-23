@@ -59,7 +59,7 @@
 
         .button-container-subrayado {
             position: relative;
-            width: 100px;
+            width: 120px;
             height: 50px;
             margin-left: auto;
             margin-right: auto;
@@ -70,7 +70,7 @@
             transition: 0.5s;
             letter-spacing: 1px;
             border-radius: 8px;
-            margin-top:10%;
+            /*margin-top:10%;*/
         }
         .button-container-subrayado button {
             width: 101%;
@@ -104,7 +104,14 @@
             padding-top: 3px;
             overflow: hidden;
         }
-/*estilo titulo texto */
+
+        /*estilo titulo texto */
+        .text-animated-container {
+            position: relative;
+            height: 70px;
+            margin: 20px;
+        }
+
         .text-animated {
             color:  #E3B7A0; /* Melocotón claro */
             font-weight: 500;
@@ -135,7 +142,6 @@
             0% {
                 width: 0;
             }
-
             100% {
                 width: 100%;
                 border-right: none;
@@ -150,14 +156,16 @@
 <div th:replace="header :: header"></div>
 
 <div class="container" style="width: 90%;">
-    <h1 class="text-center mb-4 text-animated">Lore Librarian</h1>
+
+    <div class="text-animated-container">
+        <h1 class="text-center mb-4 text-animated">Lore Librarian</h1>
+    </div>
     <div class=" button-container-subrayado">
         <span class="mas">Crear Nuevo Usuario</span>
         <button type="button"  name="Hover" data-bs-toggle="modal" data-bs-target="#crearUsuarioModal">
             Crear Nuevo Usuario
         </button>
     </div>
-
 
     <div class="container table-responsive">
         <table class="table table-striped mx-auto">
