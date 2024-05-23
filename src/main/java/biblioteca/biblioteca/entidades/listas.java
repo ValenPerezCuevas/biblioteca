@@ -19,6 +19,11 @@ public class listas {
     private Integer creado_por;
     private Integer actualizado_por;
 
+    @ManyToOne
+    @JoinColumn(name = "id_usuario")
+    // Nombre de la columna en la tabla usuarios que hace referencia al idRol en la tabla roles
+    private usuarios usuario;
+
 
 
 }

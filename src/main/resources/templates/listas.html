@@ -256,11 +256,10 @@
                         <div class="card-body">
                             <div class="text-container">
                                 <h5 class="card-title card__title text-center" th:text="${lista.nombre_lista}"></h5>
-                                <p class="card-text">ID Lista: <span th:text="${lista.id_lista}"></span></p>
-                                <p class="card-text">ID Usuario: <span th:text="${lista.id_usuario}"></span></p>
+
                                 <p class="card-text">Creado Desde : <span th:text="${lista.creado_desde}"></span></p>
                                 <p class="card-text">Actualizado Desde: <span th:text="${lista.actualizado_desde}"></span></p>
-                                <p class="card-text">Creado Por: <span th:text="${lista.creado_por}"></span></p>
+                                <p class="card-text">Creado Por: <span th:text="${lista.usuario.nombre}"></span></p>
                                 <p class="card-text">Actualizado Por: <span th:text="${lista.actualizado_por}"></span></p>
                                 <div class="btn-group" role="group" aria-label="Acciones">
 
