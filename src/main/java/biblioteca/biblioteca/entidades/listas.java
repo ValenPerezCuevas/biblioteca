@@ -1,10 +1,9 @@
 package biblioteca.biblioteca.entidades;
 
-
 import jakarta.persistence.*;
 import lombok.Data;
-
 import java.sql.Timestamp;
+import java.util.List;
 
 @Entity
 @Data
@@ -21,9 +20,8 @@ public class listas {
 
     @ManyToOne
     @JoinColumn(name = "id_usuario")
-    // Nombre de la columna en la tabla usuarios que hace referencia al idRol en la tabla roles
     private usuarios usuario;
 
-
-
+    @OneToMany(mappedBy = "lista")
+    private List<libros> libros;
 }

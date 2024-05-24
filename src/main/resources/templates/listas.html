@@ -261,15 +261,17 @@
                                 <p class="card-text">Actualizado Desde: <span th:text="${lista.actualizado_desde}"></span></p>
                                 <p class="card-text">Creado Por: <span th:text="${lista.usuario.nombre}"></span></p>
                                 <p class="card-text">Actualizado Por: <span th:text="${lista.actualizado_por}"></span></p>
-                                <div class="btn-group" role="group" aria-label="Acciones">
+                                <div class="btn-group d-flex justify-content-center" role="group" aria-label="Acciones">
 
-                                        <button type="button" title="Modificar Lista" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modificarListaModal" th:attr="data-id=${lista.id_lista}">
-                                            Modificar
-                                        </button>
-                                    <form th:action="@{'/eliminarLista/' + ${lista.id_lista}}" method="post" onsubmit="return confirm('¿Estás seguro de que quieres eliminar esta lista?');">
-                                        <button type="submit" class="btn btn-danger" title="Eliminar lista">X</button>
-                                    </form>
-
+<!--                                        <button type="button" title="Modificar Lista" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modificarListaModal" th:attr="data-id=${lista.id_lista}">-->
+<!--                                            Modificar-->
+<!--                                        </button>-->
+<!--                                    <form th:action="@{'/eliminarLista/' + ${lista.id_lista}}" method="post" onsubmit="return confirm('¿Estás seguro de que quieres eliminar esta lista?');">-->
+<!--                                        <button type="submit" class="btn btn-danger" title="Eliminar lista">X</button>-->
+<!--                                    </form>-->
+                                    <button type="button" title="Ver libros" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#verLibrosModal" th:attr="data-id=${lista.id_lista}">
+                                        Ver Libros
+                                    </button>
 
                                 </div>
                             </div>
@@ -330,6 +332,90 @@
         </div>
     </div>
 </div>
+
+<!-- Modal de ver libros-->
+<div class="modal fade" id="verLibrosModal" tabindex="-1" aria-labelledby="verLibrosModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="verLibrosModalLabel">Lista de libros</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row" id="librosContainer"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        let verLibrosModal = document.getElementById('verLibrosModal');
+        verLibrosModal.addEventListener('show.bs.modal', function (event) {
+            let button = event.relatedTarget;
+            let listaId = button.getAttribute('data-id');
+            let modalTitle = verLibrosModal.querySelector('.modal-title');
+            let librosContainer = document.getElementById('librosContainer');
+
+            fetch(`/controladorLista/${listaId}/libros`)
+                .then(response => response.json())
+                .then(data => {
+                    modalTitle.textContent = `Libros de la lista ${data.nombre_lista}`;
+                    librosContainer.innerHTML = ''; // Limpiar contenido previo
+
+                    if (data.libros.length > 0) {
+                        data.libros.forEach(libro => {
+                            let libroId = libro.id_libros;
+                            let libroTitulo = libro.titulo;
+                            let libroAutor = libro.autor;
+
+                            // Crear un elemento de tarjeta para el libro
+                            let colDiv = document.createElement('div');
+                            colDiv.classList.add('col-md-4', 'mb-4');
+
+                            let cardDiv = document.createElement('div');
+                            cardDiv.classList.add('card');
+
+                            let img = document.createElement('img');
+                            img.src = `/imagenes/Imagenes_libros/${libroId}.jpg`;
+                            img.alt = `Portada del libro ${libroTitulo}`;
+                            img.classList.add('card-img-top');
+
+                            let cardBody = document.createElement('div');
+                            cardBody.classList.add('card-body');
+
+                            let cardTitle = document.createElement('h5');
+                            cardTitle.classList.add('card-title');
+                            cardTitle.textContent = libroTitulo;
+
+                            let cardText = document.createElement('p');
+                            cardText.classList.add('card-text');
+                            cardText.textContent = `Autor: ${libroAutor}`;
+
+                            cardBody.appendChild(cardTitle);
+                            cardBody.appendChild(cardText);
+                            cardDiv.appendChild(img);
+                            cardDiv.appendChild(cardBody);
+                            colDiv.appendChild(cardDiv);
+                            librosContainer.appendChild(colDiv);
+                        });
+                    } else {
+                        librosContainer.textContent = 'No hay libros en esta lista.';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching the libros:', error);
+                    librosContainer.textContent = 'Error al cargar los libros.';
+                });
+        });
+    });
+</script>
+
+
+
+
+
+
 
 <!-- Scripts de Bootstrap -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
