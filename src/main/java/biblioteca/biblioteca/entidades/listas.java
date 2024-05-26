@@ -16,8 +16,10 @@ public class listas {
     private int id_lista;
 
     private String nombre_lista;
+
     @CreationTimestamp
     private Timestamp creado_desde;
+
     @UpdateTimestamp
     private Timestamp actualizado_desde;
     private Integer creado_por;
