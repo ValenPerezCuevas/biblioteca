@@ -1,7 +1,6 @@
 package biblioteca.biblioteca.entidades;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity
@@ -14,4 +13,8 @@ public class libros {
     private String autor;
     private Integer anoPublicacion;
     private String editorial;
+
+    @ManyToOne
+    @JoinColumn(name = "id_lista")
+    private listas lista;
 }
