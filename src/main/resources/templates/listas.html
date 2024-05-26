@@ -31,11 +31,12 @@
             border: 1px solid white;
             box-shadow: 2px 3px 20px black, 0 0 60px #8a4d0f inset;
             backdrop-filter: blur(6px);
-            /* filter: url(#wavy2); */   /* Comentario corregido */
+            /* filter: url(#wavy2); */ /* Comentario corregido */
             position: relative;
         }
+
         .card-body {
-            filter:none;
+            filter: none;
         }
 
         .card:hover {
@@ -46,10 +47,10 @@
         .card:active {
             transform: scale(0.95) rotateZ(1.7deg);
         }
+
         .card > * + * {
             margin-top: 1.1em;
         }
-
 
 
         .card .card__title {
@@ -90,6 +91,7 @@
         .card:hover .card__arrow svg {
             transform: translateX(3px);
         }
+
         /* Estilos para el footer */
         footer {
             background-color: #FFEDDB;
@@ -108,10 +110,12 @@
             display: none;
             position: absolute;
         }
+
         .text-container {
             position: relative;
             z-index: 2; /* Asegura que el texto esté por encima del efecto */
         }
+
         /*ESTILO BOTONES*/
         .button-container-subrayado {
             position: relative;
@@ -129,13 +133,14 @@
             letter-spacing: 1px;
             border-radius: 8px;
         }
+
         .button-container-subrayado button {
             width: 101%;
             height: 100%;
             font-weight: 300;
             font-size: 2vh;
             letter-spacing: 1px;
-            background-color:  #E3B7A0; /* Melocotón claro */
+            background-color: #E3B7A0; /* Melocotón claro */
             -webkit-mask: url("https://raw.githubusercontent.com/robin-dela/css-mask-animation/master/img/urban-sprite.png");
             mask: url("https://raw.githubusercontent.com/robin-dela/css-mask-animation/master/img/urban-sprite.png");
             -webkit-mask-size: 3000% 100%;
@@ -146,6 +151,7 @@
 
             animation: ani2 0.7s steps(29) forwards;
         }
+
         .button-container-subrayado button:hover {
 
             animation: ani 0.7s steps(29) forwards;
@@ -161,6 +167,7 @@
             padding-top: 3px;
             overflow: hidden;
         }
+
         @keyframes ani {
             from {
                 -webkit-mask-position: 0 0;
@@ -182,9 +189,10 @@
                 mask-position: 0 0;
             }
         }
+
         /*estilo titulo texto */
         .text-animated {
-            color:  #E3B7A0; /* Melocotón claro */
+            color: #E3B7A0; /* Melocotón claro */
             font-weight: 500;
             left: 50%;
             letter-spacing: 5px;
@@ -230,6 +238,13 @@
 <div th:replace="header :: header"></div>
 
 <br>
+
+<!-- Mensajes de éxito o error -->
+<div class="container mt-3">
+    <div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
+    <div th:if="${success}" class="alert alert-success" th:text="${success}"></div>
+</div>
+
 <div class="titulo text-center">
     <h1 class="text-center mb-4 text-animated">Listas</h1>
     <div class="button-container-subrayado ">
@@ -249,7 +264,8 @@
 </svg>
 <div class="container-fluid">
     <div class="row">
-        <div class="container col-lg-9 d-flex flex-column justify-content-center align-items-center" id="containerListas">
+        <div class="container col-lg-9 d-flex flex-column justify-content-center align-items-center"
+             id="containerListas">
             <div class="row col-md-12" id="row1">
                 <div th:each="lista : ${listas}" class="col-md-4 mb-4">
                     <div class="card">
@@ -257,28 +273,39 @@
                             <div class="text-container">
                                 <h5 class="card-title card__title text-center" th:text="${lista.nombre_lista}"></h5>
 
-                                <p class="card-text">Creado Desde : <span th:text="${lista.creado_desde}"></span></p>
-                                <p class="card-text">Actualizado Desde: <span th:text="${lista.actualizado_desde}"></span></p>
-                                <p class="card-text">Creado Por: <span th:text="${lista.usuario.nombre}"></span></p>
-                                <p class="card-text">Actualizado Por: <span th:text="${lista.actualizado_por}"></span></p>
+                                <p class="card-text">Fecha creación : <span th:text="${lista.creado_desde}"></span></p>
+                                <p class="card-text">Última actualización <span
+                                        th:text="${lista.actualizado_desde}"></span></p>
+                                <p class="card-text">Creado Por: <span th:text="${lista.usuario?.nombre}"></span></p>
+                                <!--                                <p class="card-text">Actualizado Por: <span-->
+                                <!--                                        th:text="${lista.actualizado_por != null ? lista.actualizado_por : 'No disponible'}"></span>-->
+                                <!--                                </p>-->
                                 <div class="btn-group d-flex justify-content-center" role="group" aria-label="Acciones">
 
-<!--                                        <button type="button" title="Modificar Lista" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modificarListaModal" th:attr="data-id=${lista.id_lista}">-->
-<!--                                            Modificar-->
-<!--                                        </button>-->
-<!--                                    <form th:action="@{'/eliminarLista/' + ${lista.id_lista}}" method="post" onsubmit="return confirm('¿Estás seguro de que quieres eliminar esta lista?');">-->
-<!--                                        <button type="submit" class="btn btn-danger" title="Eliminar lista">X</button>-->
-<!--                                    </form>-->
-                                    <button type="button" title="Ver libros" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#verLibrosModal" th:attr="data-id=${lista.id_lista}">
-                                        Ver Libros
-                                    </button>
+                                    <!--                                        <button type="button" title="Modificar Lista" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modificarListaModal" th:attr="data-id=${lista.id_lista}">-->
+                                    <!--                                            Modificar-->
+                                    <!--                                        </button>-->
 
+<!--                                    <button type="button" class="btn btn-primary"-->
+<!--                                            data-bs-toggle="modal"-->
+<!--                                            data-bs-target="#verLibrosModal"-->
+<!--                                            th:data-id="${lista.id_lista}"-->
+<!--                                            onclick="cargarLibros(this.getAttribute('data-id'))">-->
+<!--                                        Ver Libros-->
+<!--                                    </button>-->
+
+                                    <form th:action="@{'/eliminarLista/' + ${lista.id_lista}}" method="post"
+                                          onsubmit="return confirm('¿Estás seguro de que quieres eliminar esta lista?');">
+                                        <button type="submit" class="btn btn-danger" title="Eliminar lista">X</button>
+                                    </form>
                                 </div>
                             </div>
                         </div>
                         <div class="card__arrow">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="15" width="15">
-                                <path fill="#fff" d="M13.4697 17.9697C13.1768 18.2626 13.1768 18.7374 13.4697 19.0303C13.7626 19.3232 14.2374 19.3232 14.5303 19.0303L20.3232 13.2374C21.0066 12.554 21.0066 11.446 20.3232 10.7626L14.5303 4.96967C14.2374 4.67678 13.7626 4.67678 13.4697 4.96967C13.1768 5.26256 13.1768 5.73744 13.4697 6.03033L18.6893 11.25H4C3.58579 11.25 3.25 11.5858 3.25 12C3.25 12.4142 3.58579 12.75 4 12.75H18.6893L13.4697 17.9697Z"></path>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="15"
+                                 width="15">
+                                <path fill="#fff"
+                                      d="M13.4697 17.9697C13.1768 18.2626 13.1768 18.7374 13.4697 19.0303C13.7626 19.3232 14.2374 19.3232 14.5303 19.0303L20.3232 13.2374C21.0066 12.554 21.0066 11.446 20.3232 10.7626L14.5303 4.96967C14.2374 4.67678 13.7626 4.67678 13.4697 4.96967C13.1768 5.26256 13.1768 5.73744 13.4697 6.03033L18.6893 11.25H4C3.58579 11.25 3.25 11.5858 3.25 12C3.25 12.4142 3.58579 12.75 4 12.75H18.6893L13.4697 17.9697Z"></path>
                             </svg>
                         </div>
                     </div>
@@ -296,124 +323,117 @@
 </footer>
 
 <!-- Modal de crear lista -->
-<div class="modal fade" id="crearListaModal" tabindex="-1" aria-labelledby="crearListaModal"
-     aria-hidden="true">
+<div class="modal fade" id="crearListaModal" tabindex="-1" aria-labelledby="crearListaModal" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="crearListaModallabel">Crear Lista</h5>
+                <h5 class="modal-title" id="crearListaModallabel">Crear nueva lista</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
             </div>
             <div class="modal-body">
-<!--                <form action="#" th:action="@{/modificarLista}" th:object="${nuevaLista}" method="post">-->
-<!--                    <input type="hidden" id="idUsuario" name="id_usuario" th:value="${usuarioModificado.id_usuario}" />-->
-<!--                    <div class="mb-3">-->
-<!--                        <label for="nombreUsuario2" class="form-label">Nombre</label>-->
-<!--                        <input type="text" class="form-control" id="nombreUsuario2" name="nombre" required>-->
-<!--                    </div>-->
-<!--                    <div class="mb-3">-->
-<!--                        <label for="contrasenaUsuario2" class="form-label">Contraseña</label>-->
-<!--                        <input type="password" class="form-control" id="contrasenaUsuario2" name="contrasena" required>-->
-<!--                    </div>-->
-<!--                    <div class="mb-3">-->
-<!--                        <label for="rolUsuario2" class="form-label">Rol</label>-->
-<!--                        <select class="form-select" id="rolUsuario2" name="rol.id_rol" required>-->
-<!--                            <option th:each="rol : ${listaRoles}"-->
-<!--                                    th:value="${rol.id_rol}"-->
-<!--                                    th:text="${rol.nombre_rol}"-->
-<!--                                    th:selected="${usuario != null and usuario.rol != null and rol.id_rol == usuario.rol.id_rol}">-->
-<!--                            </option>-->
-<!--                        </select>-->
-
-<!--                    </div>-->
-<!--                    <button type="submit" class="btn btn-primary">Modificar Usuario</button>-->
-<!--                </form>-->
+                <form action="/agregarLista" method="post">
+                    <div class="mb-3">
+                        <label for="nombreLista" class="form-label">Nombre de la Lista</label>
+                        <input type="text" class="form-control" id="nombreLista" name="nombre_lista" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Crear Lista</button>
+                </form>
             </div>
         </div>
     </div>
 </div>
 
-<!-- Modal de ver libros-->
-<div class="modal fade" id="verLibrosModal" tabindex="-1" aria-labelledby="verLibrosModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="verLibrosModalLabel">Lista de libros</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-            </div>
-            <div class="modal-body">
-                <div class="row" id="librosContainer"></div>
-            </div>
-        </div>
-    </div>
-</div>
+
+<!--&lt;!&ndash; Modal de ver libros&ndash;&gt;-->
+<!--<div class="modal fade" id="verLibrosModal" tabindex="-1" aria-labelledby="verLibrosModalLabel" aria-hidden="true">-->
+<!--    <div class="modal-dialog modal-lg">-->
+<!--        <div class="modal-content">-->
+<!--            <div class="modal-header">-->
+<!--                <h5 class="modal-title" id="verLibrosModalLabel">Lista de libros</h5>-->
+<!--                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>-->
+<!--            </div>-->
+<!--            <div class="modal-body">-->
+<!--                <div class="row" id="librosContainer">-->
+<!--                    <table class="table table-striped">-->
+<!--                        <thead>-->
+<!--                        <tr>-->
+
+<!--                            <th>-->
+<!--                                Título-->
+
+<!--                            </th>-->
+<!--                            <th>-->
+<!--                                Género-->
+
+<!--                            </th>-->
+<!--                            <th>-->
+<!--                                Autor-->
+
+<!--                            </th>-->
+<!--                            <th>-->
+<!--                                Año de Publicación-->
+
+<!--                            </th>-->
+<!--                            <th>-->
+<!--                                Editorial-->
+
+<!--                            </th>-->
+<!--                            <th></th>-->
+<!--                        </thead>-->
+<!--                        <tbody class="table-group-divider" id="tabla-libros">-->
+<!--                        <tr th:each="librolista : ${librosListas}">-->
+<!--                            <th:block th:if="${librolista.lista.id_lista} == ${idLista}">-->
+<!--                                <td th:text="${librolista.libro != null ? librolista.libro.titulo : 'Libro no disponible'}"></td>-->
+<!--                                <td th:text="${librolista.libro != null ? librolista.libro.genero : 'N/A'}"></td>-->
+<!--                                <td th:text="${librolista.libro != null ? librolista.libro.autor : 'N/A'}"></td>-->
+<!--                                <td th:text="${librolista.libro != null ? librolista.libro.anoPublicacion : 'N/A'}"></td>-->
+<!--                                <td th:text="${librolista.libro != null ? librolista.libro.editorial : 'N/A'}"></td>-->
+<!--                                <td>-->
+<!--                                    <button type="button" title="Eliminar libro de la lista" class="btn btn-danger"-->
+<!--                                            th:attr="data-id=${librolista.id_libros_lista}">-->
+<!--                                        Quitar libro-->
+<!--                                    </button>-->
+<!--                                </td>-->
+<!--                            </th:block>-->
+<!--                        </tr>-->
+<!--                        </tbody>-->
+
+<!--                    </table>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
 
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        let verLibrosModal = document.getElementById('verLibrosModal');
-        verLibrosModal.addEventListener('show.bs.modal', function (event) {
-            let button = event.relatedTarget;
-            let listaId = button.getAttribute('data-id');
-            let modalTitle = verLibrosModal.querySelector('.modal-title');
-            let librosContainer = document.getElementById('librosContainer');
-
-            fetch(`/controladorLista/${listaId}/libros`)
-                .then(response => response.json())
-                .then(data => {
-                    modalTitle.textContent = `Libros de la lista ${data.nombre_lista}`;
-                    librosContainer.innerHTML = ''; // Limpiar contenido previo
-
-                    if (data.libros.length > 0) {
-                        data.libros.forEach(libro => {
-                            let libroId = libro.id_libros;
-                            let libroTitulo = libro.titulo;
-                            let libroAutor = libro.autor;
-
-                            // Crear un elemento de tarjeta para el libro
-                            let colDiv = document.createElement('div');
-                            colDiv.classList.add('col-md-4', 'mb-4');
-
-                            let cardDiv = document.createElement('div');
-                            cardDiv.classList.add('card');
-
-                            let img = document.createElement('img');
-                            img.src = `/imagenes/Imagenes_libros/${libroId}.jpg`;
-                            img.alt = `Portada del libro ${libroTitulo}`;
-                            img.classList.add('card-img-top');
-
-                            let cardBody = document.createElement('div');
-                            cardBody.classList.add('card-body');
-
-                            let cardTitle = document.createElement('h5');
-                            cardTitle.classList.add('card-title');
-                            cardTitle.textContent = libroTitulo;
-
-                            let cardText = document.createElement('p');
-                            cardText.classList.add('card-text');
-                            cardText.textContent = `Autor: ${libroAutor}`;
-
-                            cardBody.appendChild(cardTitle);
-                            cardBody.appendChild(cardText);
-                            cardDiv.appendChild(img);
-                            cardDiv.appendChild(cardBody);
-                            colDiv.appendChild(cardDiv);
-                            librosContainer.appendChild(colDiv);
-                        });
-                    } else {
-                        librosContainer.textContent = 'No hay libros en esta lista.';
-                    }
-                })
-                .catch(error => {
-                    console.error('Error fetching the libros:', error);
-                    librosContainer.textContent = 'Error al cargar los libros.';
-                });
-        });
-    });
+    function cargarLibros(idLista) {
+        fetch(`/listas/${idLista}/libros`)
+            .then(response => response.json())
+            .then(data => {
+                const modalBody = document.getElementById('librosContainer');
+                modalBody.innerHTML = ''; // Limpiar contenido previo
+                if (data.libros && data.libros.length > 0) {
+                    data.libros.forEach(libro => {
+                        modalBody.innerHTML += `
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <h5 class="card-title">${libro.titulo}</h5>
+                                    <p class="card-text">${libro.autor}</p>
+                                    <p class="card-text"><small class="text-muted">${libro.editorial}</small></p>
+                                </div>
+                            </div>
+                        `;
+                    });
+                } else {
+                    modalBody.innerHTML = '<p>No hay libros en esta lista.</p>';
+                }
+            })
+            .catch(error => {
+                console.error('Error al cargar los libros:', error);
+                document.getElementById('librosContainer').innerHTML = '<p>Error al cargar los libros.</p>';
+            });
+    }
 </script>
-
-
-
-
 
 
 

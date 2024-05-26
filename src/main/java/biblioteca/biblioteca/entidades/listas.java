@@ -2,6 +2,9 @@ package biblioteca.biblioteca.entidades;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -13,7 +16,9 @@ public class listas {
     private int id_lista;
 
     private String nombre_lista;
+    @CreationTimestamp
     private Timestamp creado_desde;
+    @UpdateTimestamp
     private Timestamp actualizado_desde;
     private Integer creado_por;
     private Integer actualizado_por;
@@ -24,4 +29,6 @@ public class listas {
 
     @OneToMany(mappedBy = "lista")
     private List<libros> libros;
+
+
 }
