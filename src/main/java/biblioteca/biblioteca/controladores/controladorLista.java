@@ -18,26 +18,23 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @Controller
 public class controladorLista {
 
     private final ListasRepository listasRepository;
-    private final LibroRepository libroRepository;
+
     private final Libros_listasRepository librosListasRepository;
 
     @Value("${ruta.imagenes}")
     private String rutaImagenes;
 
     @Autowired
-    public controladorLista(ListasRepository listasRepository, LibroRepository libroRepository, Libros_listasRepository librosListasRepository) {
+    public controladorLista(ListasRepository listasRepository,  Libros_listasRepository librosListasRepository) {
 
         this.listasRepository = listasRepository;
-        this.libroRepository = libroRepository;
+
         this.librosListasRepository = librosListasRepository;
     }
 
@@ -45,6 +42,7 @@ public class controladorLista {
     public String obtenerTodasLasListas(Model model, HttpServletRequest request){
         model.addAttribute("listas", listasRepository.findAll());
         model.addAttribute("listasModificado", new listas());
+
 //        List<libros_listas> librosListas = librosListasRepository.findAll();
 
 
@@ -110,13 +108,37 @@ public class controladorLista {
      * Mostrar libros de listas
      **********************************************************************************/
 
-//    @GetMapping("/listas/{id}/libros")
-//    public String obtenerLibrosPorLista(@PathVariable("id") Long idLista, Model model) {
-//        List<libros_listas> librosListas = librosListasRepository.findByIdLista(idLista);
-//        model.addAttribute("librosListas", librosListas);
-//        model.addAttribute("idLista", idLista);
-//        return "listas";
-//    }
+    @GetMapping("/listas/{id}/libros")
+    public ResponseEntity<?> obtenerLibrosPorLista(@PathVariable("id") Long idLista) {
+        List<libros_listas> librosListas = librosListasRepository.findByListaId(idLista);
+        if (librosListas.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontraron libros para esta lista.");
+        }
+
+        List<Map<String, Object>> librosInfo = new ArrayList<>();
+        for (libros_listas libroLista : librosListas) {
+            Map<String, Object> libroData = new HashMap<>();
+            libroData.put("titulo", libroLista.getLibro().getTitulo());
+            libroData.put("genero", libroLista.getLibro().getGenero());
+            libroData.put("autor", libroLista.getLibro().getAutor());
+            libroData.put("anoPublicacion", libroLista.getLibro().getAnoPublicacion());
+            libroData.put("editorial", libroLista.getLibro().getEditorial());
+            librosInfo.add(libroData);
+        }
+        return ResponseEntity.ok(librosInfo);
+    }
+    @DeleteMapping("/listas/{idLista}/libros/{idLibro}")
+    public ResponseEntity<?> eliminarLibroDeLista(@PathVariable("idLista") Long idLista, @PathVariable("idLibro") Long idLibro) {
+        Optional<libros_listas> libroLista = librosListasRepository.findById(idLibro);
+        if (libroLista.isPresent() && libroLista.get().getLista().getId_lista() == idLista) {
+            librosListasRepository.deleteById(idLibro);
+            return ResponseEntity.ok().body("Libro eliminado correctamente de la lista.");
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Libro no encontrado en la lista especificada.");
+        }
+    }
+
+
 
 
 

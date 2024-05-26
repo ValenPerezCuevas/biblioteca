@@ -286,13 +286,14 @@
                                     <!--                                            Modificar-->
                                     <!--                                        </button>-->
 
-<!--                                    <button type="button" class="btn btn-primary"-->
-<!--                                            data-bs-toggle="modal"-->
-<!--                                            data-bs-target="#verLibrosModal"-->
-<!--                                            th:data-id="${lista.id_lista}"-->
-<!--                                            onclick="cargarLibros(this.getAttribute('data-id'))">-->
-<!--                                        Ver Libros-->
-<!--                                    </button>-->
+                                    <button type="button" class="btn btn-primary"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#verLibrosModal"
+                                            th:data-id="${lista.id_lista}"
+                                            onclick="cargarLibros(this.getAttribute('data-id'))">
+
+                                        Ver Libros
+                                    </button>
 
                                     <form th:action="@{'/eliminarLista/' + ${lista.id_lista}}" method="post"
                                           onsubmit="return confirm('¿Estás seguro de que quieres eliminar esta lista?');">
@@ -344,96 +345,108 @@
 </div>
 
 
-<!--&lt;!&ndash; Modal de ver libros&ndash;&gt;-->
-<!--<div class="modal fade" id="verLibrosModal" tabindex="-1" aria-labelledby="verLibrosModalLabel" aria-hidden="true">-->
-<!--    <div class="modal-dialog modal-lg">-->
-<!--        <div class="modal-content">-->
-<!--            <div class="modal-header">-->
-<!--                <h5 class="modal-title" id="verLibrosModalLabel">Lista de libros</h5>-->
-<!--                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>-->
-<!--            </div>-->
-<!--            <div class="modal-body">-->
-<!--                <div class="row" id="librosContainer">-->
-<!--                    <table class="table table-striped">-->
-<!--                        <thead>-->
-<!--                        <tr>-->
+<!-- Modal de ver libros -->
+<div class="modal fade" id="verLibrosModal" tabindex="-1" aria-labelledby="verLibrosModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="verLibrosModalLabel">Lista de libros</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row" id="librosContainer">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>Título</th>
+                            <th>Género</th>
+                            <th>Autor</th>
+                            <th>Año de Publicación</th>
+                            <th>Editorial</th>
+                        </tr>
+                        </thead>
+                        <tbody id="tabla-libros">
+                        <!-- Los libros se cargarán aquí -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-<!--                            <th>-->
-<!--                                Título-->
-
-<!--                            </th>-->
-<!--                            <th>-->
-<!--                                Género-->
-
-<!--                            </th>-->
-<!--                            <th>-->
-<!--                                Autor-->
-
-<!--                            </th>-->
-<!--                            <th>-->
-<!--                                Año de Publicación-->
-
-<!--                            </th>-->
-<!--                            <th>-->
-<!--                                Editorial-->
-
-<!--                            </th>-->
-<!--                            <th></th>-->
-<!--                        </thead>-->
-<!--                        <tbody class="table-group-divider" id="tabla-libros">-->
-<!--                        <tr th:each="librolista : ${librosListas}">-->
-<!--                            <th:block th:if="${librolista.lista.id_lista} == ${idLista}">-->
-<!--                                <td th:text="${librolista.libro != null ? librolista.libro.titulo : 'Libro no disponible'}"></td>-->
-<!--                                <td th:text="${librolista.libro != null ? librolista.libro.genero : 'N/A'}"></td>-->
-<!--                                <td th:text="${librolista.libro != null ? librolista.libro.autor : 'N/A'}"></td>-->
-<!--                                <td th:text="${librolista.libro != null ? librolista.libro.anoPublicacion : 'N/A'}"></td>-->
-<!--                                <td th:text="${librolista.libro != null ? librolista.libro.editorial : 'N/A'}"></td>-->
-<!--                                <td>-->
-<!--                                    <button type="button" title="Eliminar libro de la lista" class="btn btn-danger"-->
-<!--                                            th:attr="data-id=${librolista.id_libros_lista}">-->
-<!--                                        Quitar libro-->
-<!--                                    </button>-->
-<!--                                </td>-->
-<!--                            </th:block>-->
-<!--                        </tr>-->
-<!--                        </tbody>-->
-
-<!--                    </table>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
 
 <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Asegura que el modal está completamente listo antes de cargar los libros
+        $('#verLibrosModal').on('shown.bs.modal', function (e) {
+            // Obtiene el ID de la lista desde el botón que disparó el modal
+            var idLista = e.relatedTarget.getAttribute('data-id');
+            // console.log(idLista);
+            cargarLibros(idLista);
+        });
+    });
+
     function cargarLibros(idLista) {
+        const tablaLibros = document.getElementById('tabla-libros');
+        tablaLibros.innerHTML = '<tr><td colspan="6">Cargando libros...</td></tr>';
+
         fetch(`/listas/${idLista}/libros`)
             .then(response => response.json())
             .then(data => {
-                const modalBody = document.getElementById('librosContainer');
-                modalBody.innerHTML = ''; // Limpiar contenido previo
-                if (data.libros && data.libros.length > 0) {
-                    data.libros.forEach(libro => {
-                        modalBody.innerHTML += `
-                            <div class="card mb-3">
-                                <div class="card-body">
-                                    <h5 class="card-title">${libro.titulo}</h5>
-                                    <p class="card-text">${libro.autor}</p>
-                                    <p class="card-text"><small class="text-muted">${libro.editorial}</small></p>
-                                </div>
-                            </div>
-                        `;
+                tablaLibros.innerHTML = '';
+                if (data && data.length > 0) {
+                    data.forEach(libro => {
+                        const tr = document.createElement('tr');
+                        tr.innerHTML = `
+                        <td>${libro.titulo || 'Libro no disponible'}</td>
+                        <td>${libro.genero || 'N/A'}</td>
+                        <td>${libro.autor || 'N/A'}</td>
+                        <td>${libro.anoPublicacion || 'N/A'}</td>
+                        <td>${libro.editorial || 'N/A'}</td>
+                        <td>
+                            <button type="button" title="Eliminar libro de la lista" class="btn btn-danger" onclick="eliminarLibroDeLista(${idLista}, ${libro.id})">
+                                Quitar libro
+                            </button>
+                        </td>`;
+                        tablaLibros.appendChild(tr);
                     });
                 } else {
-                    modalBody.innerHTML = '<p>No hay libros en esta lista.</p>';
+                    tablaLibros.innerHTML = '<tr><td colspan="6">No hay libros en esta lista.</td></tr>';
                 }
             })
             .catch(error => {
                 console.error('Error al cargar los libros:', error);
-                document.getElementById('librosContainer').innerHTML = '<p>Error al cargar los libros.</p>';
+                tablaLibros.innerHTML = '<tr><td colspan="6">Error al cargar los libros.</td></tr>';
             });
     }
+
+    document.querySelectorAll('.btn-eliminar-libro').forEach(button => {
+        button.addEventListener('click', function() {
+            const idLibro = this.getAttribute('data-id');
+            if (idLibro) {
+                eliminarLibro(idLibro);
+            } else {
+                console.error('El ID del libro no está definido');
+            }
+        });
+    });
+
+    function eliminarLibro(idLibro) {
+        fetch(`https://localhost/listas/2/libros/${idLibro}`, {
+            method: 'DELETE'
+        }).then(response => {
+            if (response.ok) {
+                console.log('Libro eliminado');
+            } else {
+                console.error('Error al eliminar libro');
+            }
+        }).catch(error => console.error('Error en la solicitud:', error));
+    }
+
 </script>
+
+
 
 
 
