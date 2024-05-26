@@ -348,7 +348,7 @@
             </div>
             <div class="modal-body">
                 <div class="row" id="librosContainer">
-                    <table class="table table-striped">
+                    <table class="table table-striped mx-auto">
                         <thead>
                         <tr>
                             <th>Título</th>
@@ -358,7 +358,7 @@
                             <th>Editorial</th>
                         </tr>
                         </thead>
-                        <tbody id="tabla-libros">
+                        <tbody id="tabla-libros" class="table-group-divider">
                         <!-- Los libros se cargarán aquí -->
                         </tbody>
                     </table>
@@ -386,26 +386,35 @@
 
     function cargarLibros(idLista) {
         const tablaLibros = document.getElementById('tabla-libros');
+        const modalTitle = document.getElementById('verLibrosModalLabel');
         tablaLibros.innerHTML = '<tr><td colspan="6">Cargando libros...</td></tr>';
 
         fetch(`/listas/${idLista}/libros`)
             .then(response => response.json())
             .then(data => {
+                console.log(data);  // Verifica que la estructura de los datos es la esperada
+
+                const nombre_lista = data.nombre_lista;
+                const libros = data.libros;
+
+                // Actualiza el título del modal con el nombre de la lista
+                modalTitle.textContent = `Libros en la lista: ${nombre_lista}`;
+
                 tablaLibros.innerHTML = '';
-                if (data && data.length > 0) {
-                    data.forEach(libro => {
+                if (libros && libros.length > 0) {
+                    libros.forEach(libro => {
                         const tr = document.createElement('tr');
                         tr.innerHTML = `
-                        <td>${libro.titulo || 'Libro no disponible'}</td>
-                        <td>${libro.genero || 'N/A'}</td>
-                        <td>${libro.autor || 'N/A'}</td>
-                        <td>${libro.anoPublicacion || 'N/A'}</td>
-                        <td>${libro.editorial || 'N/A'}</td>
-                        <td>
-                            <button type="button" title="Eliminar libro de la lista" class="btn btn-danger" onclick="eliminarLibroDeLista(${idLista}, ${libro.id})">
-                                Quitar libro
-                            </button>
-                        </td>`;
+                    <td>${libro.titulo || 'Libro no disponible'}</td>
+                    <td>${libro.genero || 'N/A'}</td>
+                    <td>${libro.autor || 'N/A'}</td>
+                    <td>${libro.anoPublicacion || 'N/A'}</td>
+                    <td>${libro.editorial || 'N/A'}</td>
+                    <td>
+                        <button type="button" title="Eliminar libro de la lista" class="btn btn-danger" onclick="eliminarLibroDeLista(${idLista}, ${libro.id})">
+                            Quitar libro
+                        </button>
+                    </td>`;
                         tablaLibros.appendChild(tr);
                     });
                 } else {

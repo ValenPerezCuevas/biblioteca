@@ -110,14 +110,18 @@ public class controladorLista {
 
     @GetMapping("/listas/{id}/libros")
     public ResponseEntity<?> obtenerLibrosPorLista(@PathVariable("id") Long idLista) {
-        List<libros_listas> librosListas = librosListasRepository.findByListaId(idLista);
-        if (librosListas.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontraron libros para esta lista.");
+        Optional<listas> listaOptional = listasRepository.findById(idLista);
+        if (!listaOptional.isPresent()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Lista no encontrada.");
         }
 
+        listas lista = listaOptional.get();
+        List<libros_listas> librosListas = librosListasRepository.findByListaId(idLista);
         List<Map<String, Object>> librosInfo = new ArrayList<>();
+
         for (libros_listas libroLista : librosListas) {
             Map<String, Object> libroData = new HashMap<>();
+            libroData.put("id", libroLista.getLibro().getId_libros());
             libroData.put("titulo", libroLista.getLibro().getTitulo());
             libroData.put("genero", libroLista.getLibro().getGenero());
             libroData.put("autor", libroLista.getLibro().getAutor());
@@ -125,8 +129,15 @@ public class controladorLista {
             libroData.put("editorial", libroLista.getLibro().getEditorial());
             librosInfo.add(libroData);
         }
-        return ResponseEntity.ok(librosInfo);
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("nombre_lista", lista.getNombre_lista());
+        response.put("libros", librosInfo);
+
+        return ResponseEntity.ok(response);
     }
+
+
     @DeleteMapping("/listas/{idLista}/libros/{idLibro}")
     public ResponseEntity<?> eliminarLibroDeLista(@PathVariable("idLista") Long idLista, @PathVariable("idLibro") Long idLibro) {
         Optional<libros_listas> libroLista = librosListasRepository.findById(idLibro);
