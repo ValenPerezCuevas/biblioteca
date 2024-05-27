@@ -107,7 +107,9 @@ public class controladorLista {
      **********************************************************************************/
 
     @GetMapping("/listas/{id}/libros")
-    public ResponseEntity<?> obtenerLibrosPorLista(@PathVariable("id") Long idLista) {
+    public ResponseEntity<?> obtenerLibrosPorLista(
+            @PathVariable("id") Long idLista,
+            HttpServletRequest request) {
         Optional<listas> listaOptional = listasRepository.findById(idLista);
         if (!listaOptional.isPresent()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Lista no encontrada.");
@@ -128,16 +130,24 @@ public class controladorLista {
             librosInfo.add(libroData);
         }
 
+        usuarios usuarioLogueado = (usuarios) request.getSession().getAttribute("usuario");
+
         Map<String, Object> response = new HashMap<>();
         response.put("nombre_lista", lista.getNombre_lista());
         response.put("libros", librosInfo);
+
+        response.put("creador_lista", lista.getCreado_por());
+        response.put("usuario_actual", usuarioLogueado.getId_usuario());
 
         return ResponseEntity.ok(response);
     }
 
 
     @DeleteMapping("/listas/{idLista}/libros/{idLibro}")
-    public ResponseEntity<?> eliminarLibroDeLista(@PathVariable("idLista") Long idLista, @PathVariable("idLibro") Long idLibro) {
+    public ResponseEntity<?> eliminarLibroDeLista(
+            @PathVariable("idLista") Long idLista,
+            @PathVariable("idLibro") Long idLibro,
+            HttpServletRequest request) {
         Optional<libros_listas> libroLista = librosListasRepository.findByListaIdAndLibroId(idLista, idLibro);
         if (libroLista.isPresent()) {
             librosListasRepository.delete(libroLista.get());
@@ -146,12 +156,6 @@ public class controladorLista {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Libro no encontrado en la lista especificada.");
         }
     }
-    }
-
-
-
-
-
-
+}
 
 
