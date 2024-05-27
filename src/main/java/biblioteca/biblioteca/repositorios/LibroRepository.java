@@ -14,4 +14,8 @@ public interface LibroRepository extends JpaRepository<libros, Long> {
     Page<libros> findByAutorContainingIgnoreCase(String autor, Pageable pageable);
 
 
+
+
+
+//    List<libros> findByListaId_lista(Long id_lista);
 }
