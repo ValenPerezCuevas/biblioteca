@@ -3,16 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Listas</title>
-    <!-- Enlace a Bootstrap CSS -->
     <link href="/css/bootstrap.css" rel="stylesheet">
     <link href="/css/bootstrap-grid.css" rel="stylesheet">
     <link href="/css/bootstrap-reboot.css" rel="stylesheet">
     <link href="/css/bootstrap-utilities.css" rel="stylesheet">
-
-    <!-- Estilos personalizados -->
     <style>
-        /* this card is inspired form this - https://georgefrancis.dev/ */
-
+        /* Estilos personalizados */
         .card {
             box-sizing: border-box;
             --border-radius: 0.75rem;
@@ -26,7 +22,6 @@
             border: 1px solid white;
             box-shadow: 2px 3px 20px black, 0 0 60px #8a4d0f inset;
             backdrop-filter: blur(6px);
-            /* filter: url(#wavy2); */ /* Comentario corregido */
             position: relative;
         }
 
@@ -46,7 +41,6 @@
         .card > * + * {
             margin-top: 1.1em;
         }
-
 
         .card .card__title {
             padding: 0;
@@ -72,7 +66,6 @@
             transition: 0.2s;
         }
 
-        /* hover */
         .card:hover .card__title {
             color: var(--primary-color);
             text-decoration: underline;
@@ -86,7 +79,6 @@
             transform: translateX(3px);
         }
 
-        /* Estilos para el footer */
         footer {
             background-color: #FFEDDB;
             color: #BF9270;
@@ -107,10 +99,9 @@
 
         .text-container {
             position: relative;
-            z-index: 2; /* Asegura que el texto esté por encima del efecto */
+            z-index: 2;
         }
 
-        /*ESTILO BOTONES*/
         .button-container-subrayado {
             position: relative;
             width: 130px;
@@ -119,7 +110,7 @@
             margin-right: auto;
             overflow: hidden;
             border: 1px solid #000;
-            background-color: #BF9270; /* Marrón medio */
+            background-color: #BF9270;
             font-weight: 300;
             transition: 0.5s;
             letter-spacing: 1px;
@@ -132,7 +123,7 @@
             font-weight: 300;
             font-size: 2vh;
             letter-spacing: 1px;
-            background-color: #E3B7A0; /* Melocotón claro */
+            background-color: #E3B7A0;
             -webkit-mask: url("https://raw.githubusercontent.com/robin-dela/css-mask-animation/master/img/urban-sprite.png");
             mask: url("https://raw.githubusercontent.com/robin-dela/css-mask-animation/master/img/urban-sprite.png");
             -webkit-mask-size: 3000% 100%;
@@ -180,7 +171,6 @@
             }
         }
 
-        /*estilo titulo texto */
         .text-animated-container {
             position: relative;
             height: 85px;
@@ -188,7 +178,7 @@
         }
 
         .text-animated {
-            color: #E3B7A0; /* Melocotón claro */
+            color: #E3B7A0;
             font-weight: 500;
             left: 50%;
             letter-spacing: 5px;
@@ -201,7 +191,7 @@
         .text-animated::before {
             animation: type 4s steps(24) normal;
             border-right: 1px solid #000;
-            color: #BF9270; /* Marrón medio */
+            color: #BF9270;
             content: 'Listas';
             height: 100%;
             left: 0;
@@ -225,23 +215,16 @@
         }
 
     </style>
-
 </head>
 <body>
-
-<!-- Incluir el encabezado compartido -->
 <div th:replace="header :: header"></div>
-
-<!-- Mensajes de éxito o error -->
 <div class="container mt-3">
     <div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
     <div th:if="${success}" class="alert alert-success" th:text="${success}"></div>
 </div>
-
 <div class="text-animated-container">
     <h1 class="text-center mb-4 text-animated">Listas</h1>
 </div>
-
 <div class="button-container-subrayado ">
     <span class="mas">Crear Nueva Lista</span>
     <button type="button" name="Hover" data-bs-toggle="modal" data-bs-target="#crearListaModal">
@@ -255,7 +238,6 @@
         <feDisplacementMap in="SourceGraphic" scale="20"></feDisplacementMap>
     </filter>
 </svg>
-
 <div class="container-fluid">
     <div class="row">
         <div class="container col-lg-9 d-flex flex-column justify-content-center align-items-center"
@@ -266,29 +248,17 @@
                         <div class="card-body">
                             <div class="text-container">
                                 <h5 class="card-title card__title text-center" th:text="${lista.nombre_lista}"></h5>
-
                                 <p class="card-text">Fecha creación : <span th:text="${lista.creado_desde}"></span></p>
-                                <p class="card-text">Última actualización <span
-                                        th:text="${lista.actualizado_desde}"></span></p>
+                                <p class="card-text">Última actualización <span th:text="${lista.actualizado_desde}"></span></p>
                                 <p class="card-text">Creado Por: <span th:text="${lista.usuario?.nombre}"></span></p>
-<!--                                <p class="card-text">Actualizado Por: <span-->
-<!--                                        th:text="${lista.actualizado_por != null ? lista.actualizado_por : 'No disponible'}"></span>-->
-<!--                                </p>-->
                                 <div class="btn-group d-flex justify-content-center" role="group" aria-label="Acciones">
-
-<!--                                        <button type="button" title="Modificar Lista" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modificarListaModal" th:attr="data-id=${lista.id_lista}">-->
-<!--                                            Modificar-->
-<!--                                        </button>-->
-
                                     <button type="button" class="btn btn-primary"
                                             data-bs-toggle="modal"
                                             data-bs-target="#verLibrosModal"
                                             th:data-id="${lista.id_lista}"
                                             onclick="cargarLibros(this.getAttribute('data-id'))">
-
                                         Ver Libros
                                     </button>
-
                                     <form th:action="@{'/eliminarLista/' + ${lista.id_lista}}" method="post"
                                           onsubmit="return confirm('¿Estás seguro de que quieres eliminar esta lista?');">
                                         <button type="submit" class="btn btn-danger" title="Eliminar lista">X</button>
@@ -309,15 +279,11 @@
         </div>
     </div>
 </div>
-
-<!-- Footer -->
 <footer class="row d-flex vh-15">
     <div class="d-flex justify-content-center">
         <p id="frase"></p>
     </div>
 </footer>
-
-<!-- Modal de crear lista -->
 <div class="modal fade" id="crearListaModal" tabindex="-1" aria-labelledby="crearListaModal" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -337,8 +303,6 @@
         </div>
     </div>
 </div>
-
-<!-- Modal de ver libros -->
 <div class="modal fade" id="verLibrosModal" tabindex="-1" aria-labelledby="verLibrosModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -356,6 +320,7 @@
                             <th>Autor</th>
                             <th>Año de Publicación</th>
                             <th>Editorial</th>
+                            <th>Acciones</th>
                         </tr>
                         </thead>
                         <tbody id="tabla-libros" class="table-group-divider">
@@ -367,19 +332,13 @@
         </div>
     </div>
 </div>
-
-<!-- Scripts de Bootstrap -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="/js/footer.js"></script>
-
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        // Asegura que el modal está completamente listo antes de cargar los libros
         $('#verLibrosModal').on('shown.bs.modal', function (e) {
-            // Obtiene el ID de la lista desde el botón que disparó el modal
             var idLista = e.relatedTarget.getAttribute('data-id');
-            // console.log(idLista);
             cargarLibros(idLista);
         });
     });
@@ -392,12 +351,11 @@
         fetch(`/listas/${idLista}/libros`)
             .then(response => response.json())
             .then(data => {
-                console.log(data);  // Verifica que la estructura de los datos es la esperada
+                console.log(data);
 
                 const nombre_lista = data.nombre_lista;
                 const libros = data.libros;
 
-                // Actualiza el título del modal con el nombre de la lista
                 modalTitle.textContent = `Libros en la lista: ${nombre_lista}`;
 
                 tablaLibros.innerHTML = '';
@@ -405,16 +363,18 @@
                     libros.forEach(libro => {
                         const tr = document.createElement('tr');
                         tr.innerHTML = `
-                    <td>${libro.titulo || 'Libro no disponible'}</td>
-                    <td>${libro.genero || 'N/A'}</td>
-                    <td>${libro.autor || 'N/A'}</td>
-                    <td>${libro.anoPublicacion || 'N/A'}</td>
-                    <td>${libro.editorial || 'N/A'}</td>
-                    <td>
-                        <button type="button" title="Eliminar libro de la lista" class="btn btn-danger" onclick="eliminarLibroDeLista(${idLista}, ${libro.id})">
-                            Quitar libro
-                        </button>
-                    </td>`;
+                        <td>${libro.titulo || 'Libro no disponible'}</td>
+                        <td>${libro.genero || 'N/A'}</td>
+                        <td>${libro.autor || 'N/A'}</td>
+                        <td>${libro.anoPublicacion || 'N/A'}</td>
+                        <td>${libro.editorial || 'N/A'}</td>
+                        <td>
+                            <button type="button" title="Eliminar libro de la lista"
+                                    class="btn btn-danger"
+                                    onclick="eliminarLibroDeLista(${idLista}, ${libro.id})">
+                                Quitar libro
+                            </button>
+                        </td>`;
                         tablaLibros.appendChild(tr);
                     });
                 } else {
@@ -427,31 +387,20 @@
             });
     }
 
-    document.querySelectorAll('.btn-eliminar-libro').forEach(button => {
-        button.addEventListener('click', function() {
-            const idLibro = this.getAttribute('data-id');
-            if (idLibro) {
-                eliminarLibro(idLibro);
-            } else {
-                console.error('El ID del libro no está definido');
-            }
-        });
-    });
-
-    function eliminarLibro(idLibro) {
-        fetch(`https://localhost/listas/2/libros/${idLibro}`, {
+    function eliminarLibroDeLista(idLista, idLibro) {
+        fetch(`/listas/${idLista}/libros/${idLibro}`, {
             method: 'DELETE'
         }).then(response => {
             if (response.ok) {
-                console.log('Libro eliminado');
+                console.log('Libro eliminado correctamente de la lista');
+                cargarLibros(idLista);
             } else {
-                console.error('Error al eliminar libro');
+                console.error('Error al eliminar el libro de la lista');
             }
-        }).catch(error => console.error('Error en la solicitud:', error));
+        }).catch(error => {
+            console.error('Error en la solicitud:', error);
+        });
     }
-
 </script>
-
-
 </body>
 </html>

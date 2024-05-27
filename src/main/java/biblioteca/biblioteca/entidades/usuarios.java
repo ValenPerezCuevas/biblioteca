@@ -13,9 +13,13 @@ public class usuarios {
     private Integer id_usuario;
     private String nombre;
     private String contrasena;
+
     @ManyToOne
     @JoinColumn(name = "id_rol")
     // Nombre de la columna en la tabla usuarios que hace referencia al idRol en la tabla roles
     private roles rol;
+
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<listas> listas;
 
 }
