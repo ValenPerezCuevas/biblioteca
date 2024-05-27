@@ -320,7 +320,7 @@
                             <th>Autor</th>
                             <th>Año de Publicación</th>
                             <th>Editorial</th>
-                            <th>Acciones</th>
+                            <th></th>
                         </tr>
                         </thead>
                         <tbody id="tabla-libros" class="table-group-divider">
@@ -355,6 +355,8 @@
 
                 const nombre_lista = data.nombre_lista;
                 const libros = data.libros;
+                const creadorLista = data.creador_lista;
+                const usuarioActual = data.usuario_actual;
 
                 modalTitle.textContent = `Libros en la lista: ${nombre_lista}`;
 
@@ -369,11 +371,12 @@
                         <td>${libro.anoPublicacion || 'N/A'}</td>
                         <td>${libro.editorial || 'N/A'}</td>
                         <td>
-                            <button type="button" title="Eliminar libro de la lista"
-                                    class="btn btn-danger"
-                                    onclick="eliminarLibroDeLista(${idLista}, ${libro.id})">
-                                Quitar libro
-                            </button>
+                            ${creadorLista === usuarioActual ? `
+                                <button type="button" title="Eliminar libro de la lista"
+                                        class="btn btn-danger"
+                                        onclick="eliminarLibroDeLista(${idLista}, ${libro.id})">
+                                    Quitar libro
+                                </button>` : ''}
                         </td>`;
                         tablaLibros.appendChild(tr);
                     });
