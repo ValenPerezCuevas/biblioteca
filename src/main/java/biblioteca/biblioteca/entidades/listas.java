@@ -29,8 +29,8 @@ public class listas {
     @JoinColumn(name = "id_usuario")
     private usuarios usuario;
 
-    @OneToMany(mappedBy = "lista")
-    private List<libros> libros;
+    @OneToMany(mappedBy = "lista", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<libros_listas> librosListas;
 
 
 }

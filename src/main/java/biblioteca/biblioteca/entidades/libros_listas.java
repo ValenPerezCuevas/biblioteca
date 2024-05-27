@@ -12,11 +12,11 @@ public class libros_listas {
 
 
     @ManyToOne
-    @JoinColumn(name = "id_libro", insertable = false, updatable = false)
+    @JoinColumn(name = "id_libro", nullable = false)
     private libros libro;
 
     @ManyToOne
-    @JoinColumn(name = "id_lista", insertable = false, updatable = false)
+    @JoinColumn(name = "id_lista", nullable = false)
     private listas lista;
 
 

@@ -285,7 +285,6 @@
                                             data-bs-target="#verLibrosModal"
                                             th:data-id="${lista.id_lista}"
                                             onclick="cargarLibros(this.getAttribute('data-id'))">
-
                                         Ver Libros
                                     </button>
 
@@ -368,6 +367,7 @@
     </div>
 </div>
 
+
 <!-- Scripts de Bootstrap -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -405,16 +405,20 @@
                     libros.forEach(libro => {
                         const tr = document.createElement('tr');
                         tr.innerHTML = `
-                    <td>${libro.titulo || 'Libro no disponible'}</td>
-                    <td>${libro.genero || 'N/A'}</td>
-                    <td>${libro.autor || 'N/A'}</td>
-                    <td>${libro.anoPublicacion || 'N/A'}</td>
-                    <td>${libro.editorial || 'N/A'}</td>
-                    <td>
-                        <button type="button" title="Eliminar libro de la lista" class="btn btn-danger" onclick="eliminarLibroDeLista(${idLista}, ${libro.id})">
-                            Quitar libro
-                        </button>
-                    </td>`;
+                        <td>${libro.titulo || 'Libro no disponible'}</td>
+                        <td>${libro.genero || 'N/A'}</td>
+                        <td>${libro.autor || 'N/A'}</td>
+                        <td>${libro.anoPublicacion || 'N/A'}</td>
+                        <td>${libro.editorial || 'N/A'}</td>
+                        <td>
+                            <button type="button" title="Eliminar libro de la lista"
+                                class="btn btn-danger"
+                                data-id="${idLista}"
+                                data-libro-id="${libro.id_libros_lista}"
+                                onclick="eliminarLibroDeLista(${idLista}, ${libro.id_libros_lista})">                                Quitar libro
+                            </button>
+
+                        </td>`;
                         tablaLibros.appendChild(tr);
                     });
                 } else {
@@ -427,28 +431,40 @@
             });
     }
 
-    document.querySelectorAll('.btn-eliminar-libro').forEach(button => {
-        button.addEventListener('click', function() {
-            const idLibro = this.getAttribute('data-id');
-            if (idLibro) {
-                eliminarLibro(idLibro);
-            } else {
-                console.error('El ID del libro no está definido');
-            }
-        });
-    });
 
-    function eliminarLibro(idLibro) {
-        fetch(`https://localhost/listas/2/libros/${idLibro}`, {
+    // document.querySelectorAll('.btn-eliminar-libro').forEach(button => {
+    //     button.addEventListener('click', function() {
+    //         const idLibro = this.getAttribute('data-id');
+    //         if (idLibro) {
+    //             eliminarLibro(idLibro);
+    //         } else {
+    //             console.error('El ID del libro no está definido');
+    //         }
+    //     });
+    // });
+
+    function eliminarLibroDeLista(idLista, idLibrosLista) {
+        if (!idLista || !idLibrosLista) {
+            console.error('ID de lista o ID de libro no definidos');
+            return;
+        }
+
+        fetch(`/listas/${idLista}/libros/${idLibrosLista}`, {
             method: 'DELETE'
         }).then(response => {
             if (response.ok) {
-                console.log('Libro eliminado');
+                console.log('Libro eliminado correctamente de la lista');
+                // Recargar los libros después de eliminar uno
+                cargarLibros(idLista);
             } else {
-                console.error('Error al eliminar libro');
+                console.error('Error al eliminar el libro de la lista');
             }
-        }).catch(error => console.error('Error en la solicitud:', error));
+        }).catch(error => {
+            console.error('Error en la solicitud:', error);
+        });
     }
+
+
 
 </script>
 
