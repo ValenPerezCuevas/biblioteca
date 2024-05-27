@@ -46,8 +46,6 @@ public class controladorLista {
 //        List<libros_listas> librosListas = librosListasRepository.findAll();
 
 
-
-
         return "listas";
     }
 
@@ -138,16 +136,27 @@ public class controladorLista {
     }
 
 
-    @DeleteMapping("/listas/{idLista}/libros/{idLibro}")
-    public ResponseEntity<?> eliminarLibroDeLista(@PathVariable("idLista") Long idLista, @PathVariable("idLibro") Long idLibro) {
-        Optional<libros_listas> libroLista = librosListasRepository.findById(idLibro);
-        if (libroLista.isPresent() && libroLista.get().getLista().getId_lista() == idLista) {
-            librosListasRepository.deleteById(idLibro);
-            return ResponseEntity.ok().body("Libro eliminado correctamente de la lista.");
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Libro no encontrado en la lista especificada.");
+    @DeleteMapping("/{idLista}/libros/{idLibro}")
+    public ResponseEntity<?> eliminarLibroDeLista(
+            @PathVariable("idLista") String idListaStr,
+            @PathVariable("idLibro") String idLibroStr) {
+        try {
+            Long idLista = Long.parseLong(idListaStr);
+            Long idLibro = Long.parseLong(idLibroStr);
+
+            Optional<libros_listas> libroLista = librosListasRepository.findByListaIdAndLibroId(idLista, idLibro);
+            if (libroLista.isPresent()) {
+                librosListasRepository.delete(libroLista.get());
+                return ResponseEntity.ok().body("Libro eliminado correctamente de la lista.");
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Libro no encontrado en la lista especificada.");
+            }
+        } catch (NumberFormatException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Formato de ID inválido.");
         }
     }
+
+
 
 
 
