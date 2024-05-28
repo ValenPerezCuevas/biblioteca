@@ -140,6 +140,7 @@
             height: 100%;
             background: rgba(255, 255, 255, 0.5);  /*Color blanco translúcido para suavizar el efecto */
             filter: url('#wavy2'); /* Aplicar la distorsión SVG como filtro */
+            -webkit-filter: url('#wavy2'); /* Prefijo para Chrome y Safari */
             box-shadow: 15px 13px 20px black, 0 0 60px #8a4d0f inset;
             border: 1px solid black;
             z-index: -1;
@@ -171,13 +172,69 @@
             padding: 20px 0;
             text-align: center;
         }
+        /***************************EFECTO TARJETA QUEMANDOSE AL ELIMINAR LISTA *************/
+        .card.burn:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/217233/burnStrip.jpg');
+            mix-blend-mode: darken;
+            animation: burn 1.3s forwards steps(50, end);
+            z-index: 1;
+        }
 
-        /*********** .titulo p {
-           color: red;
-           font-size: 4rem;
-           align-items: center;
-       }
-       ****/
+        @keyframes burn {
+            0% {
+                background-position: 0 0;
+            }
+            100% {
+                background-position: -38145px 0;
+            }
+        }
+        .card.burn:after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/217233/ashInnerStrip.jpg');
+            mix-blend-mode: screen;
+            animation: ash 2s infinite steps(66, end);
+            z-index: 2;
+        }
+        @keyframes ash {
+            0% {
+                background-position: 0 0;
+            }
+            100% {
+                background-position: -50190px 0;
+            }
+        }
+        .card.burn .ashOuter {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/217233/ashOuterStrip.jpg');
+            mix-blend-mode: difference;
+            z-index: 3;
+        }
+
+        .card.burn .burnline {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/217233/burnlineStrip.jpg');
+            mix-blend-mode: lighten;
+            z-index: 4;
+        }
 
 </style>
 </head>
@@ -218,6 +275,9 @@
             <div class="row col-md-12" id="row1">
                 <div th:each="lista : ${listas}" class="col-md-4 mb-4">
                     <div class="card">
+                        <div class="ashOuter"></div>
+                        <div class="burnline"></div>
+                        <!-- Otro contenido de la tarjeta aquí -->
                         <div class="card-body">
                             <div class="text-container">
                                 <h5 class="card-title card__title text-center" th:text="${lista.nombre_lista}"></h5>
@@ -234,7 +294,7 @@
                                         Ver Libros
                                     </button>
                                     <form th:action="@{'/eliminarLista/' + ${lista.id_lista}}" method="post"
-                                          onsubmit="return confirm('¿Estás seguro de que quieres eliminar esta lista?');">
+                                          onsubmit="return confirmAndBurn(this);">
                                         <button type="submit" class="btn btn-danger" title="Eliminar lista">X</button>
                                     </form>
                                 </div>
@@ -376,6 +436,20 @@
             console.error('Error en la solicitud:', error);
         });
     }
+
+    function confirmAndBurn(form) {
+        if (confirm('¿Estás seguro de que quieres eliminar esta lista?')) {
+            var card = form.closest('.card');
+            card.classList.add('burn');
+            card.querySelector('.ashOuter').classList.add('burn');
+            card.querySelector('.burnline').classList.add('burn');
+            setTimeout(function() {
+                form.submit();
+            }, 1300); // 1300ms es la duración de la animación 'burn'
+        }
+        return false;
+    }
+
 </script>
 </body>
 </html>
