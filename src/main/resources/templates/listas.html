@@ -311,7 +311,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
             </div>
             <div class="modal-body">
-                <div class="row" id="librosContainer">
+                <div class="row table-responsive" id="librosContainer">
                     <table class="table table-striped mx-auto">
                         <thead>
                         <tr>
@@ -319,7 +319,7 @@
                             <th>Género</th>
                             <th>Autor</th>
                             <th>Año de Publicación</th>
-                            <th>Editorial</th>
+                            <th class="d-none d-md-table-cell">Editorial</th>
                             <th></th>
                         </tr>
                         </thead>
@@ -369,7 +369,7 @@
                         <td>${libro.genero || 'N/A'}</td>
                         <td>${libro.autor || 'N/A'}</td>
                         <td>${libro.anoPublicacion || 'N/A'}</td>
-                        <td>${libro.editorial || 'N/A'}</td>
+                        <td class="d-none d-md-table-cell">${libro.editorial || 'N/A'}</td>
                         <td>
                             ${creadorLista === usuarioActual ? `
                                 <button type="button" title="Eliminar libro de la lista"
