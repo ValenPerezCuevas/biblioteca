@@ -43,7 +43,7 @@ public class controladorLista {
         model.addAttribute("listas", listasRepository.findAll());
         model.addAttribute("listasModificado", new listas());
 
-//        List<libros_listas> librosListas = librosListasRepository.findAll();
+
 
 
         return "listas";
