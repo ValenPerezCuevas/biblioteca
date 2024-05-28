@@ -82,3 +82,6 @@ ON DELETE CASCADE,
 ADD CONSTRAINT fk_listas_actualizado_por
 FOREIGN KEY (actualizado_por) REFERENCES usuarios(id_usuario)
 ON DELETE CASCADE;
+
+--Modificación en base de datos:
+ALTER TABLE libros_listas ADD CONSTRAINT fk_libros_listas_id_lista FOREIGN KEY (id_lista) REFERENCES listas(id_lista) ON DELETE CASCADE;
