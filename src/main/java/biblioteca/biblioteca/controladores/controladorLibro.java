@@ -127,4 +127,27 @@ public class controladorLibro {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Libro no encontrado");
         }
     }
+
+    /**********************************************************************************
+     * Mostrar portada
+     * * *********************************************************************************/
+
+    @GetMapping("/obtenerInfoLibro/{id}")
+    public ResponseEntity<?> obtenerInfoLibro(@PathVariable("id") Long id) {
+        Optional<libros> libroOptional = libroRepository.findById(id);
+        if (libroOptional.isPresent()) {
+            libros libro = libroOptional.get();
+            Map<String, Object> response = new HashMap<>();
+            response.put("titulo", libro.getTitulo());
+            response.put("autor", libro.getAutor());
+            response.put("genero", libro.getGenero());
+            response.put("anoPublicacion", libro.getAnoPublicacion());
+            response.put("editorial", libro.getEditorial());
+            return ResponseEntity.ok(response);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Libro no encontrado");
+        }
+    }
+
+
 }

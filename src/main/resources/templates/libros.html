@@ -137,6 +137,25 @@
             height: 550px;
             object-fit: cover;
         }
+
+        /* Estilo para ocultar columna Editorial en pantallas pequeñas */
+        @media (max-width: 1000px) {
+            .hide-on-sm {
+                display: none;
+            }
+        }
+
+        @media (max-width: 800px){
+            .hide-on-sm-1 {
+                display: none;
+            }
+        }
+
+        @media (max-width: 780px){
+            .hide-on-sm-2 {
+                display: none;
+            }
+        }
     </style>
 </head>
 <body>
@@ -215,19 +234,19 @@
                         <path fill-rule="evenodd" d="M11.5 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L11 2.707V14.5a.5.5 0 0 0 .5.5m-7-14a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L4 13.293V1.5a.5.5 0 0 1 .5-.5"/>
                     </svg>
                 </th>
-                <th data-sort="autor" th:data-order="${sortBy == 'autor' and sortOrder == 'asc' ? 'desc' : 'asc'}">
+                <th data-sort="autor" th:data-order="${sortBy == 'autor' and sortOrder == 'asc' ? 'desc' : 'asc'}" class="hide-on-sm-2">
                     Autor
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-up" viewBox="0 0 16 16">
                         <path fill-rule="evenodd" d="M11.5 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L11 2.707V14.5a.5.5 0 0 0 .5.5m-7-14a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L4 13.293V1.5a.5.5 0 0 1 .5-.5"/>
                     </svg>
                 </th>
-                <th data-sort="anoPublicacion" th:data-order="${sortBy == 'anoPublicacion' and sortOrder == 'asc' ? 'desc' : 'asc'}">
+                <th data-sort="anoPublicacion" th:data-order="${sortBy == 'anoPublicacion' and sortOrder == 'asc' ? 'desc' : 'asc'}" class="hide-on-sm-1">
                     Año de Publicación
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-up" viewBox="0 0 16 16">
                         <path fill-rule="evenodd" d="M11.5 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L11 2.707V14.5a.5.5 0 0 0 .5.5m-7-14a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L4 13.293V1.5a.5.5 0 0 1 .5-.5"/>
                     </svg>
                 </th>
-                <th data-sort="editorial" th:data-order="${sortBy == 'editorial' and sortOrder == 'asc' ? 'desc' : 'asc'}">
+                <th data-sort="editorial" th:data-order="${sortBy == 'editorial' and sortOrder == 'asc' ? 'desc' : 'asc'}" class="hide-on-sm">
                     Editorial
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-up" viewBox="0 0 16 16">
                         <path fill-rule="evenodd" d="M11.5 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L11 2.707V14.5a.5.5 0 0 0 .5.5m-7-14a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L4 13.293V1.5a.5.5 0 0 1 .5-.5"/>
@@ -239,9 +258,9 @@
             <tr th:each="libro : ${libros}">
                 <td th:text="${libro.titulo}"></td>
                 <td th:text="${libro.genero}"></td>
-                <td th:text="${libro.autor}"></td>
-                <td th:text="${libro.anoPublicacion}"></td>
-                <td th:text="${libro.editorial}"></td>
+                <td th:text="${libro.autor}" class="hide-on-sm-2"></td>
+                <td th:text="${libro.anoPublicacion}" class="hide-on-sm-1">></td>
+                <td th:text="${libro.editorial}" class="hide-on-sm"></td>
                 <td>
                     <div class="btn-group" role="group" aria-label="Acciones">
                         <button type="button" class="btn btn-info" title="Ver portada"
@@ -260,30 +279,63 @@
                         </form>
                     </div>
                 </td>
-
             </tr>
             </tbody>
         </table>
-
-        <!-- Controles de Paginación -->
-        <nav aria-label="Page navigation example">
-            <ul class="pagination justify-content-center">
-                <li class="page-item" th:class="${paginaActual == 0} ? 'disabled'">
-                    <a class="page-link" th:href="@{/listado(pagina=0, sortBy=${sortBy}, sortOrder=${sortOrder})}" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                    </a>
-                </li>
-                <li th:each="num : ${#numbers.sequence(0, totalPaginas - 1)}" class="page-item" th:classappend="${num == paginaActual} ? 'active'">
-                    <a class="page-link" th:href="@{/listado(pagina=${num}, sortBy=${sortBy}, sortOrder=${sortOrder})}" th:text="${num + 1}"></a>
-                </li>
-                <li class="page-item" th:class="${paginaActual == totalPaginas - 1} ? 'disabled'">
-                    <a class="page-link" th:href="@{/listado(pagina=${totalPaginas - 1}, sortBy=${sortBy}, sortOrder=${sortOrder})}" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
     </div>
+    <br>
+
+    <!-- Controles de Paginación ventana grande -->
+    <nav aria-label="Page navigation example" class="d-none d-md-block">
+        <ul class="pagination justify-content-center">
+            <li class="page-item" th:class="${paginaActual == 0} ? 'disabled'">
+                <a class="page-link" th:href="@{/listado(pagina=0, sortBy=${sortBy}, sortOrder=${sortOrder})}" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            <li th:each="num : ${#numbers.sequence(0, totalPaginas - 1)}" class="page-item" th:classappend="${num == paginaActual} ? 'active'">
+                <a class="page-link" th:href="@{/listado(pagina=${num}, sortBy=${sortBy}, sortOrder=${sortOrder})}" th:text="${num + 1}"></a>
+            </li>
+            <li class="page-item" th:class="${paginaActual == totalPaginas - 1} ? 'disabled'">
+                <a class="page-link" th:href="@{/listado(pagina=${totalPaginas - 1}, sortBy=${sortBy}, sortOrder=${sortOrder})}" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Controles de Paginación ventana pequeña -->
+    <nav aria-label="Page navigation" class="d-md-none">
+        <ul class="pagination justify-content-center">
+            <li class="page-item" th:class="${paginaActual == 0} ? 'disabled'">
+                <a class="page-link" th:href="@{/listado(pagina=0, sortBy=${sortBy}, sortOrder=${sortOrder})}" aria-label="Primera">
+                    <span aria-hidden="true">&laquo;&laquo;</span>
+                    <span class="visually-hidden">Primera</span>
+                </a>
+            </li>
+            <li class="page-item" th:class="${paginaActual == 0} ? 'disabled'">
+                <a class="page-link" th:href="@{/listado(pagina=${paginaActual - 1}, sortBy=${sortBy}, sortOrder=${sortOrder})}" aria-label="Anterior">
+                    <span aria-hidden="true">&laquo;</span>
+                    <span class="visually-hidden">Anterior</span>
+                </a>
+            </li>
+            <li class="page-item">
+                <span class="page-link" th:text="${paginaActual + 1} + ' de ' + ${totalPaginas}"></span>
+            </li>
+            <li class="page-item" th:class="${paginaActual == totalPaginas - 1} ? 'disabled'">
+                <a class="page-link" th:href="@{/listado(pagina=${paginaActual + 1}, sortBy=${sortBy}, sortOrder=${sortOrder})}" aria-label="Siguiente">
+                    <span aria-hidden="true">&raquo;</span>
+                    <span class="visually-hidden">Siguiente</span>
+                </a>
+            </li>
+            <li class="page-item" th:class="${paginaActual == totalPaginas - 1} ? 'disabled'">
+                <a class="page-link" th:href="@{/listado(pagina=${totalPaginas - 1}, sortBy=${sortBy}, sortOrder=${sortOrder})}" aria-label="Última">
+                    <span aria-hidden="true">&raquo;&raquo;</span>
+                    <span class="visually-hidden">Última</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
 
     <!-- Footer -->
     <footer class="row d-flex vh-15">

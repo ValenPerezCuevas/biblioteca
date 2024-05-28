@@ -11,8 +11,6 @@
     <link href="/css/bootstrap-utilities.css" rel="stylesheet">
 
     <style>
-        /* Estilos personalizados */
-        @import url('https://fonts.googleapis.com/css2?family=Caesar+Dressing&display=swap');
 
         /* Estilos para el aside */
         aside {
@@ -101,6 +99,24 @@
             stroke-dashoffset: 0;
             opacity: 1;
         }
+        .card {
+            width: 200px;
+            margin-bottom: 20px;
+        }
+
+
+        .card-img-top {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+
+        .card-body {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+        }
+
     </style>
 </head>
 <body>
@@ -108,280 +124,298 @@
 <!-- Incluir el encabezado compartido -->
 <div th:replace="header :: header"></div>
 
-<div class="container-fluid">
-    <div class="row">
+<div class="container-fluid ">
+    <div class="row justify-content-evenly">
         <!-- Aside en la parte izquierda -->
-        <aside class="col-md-3 p-4 d-flex flex-column  align-items-center ">
-            <!-- Agregando la clase p-4 para el margen -->
+<!--        <aside class="col-md-3 p-4 d-flex flex-column  align-items-center ">-->
+<!--            &lt;!&ndash; Agregando la clase p-4 para el margen &ndash;&gt;-->
 
-            <div>
-                <nav class="navbar">
-                    <div class="container-fluid m-2">
-                        <form class="d-flex" role="search">
-                            <input class="form-control me-2" type="search" placeholder="Introduce un título"
-                                   aria-label="Búsqueda">
-                            <button class="btn btn-outline-success" type="submit">Buscar</button>
-                        </form>
+<!--            <div>-->
+<!--                <nav class="navbar">-->
+<!--                    <div class="container-fluid m-2">-->
+<!--                        <form class="d-flex" role="search">-->
+<!--                            <input class="form-control me-2" type="search" placeholder="Introduce un título" aria-label="Búsqueda">-->
+<!--                            <button class="btn btn-outline-success" type="submit">Buscar</button>-->
+<!--                        </form>-->
+<!--                    </div>-->
+<!--                </nav>-->
+<!--            </div>-->
+
+<!--            <div class="m-2 w-75">-->
+<!--                <h4>Listas</h4>-->
+<!--                <div class="checkbox-wrapper">-->
+<!--                    <input checked type="checkbox" class="check" id="check3-61">-->
+<!--                    <label for="check3-61" class="label">-->
+<!--                        <svg width="45" height="45" viewBox="0 0 95 95">-->
+<!--                            <rect x="30" y="20" width="50" height="50" stroke="black" fill="none"></rect>-->
+<!--                            <g transform="translate(0,-952.36222)">-->
+<!--                                <path d="m 56,963 c -102,122 6,9 7,9 17,-5 -66,69 -38,52 122,-77 -7,14 18,4 29,-11 45,-43 23,-4" stroke="black" stroke-width="3" fill="none" class="path1"></path>-->
+<!--                            </g>-->
+<!--                        </svg>-->
+<!--                        <span>Usuario</span>-->
+<!--                    </label>-->
+<!--                </div>-->
+<!--                <div class="checkbox-wrapper">-->
+<!--                    <input checked type="checkbox" class="check" id="check3-62">-->
+<!--                    <label for="check3-62" class="label">-->
+<!--                        <svg width="45" height="45" viewBox="0 0 95 95">-->
+<!--                            <rect x="30" y="20" width="50" height="50" stroke="black" fill="none"></rect>-->
+<!--                            <g transform="translate(0,-952.36222)">-->
+<!--                                <path d="m 56,963 c -102,122 6,9 7,9 17,-5 -66,69 -38,52 122,-77 -7,14 18,4 29,-11 45,-43 23,-4" stroke="black" stroke-width="3" fill="none" class="path1"></path>-->
+<!--                            </g>-->
+<!--                        </svg>-->
+<!--                        <span>Número Lista</span>-->
+<!--                    </label>-->
+<!--                </div>-->
+<!--                <div class="checkbox-wrapper">-->
+<!--                    <input checked type="checkbox" class="check" id="check3-63">-->
+<!--                    <label for="check3-63" class="label">-->
+<!--                        <svg width="45" height="45" viewBox="0 0 95 95">-->
+<!--                            <rect x="30" y="20" width="50" height="50" stroke="black" fill="none"></rect>-->
+<!--                            <g transform="translate(0,-952.36222)">-->
+<!--                                <path d="m 56,963 c -102,122 6,9 7,9 17,-5 -66,69 -38,52 122,-77 -7,14 18,4 29,-11 45,-43 23,-4" stroke="black" stroke-width="3" fill="none" class="path1"></path>-->
+<!--                            </g>-->
+<!--                        </svg>-->
+<!--                        <span>Nombre Listas</span>-->
+<!--                    </label>-->
+<!--                </div>-->
+<!--                <div class="checkbox-wrapper">-->
+<!--                    <input checked type="checkbox" class="check" id="check3-64">-->
+<!--                    <label for="check3-64" class="label">-->
+<!--                        <svg width="45" height="45" viewBox="0 0 95 95">-->
+<!--                            <rect x="30" y="20" width="50" height="50" stroke="black" fill="none"></rect>-->
+<!--                            <g transform="translate(0,-952.36222)">-->
+<!--                                <path d="m 56,963 c -102,122 6,9 7,9 17,-5 -66,69 -38,52 122,-77 -7,14 18,4 29,-11 45,-43 23,-4" stroke="black" stroke-width="3" fill="none" class="path1"></path>-->
+<!--                            </g>-->
+<!--                        </svg>-->
+<!--                        <span>Cantidad de Libros</span>-->
+<!--                    </label>-->
+<!--                </div>-->
+<!--            </div>-->
+
+<!--            <div class="m-2 w-75">-->
+<!--                <h4>Usuario</h4>-->
+<!--                <div class="checkbox-wrapper">-->
+<!--                    <input checked type="checkbox" class="check" id="check2-61">-->
+<!--                    <label for="check2-61" class="label">-->
+<!--                        <svg width="45" height="45" viewBox="0 0 95 95">-->
+<!--                            <rect x="30" y="20" width="50" height="50" stroke="black" fill="none"></rect>-->
+<!--                            <g transform="translate(0,-952.36222)">-->
+<!--                                <path d="m 56,963 c -102,122 6,9 7,9 17,-5 -66,69 -38,52 122,-77 -7,14 18,4 29,-11 45,-43 23,-4" stroke="black" stroke-width="3" fill="none" class="path1"></path>-->
+<!--                            </g>-->
+<!--                        </svg>-->
+<!--                        <span>Nombre usuario</span>-->
+<!--                    </label>-->
+<!--                </div>-->
+<!--                <div class="checkbox-wrapper">-->
+<!--                    <input checked type="checkbox" class="check" id="check2-62">-->
+<!--                    <label for="check2-62" class="label">-->
+<!--                        <svg width="45" height="45" viewBox="0 0 95 95">-->
+<!--                            <rect x="30" y="20" width="50" height="50" stroke="black" fill="none"></rect>-->
+<!--                            <g transform="translate(0,-952.36222)">-->
+<!--                                <path d="m 56,963 c -102,122 6,9 7,9 17,-5 -66,69 -38,52 122,-77 -7,14 18,4 29,-11 45,-43 23,-4" stroke="black" stroke-width="3" fill="none" class="path1"></path>-->
+<!--                            </g>-->
+<!--                        </svg>-->
+<!--                        <span>Fecha Registro</span>-->
+<!--                    </label>-->
+<!--                </div>-->
+<!--                <div class="checkbox-wrapper">-->
+<!--                    <input checked type="checkbox" class="check" id="check2-63">-->
+<!--                    <label for="check2-63" class="label">-->
+<!--                        <svg width="45" height="45" viewBox="0 0 95 95">-->
+<!--                            <rect x="30" y="20" width="50" height="50" stroke="black" fill="none"></rect>-->
+<!--                            <g transform="translate(0,-952.36222)">-->
+<!--                                <path d="m 56,963 c -102,122 6,9 7,9 17,-5 -66,69 -38,52 122,-77 -7,14 18,4 29,-11 45,-43 23,-4" stroke="black" stroke-width="3" fill="none" class="path1"></path>-->
+<!--                            </g>-->
+<!--                        </svg>-->
+<!--                        <span>NºListas</span>-->
+<!--                    </label>-->
+<!--                </div>-->
+<!--                <div class="checkbox-wrapper">-->
+<!--                    <input checked type="checkbox" class="check" id="check2-64">-->
+<!--                    <label for="check2-64" class="label">-->
+<!--                        <svg width="45" height="45" viewBox="0 0 95 95">-->
+<!--                            <rect x="30" y="20" width="50" height="50" stroke="black" fill="none"></rect>-->
+<!--                            <g transform="translate(0,-952.36222)">-->
+<!--                                <path d="m 56,963 c -102,122 6,9 7,9 17,-5 -66,69 -38,52 122,-77 -7,14 18,4 29,-11 45,-43 23,-4" stroke="black" stroke-width="3" fill="none" class="path1"></path>-->
+<!--                            </g>-->
+<!--                        </svg>-->
+<!--                        <span>Fecha</span>-->
+<!--                    </label>-->
+<!--                </div>-->
+<!--            </div>-->
+
+<!--            <div class="m-2 w-75">-->
+<!--                <h4>Libros</h4>-->
+<!--                <div class="checkbox-wrapper">-->
+<!--                    <input checked type="checkbox" class="check" id="check1-61">-->
+<!--                    <label for="check1-61" class="label">-->
+<!--                        <svg width="45" height="45" viewBox="0 0 95 95">-->
+<!--                            <rect x="30" y="20" width="50" height="50" stroke="black" fill="none"></rect>-->
+<!--                            <g transform="translate(0,-952.36222)">-->
+<!--                                <path d="m 56,963 c -102,122 6,9 7,9 17,-5 -66,69 -38,52 122,-77 -7,14 18,4 29,-11 45,-43 23,-4" stroke="black" stroke-width="3" fill="none" class="path1"></path>-->
+<!--                            </g>-->
+<!--                        </svg>-->
+<!--                        <span>Titulo</span>-->
+<!--                    </label>-->
+<!--                </div>-->
+<!--                <div class="checkbox-wrapper">-->
+<!--                    <input checked type="checkbox" class="check" id="check1-62">-->
+<!--                    <label for="check1-62" class="label">-->
+<!--                        <svg width="45" height="45" viewBox="0 0 95 95">-->
+<!--                            <rect x="30" y="20" width="50" height="50" stroke="black" fill="none"></rect>-->
+<!--                            <g transform="translate(0,-952.36222)">-->
+<!--                                <path d="m 56,963 c -102,122 6,9 7,9 17,-5 -66,69 -38,52 122,-77 -7,14 18,4 29,-11 45,-43 23,-4" stroke="black" stroke-width="3" fill="none" class="path1"></path>-->
+<!--                            </g>-->
+<!--                        </svg>-->
+<!--                        <span>Genero</span>-->
+<!--                    </label>-->
+<!--                </div>-->
+<!--                <div class="checkbox-wrapper">-->
+<!--                    <input checked type="checkbox" class="check" id="check1-63">-->
+<!--                    <label for="check1-63" class="label">-->
+<!--                        <svg width="45" height="45" viewBox="0 0 95 95">-->
+<!--                            <rect x="30" y="20" width="50" height="50" stroke="black" fill="none"></rect>-->
+<!--                            <g transform="translate(0,-952.36222)">-->
+<!--                                <path d="m 56,963 c -102,122 6,9 7,9 17,-5 -66,69 -38,52 122,-77 -7,14 18,4 29,-11 45,-43 23,-4" stroke="black" stroke-width="3" fill="none" class="path1"></path>-->
+<!--                            </g>-->
+<!--                        </svg>-->
+<!--                        <span>Autor</span>-->
+<!--                    </label>-->
+<!--                </div>-->
+<!--                <div class="checkbox-wrapper">-->
+<!--                    <input checked type="checkbox" class="check" id="check1-64">-->
+<!--                    <label for="check1-64" class="label">-->
+<!--                        <svg width="45" height="45" viewBox="0 0 95 95">-->
+<!--                            <rect x="30" y="20" width="50" height="50" stroke="black" fill="none"></rect>-->
+<!--                            <g transform="translate(0,-952.36222)">-->
+<!--                                <path d="m 56,963 c -102,122 6,9 7,9 17,-5 -66,69 -38,52 122,-77 -7,14 18,4 29,-11 45,-43 23,-4" stroke="black" stroke-width="3" fill="none" class="path1"></path>-->
+<!--                            </g>-->
+<!--                        </svg>-->
+<!--                        <span>Año de publicación</span>-->
+<!--                    </label>-->
+<!--                </div>-->
+<!--                <div class="checkbox-wrapper">-->
+<!--                    <input checked type="checkbox" class="check" id="check1-65">-->
+<!--                    <label for="check1-65" class="label">-->
+<!--                        <svg width="45" height="45" viewBox="0 0 95 95">-->
+<!--                            <rect x="30" y="20" width="50" height="50" stroke="black" fill="none"></rect>-->
+<!--                            <g transform="translate(0,-952.36222)">-->
+<!--                                <path d="m 56,963 c -102,122 6,9 7,9 17,-5 -66,69 -38,52 122,-77 -7,14 18,4 29,-11 45,-43 23,-4" stroke="black" stroke-width="3" fill="none" class="path1"></path>-->
+<!--                            </g>-->
+<!--                        </svg>-->
+<!--                        <span>Editorial</span>-->
+<!--                    </label>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </aside>-->
+
+
+        <!-- Contenido principal para libros -->
+
+            <div th:each="libro : ${libros}" class="col-lg-3 col-md-4 col-sm-6 mb-4 d-flex justify-content-center">
+                <div class="card" >
+                    <img th:src="@{'/imagenes/Imagenes_libros/' + ${libro.id_libros} + '.jpg'}" class="card-img-top" alt="Portada del libro">
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="${libro.titulo}">Título del libro</h5>
+                        <p class="card-text">Autor: <span th:text="${libro.autor}">Autor del libro</span></p>
+                        <a href="#" class="btn btn-primary btn-ver-info"
+                           data-bs-toggle="modal" data-bs-target="#verInfoLibro"
+                           th:data-libro="${libro}">Ver Info</a>
                     </div>
-                </nav>
-            </div>
-
-            <div class="m-2 w-75">
-                <h4>Listas</h4>
-                <div class="checkbox-wrapper">
-                    <input checked="" type="checkbox" class="check" id="check3-61">
-                    <label for="check3-61" class="label">
-                        <svg width="45" height="45" viewBox="0 0 95 95">
-                            <rect x="30" y="20" width="50" height="50" stroke="black" fill="none"></rect>
-                            <g transform="translate(0,-952.36222)">
-                                <path d="m 56,963 c -102,122 6,9 7,9 17,-5 -66,69 -38,52 122,-77 -7,14 18,4 29,-11 45,-43 23,-4" stroke="black" stroke-width="3" fill="none" class="path1"></path>
-                            </g>
-                        </svg>
-                        <span>Usuario</span>
-                    </label>
-                </div>
-                <div class="checkbox-wrapper">
-                    <input checked="" type="checkbox" class="check" id="check3-62">
-                    <label for="check3-62" class="label">
-                        <svg width="45" height="45" viewBox="0 0 95 95">
-                            <rect x="30" y="20" width="50" height="50" stroke="black" fill="none"></rect>
-                            <g transform="translate(0,-952.36222)">
-                                <path d="m 56,963 c -102,122 6,9 7,9 17,-5 -66,69 -38,52 122,-77 -7,14 18,4 29,-11 45,-43 23,-4" stroke="black" stroke-width="3" fill="none" class="path1"></path>
-                            </g>
-                        </svg>
-                        <span>Número Lista</span>
-                    </label>
-                </div>
-                <div class="checkbox-wrapper">
-                    <input checked="" type="checkbox" class="check" id="check3-63">
-                    <label for="check3-63" class="label">
-                        <svg width="45" height="45" viewBox="0 0 95 95">
-                            <rect x="30" y="20" width="50" height="50" stroke="black" fill="none"></rect>
-                            <g transform="translate(0,-952.36222)">
-                                <path d="m 56,963 c -102,122 6,9 7,9 17,-5 -66,69 -38,52 122,-77 -7,14 18,4 29,-11 45,-43 23,-4" stroke="black" stroke-width="3" fill="none" class="path1"></path>
-                            </g>
-                        </svg>
-                        <span>Nombre Listas</span>
-                    </label>
-                </div>
-                <div class="checkbox-wrapper">
-                    <input checked="" type="checkbox" class="check" id="check3-64">
-                    <label for="check3-64" class="label">
-                        <svg width="45" height="45" viewBox="0 0 95 95">
-                            <rect x="30" y="20" width="50" height="50" stroke="black" fill="none"></rect>
-                            <g transform="translate(0,-952.36222)">
-                                <path d="m 56,963 c -102,122 6,9 7,9 17,-5 -66,69 -38,52 122,-77 -7,14 18,4 29,-11 45,-43 23,-4" stroke="black" stroke-width="3" fill="none" class="path1"></path>
-                            </g>
-                        </svg>
-                        <span>Cantidad de Libros</span>
-                    </label>
-                </div>
-            </div>
-
-
-            <div class="m-2 w-75">
-                <div class="m-2 w-75">
-                    <h4>Usuario</h4>
-                    <div class="checkbox-wrapper">
-                        <input checked="" type="checkbox" class="check" id="check2-61">
-                        <label for="check2-61" class="label">
-                            <svg width="45" height="45" viewBox="0 0 95 95">
-                                <rect x="30" y="20" width="50" height="50" stroke="black" fill="none"></rect>
-                                <g transform="translate(0,-952.36222)">
-                                    <path d="m 56,963 c -102,122 6,9 7,9 17,-5 -66,69 -38,52 122,-77 -7,14 18,4 29,-11 45,-43 23,-4" stroke="black" stroke-width="3" fill="none" class="path1"></path>
-                                </g>
-                            </svg>
-                            <span>Nombre usuario</span>
-                        </label>
-                    </div>
-                    <div class="checkbox-wrapper">
-                        <input checked="" type="checkbox" class="check" id="check2-62">
-                        <label for="check2-62" class="label">
-                            <svg width="45" height="45" viewBox="0 0 95 95">
-                                <rect x="30" y="20" width="50" height="50" stroke="black" fill="none"></rect>
-                                <g transform="translate(0,-952.36222)">
-                                    <path d="m 56,963 c -102,122 6,9 7,9 17,-5 -66,69 -38,52 122,-77 -7,14 18,4 29,-11 45,-43 23,-4" stroke="black" stroke-width="3" fill="none" class="path1"></path>
-                                </g>
-                            </svg>
-                            <span>Fecha Registro</span>
-                        </label>
-                    </div>
-                    <div class="checkbox-wrapper">
-                        <input checked="" type="checkbox" class="check" id="check2-63">
-                        <label for="check2-63" class="label">
-                            <svg width="45" height="45" viewBox="0 0 95 95">
-                                <rect x="30" y="20" width="50" height="50" stroke="black" fill="none"></rect>
-                                <g transform="translate(0,-952.36222)">
-                                    <path d="m 56,963 c -102,122 6,9 7,9 17,-5 -66,69 -38,52 122,-77 -7,14 18,4 29,-11 45,-43 23,-4" stroke="black" stroke-width="3" fill="none" class="path1"></path>
-                                </g>
-                            </svg>
-                            <span>NºListas</span>
-                        </label>
-                    </div>
-                    <div class="checkbox-wrapper">
-                        <input checked="" type="checkbox" class="check" id="check2-64">
-                        <label for="check2-64" class="label">
-                            <svg width="45" height="45" viewBox="0 0 95 95">
-                                <rect x="30" y="20" width="50" height="50" stroke="black" fill="none"></rect>
-                                <g transform="translate(0,-952.36222)">
-                                    <path d="m 56,963 c -102,122 6,9 7,9 17,-5 -66,69 -38,52 122,-77 -7,14 18,4 29,-11 45,-43 23,-4" stroke="black" stroke-width="3" fill="none" class="path1"></path>
-                                </g>
-                            </svg>
-                            <span>Fecha</span>
-                        </label>
-                    </div>
-                </div>
-
-
-            </div>
-
-            <div class="m-2 w-75">
-                <h4>Libros</h4>
-                <div class="checkbox-wrapper">
-                    <input checked="" type="checkbox" class="check" id="check1-61">
-                    <label for="check1-61" class="label">
-                        <svg width="45" height="45" viewBox="0 0 95 95">
-                            <rect x="30" y="20" width="50" height="50" stroke="black" fill="none"></rect>
-                            <g transform="translate(0,-952.36222)">
-                                <path d="m 56,963 c -102,122 6,9 7,9 17,-5 -66,69 -38,52 122,-77 -7,14 18,4 29,-11 45,-43 23,-4" stroke="black" stroke-width="3" fill="none" class="path1"></path>
-                            </g>
-                        </svg>
-                        <span>Titulo</span>
-                    </label>
-                </div>
-                <div class="checkbox-wrapper">
-                    <input checked="" type="checkbox" class="check" id="check1-62">
-                    <label for="check1-62" class="label">
-                        <svg width="45" height="45" viewBox="0 0 95 95">
-                            <rect x="30" y="20" width="50" height="50" stroke="black" fill="none"></rect>
-                            <g transform="translate(0,-952.36222)">
-                                <path d="m 56,963 c -102,122 6,9 7,9 17,-5 -66,69 -38,52 122,-77 -7,14 18,4 29,-11 45,-43 23,-4" stroke="black" stroke-width="3" fill="none" class="path1"></path>
-                            </g>
-                        </svg>
-                        <span>Genero</span>
-                    </label>
-                </div>
-                <div class="checkbox-wrapper">
-                    <input checked="" type="checkbox" class="check" id="check1-63">
-                    <label for="check1-63" class="label">
-                        <svg width="45" height="45" viewBox="0 0 95 95">
-                            <rect x="30" y="20" width="50" height="50" stroke="black" fill="none"></rect>
-                            <g transform="translate(0,-952.36222)">
-                                <path d="m 56,963 c -102,122 6,9 7,9 17,-5 -66,69 -38,52 122,-77 -7,14 18,4 29,-11 45,-43 23,-4" stroke="black" stroke-width="3" fill="none" class="path1"></path>
-                            </g>
-                        </svg>
-                        <span>Autor</span>
-                    </label>
-                </div>
-                <div class="checkbox-wrapper">
-                    <input checked="" type="checkbox" class="check" id="check1-64">
-                    <label for="check1-64" class="label">
-                        <svg width="45" height="45" viewBox="0 0 95 95">
-                            <rect x="30" y="20" width="50" height="50" stroke="black" fill="none"></rect>
-                            <g transform="translate(0,-952.36222)">
-                                <path d="m 56,963 c -102,122 6,9 7,9 17,-5 -66,69 -38,52 122,-77 -7,14 18,4 29,-11 45,-43 23,-4" stroke="black" stroke-width="3" fill="none" class="path1"></path>
-                            </g>
-                        </svg>
-                        <span>Año de publicación</span>
-                    </label>
-                </div>
-                <div class="checkbox-wrapper">
-                    <input checked="" type="checkbox" class="check" id="check1-65">
-                    <label for="check1-65" class="label">
-                        <svg width="45" height="45" viewBox="0 0 95 95">
-                            <rect x="30" y="20" width="50" height="50" stroke="black" fill="none"></rect>
-                            <g transform="translate(0,-952.36222)">
-                                <path d="m 56,963 c -102,122 6,9 7,9 17,-5 -66,69 -38,52 122,-77 -7,14 18,4 29,-11 45,-43 23,-4" stroke="black" stroke-width="3" fill="none" class="path1"></path>
-                            </g>
-                        </svg>
-                        <span>Editorial</span>
-                    </label>
-                </div>
-
-
-            </div>
-
-
-        </aside>
-        <div class="container col-lg-9 d-flex flex-column justify-content-center align-items-center">
-            <div class="row col-md-12">
-                <div class="d-flex flex-nowrap justify-content-between">
-                    <div class="box">1</div>
-                    <div class="box">2</div>
-                    <div class="box">3</div>
-                    <div class="box">4</div>
-                    <div class="box">5</div>
-                    <div class="box">6</div>
-                </div>
-            </div>
-            <div class="row col-lg-12">
-                <div class="d-flex flex-nowrap justify-content-between">
-                    <div class="box">1</div>
-                    <div class="box">2</div>
-                    <div class="box">3</div>
-                    <div class="box">4</div>
-                    <div class="box">5</div>
-                    <div class="box">6</div>
-                </div>
-            </div>
-            <div class="row col-lg-12">
-                <div class="d-flex flex-nowrap justify-content-between">
-                    <div class="box">1</div>
-                    <div class="box">2</div>
-                    <div class="box">3</div>
-                    <div class="box">4</div>
-                    <div class="box">5</div>
-                    <div class="box">6</div>
                 </div>
             </div>
         </div>
-
-        <!-- Footer -->
-        <footer class="row d-flex vh-15">
-            <div class="d-flex justify-content-center">
-                <p id="frase"></p>
-            </div>
-        </footer>
     </div>
+</div>
+<br>
+<!-- Controles de Paginación -->
+<nav aria-label="Page navigation example" class="mt-4">
+    <ul class="pagination justify-content-center">
+        <li class="page-item" th:class="${paginaActual == 0} ? 'disabled'">
+            <a class="page-link" th:href="@{/descubre(pagina=0, sortBy=${sortBy}, sortOrder=${sortOrder})}" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+        <li th:each="num : ${#numbers.sequence(0, totalPaginas - 1)}" class="page-item" th:classappend="${num == paginaActual} ? 'active'">
+            <a class="page-link" th:href="@{/descubre(pagina=${num}, sortBy=${sortBy}, sortOrder=${sortOrder})}" th:text="${num + 1}"></a>
+        </li>
+        <li class="page-item" th:class="${paginaActual == totalPaginas - 1} ? 'disabled'">
+            <a class="page-link" th:href="@{/descubre(pagina=${totalPaginas - 1}, sortBy=${sortBy}, sortOrder=${sortOrder})}" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+    </ul>
+</nav>
 
-    <!-- Scripts de Bootstrap y JavaScript -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="/js/footer.js"></script>
-    <!--<div class="container" style="width: 90%;">
-       <h1 class="text-center mb-4">Listas</h1>
-       <div class="container">
-           <table class="table table-striped mx-auto">
-               <tr class="text-center">
-                   <th class="text-center">Id_lista</th>
-                   <th class="text-center">Id_usuario</th>
-                   <th class="text-center">nombre_lista</th>
-                   <th class="text-center">creado_desde</th>
-                   <th class="text-center">actualizado_desde</th>
-                   <th class="text-center">creado_por</th>
-                   <th class="text-center">actualizado_por</th>
-               </tr>
-               <tbody>
-               <tr th:each="lista : ${listas}">
-                   <td th:text="${lista.id_lista}" class="text-center"></td>
-                   <td th:text="${lista.id_usuario}" class="text-center"></td>
-                   <td th:text="${lista.nombre_lista}" class="text-center"></td>
-                   <td th:text="${lista.creado_desde}" class="text-center"></td>
-                   <td th:text="${lista.actualizado_desde}" class="text-center"></td>
-                   <td th:text="${lista.creado_por}" class="text-center"></td>
-                   <td th:text="${lista.actualizado_por}" class="text-center"></td>
-                   <td class="text-center">
-                       <div class="btn-group" role="group" aria-label="Acciones">
-                           <button type="button" class="btn btn-success">Modificar</button>
-                           <button type="button" class="btn btn-danger">X</button>
-                       </div>
-                   </td>
-               </tr>
-               </tbody>
-           </table>
-       </div>
-    </div>-->
+<!-- Footer -->
+<footer class="row d-flex vh-15">
+    <div class="d-flex justify-content-center">
+        <p id="frase"></p>
+    </div>
+</footer>
 
+<!-- Modal ver info libro -->
+<div class="modal fade" id="verInfoLibro" tabindex="-1" aria-labelledby="verInfoLibroModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="verInfoLibroModalLabel">Información del Libro</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <p>Título: <span th:text="${libro != null ? libro.titulo : ''}"></span></p>
+                </div>
+                <div class="mb-3">
+                    <p>Autor: <span th:text="${libro != null ? libro.autor : ''}"></span></p>
+                </div>
+                <div class="mb-3">
+                    <p>Género: <span th:text="${libro != null ? libro.genero : ''}"></span></p>
+                </div>
+                <div class="mb-3">
+                    <p>Año de publicación: <span th:text="${libro != null ? libro.anoPublicacion : ''}"></span></p>
+                </div>
+                <div class="mb-3">
+                    <p>Editorial: <span th:text="${libro != null ? libro.editorial : ''}"></span></p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Scripts de Bootstrap y JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="/js/footer.js"></script>
+
+
+<script>
+    $(document).ready(function() {
+        $('.btn-ver-info').click(function () {
+            var libroId = $(this).data('id');
+            $.ajax({
+                type: 'GET',
+                url: '/obtenerInfoLibro/' + libroId,
+                success: function (data) {
+                    $('#modal-titulo').text(data.titulo);
+                    $('#modal-autor').text(data.autor);
+                    $('#modal-genero').text(data.genero);
+                    $('#modal-ano').text(data.anoPublicacion);
+                    $('#modal-editorial').text(data.editorial);
+                },
+                error: function (xhr, status, error) {
+                    alert('Error al cargar la información del libro');
+                }
+            });
+        });
+    });
+
+</script>
 
 
 

@@ -44,7 +44,7 @@ public class controladorLista {
         model.addAttribute("listasModificado", new listas());
         model.addAttribute("requestURI", request.getRequestURI());
 
-//        List<libros_listas> librosListas = librosListasRepository.findAll();
+
 
 
         return "listas";
