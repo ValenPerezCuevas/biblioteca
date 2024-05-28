@@ -42,6 +42,7 @@ public class controladorLista {
     public String obtenerTodasLasListas(Model model, HttpServletRequest request){
         model.addAttribute("listas", listasRepository.findAll());
         model.addAttribute("listasModificado", new listas());
+        model.addAttribute("requestURI", request.getRequestURI());
 
 
 
