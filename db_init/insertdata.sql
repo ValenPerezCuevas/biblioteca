@@ -256,15 +256,15 @@ INSERT INTO listas (id_lista, id_usuario, nombre_lista, creado_desde, actualizad
 (12, 19, 'Lista 12', '2024-05-10 12:00:00', '2024-05-10 12:00:00', 11, 12),
 (13, 20, 'Lista 13', '2024-05-10 12:00:00', '2024-05-10 12:00:00', 12, 13);
 
-INSERT INTO libros_lista (id_libros_lista, id_libro, id_lista, id_libros) VALUES
-(1, 1, 1),
-(2, 2, 1),
-(3, 1, 2),
-(4, 5, 2),
-(5, 8, 3),
-(6, 9, 3),
-(7, 4, 4),
-(8, 6, 4),
-(9, 3, 5),
-(10, 7, 5),
-(11, 10, 5);
+INSERT INTO libros_listas (id_libro, id_lista) VALUES
+(1, 1),
+(2, 1),
+(1, 2),
+(5, 2),
+(8, 3),
+(9, 3),
+(4, 4),
+(6, 4),
+(3, 5),
+(7, 5),
+(10, 5);
