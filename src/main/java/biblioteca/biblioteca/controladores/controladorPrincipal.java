@@ -19,11 +19,6 @@ public class controladorPrincipal {
         return "admin";
     }
 
-    @GetMapping("/descubre")
-    public String descubrir(HttpServletRequest request, Model model) {
-        model.addAttribute("requestURI", request.getRequestURI());
-        return "descubre";
-    }
 
 
 
