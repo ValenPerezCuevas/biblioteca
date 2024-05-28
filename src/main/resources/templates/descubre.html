@@ -11,8 +11,6 @@
     <link href="/css/bootstrap-utilities.css" rel="stylesheet">
 
     <style>
-        /* Estilos personalizados */
-        @import url('https://fonts.googleapis.com/css2?family=Caesar+Dressing&display=swap');
 
         /* Estilos para el aside */
         aside {
@@ -106,17 +104,19 @@
             margin-bottom: 20px;
         }
 
+
         .card-img-top {
             width: 100%;
-            height: 200px;
+            height: 300px;
             object-fit: cover;
         }
 
         .card-body {
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            justify-content: space-evenly;
         }
+
     </style>
 </head>
 <body>
@@ -124,8 +124,8 @@
 <!-- Incluir el encabezado compartido -->
 <div th:replace="header :: header"></div>
 
-<div class="container-fluid">
-    <div class="row">
+<div class="container-fluid ">
+    <div class="row justify-content-evenly">
         <!-- Aside en la parte izquierda -->
 <!--        <aside class="col-md-3 p-4 d-flex flex-column  align-items-center ">-->
 <!--            &lt;!&ndash; Agregando la clase p-4 para el margen &ndash;&gt;-->
@@ -312,58 +312,113 @@
 
 
         <!-- Contenido principal para libros -->
-        <div class="col-lg-9">
-            <div class="container">
-                <div class="row card-container">
-                    <div th:each="libro : ${libros}" class="col-md-4 col-lg-2 mb-4">
-                        <div class="card">
-                            <img th:src="@{'/imagenes/Imagenes_libros/' + ${libro.id_libros} + '.jpg'}" class="card-img-top" alt="Portada del libro">
-                            <div class="card-body">
-                                <h5 class="card-title" th:text="${libro.titulo}">Título del libro</h5>
-                                <p class="card-text">Autor: <span th:text="${libro.autor}">Autor del libro</span></p>
 
-
-                                <a href="#" class="btn btn-primary" th:attr="data-id=${libro.id_libros}" data-bs-toggle="modal" data-bs-target="#modificarLibroModal">Modificar</a>
-                            </div>
-                        </div>
+            <div th:each="libro : ${libros}" class="col-lg-3 col-md-4 col-sm-6 mb-4 d-flex justify-content-center">
+                <div class="card" >
+                    <img th:src="@{'/imagenes/Imagenes_libros/' + ${libro.id_libros} + '.jpg'}" class="card-img-top" alt="Portada del libro">
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="${libro.titulo}">Título del libro</h5>
+                        <p class="card-text">Autor: <span th:text="${libro.autor}">Autor del libro</span></p>
+                        <a href="#" class="btn btn-primary btn-ver-info"
+                           data-bs-toggle="modal" data-bs-target="#verInfoLibro"
+                           th:data-libro="${libro}">Ver Info</a>
                     </div>
                 </div>
-
-                <!-- Controles de Paginación -->
-                <nav aria-label="Page navigation example" class="mt-4">
-                    <ul class="pagination justify-content-center">
-                        <li class="page-item" th:class="${paginaActual == 0} ? 'disabled'">
-                            <a class="page-link" th:href="@{/listado(pagina=0, sortBy=${sortBy}, sortOrder=${sortOrder})}" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
-                            </a>
-                        </li>
-                        <li th:each="num : ${#numbers.sequence(0, totalPaginas - 1)}" class="page-item" th:classappend="${num == paginaActual} ? 'active'">
-                            <a class="page-link" th:href="@{/listado(pagina=${num}, sortBy=${sortBy}, sortOrder=${sortOrder})}" th:text="${num + 1}"></a>
-                        </li>
-                        <li class="page-item" th:class="${paginaActual == totalPaginas - 1} ? 'disabled'">
-                            <a class="page-link" th:href="@{/listado(pagina=${totalPaginas - 1}, sortBy=${sortBy}, sortOrder=${sortOrder})}" aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
             </div>
         </div>
-
-
-        <!-- Footer -->
-        <footer class="row d-flex vh-15">
-            <div class="d-flex justify-content-center">
-                <p id="frase"></p>
-            </div>
-        </footer>
     </div>
 </div>
+<br>
+<!-- Controles de Paginación -->
+<nav aria-label="Page navigation example" class="mt-4">
+    <ul class="pagination justify-content-center">
+        <li class="page-item" th:class="${paginaActual == 0} ? 'disabled'">
+            <a class="page-link" th:href="@{/descubre(pagina=0, sortBy=${sortBy}, sortOrder=${sortOrder})}" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+        <li th:each="num : ${#numbers.sequence(0, totalPaginas - 1)}" class="page-item" th:classappend="${num == paginaActual} ? 'active'">
+            <a class="page-link" th:href="@{/descubre(pagina=${num}, sortBy=${sortBy}, sortOrder=${sortOrder})}" th:text="${num + 1}"></a>
+        </li>
+        <li class="page-item" th:class="${paginaActual == totalPaginas - 1} ? 'disabled'">
+            <a class="page-link" th:href="@{/descubre(pagina=${totalPaginas - 1}, sortBy=${sortBy}, sortOrder=${sortOrder})}" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+    </ul>
+</nav>
+
+<!-- Footer -->
+<footer class="row d-flex vh-15">
+    <div class="d-flex justify-content-center">
+        <p id="frase"></p>
+    </div>
+</footer>
+
+<!-- Modal ver info libro -->
+<div class="modal fade" id="verInfoLibro" tabindex="-1" aria-labelledby="verInfoLibroModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="verInfoLibroModalLabel">Información del Libro</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <p>Título: <span th:text="${libro != null ? libro.titulo : ''}"></span></p>
+                </div>
+                <div class="mb-3">
+                    <p>Autor: <span th:text="${libro != null ? libro.autor : ''}"></span></p>
+                </div>
+                <div class="mb-3">
+                    <p>Género: <span th:text="${libro != null ? libro.genero : ''}"></span></p>
+                </div>
+                <div class="mb-3">
+                    <p>Año de publicación: <span th:text="${libro != null ? libro.anoPublicacion : ''}"></span></p>
+                </div>
+                <div class="mb-3">
+                    <p>Editorial: <span th:text="${libro != null ? libro.editorial : ''}"></span></p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <!-- Scripts de Bootstrap y JavaScript -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="/js/footer.js"></script>
+
+
+<script>
+    $(document).ready(function() {
+        $('.btn-ver-info').click(function () {
+            var libroId = $(this).data('id');
+            $.ajax({
+                type: 'GET',
+                url: '/obtenerInfoLibro/' + libroId,
+                success: function (data) {
+                    $('#modal-titulo').text(data.titulo);
+                    $('#modal-autor').text(data.autor);
+                    $('#modal-genero').text(data.genero);
+                    $('#modal-ano').text(data.anoPublicacion);
+                    $('#modal-editorial').text(data.editorial);
+                },
+                error: function (xhr, status, error) {
+                    alert('Error al cargar la información del libro');
+                }
+            });
+        });
+    });
+
+</script>
+
+
+
 
 </body>
 </html>
