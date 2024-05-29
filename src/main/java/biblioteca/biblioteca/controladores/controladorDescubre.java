@@ -11,6 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +19,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
 
 @Controller
 public class controladorDescubre {
@@ -62,5 +67,26 @@ public class controladorDescubre {
 
         return "descubre";
     }
+
+
+    @GetMapping("/descubre/obtenerInfoLibro/{id}")
+    public ResponseEntity<?> obtenerInfoLibro(@PathVariable("id") Long id) {
+        Optional<libros> libroOptional = libroRepository.findById(id);
+        if (libroOptional.isPresent()) {
+            libros libro = libroOptional.get();
+            Map<String, Object> response = new HashMap<>();
+            response.put("titulo", libro.getTitulo());
+            response.put("autor", libro.getAutor());
+            response.put("genero", libro.getGenero());
+            response.put("anoPublicacion", libro.getAnoPublicacion());
+            response.put("editorial", libro.getEditorial());
+            response.put("imagen", libro.getId_libros() + ".jpg");
+            return ResponseEntity.ok(response);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Libro no encontrado");
+        }
+    }
+
+
 
 }
