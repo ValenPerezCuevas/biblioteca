@@ -509,7 +509,7 @@
 
 function mostrarListas(libroId) {
     let url = '/descubre/obtenerListas';
-
+    document.getElementById('libroId').value = libroId;
     $.ajax({
         url: url,
         method: 'GET',
@@ -546,13 +546,20 @@ function mostrarListas(libroId) {
 
 
 
-    function anadirLibroALista() {
-        let listaId = document.getElementById('selectLista').value;
-        let libroId = document.getElementById('libroId').value; // Asegúrate de obtener el ID del libro de alguna manera
+function anadirLibroALista() {
+    let listaId = document.getElementById('selectLista').value;
+    let libroId = document.getElementById('libroId').value; // Asegúrate de que este campo se llena correctamente al abrir el modal
 
-        // Aquí va el código para añadir el libro a la lista utilizando listaId y libroId
-        console.log('Añadir libro ' + libroId + ' a la lista ' + listaId);
-    }
+    $.post('/descubre/anadirLibroALista', { libroId: libroId, listaId: listaId })
+        .done(function(response) {
+            alert('Libro añadido con éxito');
+            console.log(response);
+        })
+        .fail(function(error) {
+            alert('Error al añadir el libro: ' + error.responseJSON);
+        });
+}
+
 </script>
 
 

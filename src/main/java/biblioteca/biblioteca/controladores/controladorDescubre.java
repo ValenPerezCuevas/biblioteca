@@ -104,6 +104,40 @@ public class controladorDescubre {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontraron listas disponibles");
         }
     }
+    @PostMapping("/descubre/anadirLibroALista")
+    public ResponseEntity<?> anadirLibroALista(@RequestParam Integer libroId, @RequestParam Integer listaId, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        usuarios usuario = (usuarios) session.getAttribute("usuarioLogueado"); // Obtén el usuario de la sesión
+
+        if (usuario == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Usuario no autenticado");
+        }
+
+        Optional<listas> listaOpt = listasRepository.findByIdAndUsuario(listaId, usuario);
+        if (!listaOpt.isPresent()) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("La lista no pertenece al usuario");
+        }
+
+        Optional<libros> libroOpt = libroRepository.findById(libroId.longValue());  // Asegúrate de que el tipo de dato sea correcto
+        if (!libroOpt.isPresent()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Libro no encontrado");
+        }
+
+        // Verificar si el libro ya está en la lista
+        Optional<libros_listas> librosListasOpt = librosListasRepository.findByListaIdAndLibroId(listaId.longValue(), libroId.longValue());
+        if (librosListasOpt.isPresent()) {
+            return ResponseEntity.ok("El libro ya está en la lista");
+        }
+
+        // Añadir el libro a la lista
+        libros_listas nuevoLibroLista = new libros_listas();
+        nuevoLibroLista.setLibro(libroOpt.get());
+        nuevoLibroLista.setLista(listaOpt.get());
+        librosListasRepository.save(nuevoLibroLista);
+
+        return ResponseEntity.ok("Libro añadido a la lista con éxito");
+    }
+
 
 
 
