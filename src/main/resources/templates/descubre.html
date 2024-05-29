@@ -418,16 +418,7 @@
                 document.querySelector('#verInfoLibro #modal-ano').textContent = data.anoPublicacion;
                 document.querySelector('#verInfoLibro #modal-editorial').textContent = data.editorial;
 
-                /*?????????????*/
-                // Obtener los atributos del libro desde el dataset del botón
-                var libro = JSON.parse(button.dataset.libro);
 
-                // Actualizar el contenido del modal con los valores del libro
-                document.getElementById("modalTitulo").innerText = libro.titulo;
-                document.getElementById("modalAutor").innerText = libro.autor;
-                document.getElementById("modalGenero").innerText = libro.genero;
-                document.getElementById("modalAnoPublicacion").innerText = libro.anoPublicacion;
-                document.getElementById("modalEditorial").innerText = libro.editorial;
 
                 // Mostrar el modal
                 let verInfoModal = new bootstrap.Modal(document.getElementById('verInfoLibro'));
