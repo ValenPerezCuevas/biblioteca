@@ -323,6 +323,11 @@
                                 th:attr="onclick='mostrarPortada(' + ${libro.id_libros} + ')'">
                             Ver Info
                         </button>
+                        <button type="button" class="btn btn-info" title="Añadir a lista"
+                                th:attr="onclick='mostrarListas(' + ${libro.id_libros} + ')'">
+                            Añadir a Lista
+                        </button>
+
                     </div>
                 </div>
                     </div>
@@ -390,7 +395,27 @@
         </div>
     </div>
 </div>
+<!-- Modal ver listas -->
+<div class="modal fade" id="verInfoListas" tabindex="-1" aria-labelledby="verInfoListasLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="verInfoListasLabel">Información del Libro</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <p>Mensaje de prueba</p>
+                </div>
 
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 <!-- Scripts de Bootstrap y JavaScript -->
@@ -400,6 +425,7 @@
 
 
 <script>
+    <!-- Scripts mostrar portada-->
     function mostrarPortada(libroId) {
         let url = '/descubre/obtenerInfoLibro/' + libroId;
 
@@ -430,8 +456,11 @@
             });
     }
 
-
-
+    <!-- Scripts añadir a la lista-->
+function mostrarListas(libroId){
+        let verInfoListas = new bootstrap.Modal(document.getElementById('verInfoListas'));
+        verInfoListas.show();
+}
 
 </script>
 
