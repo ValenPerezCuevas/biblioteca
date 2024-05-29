@@ -236,6 +236,18 @@
             z-index: 4;
         }
 
+        @media (max-width: 992px) {
+            .col-editorial {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .col-year {
+                display: none;
+            }
+        }
+
 </style>
 </head>
 <body>
@@ -300,7 +312,6 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -314,7 +325,7 @@
     </div>
 </footer>
 <!----------------------------------------MODALES--------------------------------->
-
+<!-- Modal crear lista -->
 <div class="modal fade" id="crearListaModal" tabindex="-1" aria-labelledby="crearListaModal" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -334,8 +345,9 @@
         </div>
     </div>
 </div>
+<!-- Modal ver libros en lista -->
 <div class="modal fade" id="verLibrosModal" tabindex="-1" aria-labelledby="verLibrosModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="verLibrosModalLabel">Lista de libros</h5>
@@ -349,8 +361,8 @@
                             <th>Título</th>
                             <th>Género</th>
                             <th>Autor</th>
-                            <th>Año de Publicación</th>
-                            <th class="d-none d-md-table-cell">Editorial</th>
+                            <th class="col-year">Año de Publicación</th>
+                            <th class="col-editorial">Editorial</th>
                             <th></th>
                         </tr>
                         </thead>
@@ -400,8 +412,8 @@
                         <td>${libro.titulo || 'Libro no disponible'}</td>
                         <td>${libro.genero || 'N/A'}</td>
                         <td>${libro.autor || 'N/A'}</td>
-                        <td>${libro.anoPublicacion || 'N/A'}</td>
-                        <td class="d-none d-md-table-cell">${libro.editorial || 'N/A'}</td>
+                        <td class="col-year">${libro.anoPublicacion || 'N/A'}</td>
+                        <td class="col-editorial">${libro.editorial || 'N/A'}</td>
                         <td>
                             ${creadorLista === usuarioActual ? `
                                 <button type="button" title="Eliminar libro de la lista"

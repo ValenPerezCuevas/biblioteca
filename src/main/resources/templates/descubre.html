@@ -320,7 +320,7 @@
                         <h5 class="card-title" th:text="${libro.titulo}">Título del libro</h5>
                         <p class="card-text">Autor: <span th:text="${libro.autor}">Autor del libro</span></p>
                         <button type="button" class="btn btn-info" title="Ver info"
-                                th:attr="onclick='mostrarPortada(' + ${libro.id_libros} + ')'">
+                                th:attr="onclick='mostrarInfo(' + ${libro.id_libros} + ')'">
                             Ver Info
                         </button>
                     </div>
@@ -332,8 +332,8 @@
     </div>
 </div>
 <br>
-<!-- Controles de Paginación -->
-<nav aria-label="Page navigation example" class="mt-4">
+<!-- Controles de Paginación ventana grande -->
+<nav aria-label="Page navigation example" class="d-none d-md-block"  style="background-color: transparent">
     <ul class="pagination justify-content-center">
         <li class="page-item" th:class="${paginaActual == 0} ? 'disabled'">
             <a class="page-link" th:href="@{/descubre(pagina=0, sortBy=${sortBy}, sortOrder=${sortOrder})}" aria-label="Previous">
@@ -351,6 +351,39 @@
     </ul>
 </nav>
 
+<!-- Controles de Paginación ventana pequeña -->
+<nav aria-label="Page navigation" class="d-md-none">
+    <ul class="pagination justify-content-center">
+        <li class="page-item" th:class="${paginaActual == 0} ? 'disabled'">
+            <a class="page-link" th:href="@{/descubre(pagina=0, sortBy=${sortBy}, sortOrder=${sortOrder})}" aria-label="Primera">
+                <span aria-hidden="true">&laquo;&laquo;</span>
+                <span class="visually-hidden">Primera</span>
+            </a>
+        </li>
+        <li class="page-item" th:class="${paginaActual == 0} ? 'disabled'">
+            <a class="page-link" th:href="@{/descubre(pagina=${paginaActual - 1}, sortBy=${sortBy}, sortOrder=${sortOrder})}" aria-label="Anterior">
+                <span aria-hidden="true">&laquo;</span>
+                <span class="visually-hidden">Anterior</span>
+            </a>
+        </li>
+        <li class="page-item">
+            <span class="page-link" th:text="${paginaActual + 1} + ' de ' + ${totalPaginas}"></span>
+        </li>
+        <li class="page-item" th:class="${paginaActual == totalPaginas - 1} ? 'disabled'">
+            <a class="page-link" th:href="@{/descubre(pagina=${paginaActual + 1}, sortBy=${sortBy}, sortOrder=${sortOrder})}" aria-label="Siguiente">
+                <span aria-hidden="true">&raquo;</span>
+                <span class="visually-hidden">Siguiente</span>
+            </a>
+        </li>
+        <li class="page-item" th:class="${paginaActual == totalPaginas - 1} ? 'disabled'">
+            <a class="page-link" th:href="@{/descubre(pagina=${totalPaginas - 1}, sortBy=${sortBy}, sortOrder=${sortOrder})}" aria-label="Última">
+                <span aria-hidden="true">&raquo;&raquo;</span>
+                <span class="visually-hidden">Última</span>
+            </a>
+        </li>
+    </ul>
+</nav>
+
 <!-- Footer -->
 <footer class="row d-flex vh-15">
     <div class="d-flex justify-content-center">
@@ -363,34 +396,29 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="verInfoLibroModalLabel">Información del Libro</h5>
+                <h5 class="modal-title" id="modal-titulo" style="font-weight: bolder"></h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
             </div>
             <div class="modal-body">
                 <div class="mb-3">
-                    <p>Título: <span id="modal-titulo"></span></p>
+                    <p>Autor: <span id="modal-autor" style="font-size: larger"></span></p>
                 </div>
                 <div class="mb-3">
-                    <p>Autor: <span id="modal-autor"></span></p>
+                    <p>Género: <span id="modal-genero" style="font-size: larger"></span></p>
                 </div>
                 <div class="mb-3">
-                    <p>Género: <span id="modal-genero"></span></p>
+                    <p>Año de publicación: <span id="modal-ano" style="font-size: larger"></span></p>
                 </div>
                 <div class="mb-3">
-                    <p>Año de publicación: <span id="modal-ano"></span></p>
+                    <p>Editorial: <span id="modal-editorial" style="font-size: larger"></span></p>
                 </div>
-                <div class="mb-3">
-                    <p>Editorial: <span id="modal-editorial"></span></p>
-                </div>
-
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-            </div>
+<!--            <div class="modal-footer">-->
+<!--                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>-->
+<!--            </div>-->
         </div>
     </div>
 </div>
-
 
 
 <!-- Scripts de Bootstrap y JavaScript -->
@@ -400,7 +428,7 @@
 
 
 <script>
-    function mostrarPortada(libroId) {
+    function mostrarInfo(libroId) {
         let url = '/descubre/obtenerInfoLibro/' + libroId;
 
         fetch(url)
@@ -418,8 +446,6 @@
                 document.querySelector('#verInfoLibro #modal-ano').textContent = data.anoPublicacion;
                 document.querySelector('#verInfoLibro #modal-editorial').textContent = data.editorial;
 
-
-
                 // Mostrar el modal
                 let verInfoModal = new bootstrap.Modal(document.getElementById('verInfoLibro'));
                 verInfoModal.show();
@@ -430,16 +456,7 @@
             });
     }
 
-
-
-
 </script>
-
-
-
-
-
-
 
 </body>
 </html>
