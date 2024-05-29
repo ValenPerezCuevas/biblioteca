@@ -87,6 +87,31 @@ public class controladorDescubre {
         }
     }
 
+    @GetMapping("/descubre/filtrar")
+    public String filtrar(
+            @RequestParam(name = "titulo", required = false) String titulo,
+            @RequestParam(name = "autor", required = false) String autor,
+            @RequestParam(name = "genero", required = false) String genero,
+            @RequestParam(name = "anoDesde", required = false) Integer anoDesde,
+            @RequestParam(name = "anoHasta", required = false) Integer anoHasta,
+            @RequestParam(name = "pagina", required = false, defaultValue = "0") int pagina,
+            @RequestParam(name = "tamanio", required = false, defaultValue = "12") int tamanio,
+            Model model
+    ) {
+        // Configurar la paginación
+        Pageable pageable = PageRequest.of(pagina, tamanio);
+
+        // Filtrar los libros según los criterios especificados
+        Page<libros> paginaLibros = libroRepository.findByFiltros(titulo, autor, genero, anoDesde, anoHasta, pageable);
+
+        model.addAttribute("libros", paginaLibros.getContent());
+        model.addAttribute("paginaActual", pagina);
+        model.addAttribute("totalPaginas", paginaLibros.getTotalPages());
+
+        return "descubre";
+    }
+
+
 
 
 }

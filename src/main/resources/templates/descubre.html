@@ -133,86 +133,86 @@
         <!-- Aside en la parte izquierda -->
         <aside class="col-md-3">
             <h3>Filtros de búsqueda</h3>
-            <form id="filters-form">
+            <form id="filters-form" th:action="@{/descubre/filtrar}" method="get">
                 <!-- Filtro por título -->
                 <div class="mb-3">
                     <label for="filter-title" class="form-label">Título</label>
-                    <input type="text" class="form-control" id="filter-title" placeholder="Introduce un título">
+                    <input type="text" name="titulo" class="form-control" id="filter-title" placeholder="Introduce un título">
                 </div>
                 <!-- Filtro por autor -->
                 <div class="mb-3">
                     <label for="filter-author" class="form-label">Autor</label>
-                    <input type="text" class="form-control" id="filter-author" placeholder="Introduce un autor">
+                    <input type="text" name="autor" class="form-control" id="filter-author" placeholder="Introduce un autor">
                 </div>
                 <!-- Filtro por editorial -->
                 <div class="mb-3">
                     <label for="filter-editorial" class="form-label">Editorial</label>
-                    <input type="text" class="form-control" id="filter-editorial" placeholder="Introduce una editorial">
+                    <input type="text" name="editorial" class="form-control" id="filter-editorial" placeholder="Introduce una editorial">
                 </div>
                 <!-- Filtro por género -->
                 <div class="mb-3">
                     <label class="form-label">Género</label>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="novela" id="gen-novela">
+                        <input class="form-check-input" type="checkbox" name="genero" value="novela" id="gen-novela">
                         <label class="form-check-label" for="gen-novela">Novela</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="novela negra" id="gen-novela-negra">
+                        <input class="form-check-input" type="checkbox" name="genero" value="novela negra" id="gen-novela-negra">
                         <label class="form-check-label" for="gen-novela-negra">Novela negra</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="ficción" id="gen-ficcion">
+                        <input class="form-check-input" type="checkbox" name="genero" value="ficción" id="gen-ficcion">
                         <label class="form-check-label" for="gen-ficcion">Ficción</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="ciencia ficción" id="gen-ciencia-ficcion">
+                        <input class="form-check-input" type="checkbox" name="genero" value="ciencia ficción" id="gen-ciencia-ficcion">
                         <label class="form-check-label" for="gen-ciencia-ficcion">Ciencia Ficción</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="fantasía" id="gen-fantasia">
+                        <input class="form-check-input" type="checkbox" name="genero" value="fantasía" id="gen-fantasia">
                         <label class="form-check-label" for="gen-fantasia">Fantasía</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="terror" id="gen-terror">
+                        <input class="form-check-input" type="checkbox" name="genero" value="terror" id="gen-terror">
                         <label class="form-check-label" for="gen-terror">Terror</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="suspense" id="gen-suspense">
+                        <input class="form-check-input" type="checkbox" name="genero" value="suspense" id="gen-suspense">
                         <label class="form-check-label" for="gen-suspense">Suspense</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="autoayuda" id="gen-autoayuda">
+                        <input class="form-check-input" type="checkbox" name="genero" value="autoayuda" id="gen-autoayuda">
                         <label class="form-check-label" for="gen-autoayuda">Autoayuda</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="filosofia" id="gen-filosofia">
+                        <input class="form-check-input" type="checkbox" name="genero" value="filosofia" id="gen-filosofia">
                         <label class="form-check-label" for="gen-filosofia">Filosofía</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="juvenil" id="gen-juvenil">
+                        <input class="form-check-input" type="checkbox" name="genero" value="juvenil" id="gen-juvenil">
                         <label class="form-check-label" for="gen-juvenil">Juvenil</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="programacion" id="gen-programacion">
+                        <input class="form-check-input" type="checkbox" name="genero" value="programacion" id="gen-programacion">
                         <label class="form-check-label" for="gen-programacion">Programación</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="no ficcion" id="gen-no-ficción">
+                        <input class="form-check-input" type="checkbox" name="genero" value="no ficcion" id="gen-no-ficción">
                         <label class="form-check-label" for="gen-no-ficción">No ficción</label>
                     </div>
                     <!-- Campo de texto para otro género -->
                     <div class="mt-2">
-                        <input type="text" class="form-control" id="filter-other-genre" placeholder="Otro género">
+                        <input type="text" name="generoOtro" class="form-control" id="filter-other-genre" placeholder="Otro género">
                     </div>
                 </div>
                 <!-- Filtro por rango de año de publicación -->
                 <div class="mb-3">
                     <label for="filter-year-from" class="form-label">Año de publicación desde</label>
-                    <input type="number" class="form-control" id="filter-year-from" placeholder="Desde">
+                    <input type="number" name="anoDesde" class="form-control" id="filter-year-from" placeholder="Desde">
                 </div>
                 <div class="mb-3">
                     <label for="filter-year-to" class="form-label">Año de publicación hasta</label>
-                    <input type="number" class="form-control" id="filter-year-to" placeholder="Hasta">
+                    <input type="number" name="anoHasta" class="form-control" id="filter-year-to" placeholder="Hasta">
                 </div>
                 <button type="submit" class="btn btn-primary" style="margin-top: 2rem !important;">Aplicar filtros</button>
             </form>
