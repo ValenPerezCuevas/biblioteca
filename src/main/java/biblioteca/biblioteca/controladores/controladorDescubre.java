@@ -22,6 +22,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Controller
 public class controladorDescubre {
@@ -89,15 +90,21 @@ public class controladorDescubre {
     }
 
     @GetMapping("/descubre/obtenerListas")
-    @ResponseBody
-    public List<listas> obtenerMisListas(HttpSession session) {
-        usuarios usuarioLogeado = (usuarios) session.getAttribute("usuario");
-        List<listas> listas=new ArrayList<>();
-        if (usuarioLogeado != null) {
-             listas = listasRepository.findByUsuario(usuarioLogeado);
-//            return ResponseEntity.ok(listas);
+    public ResponseEntity<?> obtenerListas() {
+        List<listas> todasLasListas = listasRepository.findAll();
+        if (!todasLasListas.isEmpty()) {
+            List<Map<String, Object>> listasResponse = todasLasListas.stream().map(lista -> {
+                Map<String, Object> response = new HashMap<>();
+                response.put("id_lista", lista.getId_lista());
+                response.put("nombre_lista", lista.getNombre_lista());
+                return response;
+            }).collect(Collectors.toList());
+            return ResponseEntity.ok(listasResponse);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontraron listas disponibles");
         }
-        return listas;
     }
+
+
 
 }
