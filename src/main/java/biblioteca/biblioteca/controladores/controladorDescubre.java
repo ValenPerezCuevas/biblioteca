@@ -1,10 +1,14 @@
 package biblioteca.biblioteca.controladores;
 
 import biblioteca.biblioteca.entidades.libros;
+import biblioteca.biblioteca.entidades.libros_listas;
+import biblioteca.biblioteca.entidades.listas;
+import biblioteca.biblioteca.entidades.usuarios;
 import biblioteca.biblioteca.repositorios.LibroRepository;
 import biblioteca.biblioteca.repositorios.Libros_listasRepository;
 import biblioteca.biblioteca.repositorios.ListasRepository;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
@@ -15,14 +19,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @Controller
 public class controladorDescubre {
@@ -40,6 +39,8 @@ public class controladorDescubre {
         this.listasRepository = listasRepository;
         this.librosListasRepository = librosListasRepository;
     }
+   /* @Autowired
+    private HttpSession session;*/
 
     @GetMapping("/descubre")
     public String descubrir(
@@ -87,6 +88,16 @@ public class controladorDescubre {
         }
     }
 
-
+    @GetMapping("/descubre/obtenerListas")
+    @ResponseBody
+    public List<listas> obtenerMisListas(HttpSession session) {
+        usuarios usuarioLogeado = (usuarios) session.getAttribute("usuario");
+        List<listas> listas=new ArrayList<>();
+        if (usuarioLogeado != null) {
+             listas = listasRepository.findByUsuario(usuarioLogeado);
+//            return ResponseEntity.ok(listas);
+        }
+        return listas;
+    }
 
 }

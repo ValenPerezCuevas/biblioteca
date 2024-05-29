@@ -328,6 +328,7 @@
                             Añadir a Lista
                         </button>
 
+
                     </div>
                 </div>
                     </div>
@@ -395,20 +396,28 @@
         </div>
     </div>
 </div>
-<!-- Modal ver listas -->
-<div class="modal fade" id="verInfoListas" tabindex="-1" aria-labelledby="verInfoListasLabel" aria-hidden="true">
+<!-- Modal para seleccionar la lista -->
+<div class="modal fade" id="seleccionarListaModal" tabindex="-1" aria-labelledby="seleccionarListaModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="verInfoListasLabel">Información del Libro</h5>
+                <h5 class="modal-title" id="seleccionarListaModalLabel">Seleccionar Lista</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
             </div>
             <div class="modal-body">
-                <div class="mb-3">
-                    <p>Mensaje de prueba</p>
+                <form id="formSeleccionarLista">
+                    <div class="mb-3">
+                        <label for="selectLista" class="form-label">Elige una lista:</label>
+                        <select class="form-select" id="selectLista" name="lista">
+
+                        </select>
+                    </div>
+                    <input type="hidden" id="libroId" name="libroId"> <!-- Campo oculto para el ID del libro -->
+                    <button type="button" class="btn btn-primary" onclick="anadirLibroALista()">Añadir a la Lista</button>
+                </form>
+                <div id="mensajeConfirmacion" class="alert alert-success mt-3" style="display:none;">
+                    Libro añadido a la lista con éxito.
                 </div>
-
-
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
@@ -455,14 +464,99 @@
                 alert('No se pudo cargar la información del libro: ' + error.message);
             });
     }
-
+</script>
     <!-- Scripts añadir a la lista-->
-function mostrarListas(libroId){
-        let verInfoListas = new bootstrap.Modal(document.getElementById('verInfoListas'));
-        verInfoListas.show();
+
+<script>
+/*    function mostrarListas(libroId) {
+        let url = '/descubre/obtenerListas';
+
+        fetch(url)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Error al cargar las listas');
+                }
+                return response.json(); // Obtener el JSON
+            })
+            .then(data => {
+                console.log(data);
+                let selectLista = document.getElementById('selectLista');
+                selectLista.innerHTML = ''; // Limpiar opciones anteriores
+
+                // Asegúrate de que `data` es un array de listas
+                if (Array.isArray(data)) {
+                    console.log(data);
+                    data.forEach(lista => {
+                        let option = document.createElement('option');
+                        option.value = lista.id_lista;
+                        option.textContent = lista.nombre_lista;
+                        selectLista.appendChild(option);
+                    });
+                } else {
+                    console.error('La respuesta no es un array');
+                    alert('Error en el formato de la respuesta');
+                }
+
+                // Mostrar el modal
+                let seleccionarListaModal = new bootstrap.Modal(document.getElementById('seleccionarListaModal'));
+                seleccionarListaModal.show();
+            })
+            .catch(error => {
+                console.error('Error en la petición:', error); // Para depuración
+                alert('No se pudo cargar las listas: ' + error.message);
+            });
+    }*/
+
+function mostrarListas(libroId) {
+    let url = '/descubre/obtenerListas';
+
+    $.ajax({
+        url: url,
+        method: 'GET',
+        success: function(data) {
+            console.log(data);
+            let selectLista = document.getElementById('selectLista');
+            selectLista.innerHTML = ''; // Limpiar opciones anteriores
+
+            // Asegúrate de que `data` es un array de listas
+            if (Array.isArray(data)) {
+                data.forEach(lista => {
+                    let option = document.createElement('option');
+                    option.value = lista.id_lista;
+                    option.textContent = lista.nombre_lista;
+                    selectLista.appendChild(option);
+                });
+            } else {
+                console.error('La respuesta no es un array');
+                alert('Error en el formato de la respuesta');
+            }
+
+            // Mostrar el modal
+            let seleccionarListaModal = new bootstrap.Modal(document.getElementById('seleccionarListaModal'));
+            seleccionarListaModal.show();
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.error('Error en la petición:', textStatus, errorThrown); // Para depuración
+            alert('No se pudo cargar las listas: ' + textStatus);
+        }
+    });
 }
 
+
+
+
+
+    function anadirLibroALista() {
+        let listaId = document.getElementById('selectLista').value;
+        let libroId = document.getElementById('libroId').value; // Asegúrate de obtener el ID del libro de alguna manera
+
+        // Aquí va el código para añadir el libro a la lista utilizando listaId y libroId
+        console.log('Añadir libro ' + libroId + ' a la lista ' + listaId);
+    }
 </script>
+
+
+
 
 
 
