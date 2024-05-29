@@ -3,48 +3,178 @@
 <head>
     <meta charset="UTF-8">
     <title>Home</title>
-<!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">-->
+    <!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">-->
     <link href="/css/bootstrap.css" rel="stylesheet">
     <link href="/css/bootstrap-grid.css" rel="stylesheet">
     <link href="/css/bootstrap-reboot.css" rel="stylesheet">
     <link href="/css/bootstrap-utilities.css" rel="stylesheet">
 
+    <style>
+        /*@import url('https://fonts.googleapis.com/css2?family=Caesar+Dressing&display=swap');*/
+        .full-height {
+            margin-top:-20px;
+        }
+        /***********************Estilos de carrusel*******************/
+        .carousel-inner{
+            height: 100vh;
+        }
+        .carousel-inner img {
+            height: 100vh;
+            width: 100%;
+            object-fit: contain; /* Ajusta la imagen para que cubra el contenedor sin distorsión */
+            background-color: #000;
+        }
+        /* Ajustar el tamaño del carrusel en dispositivos móviles */
+        @media (max-width: 767px) {
+            .carousel-inner img {
+                /* Ajustar la altura automática en dispositivos móviles */
+                height: auto;
+
+            }
+            .carousel-inner{
+                height: 70vh; /* Ajusta la altura del carrusel para dispositivos móviles */
+            }
+        }
+        /* Ajustar el tamaño del carrusel en tablets y pantallas más grandes */
+        @media (min-width: 768px) {
+            .carousel-inner img {
+                height: 100%; /* Ajustar la altura al 100% en tablets y pantallas más grandes */
+            }
+        }
+        /* Ajustar la transición del deslizamiento */
+        .carousel-item {
+            transition: transform 1.5s ease-in-out;
+        }
+        /***************** contenedor texto saludo *****************/
+        .saludo {
+            position: absolute;
+            top: 60%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 3;
+            color: #faf3e0; /* Crema */
+            background-color: rgba(0, 0, 0, 0.6); /* Fondo semitransparente */
+            padding: 20px;
+            border-radius: 10px; /* Bordes redondeados */
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra de caja */
+            backdrop-filter: blur(5px); /* Efecto de desenfoque de fondo */
+            width: 80%;
+            max-width: 600px;
+            margin: auto;
+        }
+        @media (max-width: 767px) {
+            .saludo{
+                width: 70%;
+                height: 250px;
+                font-size: 13px;
+            }
+        }
+        .saludo h1, .saludo p, .saludo blockquote {
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Sombra de texto */
+        }
+        .saludo h1 {
+            font-size: 36px; /* Tamaño de fuente para el título */
+            margin-bottom: 10px; /* Margen inferior para separación */
+        }
+        .saludo p {
+            margin-bottom: 15px; /* Margen inferior para separación */
+        }
+
+        .saludo blockquote {
+            font-style: italic; /* Texto en cursiva para la cita */
+        }
+        /*****clases css para mejora del texto saludo******/
+        .focus-in-contract-bck {
+            -webkit-animation: focus-in-contract-bck 3s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+            animation: focus-in-contract-bck 3s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+        }
+        @-webkit-keyframes focus-in-contract-bck {
+            0% {
+                letter-spacing: 1em;
+                -webkit-transform: translateZ(300px);
+                transform: translateZ(300px);
+                -webkit-filter: blur(12px);
+                filter: blur(12px);
+                opacity: 0;
+            }
+            100% {
+                -webkit-transform: translateZ(12px);
+                transform: translateZ(12px);
+                -webkit-filter: blur(0);
+                filter: blur(0);
+                opacity: 1;
+            }
+        }
+        @keyframes focus-in-contract-bck {
+            0% {
+                letter-spacing: 1em;
+                -webkit-transform: translateZ(300px);
+                transform: translateZ(300px);
+                -webkit-filter: blur(12px);
+                filter: blur(12px);
+                opacity: 0;
+            }
+            100% {
+                -webkit-transform: translateZ(12px);
+                transform: translateZ(12px);
+                -webkit-filter: blur(0);
+                filter: blur(0);
+                opacity: 1;
+            }
+        }
+        .text-focus-in {
+            -webkit-animation: text-focus-in 3s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+            animation: text-focus-in 3s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+        }
+        @-webkit-keyframes text-focus-in {
+            0% {
+                -webkit-filter: blur(12px);
+                filter: blur(12px);
+                opacity: 0;
+            }
+            100% {
+                -webkit-filter: blur(0px);
+                filter: blur(0px);
+                opacity: 1;
+            }
+        }
+        @keyframes text-focus-in {
+            0% {
+                -webkit-filter: blur(12px);
+                filter: blur(12px);
+                opacity: 0;
+            }
+            100% {
+                -webkit-filter: blur(0px);
+                filter: blur(0px);
+                opacity: 1;
+            }
+        }
+    </style>
+
 </head>
 
-<style>
-    /*@import url('https://fonts.googleapis.com/css2?family=Caesar+Dressing&display=swap');*/
-    body{
-        background-color: #BF9270;
-        color: black;
-    }
-
-    /*header{*/
-    /*    background-color: #FFEDDB;*/
-    /*}*/
-    /*nav {*/
-    /*    background-color: #E3B7A0;*/
-    /*    font-size: 3.2vh;*/
-    /*}*/
-</style>
 <body>
-
 <!-- Incluir el encabezado compartido -->
 <div th:replace="header :: header"></div>
 
-
-<div class="container mt-4"> <!-- Agregamos un margen superior para separar el carrusel del encabezado -->
-
-    <h2>Bienvenido a Alexandría</h2>
-    <p>Aquí podrás acceder al conocimiento de centenares de libros y podrás clasificarlos a tu gusto.
-    Descubre nuevas listas tendencias y mucho más</p>
-    <h4>"Entra libremente y por tu propia voluntad y deja parte de la felicidad que traes contigo" ("Drácula", Bram Stoker)</h4>
-    <div id="carouselExample" class="carousel slide">
+<!-- Texto -->
+<div class="saludo">
+    <h1 class="focus-in-contract-bck">Bienvenido a Alexandría</h1>
+    <p class="text-focus-in ">Aquí podrás acceder al conocimiento de centenares de libros y podrás clasificarlos a tu gusto.
+        Descubre nuevas listas tendencias y mucho más</p>
+    <blockquote class="text-focus-in ">"Entra libremente y por tu propia voluntad y deja parte de la felicidad que traes contigo" ("Drácula", Bram Stoker)</blockquote>
+</div>
+<!-- Carrusel -->
+<div class="full-height">
+    <div id="carouselExample" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
         <div class="carousel-inner">
             <div class="carousel-item active">
                 <img src="/imagenes/carrusel2.jpg" class="d-block w-100" alt="..." loading="lazy">
             </div>
             <div class="carousel-item">
-                <img src="/imagenes/carrusel1.jpg"  class="d-block w-100" alt="..." loading="lazy" >
+                <img src="/imagenes/carrusel1.jpg" class="d-block w-100" alt="..." loading="lazy">
             </div>
             <div class="carousel-item">
                 <img src="/imagenes/carrusel3.jpg" class="d-block w-100" alt="..." loading="lazy">
@@ -61,7 +191,38 @@
     </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var myCarousel = document.getElementById('carouselExample');
+        var carousel = new bootstrap.Carousel(myCarousel, {
+            interval: 3000,
+            ride: 'carousel'
+        });
 
+        // Preload images
+        var images = ['/imagenes/carrusel2.jpg', '/imagenes/carrusel1.jpg', '/imagenes/carrusel3.jpg'];
+        images.forEach(function(src) {
+            var img = new Image();
+            img.src = src;
+        });
+        // Función para actualizar la posición del saludo
+        function updateSaludoPosition() {
+            var carouselHeight = myCarousel.offsetHeight;
+            var saludoHeight = saludo.offsetHeight;
+            var topPosition = (carouselHeight - saludoHeight) / 2;
+            saludo.style.top = topPosition + 'px';
+        }
+
+        // Actualizar la posición del saludo al cargar la página
+        updateSaludoPosition();
+
+        // Actualizar la posición del saludo al cambiar el tamaño de la pantalla
+        window.addEventListener('resize', function() {
+            updateSaludoPosition();
+        });
+
+    });
+</script>
 </body>
 </html>
