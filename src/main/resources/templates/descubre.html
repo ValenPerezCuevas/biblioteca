@@ -469,45 +469,6 @@
     <!-- Scripts añadir a la lista-->
 
 <script>
-/*    function mostrarListas(libroId) {
-        let url = '/descubre/obtenerListas';
-
-        fetch(url)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Error al cargar las listas');
-                }
-                return response.json(); // Obtener el JSON
-            })
-            .then(data => {
-                console.log(data);
-                let selectLista = document.getElementById('selectLista');
-                selectLista.innerHTML = ''; // Limpiar opciones anteriores
-
-                // Asegúrate de que `data` es un array de listas
-                if (Array.isArray(data)) {
-                    console.log(data);
-                    data.forEach(lista => {
-                        let option = document.createElement('option');
-                        option.value = lista.id_lista;
-                        option.textContent = lista.nombre_lista;
-                        selectLista.appendChild(option);
-                    });
-                } else {
-                    console.error('La respuesta no es un array');
-                    alert('Error en el formato de la respuesta');
-                }
-
-                // Mostrar el modal
-                let seleccionarListaModal = new bootstrap.Modal(document.getElementById('seleccionarListaModal'));
-                seleccionarListaModal.show();
-            })
-            .catch(error => {
-                console.error('Error en la petición:', error); // Para depuración
-                alert('No se pudo cargar las listas: ' + error.message);
-            });
-    }*/
-
 function mostrarListas(libroId) {
     let idUsuario = document.getElementById('idUsuario').value; // Obtener el idUsuario del campo oculto
     let url = `/descubre/obtenerListas`; // Construir la URL para obtener todas las listas
@@ -557,15 +518,28 @@ function anadirLibroALista() {
     let listaId = document.getElementById('selectLista').value;
     let libroId = document.getElementById('libroId').value; // Asegúrate de que este campo se llena correctamente al abrir el modal
 
-    $.post('/descubre/anadirLibroALista', { libroId: libroId, listaId: listaId })
-        .done(function(response) {
+    $.ajax({
+        url: '/descubre/anadirLibroALista',
+        method: 'POST',
+        data: {
+            libroId: libroId,
+            listaId: listaId
+        },
+        success: function(response) {
             alert('Libro añadido con éxito');
             console.log(response);
-        })
-        .fail(function(error) {
-            alert('Error al añadir el libro: ' + error.responseJSON);
-        });
+            $('#mensajeConfirmacion').show(); // Mostrar mensaje de confirmación
+            setTimeout(function() {
+                $('#mensajeConfirmacion').hide(); // Ocultar mensaje después de unos segundos
+            }, 3000);
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            alert('Error al añadir el libro: ' + textStatus);
+            console.error('Error en la petición:', textStatus, errorThrown);
+        }
+    });
 }
+
 
 </script>
 
