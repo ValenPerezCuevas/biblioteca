@@ -42,14 +42,14 @@ public class AuthController {
     @GetMapping("/crearUsuario")
     public String showCreateUserForm(Model model) {
         model.addAttribute("usuario", new usuarios());
-        return "crearUsuario";
+        return "redirect:/login";
     }
 
     @PostMapping("/registrar")
     public String registerUser(@ModelAttribute usuarios usuario, Model model) {
         if (usuarioRepository.findByNombre(usuario.getNombre()) != null) {
             model.addAttribute("error", "El nombre de usuario ya está en uso");
-            return "crearUsuario";
+            return "redirect:/login";
         }
         roles rolUsuario = new roles();
         rolUsuario.setId_rol(2);
