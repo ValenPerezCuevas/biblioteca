@@ -1869,7 +1869,7 @@ progress {
   --bs-table-border-color: var(--bs-border-color);
   --bs-table-accent-bg: transparent;
   --bs-table-striped-color: var(--bs-emphasis-color);
-  --bs-table-striped-bg: #E3B7A0;
+  --bs-table-striped-bg: #EDCDBB;
   --bs-table-active-color: var(--bs-emphasis-color);
   --bs-table-active-bg: rgba(var(--bs-emphasis-color-rgb), 0.1);
   --bs-table-hover-color: var(--bs-emphasis-color);
@@ -3696,7 +3696,9 @@ textarea.form-control-lg {
 }
 header {
   background-color: #FFEDDB;
-
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 .dropdown-header {
   display: block;
