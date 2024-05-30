@@ -107,14 +107,16 @@ public class controladorDescubre {
         Page<libros> paginaLibros = libroRepository.findByFiltros
                 (titulo, autor, editorial, genero, anoDesde, anoHasta, pageable);
 
+        // Verificar si la lista de libros está vacía
+        if (paginaLibros.getContent().isEmpty()) {
+            model.addAttribute("noResultados", "No se encontraron libros con los filtros seleccionados.");
+        }
+
         model.addAttribute("libros", paginaLibros.getContent());
         model.addAttribute("paginaActual", pagina);
         model.addAttribute("totalPaginas", paginaLibros.getTotalPages());
 
         return "descubre";
     }
-
-
-
 
 }

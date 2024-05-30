@@ -15,9 +15,24 @@
         /* Estilos para el aside */
         aside {
             background-color: #E3B7A0;
-            color: #BF9270;
+            color: #8a6041;
             padding: 20px;
         }
+
+        label.form-label {
+            /*font-weight: bolder;*/
+            font-size: larger;
+        }
+
+        .modal-title, .card-title {
+            color: #8a6041;
+        }
+
+        .modal-body span {
+            font-size: larger;
+            color: #8a6041;
+        }
+
 
         /* Estilos para el footer */
         footer {
@@ -221,6 +236,10 @@
         <!-- Contenido principal para libros -->
         <div class="col-md-9">
             <div class="cards-container">
+                <!-- ALERTA no resultados -->
+                <div th:if="${noResultados}" class="alert alert-warning" role="alert">
+                    <p th:text="${noResultados}"></p>
+                </div>
                 <div th:each="libro : ${libros}" class="card">
                         <img th:src="@{'/imagenes/Imagenes_libros/' + ${libro.id_libros} + '.jpg'}" class="card-img-top" alt="Portada del libro">
                         <div class="card-body">
@@ -237,24 +256,27 @@
     </div>
 </div>
 <br>
-<!-- Controles de Paginación ventana grande -->
-<nav aria-label="Page navigation example" class="d-none d-md-block"  style="background-color: transparent">
-    <ul class="pagination justify-content-center">
-        <li class="page-item" th:class="${paginaActual == 0} ? 'disabled'">
-            <a class="page-link" th:href="@{/descubre(pagina=0, sortBy=${sortBy}, sortOrder=${sortOrder})}" aria-label="Previous">
-                <span aria-hidden="true">&laquo;</span>
-            </a>
-        </li>
-        <li th:each="num : ${#numbers.sequence(0, totalPaginas - 1)}" class="page-item" th:classappend="${num == paginaActual} ? 'active'">
-            <a class="page-link" th:href="@{/descubre(pagina=${num}, sortBy=${sortBy}, sortOrder=${sortOrder})}" th:text="${num + 1}"></a>
-        </li>
-        <li class="page-item" th:class="${paginaActual == totalPaginas - 1} ? 'disabled'">
-            <a class="page-link" th:href="@{/descubre(pagina=${totalPaginas - 1}, sortBy=${sortBy}, sortOrder=${sortOrder})}" aria-label="Next">
-                <span aria-hidden="true">&raquo;</span>
-            </a>
-        </li>
-    </ul>
-</nav>
+
+<!-- Controles de Paginación (solo si hay resultados) -->
+<div th:if="${not #lists.isEmpty(libros)}">
+    <!-- Controles de Paginación ventana grande -->
+    <nav aria-label="Page navigation example" class="d-none d-md-block"  style="background-color: transparent">
+        <ul class="pagination justify-content-center">
+            <li class="page-item" th:class="${paginaActual == 0} ? 'disabled'">
+                <a class="page-link" th:href="@{/descubre(pagina=0, sortBy=${sortBy}, sortOrder=${sortOrder})}" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            <li th:each="num : ${#numbers.sequence(0, totalPaginas - 1)}" class="page-item" th:classappend="${num == paginaActual} ? 'active'">
+                <a class="page-link" th:href="@{/descubre(pagina=${num}, sortBy=${sortBy}, sortOrder=${sortOrder})}" th:text="${num + 1}"></a>
+            </li>
+            <li class="page-item" th:class="${paginaActual == totalPaginas - 1} ? 'disabled'">
+                <a class="page-link" th:href="@{/descubre(pagina=${totalPaginas - 1}, sortBy=${sortBy}, sortOrder=${sortOrder})}" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
 
 <!-- Controles de Paginación ventana pequeña -->
 <nav aria-label="Page navigation" class="d-md-none">
@@ -301,21 +323,21 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="modal-titulo" style="font-weight: bolder"></h5>
+                <h4 class="modal-title" id="modal-titulo" ></h4>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
             </div>
             <div class="modal-body">
                 <div class="mb-3">
-                    <p>Autor: <span id="modal-autor" style="font-size: larger"></span></p>
+                    <p>Autor: <span id="modal-autor" ></span></p>
                 </div>
                 <div class="mb-3">
-                    <p>Género: <span id="modal-genero" style="font-size: larger"></span></p>
+                    <p>Género: <span id="modal-genero" ></span></p>
                 </div>
                 <div class="mb-3">
-                    <p>Año de publicación: <span id="modal-ano" style="font-size: larger"></span></p>
+                    <p>Año de publicación: <span id="modal-ano" ></span></p>
                 </div>
                 <div class="mb-3">
-                    <p>Editorial: <span id="modal-editorial" style="font-size: larger"></span></p>
+                    <p>Editorial: <span id="modal-editorial" ></span></p>
                 </div>
             </div>
 <!--            <div class="modal-footer">-->

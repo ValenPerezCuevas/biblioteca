@@ -128,10 +128,6 @@ public class controladorLibro {
         }
     }
 
-    /**********************************************************************************
-     * Mostrar portada
-     * * *********************************************************************************/
-
     @GetMapping("/obtenerInfoLibro/{id}")
     public ResponseEntity<?> obtenerInfoLibro(@PathVariable("id") Long id) {
         Optional<libros> libroOptional = libroRepository.findById(id);

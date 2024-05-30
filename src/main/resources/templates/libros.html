@@ -228,7 +228,7 @@
 
     <div class="container table-responsive">
         <table class="table table-striped">
-            <thead>
+            <thead >
             <tr>
                 <!-- ordenar columnas:-->
                 <th data-sort="titulo" th:data-order="${sortBy == 'titulo' and sortOrder == 'asc' ? 'desc' : 'asc'}">
@@ -435,7 +435,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="verPortadaModalLabel">Portada del Libro</h5>
+                <h5 class="modal-title" id="verPortadaModalLabel" th:text="${libro.titulo}">Portada del Libro</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
             </div>
             <div class="modal-body text-center">
