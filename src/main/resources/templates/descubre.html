@@ -236,6 +236,10 @@
         <!-- Contenido principal para libros -->
         <div class="col-md-9">
             <div class="cards-container">
+                <!-- ALERTA no resultados -->
+                <div th:if="${noResultados}" class="alert alert-warning" role="alert">
+                    <p th:text="${noResultados}"></p>
+                </div>
                 <div th:each="libro : ${libros}" class="card">
                         <img th:src="@{'/imagenes/Imagenes_libros/' + ${libro.id_libros} + '.jpg'}" class="card-img-top" alt="Portada del libro">
                         <div class="card-body">
@@ -253,24 +257,27 @@
 </div>
 <br>
 
-<!-- Controles de Paginación ventana grande -->
-<nav aria-label="Page navigation example" class="d-none d-md-block"  style="background-color: transparent">
-    <ul class="pagination justify-content-center">
-        <li class="page-item" th:class="${paginaActual == 0} ? 'disabled'">
-            <a class="page-link" th:href="@{/descubre(pagina=0, sortBy=${sortBy}, sortOrder=${sortOrder})}" aria-label="Previous">
-                <span aria-hidden="true">&laquo;</span>
-            </a>
-        </li>
-        <li th:each="num : ${#numbers.sequence(0, totalPaginas - 1)}" class="page-item" th:classappend="${num == paginaActual} ? 'active'">
-            <a class="page-link" th:href="@{/descubre(pagina=${num}, sortBy=${sortBy}, sortOrder=${sortOrder})}" th:text="${num + 1}"></a>
-        </li>
-        <li class="page-item" th:class="${paginaActual == totalPaginas - 1} ? 'disabled'">
-            <a class="page-link" th:href="@{/descubre(pagina=${totalPaginas - 1}, sortBy=${sortBy}, sortOrder=${sortOrder})}" aria-label="Next">
-                <span aria-hidden="true">&raquo;</span>
-            </a>
-        </li>
-    </ul>
-</nav>
+<!-- Controles de Paginación (solo si hay resultados) -->
+<div th:if="${not #lists.isEmpty(libros)}">
+    <!-- Controles de Paginación ventana grande -->
+    <nav aria-label="Page navigation example" class="d-none d-md-block"  style="background-color: transparent">
+        <ul class="pagination justify-content-center">
+            <li class="page-item" th:class="${paginaActual == 0} ? 'disabled'">
+                <a class="page-link" th:href="@{/descubre(pagina=0, sortBy=${sortBy}, sortOrder=${sortOrder})}" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            <li th:each="num : ${#numbers.sequence(0, totalPaginas - 1)}" class="page-item" th:classappend="${num == paginaActual} ? 'active'">
+                <a class="page-link" th:href="@{/descubre(pagina=${num}, sortBy=${sortBy}, sortOrder=${sortOrder})}" th:text="${num + 1}"></a>
+            </li>
+            <li class="page-item" th:class="${paginaActual == totalPaginas - 1} ? 'disabled'">
+                <a class="page-link" th:href="@{/descubre(pagina=${totalPaginas - 1}, sortBy=${sortBy}, sortOrder=${sortOrder})}" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>
 
 <!-- Controles de Paginación ventana pequeña -->
 <nav aria-label="Page navigation" class="d-md-none">
