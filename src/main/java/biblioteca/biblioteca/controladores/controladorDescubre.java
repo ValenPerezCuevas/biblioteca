@@ -72,6 +72,22 @@ public class controladorDescubre {
         return "descubre";
     }
 
+    @GetMapping("/descubre/obtenerInfoLibro/{id}")
+    public ResponseEntity<?> obtenerInfoLibro(@PathVariable Long id) {
+        Optional<libros> libroOptional = libroRepository.findById(id);
+        if (libroOptional.isPresent()) {
+            libros libro = libroOptional.get();
+            Map<String, Object> libroResponse = new HashMap<>();
+            libroResponse.put("titulo", libro.getTitulo());
+            libroResponse.put("autor", libro.getAutor());
+            libroResponse.put("genero", libro.getGenero());
+            libroResponse.put("anoPublicacion", libro.getAnoPublicacion());
+            libroResponse.put("editorial", libro.getEditorial());
+            return ResponseEntity.ok(libroResponse);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Libro no encontrado");
+        }
+    }
 
     @GetMapping("/descubre/obtenerListas")
     public ResponseEntity<?> obtenerListas() {
