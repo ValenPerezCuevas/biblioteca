@@ -19,7 +19,7 @@ public class usuarios {
     // Nombre de la columna en la tabla usuarios que hace referencia al idRol en la tabla roles
     private roles rol;
 
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<listas> listas;
 
 }

@@ -1,10 +1,14 @@
 package biblioteca.biblioteca.controladores;
 
 import biblioteca.biblioteca.entidades.libros;
+import biblioteca.biblioteca.entidades.libros_listas;
+import biblioteca.biblioteca.entidades.listas;
+import biblioteca.biblioteca.entidades.usuarios;
 import biblioteca.biblioteca.repositorios.LibroRepository;
 import biblioteca.biblioteca.repositorios.Libros_listasRepository;
 import biblioteca.biblioteca.repositorios.ListasRepository;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
@@ -15,11 +19,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.*;
+import java.util.stream.Collectors;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -70,23 +73,43 @@ public class controladorDescubre {
     }
 
 
-    @GetMapping("/descubre/obtenerInfoLibro/{id}")
-    public ResponseEntity<?> obtenerInfoLibro(@PathVariable("id") Long id) {
-        Optional<libros> libroOptional = libroRepository.findById(id);
-        if (libroOptional.isPresent()) {
-            libros libro = libroOptional.get();
-            Map<String, Object> response = new HashMap<>();
-            response.put("titulo", libro.getTitulo());
-            response.put("autor", libro.getAutor());
-            response.put("genero", libro.getGenero());
-            response.put("anoPublicacion", libro.getAnoPublicacion());
-            response.put("editorial", libro.getEditorial());
-            response.put("imagen", libro.getId_libros() + ".jpg");
-            return ResponseEntity.ok(response);
+    @GetMapping("/descubre/obtenerListas")
+    public ResponseEntity<?> obtenerListas() {
+        List<listas> todasLasListas = listasRepository.findAll();
+        if (!todasLasListas.isEmpty()) {
+            List<Map<String, Object>> listasResponse = todasLasListas.stream().map(lista -> {
+                Map<String, Object> response = new HashMap<>();
+                response.put("id_lista", lista.getId_lista());
+                response.put("nombre_lista", lista.getNombre_lista());
+                response.put("id_usuario", lista.getUsuario().getId_usuario());
+                return response;
+            }).collect(Collectors.toList());
+            return ResponseEntity.ok(listasResponse);
         } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Libro no encontrado");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontraron listas disponibles");
         }
     }
+
+    @PostMapping("/descubre/anadirLibroALista")
+    public ResponseEntity<?> anadirLibroALista(@RequestParam Long libroId, @RequestParam Long listaId) {
+        Optional<libros> libroOptional = libroRepository.findById(libroId);
+        Optional<listas> listaOptional = listasRepository.findById(listaId);
+
+        if (libroOptional.isPresent() && listaOptional.isPresent()) {
+            libros_listas nuevoLibroLista = new libros_listas();
+            nuevoLibroLista.setLibro(libroOptional.get());
+            nuevoLibroLista.setLista(listaOptional.get());
+            librosListasRepository.save(nuevoLibroLista);
+            return ResponseEntity.ok("Libro añadido a la lista con éxito");
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Libro o Lista no encontrado");
+        }
+    }
+
+
+
+
+
 
     @GetMapping("/descubre/filtrar")
     public String filtrar(

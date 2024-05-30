@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alexandría - Descubre</title>
+    <title>Administración</title>
     <!-- Enlace a Bootstrap CSS -->
     <link href="/css/bootstrap.css" rel="stylesheet">
     <link href="/css/bootstrap-grid.css" rel="stylesheet">
@@ -33,36 +33,41 @@
             color: #8a6041;
         }
 
+
+        /* Estilos para el footer */
+        footer {
+            background-color: #FFEDDB;
+            color: #BF9270;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        footer p {
+            font-size: 3vh;
+        }
+
+        nav {
+            background-color: #E3B7A0;
+            font-size: 3.2vh;
+        }
+
+        article {
+            background-color: #EDCDBB;
+        }
+
         ul {
             list-style: none;
         }
 
-        .card {
-            width: 200px;
-            /*margin-bottom: 20px;*/
+        .box {
+            border: 1px solid #000; /* Borde negro */
+            width: 250px; /* Ancho deseado */
+            height: 250px; /* Altura deseada */
+            margin: 5px; /* Margen entre las cajas */
+            display: flex; /* Activar flexbox */
+            justify-content: center; /* Centrar contenido horizontalmente */
+            align-items: center; /* Centrar contenido verticalmente */
         }
-
-        .cards-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* 200px como mínimo, con el ancho restante distribuido igualmente */
-            gap: 20px; /* Espacio entre las tarjetas */
-            justify-content: center;
-        }
-
-        .card-img-top {
-            width: 100%;
-            height: 300px;
-            object-fit: cover;
-        }
-
-        .card-body {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-evenly;
-        }
-
-
-        /* ESTILOS CHECKOBOX - SIN APLICAR - */
 
         .checkbox-wrapper input[type="checkbox"] {
             visibility: hidden;
@@ -109,6 +114,31 @@
             opacity: 1;
         }
 
+        .card {
+            width: 200px;
+            margin-bottom: 20px;
+        }
+
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* 200px como mínimo, con el ancho restante distribuido igualmente */
+            gap: 20px;
+            justify-content: center/* Espacio entre las tarjetas */
+        }
+
+        .card-img-top {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+
+        .card-body {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            height:100%;
+        }
+
     </style>
 </head>
 <body>
@@ -125,17 +155,20 @@
                 <!-- Filtro por título -->
                 <div class="mb-3">
                     <label for="filter-title" class="form-label">Título</label>
-                    <input type="text" name="titulo" class="form-control" id="filter-title" placeholder="Introduce un título">
+                    <input type="text" name="titulo" class="form-control" id="filter-title"
+                           placeholder="Introduce un título">
                 </div>
                 <!-- Filtro por autor -->
                 <div class="mb-3">
                     <label for="filter-author" class="form-label">Autor</label>
-                    <input type="text" name="autor" class="form-control" id="filter-author" placeholder="Introduce un autor">
+                    <input type="text" name="autor" class="form-control" id="filter-author"
+                           placeholder="Introduce un autor">
                 </div>
                 <!-- Filtro por editorial -->
                 <div class="mb-3">
                     <label for="filter-editorial" class="form-label">Editorial</label>
-                    <input type="text" name="editorial" class="form-control" id="filter-editorial" placeholder="Introduce una editorial">
+                    <input type="text" name="editorial" class="form-control" id="filter-editorial"
+                           placeholder="Introduce una editorial">
                 </div>
                 <!-- Filtro por género -->
                 <div class="mb-3">
@@ -145,7 +178,8 @@
                         <label class="form-check-label" for="gen-novela">Novela</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="genero" value="novela negra" id="gen-novela-negra">
+                        <input class="form-check-input" type="checkbox" name="genero" value="novela negra"
+                               id="gen-novela-negra">
                         <label class="form-check-label" for="gen-novela-negra">Novela negra</label>
                     </div>
                     <div class="form-check">
@@ -153,11 +187,13 @@
                         <label class="form-check-label" for="gen-ficcion">Ficción</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="genero" value="ciencia ficción" id="gen-ciencia-ficcion">
+                        <input class="form-check-input" type="checkbox" name="genero" value="ciencia ficción"
+                               id="gen-ciencia-ficcion">
                         <label class="form-check-label" for="gen-ciencia-ficcion">Ciencia Ficción</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="genero" value="fantasía" id="gen-fantasia">
+                        <input class="form-check-input" type="checkbox" name="genero" value="fantasía"
+                               id="gen-fantasia">
                         <label class="form-check-label" for="gen-fantasia">Fantasía</label>
                     </div>
                     <div class="form-check">
@@ -165,15 +201,18 @@
                         <label class="form-check-label" for="gen-terror">Terror</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="genero" value="suspense" id="gen-suspense">
+                        <input class="form-check-input" type="checkbox" name="genero" value="suspense"
+                               id="gen-suspense">
                         <label class="form-check-label" for="gen-suspense">Suspense</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="genero" value="autoayuda" id="gen-autoayuda">
+                        <input class="form-check-input" type="checkbox" name="genero" value="autoayuda"
+                               id="gen-autoayuda">
                         <label class="form-check-label" for="gen-autoayuda">Autoayuda</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="genero" value="filosofia" id="gen-filosofia">
+                        <input class="form-check-input" type="checkbox" name="genero" value="filosofia"
+                               id="gen-filosofia">
                         <label class="form-check-label" for="gen-filosofia">Filosofía</label>
                     </div>
                     <div class="form-check">
@@ -181,16 +220,19 @@
                         <label class="form-check-label" for="gen-juvenil">Juvenil</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="genero" value="programacion" id="gen-programacion">
+                        <input class="form-check-input" type="checkbox" name="genero" value="programacion"
+                               id="gen-programacion">
                         <label class="form-check-label" for="gen-programacion">Programación</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="genero" value="no ficcion" id="gen-no-ficción">
+                        <input class="form-check-input" type="checkbox" name="genero" value="no ficcion"
+                               id="gen-no-ficción">
                         <label class="form-check-label" for="gen-no-ficción">No ficción</label>
                     </div>
                     <!-- Campo de texto para otro género -->
                     <div class="mt-2">
-                        <input type="text" name="generoOtro" class="form-control" id="filter-other-genre" placeholder="Otro género">
+                        <input type="text" name="generoOtro" class="form-control" id="filter-other-genre"
+                               placeholder="Otro género">
                     </div>
                 </div>
                 <!-- Filtro por rango de año de publicación -->
@@ -202,7 +244,8 @@
                     <label for="filter-year-to" class="form-label">Año de publicación hasta</label>
                     <input type="number" name="anoHasta" class="form-control" id="filter-year-to" placeholder="Hasta">
                 </div>
-                <button type="submit" class="btn btn-primary" style="margin-top: 2rem !important;">Aplicar filtros</button>
+                <button type="submit" class="btn btn-primary" style="margin-top: 2rem !important;">Aplicar filtros
+                </button>
             </form>
         </aside>
 
@@ -214,18 +257,27 @@
                     <p th:text="${noResultados}"></p>
                 </div>
                 <div th:each="libro : ${libros}" class="card">
-                    <img th:src="@{'/imagenes/Imagenes_libros/' + ${libro.id_libros} + '.jpg'}" class="card-img-top" alt="Portada del libro">
-                    <div class="card-body">
-                        <h5 class="card-title" th:text="${libro.titulo}">Título del libro</h5>
-                        <p class="card-text">Autor: <span th:text="${libro.autor}">Autor del libro</span></p>
-                        <button type="button" class="btn btn-info" title="Ver info"
-                                th:attr="onclick='mostrarInfo(' + ${libro.id_libros} + ')'">
-                            Ver Info
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
+
+                        <img th:src="@{'/imagenes/Imagenes_libros/' + ${libro.id_libros} + '.jpg'}" class="card-img-top"
+                             alt="Portada del libro">
+                        <div class="card-body">
+                            <h5 class="card-title" th:text="${libro.titulo}">Título del libro</h5>
+                            <p class="card-text">Autor: <span th:text="${libro.autor}">Autor del libro</span></p>
+                            <button type="button" class="btn btn-info" title="Ver info"
+                                    th:attr="onclick='mostrarPortada(' + ${libro.id_libros} + ')'">
+                                Ver Info
+                            </button>
+                            <button type="button" class="btn btn-info" title="Añadir a lista"
+                                    th:attr="onclick='mostrarListas(' + ${libro.id_libros} + ')'">
+                                Añadir a Lista
+                            </button>
+                        </div> <!-- cierre de .card-body -->
+
+                </div> <!-- cierre de th:each -->
+            </div> <!-- cierre de .cards-container -->
+        </div> <!-- cierre de .col-md-9 -->
+
+
     </div>
 </div>
 <br>
@@ -233,127 +285,250 @@
 <!-- Controles de Paginación (solo si hay resultados) -->
 <div th:if="${not #lists.isEmpty(libros)}">
     <!-- Controles de Paginación ventana grande -->
-    <nav aria-label="Page navigation example" class="d-none d-md-block"  style="background-color: transparent">
+    <nav aria-label="Page navigation example" class="d-none d-md-block" style="background-color: transparent">
         <ul class="pagination justify-content-center">
             <li class="page-item" th:class="${paginaActual == 0} ? 'disabled'">
-                <a class="page-link" th:href="@{/descubre(pagina=0, sortBy=${sortBy}, sortOrder=${sortOrder})}" aria-label="Previous">
+                <a class="page-link" th:href="@{/descubre(pagina=0, sortBy=${sortBy}, sortOrder=${sortOrder})}"
+                   aria-label="Previous">
                     <span aria-hidden="true">&laquo;</span>
                 </a>
             </li>
-            <li th:each="num : ${#numbers.sequence(0, totalPaginas - 1)}" class="page-item" th:classappend="${num == paginaActual} ? 'active'">
-                <a class="page-link" th:href="@{/descubre(pagina=${num}, sortBy=${sortBy}, sortOrder=${sortOrder})}" th:text="${num + 1}"></a>
+            <li th:each="num : ${#numbers.sequence(0, totalPaginas - 1)}" class="page-item"
+                th:classappend="${num == paginaActual} ? 'active'">
+                <a class="page-link" th:href="@{/descubre(pagina=${num}, sortBy=${sortBy}, sortOrder=${sortOrder})}"
+                   th:text="${num + 1}"></a>
             </li>
             <li class="page-item" th:class="${paginaActual == totalPaginas - 1} ? 'disabled'">
-                <a class="page-link" th:href="@{/descubre(pagina=${totalPaginas - 1}, sortBy=${sortBy}, sortOrder=${sortOrder})}" aria-label="Next">
+                <a class="page-link"
+                   th:href="@{/descubre(pagina=${totalPaginas - 1}, sortBy=${sortBy}, sortOrder=${sortOrder})}"
+                   aria-label="Next">
                     <span aria-hidden="true">&raquo;</span>
                 </a>
             </li>
         </ul>
     </nav>
 
-<!-- Controles de Paginación ventana pequeña -->
-<nav aria-label="Page navigation" class="d-md-none">
-    <ul class="pagination justify-content-center">
-        <li class="page-item" th:class="${paginaActual == 0} ? 'disabled'">
-            <a class="page-link" th:href="@{/descubre(pagina=0, sortBy=${sortBy}, sortOrder=${sortOrder})}" aria-label="Primera">
-                <span aria-hidden="true">&laquo;&laquo;</span>
-                <span class="visually-hidden">Primera</span>
-            </a>
-        </li>
-        <li class="page-item" th:class="${paginaActual == 0} ? 'disabled'">
-            <a class="page-link" th:href="@{/descubre(pagina=${paginaActual - 1}, sortBy=${sortBy}, sortOrder=${sortOrder})}" aria-label="Anterior">
-                <span aria-hidden="true">&laquo;</span>
-                <span class="visually-hidden">Anterior</span>
-            </a>
-        </li>
-        <li class="page-item">
-            <span class="page-link" th:text="${paginaActual + 1} + ' de ' + ${totalPaginas}"></span>
-        </li>
-        <li class="page-item" th:class="${paginaActual == totalPaginas - 1} ? 'disabled'">
-            <a class="page-link" th:href="@{/descubre(pagina=${paginaActual + 1}, sortBy=${sortBy}, sortOrder=${sortOrder})}" aria-label="Siguiente">
-                <span aria-hidden="true">&raquo;</span>
-                <span class="visually-hidden">Siguiente</span>
-            </a>
-        </li>
-        <li class="page-item" th:class="${paginaActual == totalPaginas - 1} ? 'disabled'">
-            <a class="page-link" th:href="@{/descubre(pagina=${totalPaginas - 1}, sortBy=${sortBy}, sortOrder=${sortOrder})}" aria-label="Última">
-                <span aria-hidden="true">&raquo;&raquo;</span>
-                <span class="visually-hidden">Última</span>
-            </a>
-        </li>
-    </ul>
-</nav>
+    <!-- Controles de Paginación ventana pequeña -->
+    <nav aria-label="Page navigation" class="d-md-none">
+        <ul class="pagination justify-content-center">
+            <li class="page-item" th:class="${paginaActual == 0} ? 'disabled'">
+                <a class="page-link" th:href="@{/descubre(pagina=0, sortBy=${sortBy}, sortOrder=${sortOrder})}"
+                   aria-label="Primera">
+                    <span aria-hidden="true">&laquo;&laquo;</span>
+                    <span class="visually-hidden">Primera</span>
+                </a>
+            </li>
+            <li class="page-item" th:class="${paginaActual == 0} ? 'disabled'">
+                <a class="page-link"
+                   th:href="@{/descubre(pagina=${paginaActual - 1}, sortBy=${sortBy}, sortOrder=${sortOrder})}"
+                   aria-label="Anterior">
+                    <span aria-hidden="true">&laquo;</span>
+                    <span class="visually-hidden">Anterior</span>
+                </a>
+            </li>
+            <li class="page-item">
+                <span class="page-link" th:text="${paginaActual + 1} + ' de ' + ${totalPaginas}"></span>
+            </li>
+            <li class="page-item" th:class="${paginaActual == totalPaginas - 1} ? 'disabled'">
+                <a class="page-link"
+                   th:href="@{/descubre(pagina=${paginaActual + 1}, sortBy=${sortBy}, sortOrder=${sortOrder})}"
+                   aria-label="Siguiente">
+                    <span aria-hidden="true">&raquo;</span>
+                    <span class="visually-hidden">Siguiente</span>
+                </a>
+            </li>
+            <li class="page-item" th:class="${paginaActual == totalPaginas - 1} ? 'disabled'">
+                <a class="page-link"
+                   th:href="@{/descubre(pagina=${totalPaginas - 1}, sortBy=${sortBy}, sortOrder=${sortOrder})}"
+                   aria-label="Última">
+                    <span aria-hidden="true">&raquo;&raquo;</span>
+                    <span class="visually-hidden">Última</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
 
-<!-- Footer -->
-<footer class="row d-flex vh-15">
-    <div class="d-flex justify-content-center">
-        <p id="frase"></p>
-    </div>
-</footer>
+    <!-- Footer -->
+    <footer class="row d-flex vh-15">
+        <div class="d-flex justify-content-center">
+            <p id="frase"></p>
+        </div>
+    </footer>
 
-<!-- Modal ver info libro -->
-<div class="modal fade" id="verInfoLibro" tabindex="-1" aria-labelledby="verInfoLibroModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="modal-titulo" ></h4>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-            </div>
-            <div class="modal-body">
-                <div class="mb-3">
-                    <p>Autor: <span id="modal-autor" ></span></p>
+    <!-- Modal ver info libro -->
+    <div class="modal fade" id="verInfoLibro" tabindex="-1" aria-labelledby="verInfoLibroModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="modal-titulo"></h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
                 </div>
-                <div class="mb-3">
-                    <p>Género: <span id="modal-genero" ></span></p>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <p>Autor: <span id="modal-autor"></span></p>
+                    </div>
+                    <div class="mb-3">
+                        <p>Género: <span id="modal-genero"></span></p>
+                    </div>
+                    <div class="mb-3">
+                        <p>Año de publicación: <span id="modal-ano"></span></p>
+                    </div>
+                    <div class="mb-3">
+                        <p>Editorial: <span id="modal-editorial"></span></p>
+                    </div>
+
                 </div>
-                <div class="mb-3">
-                    <p>Año de publicación: <span id="modal-ano" ></span></p>
-                </div>
-                <div class="mb-3">
-                    <p>Editorial: <span id="modal-editorial" ></span></p>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                 </div>
             </div>
         </div>
     </div>
-</div>
+    <!-- Modal para seleccionar la lista -->
+    <div class="modal fade" id="seleccionarListaModal" tabindex="-1" aria-labelledby="seleccionarListaModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="seleccionarListaModalLabel">Seleccionar Lista</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="formSeleccionarLista">
+                        <div class="mb-3">
+                            <label for="selectLista" class="form-label">Elige una lista:</label>
+                            <select class="form-select" id="selectLista" name="lista">
+
+                            </select>
+                        </div>
+                        <input type="hidden" id="libroId" name="libroId"> <!-- Campo oculto para el ID del libro -->
+                        <input type="hidden" id="idUsuario" th:value="${session.usuario.id_usuario}">
+                        <button type="button" class="btn btn-primary" onclick="anadirLibroALista()">Añadir a la Lista
+                        </button>
+                    </form>
+                    <div id="mensajeConfirmacion" class="alert alert-success mt-3" style="display:none;">
+                        Libro añadido a la lista con éxito.
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
-<!-- Scripts de Bootstrap y JavaScript -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="/js/footer.js"></script>
+    <!-- Scripts de Bootstrap y JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/js/footer.js"></script>
 
 
-<script>
-    function mostrarInfo(libroId) {
-        let url = '/descubre/obtenerInfoLibro/' + libroId;
+    <script>
+        <!-- Scripts mostrar portada-->
+        function mostrarPortada(libroId) {
+            let url = '/descubre/obtenerInfoLibro/' + libroId;
 
-        fetch(url)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Error al cargar la información del libro');
+            fetch(url)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Error al cargar la información del libro');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log(data); // Para depuración
+                    document.querySelector('#verInfoLibro #modal-titulo').textContent = data.titulo;
+                    document.querySelector('#verInfoLibro #modal-autor').textContent = data.autor;
+                    document.querySelector('#verInfoLibro #modal-genero').textContent = data.genero;
+                    document.querySelector('#verInfoLibro #modal-ano').textContent = data.anoPublicacion;
+                    document.querySelector('#verInfoLibro #modal-editorial').textContent = data.editorial;
+
+
+                    // Mostrar el modal
+                    let verInfoModal = new bootstrap.Modal(document.getElementById('verInfoLibro'));
+                    verInfoModal.show();
+                })
+                .catch(error => {
+                    console.error(error); // Para depuración
+                    alert('No se pudo cargar la información del libro: ' + error.message);
+                });
+        }
+    </script>
+    <!-- Scripts añadir a la lista-->
+
+    <script>
+        function mostrarListas(libroId) {
+            let idUsuario = document.getElementById('idUsuario').value; // Obtener el idUsuario del campo oculto
+            let url = `/descubre/obtenerListas`; // Construir la URL para obtener todas las listas
+            document.getElementById('libroId').value = libroId; // Asignar el libroId al campo oculto
+
+            $.ajax({
+                url: url,
+                method: 'GET',
+                success: function (data) {
+                    console.log(data);
+                    let selectLista = document.getElementById('selectLista');
+                    selectLista.innerHTML = ''; // Limpiar opciones anteriores
+
+                    // Filtrar las listas por idUsuario
+                    let listasFiltradas = data.filter(lista => lista.id_usuario === parseInt(idUsuario));
+
+                    // Asegúrate de que `listasFiltradas` es un array de listas
+                    if (Array.isArray(listasFiltradas)) {
+                        listasFiltradas.forEach(lista => {
+                            let option = document.createElement('option');
+                            option.value = lista.id_lista;
+                            option.textContent = lista.nombre_lista;
+                            selectLista.appendChild(option);
+                        });
+                    } else {
+                        console.error('La respuesta no es un array');
+                        alert('Error en el formato de la respuesta');
+                    }
+
+                    // Mostrar el modal
+                    let seleccionarListaModal = new bootstrap.Modal(document.getElementById('seleccionarListaModal'));
+                    seleccionarListaModal.show();
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.error('Error en la petición:', textStatus, errorThrown);
+                    alert('No se pudo cargar las listas: ' + textStatus);
                 }
-                return response.json();
-            })
-            .then(data => {
-                console.log(data); // Para depuración
-                document.querySelector('#verInfoLibro #modal-titulo').textContent = data.titulo;
-                document.querySelector('#verInfoLibro #modal-autor').textContent = data.autor;
-                document.querySelector('#verInfoLibro #modal-genero').textContent = data.genero;
-                document.querySelector('#verInfoLibro #modal-ano').textContent = data.anoPublicacion;
-                document.querySelector('#verInfoLibro #modal-editorial').textContent = data.editorial;
-
-                // Mostrar el modal
-                let verInfoModal = new bootstrap.Modal(document.getElementById('verInfoLibro'));
-                verInfoModal.show();
-            })
-            .catch(error => {
-                console.error(error); // Para depuración
-                alert('No se pudo cargar la información del libro: ' + error.message);
             });
-    }
+        }
 
-</script>
 
+        function anadirLibroALista() {
+            let listaId = document.getElementById('selectLista').value;
+            let libroId = document.getElementById('libroId').value; // Asegúrate de que este campo se llena correctamente al abrir el modal
+
+            $.ajax({
+                url: '/descubre/anadirLibroALista',
+                method: 'POST',
+                data: {
+                    libroId: libroId,
+                    listaId: listaId
+                },
+                success: function (response) {
+                    alert('Libro añadido con éxito');
+                    console.log(response);
+                    $('#mensajeConfirmacion').show(); // Mostrar mensaje de confirmación
+                    setTimeout(function () {
+                        $('#mensajeConfirmacion').hide(); // Ocultar mensaje después de unos segundos
+                    }, 3000);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert('Error al añadir el libro: ' + textStatus);
+                    console.error('Error en la petición:', textStatus, errorThrown);
+                }
+            });
+        }
+
+
+    </script>
+
+
+</div>
 </body>
 </html>
