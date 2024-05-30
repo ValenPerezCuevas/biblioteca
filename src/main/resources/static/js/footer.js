@@ -342,6 +342,8 @@ $(document).ready(function() {
         fraseElement.fadeOut(function() {
             let fraseActual = frases[fraseIndex];
             let obraTexto = fraseActual.obra ? fraseActual.obra : "Obra desconocida";
+            let estilo = $('<style>footer { color: #8a6041;  padding: 20px 0; text-align: center; }</style>');
+            $('head').append(estilo); // Añadir el estilo al <head>
             fraseElement.html('<q>' + fraseActual.frase + '</q><br><span> - ' + fraseActual.autor + ', ' + obraTexto + '</span>');
             fraseIndex = (fraseIndex + 1) % frases.length;
             fraseElement.fadeIn();
