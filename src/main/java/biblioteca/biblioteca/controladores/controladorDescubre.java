@@ -81,7 +81,13 @@ public class controladorDescubre {
                 Map<String, Object> response = new HashMap<>();
                 response.put("id_lista", lista.getId_lista());
                 response.put("nombre_lista", lista.getNombre_lista());
-                response.put("id_usuario", lista.getUsuario().getId_usuario());
+                usuarios usuario = lista.getUsuario();
+                if (usuario != null) {
+                    response.put("id_usuario", usuario.getId_usuario());
+                } else {
+                    // Esto no debería suceder si todas las listas tienen un usuario
+                    response.put("id_usuario", "Usuario no disponible");
+                }
                 return response;
             }).collect(Collectors.toList());
             return ResponseEntity.ok(listasResponse);
@@ -89,6 +95,7 @@ public class controladorDescubre {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontraron listas disponibles");
         }
     }
+
 
     @PostMapping("/descubre/anadirLibroALista")
     public ResponseEntity<?> anadirLibroALista(@RequestParam Long libroId, @RequestParam Long listaId) {
