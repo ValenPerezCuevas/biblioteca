@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -92,8 +91,7 @@ public class controladorDescubre {
     public String filtrar(
             @RequestParam(name = "titulo", required = false) String titulo,
             @RequestParam(name = "autor", required = false) String autor,
-            @RequestParam(name = "genero", required = false) List<String> genero,
-            @RequestParam(name = "editorial", required = false) String editorial,
+            @RequestParam(name = "genero", required = false) String genero,
             @RequestParam(name = "anoDesde", required = false) Integer anoDesde,
             @RequestParam(name = "anoHasta", required = false) Integer anoHasta,
             @RequestParam(name = "pagina", required = false, defaultValue = "0") int pagina,
@@ -104,8 +102,7 @@ public class controladorDescubre {
         Pageable pageable = PageRequest.of(pagina, tamanio);
 
         // Filtrar los libros según los criterios especificados
-        Page<libros> paginaLibros = libroRepository.findByFiltros
-                (titulo, autor, genero, editorial, anoDesde, anoHasta, pageable);
+        Page<libros> paginaLibros = libroRepository.findByFiltros(titulo, autor, genero, anoDesde, anoHasta, pageable);
 
         model.addAttribute("libros", paginaLibros.getContent());
         model.addAttribute("paginaActual", pagina);
