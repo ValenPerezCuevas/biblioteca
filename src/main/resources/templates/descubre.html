@@ -241,15 +241,15 @@
                     <p th:text="${noResultados}"></p>
                 </div>
                 <div th:each="libro : ${libros}" class="card">
-                        <img th:src="@{'/imagenes/Imagenes_libros/' + ${libro.id_libros} + '.jpg'}" class="card-img-top" alt="Portada del libro">
-                        <div class="card-body">
-                            <h5 class="card-title" th:text="${libro.titulo}">Título del libro</h5>
-                            <p class="card-text">Autor: <span th:text="${libro.autor}">Autor del libro</span></p>
-                            <button type="button" class="btn btn-info" title="Ver info"
-                                    th:attr="onclick='mostrarInfo(' + ${libro.id_libros} + ')'">
-                                Ver Info
-                            </button>
-                        </div>
+                    <img th:src="@{'/imagenes/Imagenes_libros/' + ${libro.id_libros} + '.jpg'}" class="card-img-top" alt="Portada del libro">
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="${libro.titulo}">Título del libro</h5>
+                        <p class="card-text">Autor: <span th:text="${libro.autor}">Autor del libro</span></p>
+                        <button type="button" class="btn btn-info" title="Ver info"
+                                th:attr="onclick='mostrarInfo(' + ${libro.id_libros} + ')'">
+                            Ver Info
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -340,9 +340,6 @@
                     <p>Editorial: <span id="modal-editorial" ></span></p>
                 </div>
             </div>
-<!--            <div class="modal-footer">-->
-<!--                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>-->
-<!--            </div>-->
         </div>
     </div>
 </div>
