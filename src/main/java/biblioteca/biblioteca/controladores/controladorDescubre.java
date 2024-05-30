@@ -50,7 +50,7 @@ public class controladorDescubre {
             @RequestParam(name = "pagina", required = false, defaultValue = "0") int pagina,
             @RequestParam(name = "tamanio", required = false, defaultValue = "12") int tamanio,
             @RequestParam(defaultValue = "titulo") String sortBy,
-            @RequestParam(defaultValue = "asc") String sortOrder,
+            @RequestParam(defaultValue = "desc") String sortOrder,
             HttpServletRequest request,
             Model model
     ) {

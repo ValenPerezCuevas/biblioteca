@@ -20,7 +20,6 @@
         }
 
         label.form-label {
-            /*font-weight: bolder;*/
             font-size: larger;
         }
 
@@ -33,42 +32,33 @@
             color: #8a6041;
         }
 
+        .card {
+            width: 200px;
+            margin-bottom: 20px;
+        }
 
-        /* Estilos para el footer */
-        footer {
-            background-color: #FFEDDB;
-            color: #BF9270;
-            padding: 20px 0;
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* 200px como mínimo, con el ancho restante distribuido igualmente */
+            gap: 20px;
+            justify-content: center/* Espacio entre las tarjetas */
+        }
+
+        .card-img-top {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+
+        .card-body {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
             text-align: center;
+            gap: 15px;
         }
 
-        footer p {
-            font-size: 3vh;
-        }
-
-        nav {
-            background-color: #E3B7A0;
-            font-size: 3.2vh;
-        }
-
-        article {
-            background-color: #EDCDBB;
-        }
-
-        ul {
-            list-style: none;
-        }
-
-        .box {
-            border: 1px solid #000; /* Borde negro */
-            width: 250px; /* Ancho deseado */
-            height: 250px; /* Altura deseada */
-            margin: 5px; /* Margen entre las cajas */
-            display: flex; /* Activar flexbox */
-            justify-content: center; /* Centrar contenido horizontalmente */
-            align-items: center; /* Centrar contenido verticalmente */
-        }
-
+    /*    estilos checkbox (sin aplicar) */
         .checkbox-wrapper input[type="checkbox"] {
             visibility: hidden;
             display: none;
@@ -112,31 +102,6 @@
         .checkbox-wrapper .check:checked + label svg g path {
             stroke-dashoffset: 0;
             opacity: 1;
-        }
-
-        .card {
-            width: 200px;
-            margin-bottom: 20px;
-        }
-
-        .cards-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* 200px como mínimo, con el ancho restante distribuido igualmente */
-            gap: 20px;
-            justify-content: center/* Espacio entre las tarjetas */
-        }
-
-        .card-img-top {
-            width: 100%;
-            height: 300px;
-            object-fit: cover;
-        }
-
-        .card-body {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-evenly;
-            height:100%;
         }
 
     </style>
@@ -257,7 +222,6 @@
                     <p th:text="${noResultados}"></p>
                 </div>
                 <div th:each="libro : ${libros}" class="card">
-
                         <img th:src="@{'/imagenes/Imagenes_libros/' + ${libro.id_libros} + '.jpg'}" class="card-img-top"
                              alt="Portada del libro">
                         <div class="card-body">
@@ -272,7 +236,6 @@
                                 Añadir a Lista
                             </button>
                         </div> <!-- cierre de .card-body -->
-
                 </div> <!-- cierre de th:each -->
             </div> <!-- cierre de .cards-container -->
         </div> <!-- cierre de .col-md-9 -->
