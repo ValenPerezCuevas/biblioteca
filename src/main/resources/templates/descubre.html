@@ -413,6 +413,7 @@
                         </select>
                     </div>
                     <input type="hidden" id="libroId" name="libroId"> <!-- Campo oculto para el ID del libro -->
+                    <input type="hidden" id="idUsuario" th:value="${session.usuario.id_usuario}">
                     <button type="button" class="btn btn-primary" onclick="anadirLibroALista()">Añadir a la Lista</button>
                 </form>
                 <div id="mensajeConfirmacion" class="alert alert-success mt-3" style="display:none;">
@@ -508,8 +509,10 @@
     }*/
 
 function mostrarListas(libroId) {
-    let url = '/descubre/obtenerListas';
-    document.getElementById('libroId').value = libroId;
+    let idUsuario = document.getElementById('idUsuario').value; // Obtener el idUsuario del campo oculto
+    let url = `/descubre/obtenerListas`; // Construir la URL para obtener todas las listas
+    document.getElementById('libroId').value = libroId; // Asignar el libroId al campo oculto
+
     $.ajax({
         url: url,
         method: 'GET',
@@ -518,9 +521,12 @@ function mostrarListas(libroId) {
             let selectLista = document.getElementById('selectLista');
             selectLista.innerHTML = ''; // Limpiar opciones anteriores
 
-            // Asegúrate de que `data` es un array de listas
-            if (Array.isArray(data)) {
-                data.forEach(lista => {
+            // Filtrar las listas por idUsuario
+            let listasFiltradas = data.filter(lista => lista.id_usuario === parseInt(idUsuario));
+
+            // Asegúrate de que `listasFiltradas` es un array de listas
+            if (Array.isArray(listasFiltradas)) {
+                listasFiltradas.forEach(lista => {
                     let option = document.createElement('option');
                     option.value = lista.id_lista;
                     option.textContent = lista.nombre_lista;
@@ -536,11 +542,12 @@ function mostrarListas(libroId) {
             seleccionarListaModal.show();
         },
         error: function(jqXHR, textStatus, errorThrown) {
-            console.error('Error en la petición:', textStatus, errorThrown); // Para depuración
+            console.error('Error en la petición:', textStatus, errorThrown);
             alert('No se pudo cargar las listas: ' + textStatus);
         }
     });
 }
+
 
 
 
