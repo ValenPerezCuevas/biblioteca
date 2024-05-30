@@ -98,6 +98,7 @@ public class controladorDescubre {
             @RequestParam(name = "anoHasta", required = false) Integer anoHasta,
             @RequestParam(name = "pagina", required = false, defaultValue = "0") int pagina,
             @RequestParam(name = "tamanio", required = false, defaultValue = "12") int tamanio,
+            HttpServletRequest request,
             Model model
     ) {
         // Configurar la paginación
@@ -115,6 +116,7 @@ public class controladorDescubre {
         model.addAttribute("libros", paginaLibros.getContent());
         model.addAttribute("paginaActual", pagina);
         model.addAttribute("totalPaginas", paginaLibros.getTotalPages());
+        model.addAttribute("requestURI", request.getRequestURI());
 
         return "descubre";
     }

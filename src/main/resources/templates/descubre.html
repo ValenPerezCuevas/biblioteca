@@ -33,41 +33,36 @@
             color: #8a6041;
         }
 
-
-        /* Estilos para el footer */
-        footer {
-            background-color: #FFEDDB;
-            color: #BF9270;
-            padding: 20px 0;
-            text-align: center;
-        }
-
-        footer p {
-            font-size: 3vh;
-        }
-
-        nav {
-            background-color: #E3B7A0;
-            font-size: 3.2vh;
-        }
-
-        article {
-            background-color: #EDCDBB;
-        }
-
         ul {
             list-style: none;
         }
 
-        .box {
-            border: 1px solid #000; /* Borde negro */
-            width: 250px; /* Ancho deseado */
-            height: 250px; /* Altura deseada */
-            margin: 5px; /* Margen entre las cajas */
-            display: flex; /* Activar flexbox */
-            justify-content: center; /* Centrar contenido horizontalmente */
-            align-items: center; /* Centrar contenido verticalmente */
+        .card {
+            width: 200px;
+            /*margin-bottom: 20px;*/
         }
+
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* 200px como mínimo, con el ancho restante distribuido igualmente */
+            gap: 20px; /* Espacio entre las tarjetas */
+            justify-content: center;
+        }
+
+        .card-img-top {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+
+        .card-body {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+        }
+
+
+        /* ESTILOS CHECKOBOX - SIN APLICAR - */
 
         .checkbox-wrapper input[type="checkbox"] {
             visibility: hidden;
@@ -112,28 +107,6 @@
         .checkbox-wrapper .check:checked + label svg g path {
             stroke-dashoffset: 0;
             opacity: 1;
-        }
-        .card {
-            width: 200px;
-            margin-bottom: 20px;
-        }
-
-        .cards-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* 200px como mínimo, con el ancho restante distribuido igualmente */
-            gap: 20px; /* Espacio entre las tarjetas */
-        }
-
-        .card-img-top {
-            width: 100%;
-            height: 300px;
-            object-fit: cover;
-        }
-
-        .card-body {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-evenly;
         }
 
     </style>
