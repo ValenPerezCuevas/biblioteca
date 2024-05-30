@@ -19,12 +19,14 @@ public interface LibroRepository extends JpaRepository<libros, Long> {
     @Query("SELECT l FROM libros l " +
             "WHERE (:titulo IS NULL OR LOWER(l.titulo) LIKE %:titulo%) " +
             "AND (:autor IS NULL OR LOWER(l.autor) LIKE %:autor%) " +
-            "AND (:genero IS NULL OR LOWER(l.genero) = LOWER(:genero)) " +
+            "AND (:editorial IS NULL OR LOWER(l.editorial) LIKE %:editorial%) " +
+            "AND (:genero IS NULL OR l.genero IN :genero)" +
             "AND (:anoDesde IS NULL OR l.anoPublicacion >= :anoDesde) " +
             "AND (:anoHasta IS NULL OR l.anoPublicacion <= :anoHasta)")
     Page<libros> findByFiltros(@Param("titulo") String titulo,
                                @Param("autor") String autor,
-                               @Param("genero") String genero,
+                               @Param("editorial") String editorial,
+                               @Param("genero") List<String> genero,
                                @Param("anoDesde") Integer anoDesde,
                                @Param("anoHasta") Integer anoHasta,
                                Pageable pageable);
