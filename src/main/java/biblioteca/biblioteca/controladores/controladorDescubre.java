@@ -23,6 +23,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 @Controller
 public class controladorDescubre {
@@ -40,8 +44,6 @@ public class controladorDescubre {
         this.listasRepository = listasRepository;
         this.librosListasRepository = librosListasRepository;
     }
-   /* @Autowired
-    private HttpSession session;*/
 
     @GetMapping("/descubre")
     public String descubrir(
@@ -109,6 +111,35 @@ public class controladorDescubre {
 
 
 
+    @GetMapping("/descubre/filtrar")
+    public String filtrar(
+            @RequestParam(name = "titulo", required = false) String titulo,
+            @RequestParam(name = "autor", required = false) String autor,
+            @RequestParam(name = "editorial", required = false) String editorial,
+            @RequestParam(name = "genero", required = false) List<String> genero,
+            @RequestParam(name = "anoDesde", required = false) Integer anoDesde,
+            @RequestParam(name = "anoHasta", required = false) Integer anoHasta,
+            @RequestParam(name = "pagina", required = false, defaultValue = "0") int pagina,
+            @RequestParam(name = "tamanio", required = false, defaultValue = "12") int tamanio,
+            Model model
+    ) {
+        // Configurar la paginación
+        Pageable pageable = PageRequest.of(pagina, tamanio);
 
+        // Filtrar los libros según los criterios especificados
+        Page<libros> paginaLibros = libroRepository.findByFiltros
+                (titulo, autor, editorial, genero, anoDesde, anoHasta, pageable);
+
+        // Verificar si la lista de libros está vacía
+        if (paginaLibros.getContent().isEmpty()) {
+            model.addAttribute("noResultados", "No se encontraron libros con los filtros seleccionados.");
+        }
+
+        model.addAttribute("libros", paginaLibros.getContent());
+        model.addAttribute("paginaActual", pagina);
+        model.addAttribute("totalPaginas", paginaLibros.getTotalPages());
+
+        return "descubre";
+    }
 
 }

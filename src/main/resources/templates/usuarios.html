@@ -291,15 +291,15 @@
                     <input type="hidden" id="idUsuario" name="id_usuario" th:value="${usuarioModificado.id_usuario}" />
                     <div class="mb-3">
                         <label for="nombreUsuario2" class="form-label">Nombre</label>
-                        <input type="text" class="form-control" id="nombreUsuario2" name="nombre" required>
+                        <input type="text" class="form-control" id="nombreUsuario2" th:field="*{nombre}" required>
                     </div>
                     <div class="mb-3">
                         <label for="contrasenaUsuario2" class="form-label">Contraseña</label>
-                        <input type="password" class="form-control" id="contrasenaUsuario2" name="contrasena" required>
+                        <input type="password" class="form-control" id="contrasenaUsuario2" th:field="*{contrasena}" required>
                     </div>
                     <div class="mb-3">
                         <label for="rolUsuario2" class="form-label">Rol</label>
-                        <select class="form-select" id="rolUsuario2" name="rol.id_rol" required>
+                        <select class="form-select" id="rolUsuario2" name="rol.id_rol" th:field="*{rol.nombre_rol}" required>
                             <option th:each="rol : ${listaRoles}"
                                     th:value="${rol.id_rol}"
                                     th:text="${rol.nombre_rol}"

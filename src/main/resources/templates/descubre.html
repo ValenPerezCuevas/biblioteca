@@ -15,10 +15,24 @@
         /* Estilos para el aside */
         aside {
             background-color: #E3B7A0;
-            color: #BF9270;
+            color: #8a6041;
             padding: 20px;
-            height: 100vh;
         }
+
+        label.form-label {
+            /*font-weight: bolder;*/
+            font-size: larger;
+        }
+
+        .modal-title, .card-title {
+            color: #8a6041;
+        }
+
+        .modal-body span {
+            font-size: larger;
+            color: #8a6041;
+        }
+
 
         /* Estilos para el footer */
         footer {
@@ -99,11 +113,17 @@
             stroke-dashoffset: 0;
             opacity: 1;
         }
+
         .card {
             width: 200px;
             margin-bottom: 20px;
         }
 
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* 200px como mínimo, con el ancho restante distribuido igualmente */
+            gap: 20px; /* Espacio entre las tarjetas */
+        }
 
         .card-img-top {
             width: 100%;
@@ -127,210 +147,129 @@
 <div class="container-fluid ">
     <div class="row justify-content-evenly">
         <!-- Aside en la parte izquierda -->
-<!--        <aside class="col-md-3 p-4 d-flex flex-column  align-items-center ">-->
-<!--            &lt;!&ndash; Agregando la clase p-4 para el margen &ndash;&gt;-->
-
-<!--            <div>-->
-<!--                <nav class="navbar">-->
-<!--                    <div class="container-fluid m-2">-->
-<!--                        <form class="d-flex" role="search">-->
-<!--                            <input class="form-control me-2" type="search" placeholder="Introduce un título" aria-label="Búsqueda">-->
-<!--                            <button class="btn btn-outline-success" type="submit">Buscar</button>-->
-<!--                        </form>-->
-<!--                    </div>-->
-<!--                </nav>-->
-<!--            </div>-->
-
-<!--            <div class="m-2 w-75">-->
-<!--                <h4>Listas</h4>-->
-<!--                <div class="checkbox-wrapper">-->
-<!--                    <input checked type="checkbox" class="check" id="check3-61">-->
-<!--                    <label for="check3-61" class="label">-->
-<!--                        <svg width="45" height="45" viewBox="0 0 95 95">-->
-<!--                            <rect x="30" y="20" width="50" height="50" stroke="black" fill="none"></rect>-->
-<!--                            <g transform="translate(0,-952.36222)">-->
-<!--                                <path d="m 56,963 c -102,122 6,9 7,9 17,-5 -66,69 -38,52 122,-77 -7,14 18,4 29,-11 45,-43 23,-4" stroke="black" stroke-width="3" fill="none" class="path1"></path>-->
-<!--                            </g>-->
-<!--                        </svg>-->
-<!--                        <span>Usuario</span>-->
-<!--                    </label>-->
-<!--                </div>-->
-<!--                <div class="checkbox-wrapper">-->
-<!--                    <input checked type="checkbox" class="check" id="check3-62">-->
-<!--                    <label for="check3-62" class="label">-->
-<!--                        <svg width="45" height="45" viewBox="0 0 95 95">-->
-<!--                            <rect x="30" y="20" width="50" height="50" stroke="black" fill="none"></rect>-->
-<!--                            <g transform="translate(0,-952.36222)">-->
-<!--                                <path d="m 56,963 c -102,122 6,9 7,9 17,-5 -66,69 -38,52 122,-77 -7,14 18,4 29,-11 45,-43 23,-4" stroke="black" stroke-width="3" fill="none" class="path1"></path>-->
-<!--                            </g>-->
-<!--                        </svg>-->
-<!--                        <span>Número Lista</span>-->
-<!--                    </label>-->
-<!--                </div>-->
-<!--                <div class="checkbox-wrapper">-->
-<!--                    <input checked type="checkbox" class="check" id="check3-63">-->
-<!--                    <label for="check3-63" class="label">-->
-<!--                        <svg width="45" height="45" viewBox="0 0 95 95">-->
-<!--                            <rect x="30" y="20" width="50" height="50" stroke="black" fill="none"></rect>-->
-<!--                            <g transform="translate(0,-952.36222)">-->
-<!--                                <path d="m 56,963 c -102,122 6,9 7,9 17,-5 -66,69 -38,52 122,-77 -7,14 18,4 29,-11 45,-43 23,-4" stroke="black" stroke-width="3" fill="none" class="path1"></path>-->
-<!--                            </g>-->
-<!--                        </svg>-->
-<!--                        <span>Nombre Listas</span>-->
-<!--                    </label>-->
-<!--                </div>-->
-<!--                <div class="checkbox-wrapper">-->
-<!--                    <input checked type="checkbox" class="check" id="check3-64">-->
-<!--                    <label for="check3-64" class="label">-->
-<!--                        <svg width="45" height="45" viewBox="0 0 95 95">-->
-<!--                            <rect x="30" y="20" width="50" height="50" stroke="black" fill="none"></rect>-->
-<!--                            <g transform="translate(0,-952.36222)">-->
-<!--                                <path d="m 56,963 c -102,122 6,9 7,9 17,-5 -66,69 -38,52 122,-77 -7,14 18,4 29,-11 45,-43 23,-4" stroke="black" stroke-width="3" fill="none" class="path1"></path>-->
-<!--                            </g>-->
-<!--                        </svg>-->
-<!--                        <span>Cantidad de Libros</span>-->
-<!--                    </label>-->
-<!--                </div>-->
-<!--            </div>-->
-
-<!--            <div class="m-2 w-75">-->
-<!--                <h4>Usuario</h4>-->
-<!--                <div class="checkbox-wrapper">-->
-<!--                    <input checked type="checkbox" class="check" id="check2-61">-->
-<!--                    <label for="check2-61" class="label">-->
-<!--                        <svg width="45" height="45" viewBox="0 0 95 95">-->
-<!--                            <rect x="30" y="20" width="50" height="50" stroke="black" fill="none"></rect>-->
-<!--                            <g transform="translate(0,-952.36222)">-->
-<!--                                <path d="m 56,963 c -102,122 6,9 7,9 17,-5 -66,69 -38,52 122,-77 -7,14 18,4 29,-11 45,-43 23,-4" stroke="black" stroke-width="3" fill="none" class="path1"></path>-->
-<!--                            </g>-->
-<!--                        </svg>-->
-<!--                        <span>Nombre usuario</span>-->
-<!--                    </label>-->
-<!--                </div>-->
-<!--                <div class="checkbox-wrapper">-->
-<!--                    <input checked type="checkbox" class="check" id="check2-62">-->
-<!--                    <label for="check2-62" class="label">-->
-<!--                        <svg width="45" height="45" viewBox="0 0 95 95">-->
-<!--                            <rect x="30" y="20" width="50" height="50" stroke="black" fill="none"></rect>-->
-<!--                            <g transform="translate(0,-952.36222)">-->
-<!--                                <path d="m 56,963 c -102,122 6,9 7,9 17,-5 -66,69 -38,52 122,-77 -7,14 18,4 29,-11 45,-43 23,-4" stroke="black" stroke-width="3" fill="none" class="path1"></path>-->
-<!--                            </g>-->
-<!--                        </svg>-->
-<!--                        <span>Fecha Registro</span>-->
-<!--                    </label>-->
-<!--                </div>-->
-<!--                <div class="checkbox-wrapper">-->
-<!--                    <input checked type="checkbox" class="check" id="check2-63">-->
-<!--                    <label for="check2-63" class="label">-->
-<!--                        <svg width="45" height="45" viewBox="0 0 95 95">-->
-<!--                            <rect x="30" y="20" width="50" height="50" stroke="black" fill="none"></rect>-->
-<!--                            <g transform="translate(0,-952.36222)">-->
-<!--                                <path d="m 56,963 c -102,122 6,9 7,9 17,-5 -66,69 -38,52 122,-77 -7,14 18,4 29,-11 45,-43 23,-4" stroke="black" stroke-width="3" fill="none" class="path1"></path>-->
-<!--                            </g>-->
-<!--                        </svg>-->
-<!--                        <span>NºListas</span>-->
-<!--                    </label>-->
-<!--                </div>-->
-<!--                <div class="checkbox-wrapper">-->
-<!--                    <input checked type="checkbox" class="check" id="check2-64">-->
-<!--                    <label for="check2-64" class="label">-->
-<!--                        <svg width="45" height="45" viewBox="0 0 95 95">-->
-<!--                            <rect x="30" y="20" width="50" height="50" stroke="black" fill="none"></rect>-->
-<!--                            <g transform="translate(0,-952.36222)">-->
-<!--                                <path d="m 56,963 c -102,122 6,9 7,9 17,-5 -66,69 -38,52 122,-77 -7,14 18,4 29,-11 45,-43 23,-4" stroke="black" stroke-width="3" fill="none" class="path1"></path>-->
-<!--                            </g>-->
-<!--                        </svg>-->
-<!--                        <span>Fecha</span>-->
-<!--                    </label>-->
-<!--                </div>-->
-<!--            </div>-->
-
-<!--            <div class="m-2 w-75">-->
-<!--                <h4>Libros</h4>-->
-<!--                <div class="checkbox-wrapper">-->
-<!--                    <input checked type="checkbox" class="check" id="check1-61">-->
-<!--                    <label for="check1-61" class="label">-->
-<!--                        <svg width="45" height="45" viewBox="0 0 95 95">-->
-<!--                            <rect x="30" y="20" width="50" height="50" stroke="black" fill="none"></rect>-->
-<!--                            <g transform="translate(0,-952.36222)">-->
-<!--                                <path d="m 56,963 c -102,122 6,9 7,9 17,-5 -66,69 -38,52 122,-77 -7,14 18,4 29,-11 45,-43 23,-4" stroke="black" stroke-width="3" fill="none" class="path1"></path>-->
-<!--                            </g>-->
-<!--                        </svg>-->
-<!--                        <span>Titulo</span>-->
-<!--                    </label>-->
-<!--                </div>-->
-<!--                <div class="checkbox-wrapper">-->
-<!--                    <input checked type="checkbox" class="check" id="check1-62">-->
-<!--                    <label for="check1-62" class="label">-->
-<!--                        <svg width="45" height="45" viewBox="0 0 95 95">-->
-<!--                            <rect x="30" y="20" width="50" height="50" stroke="black" fill="none"></rect>-->
-<!--                            <g transform="translate(0,-952.36222)">-->
-<!--                                <path d="m 56,963 c -102,122 6,9 7,9 17,-5 -66,69 -38,52 122,-77 -7,14 18,4 29,-11 45,-43 23,-4" stroke="black" stroke-width="3" fill="none" class="path1"></path>-->
-<!--                            </g>-->
-<!--                        </svg>-->
-<!--                        <span>Genero</span>-->
-<!--                    </label>-->
-<!--                </div>-->
-<!--                <div class="checkbox-wrapper">-->
-<!--                    <input checked type="checkbox" class="check" id="check1-63">-->
-<!--                    <label for="check1-63" class="label">-->
-<!--                        <svg width="45" height="45" viewBox="0 0 95 95">-->
-<!--                            <rect x="30" y="20" width="50" height="50" stroke="black" fill="none"></rect>-->
-<!--                            <g transform="translate(0,-952.36222)">-->
-<!--                                <path d="m 56,963 c -102,122 6,9 7,9 17,-5 -66,69 -38,52 122,-77 -7,14 18,4 29,-11 45,-43 23,-4" stroke="black" stroke-width="3" fill="none" class="path1"></path>-->
-<!--                            </g>-->
-<!--                        </svg>-->
-<!--                        <span>Autor</span>-->
-<!--                    </label>-->
-<!--                </div>-->
-<!--                <div class="checkbox-wrapper">-->
-<!--                    <input checked type="checkbox" class="check" id="check1-64">-->
-<!--                    <label for="check1-64" class="label">-->
-<!--                        <svg width="45" height="45" viewBox="0 0 95 95">-->
-<!--                            <rect x="30" y="20" width="50" height="50" stroke="black" fill="none"></rect>-->
-<!--                            <g transform="translate(0,-952.36222)">-->
-<!--                                <path d="m 56,963 c -102,122 6,9 7,9 17,-5 -66,69 -38,52 122,-77 -7,14 18,4 29,-11 45,-43 23,-4" stroke="black" stroke-width="3" fill="none" class="path1"></path>-->
-<!--                            </g>-->
-<!--                        </svg>-->
-<!--                        <span>Año de publicación</span>-->
-<!--                    </label>-->
-<!--                </div>-->
-<!--                <div class="checkbox-wrapper">-->
-<!--                    <input checked type="checkbox" class="check" id="check1-65">-->
-<!--                    <label for="check1-65" class="label">-->
-<!--                        <svg width="45" height="45" viewBox="0 0 95 95">-->
-<!--                            <rect x="30" y="20" width="50" height="50" stroke="black" fill="none"></rect>-->
-<!--                            <g transform="translate(0,-952.36222)">-->
-<!--                                <path d="m 56,963 c -102,122 6,9 7,9 17,-5 -66,69 -38,52 122,-77 -7,14 18,4 29,-11 45,-43 23,-4" stroke="black" stroke-width="3" fill="none" class="path1"></path>-->
-<!--                            </g>-->
-<!--                        </svg>-->
-<!--                        <span>Editorial</span>-->
-<!--                    </label>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </aside>-->
-
-
-        <!-- Contenido principal para libros -->
-
-            <div th:each="libro : ${libros}" class="col-lg-3 col-md-4 col-sm-6 mb-4 d-flex justify-content-center">
-                <div class="card" >
-                    <img th:src="@{'/imagenes/Imagenes_libros/' + ${libro.id_libros} + '.jpg'}" class="card-img-top" alt="Portada del libro">
-                    <div class="card-body">
-                        <h5 class="card-title" th:text="${libro.titulo}">Título del libro</h5>
-                        <p class="card-text">Autor: <span th:text="${libro.autor}">Autor del libro</span></p>
-                        <button type="button" class="btn btn-info" title="Ver info"
-                                th:attr="onclick='mostrarPortada(' + ${libro.id_libros} + ')'">
-                            Ver Info
-                        </button>
-                        <button type="button" class="btn btn-info" title="Añadir a lista"
-                                th:attr="onclick='mostrarListas(' + ${libro.id_libros} + ')'">
-                            Añadir a Lista
-                        </button>
-
-
+        <aside class="col-md-3">
+            <h3>Filtros de búsqueda</h3>
+            <form id="filters-form" th:action="@{/descubre/filtrar}" method="get">
+                <!-- Filtro por título -->
+                <div class="mb-3">
+                    <label for="filter-title" class="form-label">Título</label>
+                    <input type="text" name="titulo" class="form-control" id="filter-title"
+                           placeholder="Introduce un título">
+                </div>
+                <!-- Filtro por autor -->
+                <div class="mb-3">
+                    <label for="filter-author" class="form-label">Autor</label>
+                    <input type="text" name="autor" class="form-control" id="filter-author"
+                           placeholder="Introduce un autor">
+                </div>
+                <!-- Filtro por editorial -->
+                <div class="mb-3">
+                    <label for="filter-editorial" class="form-label">Editorial</label>
+                    <input type="text" name="editorial" class="form-control" id="filter-editorial"
+                           placeholder="Introduce una editorial">
+                </div>
+                <!-- Filtro por género -->
+                <div class="mb-3">
+                    <label class="form-label">Género</label>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="genero" value="novela" id="gen-novela">
+                        <label class="form-check-label" for="gen-novela">Novela</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="genero" value="novela negra"
+                               id="gen-novela-negra">
+                        <label class="form-check-label" for="gen-novela-negra">Novela negra</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="genero" value="ficción" id="gen-ficcion">
+                        <label class="form-check-label" for="gen-ficcion">Ficción</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="genero" value="ciencia ficción"
+                               id="gen-ciencia-ficcion">
+                        <label class="form-check-label" for="gen-ciencia-ficcion">Ciencia Ficción</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="genero" value="fantasía"
+                               id="gen-fantasia">
+                        <label class="form-check-label" for="gen-fantasia">Fantasía</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="genero" value="terror" id="gen-terror">
+                        <label class="form-check-label" for="gen-terror">Terror</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="genero" value="suspense"
+                               id="gen-suspense">
+                        <label class="form-check-label" for="gen-suspense">Suspense</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="genero" value="autoayuda"
+                               id="gen-autoayuda">
+                        <label class="form-check-label" for="gen-autoayuda">Autoayuda</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="genero" value="filosofia"
+                               id="gen-filosofia">
+                        <label class="form-check-label" for="gen-filosofia">Filosofía</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="genero" value="juvenil" id="gen-juvenil">
+                        <label class="form-check-label" for="gen-juvenil">Juvenil</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="genero" value="programacion"
+                               id="gen-programacion">
+                        <label class="form-check-label" for="gen-programacion">Programación</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="genero" value="no ficcion"
+                               id="gen-no-ficción">
+                        <label class="form-check-label" for="gen-no-ficción">No ficción</label>
+                    </div>
+                    <!-- Campo de texto para otro género -->
+                    <div class="mt-2">
+                        <input type="text" name="generoOtro" class="form-control" id="filter-other-genre"
+                               placeholder="Otro género">
                     </div>
                 </div>
+                <!-- Filtro por rango de año de publicación -->
+                <div class="mb-3">
+                    <label for="filter-year-from" class="form-label">Año de publicación desde</label>
+                    <input type="number" name="anoDesde" class="form-control" id="filter-year-from" placeholder="Desde">
+                </div>
+                <div class="mb-3">
+                    <label for="filter-year-to" class="form-label">Año de publicación hasta</label>
+                    <input type="number" name="anoHasta" class="form-control" id="filter-year-to" placeholder="Hasta">
+                </div>
+                <button type="submit" class="btn btn-primary" style="margin-top: 2rem !important;">Aplicar filtros
+                </button>
+            </form>
+        </aside>
+
+        <!-- Contenido principal para libros -->
+        <div class="col-md-9">
+            <div class="cards-container">
+                <!-- ALERTA no resultados -->
+                <div th:if="${noResultados}" class="alert alert-warning" role="alert">
+                    <p th:text="${noResultados}"></p>
+                </div>
+                <div th:each="libro : ${libros}" class="col-lg-3 col-md-4 col-sm-6 mb-4 d-flex justify-content-center">
+                    <div class="card">
+                        <img th:src="@{'/imagenes/Imagenes_libros/' + ${libro.id_libros} + '.jpg'}" class="card-img-top"
+                             alt="Portada del libro">
+                        <div class="card-body">
+                            <h5 class="card-title" th:text="${libro.titulo}">Título del libro</h5>
+                            <p class="card-text">Autor: <span th:text="${libro.autor}">Autor del libro</span></p>
+                            <button type="button" class="btn btn-info" title="Ver info"
+                                    th:attr="onclick='mostrarPortada(' + ${libro.id_libros} + ')'">
+                                Ver Info
+                            </button>
+                            <button type="button" class="btn btn-info" title="Añadir a lista"
+                                    th:attr="onclick='mostrarListas(' + ${libro.id_libros} + ')'">
+                                Añadir a Lista
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -338,219 +277,254 @@
     </div>
 </div>
 <br>
-<!-- Controles de Paginación -->
-<nav aria-label="Page navigation example" class="mt-4">
-    <ul class="pagination justify-content-center">
-        <li class="page-item" th:class="${paginaActual == 0} ? 'disabled'">
-            <a class="page-link" th:href="@{/descubre(pagina=0, sortBy=${sortBy}, sortOrder=${sortOrder})}" aria-label="Previous">
-                <span aria-hidden="true">&laquo;</span>
-            </a>
-        </li>
-        <li th:each="num : ${#numbers.sequence(0, totalPaginas - 1)}" class="page-item" th:classappend="${num == paginaActual} ? 'active'">
-            <a class="page-link" th:href="@{/descubre(pagina=${num}, sortBy=${sortBy}, sortOrder=${sortOrder})}" th:text="${num + 1}"></a>
-        </li>
-        <li class="page-item" th:class="${paginaActual == totalPaginas - 1} ? 'disabled'">
-            <a class="page-link" th:href="@{/descubre(pagina=${totalPaginas - 1}, sortBy=${sortBy}, sortOrder=${sortOrder})}" aria-label="Next">
-                <span aria-hidden="true">&raquo;</span>
-            </a>
-        </li>
-    </ul>
-</nav>
 
-<!-- Footer -->
-<footer class="row d-flex vh-15">
-    <div class="d-flex justify-content-center">
-        <p id="frase"></p>
-    </div>
-</footer>
+<!-- Controles de Paginación (solo si hay resultados) -->
+<div th:if="${not #lists.isEmpty(libros)}">
+    <!-- Controles de Paginación ventana grande -->
+    <nav aria-label="Page navigation example" class="d-none d-md-block" style="background-color: transparent">
+        <ul class="pagination justify-content-center">
+            <li class="page-item" th:class="${paginaActual == 0} ? 'disabled'">
+                <a class="page-link" th:href="@{/descubre(pagina=0, sortBy=${sortBy}, sortOrder=${sortOrder})}"
+                   aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            <li th:each="num : ${#numbers.sequence(0, totalPaginas - 1)}" class="page-item"
+                th:classappend="${num == paginaActual} ? 'active'">
+                <a class="page-link" th:href="@{/descubre(pagina=${num}, sortBy=${sortBy}, sortOrder=${sortOrder})}"
+                   th:text="${num + 1}"></a>
+            </li>
+            <li class="page-item" th:class="${paginaActual == totalPaginas - 1} ? 'disabled'">
+                <a class="page-link"
+                   th:href="@{/descubre(pagina=${totalPaginas - 1}, sortBy=${sortBy}, sortOrder=${sortOrder})}"
+                   aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
 
-<!-- Modal ver info libro -->
-<div class="modal fade" id="verInfoLibro" tabindex="-1" aria-labelledby="verInfoLibroModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="verInfoLibroModalLabel">Información del Libro</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-            </div>
-            <div class="modal-body">
-                <div class="mb-3">
-                    <p>Título: <span id="modal-titulo"></span></p>
-                </div>
-                <div class="mb-3">
-                    <p>Autor: <span id="modal-autor"></span></p>
-                </div>
-                <div class="mb-3">
-                    <p>Género: <span id="modal-genero"></span></p>
-                </div>
-                <div class="mb-3">
-                    <p>Año de publicación: <span id="modal-ano"></span></p>
-                </div>
-                <div class="mb-3">
-                    <p>Editorial: <span id="modal-editorial"></span></p>
-                </div>
+    <!-- Controles de Paginación ventana pequeña -->
+    <nav aria-label="Page navigation" class="d-md-none">
+        <ul class="pagination justify-content-center">
+            <li class="page-item" th:class="${paginaActual == 0} ? 'disabled'">
+                <a class="page-link" th:href="@{/descubre(pagina=0, sortBy=${sortBy}, sortOrder=${sortOrder})}"
+                   aria-label="Primera">
+                    <span aria-hidden="true">&laquo;&laquo;</span>
+                    <span class="visually-hidden">Primera</span>
+                </a>
+            </li>
+            <li class="page-item" th:class="${paginaActual == 0} ? 'disabled'">
+                <a class="page-link"
+                   th:href="@{/descubre(pagina=${paginaActual - 1}, sortBy=${sortBy}, sortOrder=${sortOrder})}"
+                   aria-label="Anterior">
+                    <span aria-hidden="true">&laquo;</span>
+                    <span class="visually-hidden">Anterior</span>
+                </a>
+            </li>
+            <li class="page-item">
+                <span class="page-link" th:text="${paginaActual + 1} + ' de ' + ${totalPaginas}"></span>
+            </li>
+            <li class="page-item" th:class="${paginaActual == totalPaginas - 1} ? 'disabled'">
+                <a class="page-link"
+                   th:href="@{/descubre(pagina=${paginaActual + 1}, sortBy=${sortBy}, sortOrder=${sortOrder})}"
+                   aria-label="Siguiente">
+                    <span aria-hidden="true">&raquo;</span>
+                    <span class="visually-hidden">Siguiente</span>
+                </a>
+            </li>
+            <li class="page-item" th:class="${paginaActual == totalPaginas - 1} ? 'disabled'">
+                <a class="page-link"
+                   th:href="@{/descubre(pagina=${totalPaginas - 1}, sortBy=${sortBy}, sortOrder=${sortOrder})}"
+                   aria-label="Última">
+                    <span aria-hidden="true">&raquo;&raquo;</span>
+                    <span class="visually-hidden">Última</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
 
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-            </div>
+    <!-- Footer -->
+    <footer class="row d-flex vh-15">
+        <div class="d-flex justify-content-center">
+            <p id="frase"></p>
         </div>
-    </div>
-</div>
-<!-- Modal para seleccionar la lista -->
-<div class="modal fade" id="seleccionarListaModal" tabindex="-1" aria-labelledby="seleccionarListaModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="seleccionarListaModalLabel">Seleccionar Lista</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-            </div>
-            <div class="modal-body">
-                <form id="formSeleccionarLista">
+    </footer>
+
+    <!-- Modal ver info libro -->
+    <div class="modal fade" id="verInfoLibro" tabindex="-1" aria-labelledby="verInfoLibroModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="modal-titulo"></h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body">
                     <div class="mb-3">
-                        <label for="selectLista" class="form-label">Elige una lista:</label>
-                        <select class="form-select" id="selectLista" name="lista">
-
-                        </select>
+                        <p>Autor: <span id="modal-autor"></span></p>
                     </div>
-                    <input type="hidden" id="libroId" name="libroId"> <!-- Campo oculto para el ID del libro -->
-                    <input type="hidden" id="idUsuario" th:value="${session.usuario.id_usuario}">
-                    <button type="button" class="btn btn-primary" onclick="anadirLibroALista()">Añadir a la Lista</button>
-                </form>
-                <div id="mensajeConfirmacion" class="alert alert-success mt-3" style="display:none;">
-                    Libro añadido a la lista con éxito.
+                    <div class="mb-3">
+                        <p>Género: <span id="modal-genero"></span></p>
+                    </div>
+                    <div class="mb-3">
+                        <p>Año de publicación: <span id="modal-ano"></span></p>
+                    </div>
+                    <div class="mb-3">
+                        <p>Editorial: <span id="modal-editorial"></span></p>
+                    </div>
+
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
+    <!-- Modal para seleccionar la lista -->
+    <div class="modal fade" id="seleccionarListaModal" tabindex="-1" aria-labelledby="seleccionarListaModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="seleccionarListaModalLabel">Seleccionar Lista</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="formSeleccionarLista">
+                        <div class="mb-3">
+                            <label for="selectLista" class="form-label">Elige una lista:</label>
+                            <select class="form-select" id="selectLista" name="lista">
+
+                            </select>
+                        </div>
+                        <input type="hidden" id="libroId" name="libroId"> <!-- Campo oculto para el ID del libro -->
+                        <input type="hidden" id="idUsuario" th:value="${session.usuario.id_usuario}">
+                        <button type="button" class="btn btn-primary" onclick="anadirLibroALista()">Añadir a la Lista
+                        </button>
+                    </form>
+                    <div id="mensajeConfirmacion" class="alert alert-success mt-3" style="display:none;">
+                        Libro añadido a la lista con éxito.
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
-<!-- Scripts de Bootstrap y JavaScript -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="/js/footer.js"></script>
+    <!-- Scripts de Bootstrap y JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/js/footer.js"></script>
 
 
-<script>
-    <!-- Scripts mostrar portada-->
-    function mostrarPortada(libroId) {
-        let url = '/descubre/obtenerInfoLibro/' + libroId;
+    <script>
+        <!-- Scripts mostrar portada-->
+        function mostrarPortada(libroId) {
+            let url = '/descubre/obtenerInfoLibro/' + libroId;
 
-        fetch(url)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Error al cargar la información del libro');
-                }
-                return response.json();
-            })
-            .then(data => {
-                console.log(data); // Para depuración
-                document.querySelector('#verInfoLibro #modal-titulo').textContent = data.titulo;
-                document.querySelector('#verInfoLibro #modal-autor').textContent = data.autor;
-                document.querySelector('#verInfoLibro #modal-genero').textContent = data.genero;
-                document.querySelector('#verInfoLibro #modal-ano').textContent = data.anoPublicacion;
-                document.querySelector('#verInfoLibro #modal-editorial').textContent = data.editorial;
+            fetch(url)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Error al cargar la información del libro');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log(data); // Para depuración
+                    document.querySelector('#verInfoLibro #modal-titulo').textContent = data.titulo;
+                    document.querySelector('#verInfoLibro #modal-autor').textContent = data.autor;
+                    document.querySelector('#verInfoLibro #modal-genero').textContent = data.genero;
+                    document.querySelector('#verInfoLibro #modal-ano').textContent = data.anoPublicacion;
+                    document.querySelector('#verInfoLibro #modal-editorial').textContent = data.editorial;
 
 
-
-                // Mostrar el modal
-                let verInfoModal = new bootstrap.Modal(document.getElementById('verInfoLibro'));
-                verInfoModal.show();
-            })
-            .catch(error => {
-                console.error(error); // Para depuración
-                alert('No se pudo cargar la información del libro: ' + error.message);
-            });
-    }
-</script>
+                    // Mostrar el modal
+                    let verInfoModal = new bootstrap.Modal(document.getElementById('verInfoLibro'));
+                    verInfoModal.show();
+                })
+                .catch(error => {
+                    console.error(error); // Para depuración
+                    alert('No se pudo cargar la información del libro: ' + error.message);
+                });
+        }
+    </script>
     <!-- Scripts añadir a la lista-->
 
-<script>
-function mostrarListas(libroId) {
-    let idUsuario = document.getElementById('idUsuario').value; // Obtener el idUsuario del campo oculto
-    let url = `/descubre/obtenerListas`; // Construir la URL para obtener todas las listas
-    document.getElementById('libroId').value = libroId; // Asignar el libroId al campo oculto
+    <script>
+        function mostrarListas(libroId) {
+            let idUsuario = document.getElementById('idUsuario').value; // Obtener el idUsuario del campo oculto
+            let url = `/descubre/obtenerListas`; // Construir la URL para obtener todas las listas
+            document.getElementById('libroId').value = libroId; // Asignar el libroId al campo oculto
 
-    $.ajax({
-        url: url,
-        method: 'GET',
-        success: function(data) {
-            console.log(data);
-            let selectLista = document.getElementById('selectLista');
-            selectLista.innerHTML = ''; // Limpiar opciones anteriores
+            $.ajax({
+                url: url,
+                method: 'GET',
+                success: function (data) {
+                    console.log(data);
+                    let selectLista = document.getElementById('selectLista');
+                    selectLista.innerHTML = ''; // Limpiar opciones anteriores
 
-            // Filtrar las listas por idUsuario
-            let listasFiltradas = data.filter(lista => lista.id_usuario === parseInt(idUsuario));
+                    // Filtrar las listas por idUsuario
+                    let listasFiltradas = data.filter(lista => lista.id_usuario === parseInt(idUsuario));
 
-            // Asegúrate de que `listasFiltradas` es un array de listas
-            if (Array.isArray(listasFiltradas)) {
-                listasFiltradas.forEach(lista => {
-                    let option = document.createElement('option');
-                    option.value = lista.id_lista;
-                    option.textContent = lista.nombre_lista;
-                    selectLista.appendChild(option);
-                });
-            } else {
-                console.error('La respuesta no es un array');
-                alert('Error en el formato de la respuesta');
-            }
+                    // Asegúrate de que `listasFiltradas` es un array de listas
+                    if (Array.isArray(listasFiltradas)) {
+                        listasFiltradas.forEach(lista => {
+                            let option = document.createElement('option');
+                            option.value = lista.id_lista;
+                            option.textContent = lista.nombre_lista;
+                            selectLista.appendChild(option);
+                        });
+                    } else {
+                        console.error('La respuesta no es un array');
+                        alert('Error en el formato de la respuesta');
+                    }
 
-            // Mostrar el modal
-            let seleccionarListaModal = new bootstrap.Modal(document.getElementById('seleccionarListaModal'));
-            seleccionarListaModal.show();
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-            console.error('Error en la petición:', textStatus, errorThrown);
-            alert('No se pudo cargar las listas: ' + textStatus);
+                    // Mostrar el modal
+                    let seleccionarListaModal = new bootstrap.Modal(document.getElementById('seleccionarListaModal'));
+                    seleccionarListaModal.show();
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.error('Error en la petición:', textStatus, errorThrown);
+                    alert('No se pudo cargar las listas: ' + textStatus);
+                }
+            });
         }
-    });
-}
 
 
+        function anadirLibroALista() {
+            let listaId = document.getElementById('selectLista').value;
+            let libroId = document.getElementById('libroId').value; // Asegúrate de que este campo se llena correctamente al abrir el modal
 
-
-
-
-function anadirLibroALista() {
-    let listaId = document.getElementById('selectLista').value;
-    let libroId = document.getElementById('libroId').value; // Asegúrate de que este campo se llena correctamente al abrir el modal
-
-    $.ajax({
-        url: '/descubre/anadirLibroALista',
-        method: 'POST',
-        data: {
-            libroId: libroId,
-            listaId: listaId
-        },
-        success: function(response) {
-            alert('Libro añadido con éxito');
-            console.log(response);
-            $('#mensajeConfirmacion').show(); // Mostrar mensaje de confirmación
-            setTimeout(function() {
-                $('#mensajeConfirmacion').hide(); // Ocultar mensaje después de unos segundos
-            }, 3000);
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-            alert('Error al añadir el libro: ' + textStatus);
-            console.error('Error en la petición:', textStatus, errorThrown);
+            $.ajax({
+                url: '/descubre/anadirLibroALista',
+                method: 'POST',
+                data: {
+                    libroId: libroId,
+                    listaId: listaId
+                },
+                success: function (response) {
+                    alert('Libro añadido con éxito');
+                    console.log(response);
+                    $('#mensajeConfirmacion').show(); // Mostrar mensaje de confirmación
+                    setTimeout(function () {
+                        $('#mensajeConfirmacion').hide(); // Ocultar mensaje después de unos segundos
+                    }, 3000);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert('Error al añadir el libro: ' + textStatus);
+                    console.error('Error en la petición:', textStatus, errorThrown);
+                }
+            });
         }
-    });
-}
 
 
-</script>
+    </script>
 
 
-
-
-
-
-
-
-
-
+</div>
 </body>
 </html>

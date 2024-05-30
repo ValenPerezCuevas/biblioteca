@@ -138,21 +138,30 @@
             object-fit: cover;
         }
 
-        /* Estilo para ocultar columna Editorial en pantallas pequeñas */
-        @media (max-width: 1000px) {
+        /* ocultar columna Editorial */
+        @media (max-width: 1200px) {
+            .hide-on-xl {
+                display: none;
+            }
+        }
+
+        /* ocultar columna año publicación */
+        @media (max-width: 992px){
+            .hide-on-lg {
+                display: none;
+            }
+        }
+
+        /* ocultar columna autor */
+        @media (max-width: 768px){
+            .hide-on-md {
+                display: none;
+            }
+        }
+
+        /* ocultar columna género */
+        @media (max-width: 576px){
             .hide-on-sm {
-                display: none;
-            }
-        }
-
-        @media (max-width: 800px){
-            .hide-on-sm-1 {
-                display: none;
-            }
-        }
-
-        @media (max-width: 780px){
-            .hide-on-sm-2 {
                 display: none;
             }
         }
@@ -219,7 +228,7 @@
 
     <div class="container table-responsive">
         <table class="table table-striped">
-            <thead>
+            <thead >
             <tr>
                 <!-- ordenar columnas:-->
                 <th data-sort="titulo" th:data-order="${sortBy == 'titulo' and sortOrder == 'asc' ? 'desc' : 'asc'}">
@@ -228,25 +237,25 @@
                         <path fill-rule="evenodd" d="M11.5 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L11 2.707V14.5a.5.5 0 0 0 .5.5m-7-14a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L4 13.293V1.5a.5.5 0 0 1 .5-.5"/>
                     </svg>
                 </th>
-                <th data-sort="genero" th:data-order="${sortBy == 'genero' and sortOrder == 'asc' ? 'desc' : 'asc'}">
+                <th data-sort="genero" th:data-order="${sortBy == 'genero' and sortOrder == 'asc' ? 'desc' : 'asc'}" class="hide-on-sm">
                     Género
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-up" viewBox="0 0 16 16">
                         <path fill-rule="evenodd" d="M11.5 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L11 2.707V14.5a.5.5 0 0 0 .5.5m-7-14a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L4 13.293V1.5a.5.5 0 0 1 .5-.5"/>
                     </svg>
                 </th>
-                <th data-sort="autor" th:data-order="${sortBy == 'autor' and sortOrder == 'asc' ? 'desc' : 'asc'}" class="hide-on-sm-2">
+                <th data-sort="autor" th:data-order="${sortBy == 'autor' and sortOrder == 'asc' ? 'desc' : 'asc'}" class="hide-on-md">
                     Autor
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-up" viewBox="0 0 16 16">
                         <path fill-rule="evenodd" d="M11.5 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L11 2.707V14.5a.5.5 0 0 0 .5.5m-7-14a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L4 13.293V1.5a.5.5 0 0 1 .5-.5"/>
                     </svg>
                 </th>
-                <th data-sort="anoPublicacion" th:data-order="${sortBy == 'anoPublicacion' and sortOrder == 'asc' ? 'desc' : 'asc'}" class="hide-on-sm-1">
+                <th data-sort="anoPublicacion" th:data-order="${sortBy == 'anoPublicacion' and sortOrder == 'asc' ? 'desc' : 'asc'}" class="hide-on-lg">
                     Año de Publicación
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-up" viewBox="0 0 16 16">
                         <path fill-rule="evenodd" d="M11.5 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L11 2.707V14.5a.5.5 0 0 0 .5.5m-7-14a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L4 13.293V1.5a.5.5 0 0 1 .5-.5"/>
                     </svg>
                 </th>
-                <th data-sort="editorial" th:data-order="${sortBy == 'editorial' and sortOrder == 'asc' ? 'desc' : 'asc'}" class="hide-on-sm">
+                <th data-sort="editorial" th:data-order="${sortBy == 'editorial' and sortOrder == 'asc' ? 'desc' : 'asc'}" class="hide-on-xl">
                     Editorial
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-up" viewBox="0 0 16 16">
                         <path fill-rule="evenodd" d="M11.5 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L11 2.707V14.5a.5.5 0 0 0 .5.5m-7-14a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L4 13.293V1.5a.5.5 0 0 1 .5-.5"/>
@@ -257,10 +266,10 @@
             <tbody class="table-group-divider" id="tabla-libros">
             <tr th:each="libro : ${libros}">
                 <td th:text="${libro.titulo}"></td>
-                <td th:text="${libro.genero}"></td>
-                <td th:text="${libro.autor}" class="hide-on-sm-2"></td>
-                <td th:text="${libro.anoPublicacion}" class="hide-on-sm-1">></td>
-                <td th:text="${libro.editorial}" class="hide-on-sm"></td>
+                <td th:text="${libro.genero}" class="hide-on-sm"></td>
+                <td th:text="${libro.autor}" class="hide-on-md"></td>
+                <td th:text="${libro.anoPublicacion}" class="hide-on-lg">></td>
+                <td th:text="${libro.editorial}" class="hide-on-xl"></td>
                 <td>
                     <div class="btn-group" role="group" aria-label="Acciones">
                         <button type="button" class="btn btn-info" title="Ver portada"
@@ -426,7 +435,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="verPortadaModalLabel">Portada del Libro</h5>
+                <h5 class="modal-title" id="verPortadaModalLabel" th:text="${libro.titulo}">Portada del Libro</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
             </div>
             <div class="modal-body text-center">
