@@ -119,7 +119,4 @@ public class controladorDescubre {
         return "descubre";
     }
 
-
-
-
 }
