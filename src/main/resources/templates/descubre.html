@@ -474,11 +474,12 @@
                     listaId: listaId
                 },
                 success: function (response) {
-                    alert('Libro añadido con éxito');
+
                     console.log(response);
                     $('#mensajeConfirmacion').show(); // Mostrar mensaje de confirmación
                     setTimeout(function () {
-                        $('#mensajeConfirmacion').hide(); // Ocultar mensaje después de unos segundos
+                        $('#mensajeConfirmacion').hide();
+                        $('#seleccionarListaModal').modal('hide');
                     }, 3000);
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
