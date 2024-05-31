@@ -34,7 +34,6 @@ public class controladorLista {
     public controladorLista(ListasRepository listasRepository,  Libros_listasRepository librosListasRepository) {
 
         this.listasRepository = listasRepository;
-
         this.librosListasRepository = librosListasRepository;
     }
 
@@ -43,9 +42,6 @@ public class controladorLista {
         model.addAttribute("listas", listasRepository.findAll());
         model.addAttribute("listasModificado", new listas());
         model.addAttribute("requestURI", request.getRequestURI());
-
-
-
 
         return "listas";
     }
@@ -64,27 +60,31 @@ public class controladorLista {
         return "redirect:/listas";
     }
 
-
     /**********************************************************************************
      * Eliminar datos
      * * *********************************************************************************/
     @PostMapping("/eliminarLista/{id}")
     public String eliminarLista(@PathVariable("id") Long id, HttpServletRequest request, RedirectAttributes redirectAttributes) {
-        usuarios usuarioLogueado = (usuarios) request.getSession().getAttribute("usuario");
-        listas lista = listasRepository.findById(id).orElse(null);
+//        usuarios usuarioLogueado = (usuarios) request.getSession().getAttribute("usuario");
+//        listas lista = listasRepository.findById(id).orElse(null);
+//
+//        if (lista == null) {
+//            redirectAttributes.addFlashAttribute("error", "Lista no encontrada.");
+//            return "redirect:/listas";
+//        }
+//
+//        if (!lista.getCreado_por().equals(usuarioLogueado.getId_usuario())) {
+//            redirectAttributes.addFlashAttribute("error", "Esta lista no te pertenece, no puedes borrarla.");
+//            return "redirect:/listas";
+//        }
 
-        if (lista == null) {
-            redirectAttributes.addFlashAttribute("error", "Lista no encontrada.");
-            return "redirect:/listas";
+        try {
+            listasRepository.deleteById(id);
+            redirectAttributes.addFlashAttribute("success", "Lista eliminada con éxito");
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("error", "No se pudo eliminar la lista");
         }
 
-        if (!lista.getCreado_por().equals(usuarioLogueado.getId_usuario())) {
-            redirectAttributes.addFlashAttribute("error", "Esta lista no te pertenece, no puedes borrarla.");
-            return "redirect:/listas";
-        }
-
-        listasRepository.deleteById(id);
-        redirectAttributes.addFlashAttribute("success", "Lista eliminada con éxito.");
         return "redirect:/listas";
     }
 
@@ -103,10 +103,10 @@ public class controladorLista {
         listasRepository.save(listaModificada);
         return "redirect:/listas";
     }
+
     /**********************************************************************************
      * Mostrar libros de listas
      **********************************************************************************/
-
     @GetMapping("/listas/{id}/libros")
     public ResponseEntity<?> obtenerLibrosPorLista(
             @PathVariable("id") Long idLista,

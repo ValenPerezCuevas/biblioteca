@@ -20,8 +20,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-
-
 @Controller
 public class controladorLibro {
     private final LibroRepository libroRepository;
@@ -77,7 +75,6 @@ public class controladorLibro {
         return "libros";
     }
 
-
     /**********************************************************************************
      * Método para agregar un libro
      * *********************************************************************************/
@@ -95,6 +92,7 @@ public class controladorLibro {
         libroRepository.deleteById(id);
         return "redirect:/listado";
     }
+
     /**********************************************************************************
      * Modificar datos de libro
      * * *********************************************************************************/
@@ -144,6 +142,4 @@ public class controladorLibro {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Libro no encontrado");
         }
     }
-
-
 }

@@ -12,9 +12,8 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ListasRepository extends JpaRepository<listas,Long> {
-    ArrayList<listas> findByUsuario(usuarios usuario);
-
-
-    @Query("SELECT l FROM listas l WHERE l.id_lista = :idLista AND l.usuario = :usuario")
-    Optional<listas> findByIdAndUsuario(@Param("idLista") Integer idLista, @Param("usuario") usuarios usuario);
+//    ArrayList<listas> findByUsuario(usuarios usuario);
+//
+//    @Query("SELECT l FROM listas l WHERE l.id_lista = :idLista AND l.usuario = :usuario")
+//    Optional<listas> findByIdAndUsuario(@Param("idLista") Integer idLista, @Param("usuario") usuarios usuario);
 }

@@ -18,10 +18,4 @@ public class controladorPrincipal {
         model.addAttribute("requestURI", request.getRequestURI());
         return "admin";
     }
-
-
-
-
-
-
 }
