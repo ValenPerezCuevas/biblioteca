@@ -24,7 +24,6 @@ import java.util.*;
 public class controladorLista {
 
     private final ListasRepository listasRepository;
-
     private final Libros_listasRepository librosListasRepository;
 
     @Value("${ruta.imagenes}")
@@ -32,15 +31,16 @@ public class controladorLista {
 
     @Autowired
     public controladorLista(ListasRepository listasRepository,  Libros_listasRepository librosListasRepository) {
-
         this.listasRepository = listasRepository;
         this.librosListasRepository = librosListasRepository;
     }
 
     @GetMapping("/listas")
-    public String obtenerTodasLasListas(Model model, HttpServletRequest request){
+    public String obtenerTodasLasListas(Model model, HttpServletRequest request) {
+        usuarios usuarioLogueado = (usuarios) request.getSession().getAttribute("usuario");
         model.addAttribute("listas", listasRepository.findAll());
         model.addAttribute("listasModificado", new listas());
+        model.addAttribute("usuarioLogueado", usuarioLogueado);
         model.addAttribute("requestURI", request.getRequestURI());
 
         return "listas";
@@ -62,11 +62,10 @@ public class controladorLista {
 
     /**********************************************************************************
      * Eliminar datos
-     * * *********************************************************************************/
+     * * ******************************************************************************/
     @PostMapping("/eliminarLista/{id_lista}")
     public String eliminarLista(@PathVariable("id_lista") Integer id_lista, HttpServletRequest request, RedirectAttributes redirectAttributes) {
         usuarios usuarioLogueado = (usuarios) request.getSession().getAttribute("usuario");
-
 
         try {
             // Verificar si la lista existe
@@ -77,7 +76,6 @@ public class controladorLista {
             }
 
             // Verificar que el usuario logueado tiene permiso para eliminarla
-
             if (!lista.getUsuario().getId_usuario().equals(usuarioLogueado.getId_usuario())){
                 redirectAttributes.addFlashAttribute("error", "Esta lista no te pertenece, no puedes borrarla.");
                 return "redirect:/listas";
