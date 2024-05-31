@@ -63,26 +63,31 @@ public class controladorLista {
     /**********************************************************************************
      * Eliminar datos
      * * *********************************************************************************/
-    @PostMapping("/eliminarLista/{id}")
-    public String eliminarLista(@PathVariable("id") Long id, HttpServletRequest request, RedirectAttributes redirectAttributes) {
-//        usuarios usuarioLogueado = (usuarios) request.getSession().getAttribute("usuario");
-//        listas lista = listasRepository.findById(id).orElse(null);
-//
-//        if (lista == null) {
-//            redirectAttributes.addFlashAttribute("error", "Lista no encontrada.");
-//            return "redirect:/listas";
-//        }
-//
-//        if (!lista.getCreado_por().equals(usuarioLogueado.getId_usuario())) {
-//            redirectAttributes.addFlashAttribute("error", "Esta lista no te pertenece, no puedes borrarla.");
-//            return "redirect:/listas";
-//        }
+    @PostMapping("/eliminarLista/{id_lista}")
+    public String eliminarLista(@PathVariable("id_lista") Integer id_lista, HttpServletRequest request, RedirectAttributes redirectAttributes) {
+        usuarios usuarioLogueado = (usuarios) request.getSession().getAttribute("usuario");
+
 
         try {
-            listasRepository.deleteById(id);
+            // Verificar si la lista existe
+            listas lista = listasRepository.findById(Long.valueOf(id_lista)).orElse(null);
+            if (lista == null) {
+                redirectAttributes.addFlashAttribute("error", "Lista no encontrada.");
+                return "redirect:/listas";
+            }
+
+            // Verificar que el usuario logueado tiene permiso para eliminarla
+
+            if (!lista.getUsuario().getId_usuario().equals(usuarioLogueado.getId_usuario())){
+                redirectAttributes.addFlashAttribute("error", "Esta lista no te pertenece, no puedes borrarla.");
+                return "redirect:/listas";
+            }
+
+            // Usar el método personalizado para eliminar
+            listasRepository.deleteByIdCustom(id_lista);
             redirectAttributes.addFlashAttribute("success", "Lista eliminada con éxito");
         } catch (Exception e) {
-            redirectAttributes.addFlashAttribute("error", "No se pudo eliminar la lista");
+            redirectAttributes.addFlashAttribute("error", "No se pudo eliminar la lista debido a: " + e.getMessage());
         }
 
         return "redirect:/listas";
