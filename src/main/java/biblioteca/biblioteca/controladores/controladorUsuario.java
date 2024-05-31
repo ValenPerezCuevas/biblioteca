@@ -1,7 +1,6 @@
 package biblioteca.biblioteca.controladores;
 
-
-import biblioteca.biblioteca.entidades.libros;
+import biblioteca.biblioteca.entidades.listas;
 import biblioteca.biblioteca.entidades.roles;
 import biblioteca.biblioteca.entidades.usuarios;
 import biblioteca.biblioteca.repositorios.RolesRepository;
@@ -17,13 +16,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 @Controller
-
 public class controladorUsuario {
-
 
     private final UsuarioRepository usuarioRepository;
     private final RolesRepository rolesRepository;
@@ -34,9 +32,6 @@ public class controladorUsuario {
         this.rolesRepository = rolesRepository;
     }
 
-    /**********************************************************************************
-     * Mostrar datos de los usuarios
-     * *********************************************************************************/
     @GetMapping("/usuarios")
     public String obtenerTodosLosUsuarios(
             HttpServletRequest request,
@@ -46,7 +41,6 @@ public class controladorUsuario {
             @RequestParam(defaultValue = "rol,nombre") String sortBy,
             @RequestParam(defaultValue = "asc,asc") String sortOrder
     ) {
-        // dos métodos de ordenación por defecto 1ro rol y 2do nombre:
         String[] sortProperties = sortBy.split(",");
         String[] sortDirections = sortOrder.split(",");
 
@@ -68,18 +62,12 @@ public class controladorUsuario {
         model.addAttribute("sortBy", sortBy);
         model.addAttribute("sortOrder", sortOrder);
 
-//        model.addAttribute("listaUsuarios", usuarioRepository.findAll());
         model.addAttribute("nuevoUsuario", new usuarios());
         model.addAttribute("usuarioModificado", new usuarios());
-        model.addAttribute("listaRoles", rolesRepository.findAll()); // Agregar lista de roles al modelo
+        model.addAttribute("listaRoles", rolesRepository.findAll());
 
         return "usuarios";
     }
-
-
-    /**********************************************************************************
-     * Mandar formulario de agregar usuario
-     * * *********************************************************************************/
 
     @PostMapping("/agregarUsuario")
     public String guardarUsuario(@ModelAttribute("nuevoUsuario") usuarios usuario, @RequestParam("rol.id_rol") Long id) {
@@ -90,18 +78,12 @@ public class controladorUsuario {
         return "redirect:/usuarios";
     }
 
-    /**********************************************************************************
-     * Eliminar datos
-     * * *********************************************************************************/
     @PostMapping("/eliminarUsuario/{id}")
     public String eliminarUsuario(@PathVariable("id") Long id) {
         usuarioRepository.deleteById(id);
         return "redirect:/usuarios";
     }
 
-    /**********************************************************************************
-     * Modificar datos
-     * * *********************************************************************************/
     @GetMapping("/modificarUsuario/{id}")
     @ResponseBody
     public ResponseEntity<usuarios> mostrarFormularioDeModificar(@PathVariable("id") Long id) {
@@ -112,9 +94,32 @@ public class controladorUsuario {
 
     @PostMapping("/modificarUsuario")
     public String modificarUsuario(@ModelAttribute("usuarioModificado") usuarios usuarioModificado) {
-        usuarioRepository.save(usuarioModificado);
+        usuarios usuarioExistente = usuarioRepository.findById(Long.valueOf(usuarioModificado.getId_usuario()))
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+
+        // Actualizar campos básicos
+        usuarioExistente.setNombre(usuarioModificado.getNombre());
+        usuarioExistente.setContrasena(usuarioModificado.getContrasena());
+
+        // Gestionar la relación con roles
+        roles rol = rolesRepository.findById((long) usuarioModificado.getRol().getId_rol())
+                .orElseThrow(() -> new RuntimeException("Rol no encontrado"));
+        usuarioExistente.setRol(rol);
+
+        // Gestionar listas: actualizar la colección
+        List<listas> listasNuevas = usuarioModificado.getListas();
+        if (listasNuevas != null) {
+            // Eliminar listas huérfanas
+            usuarioExistente.getListas().clear();
+            // Asignar el usuario a las nuevas listas y añadirlas a la colección existente
+            for (listas lista : listasNuevas) {
+                lista.setUsuario(usuarioExistente);
+                usuarioExistente.getListas().add(lista);
+            }
+        }
+
+        usuarioRepository.save(usuarioExistente);
         return "redirect:/usuarios";
     }
-
 
 }

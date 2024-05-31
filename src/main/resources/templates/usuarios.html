@@ -226,8 +226,7 @@
 
 <!-- Modales -->
 <!-- Modal crear usuario -->
-<div class="modal fade" id="crearUsuarioModal" tabindex="-1" aria-labelledby="crearUsuarioModalLabel"
-     aria-hidden="true">
+<div class="modal fade" id="crearUsuarioModal" tabindex="-1" aria-labelledby="crearUsuarioModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -235,19 +234,18 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
             </div>
             <div class="modal-body">
-                <form action="#" th:action="@{/agregarUsuario}" th:object="${nuevoUsuario}" method="post">
+                <form th:action="@{/agregarUsuario}" th:object="${nuevoUsuario}" method="post">
                     <div class="mb-3">
                         <label for="nombreUsuario" class="form-label">Nombre</label>
                         <input type="text" class="form-control" id="nombreUsuario" th:field="*{nombre}" required>
                     </div>
                     <div class="mb-3">
                         <label for="contrasenaUsuario" class="form-label">Contraseña</label>
-                        <input type="password" class="form-control" id="contrasenaUsuario" th:field="*{contrasena}"
-                               required>
+                        <input type="password" class="form-control" id="contrasenaUsuario" th:field="*{contrasena}" required>
                     </div>
                     <div class="mb-3">
                         <label for="rolUsuario" class="form-label">Rol</label>
-                        <select class="form-select" id="rolUsuario" name="rol.id_rol" required>
+                        <select class="form-select" id="rolUsuario" th:field="*{rol.id_rol}" required>
                             <option th:each="rol : ${listaRoles}" th:value="${rol.id_rol}" th:text="${rol.nombre_rol}"></option>
                         </select>
                     </div>
@@ -259,8 +257,7 @@
 </div>
 
 <!-- Modal de modificar usuario -->
-<div class="modal fade" id="modificarUsuarioModal" tabindex="-1" aria-labelledby="modificarUsuarioModal"
-     aria-hidden="true">
+<div class="modal fade" id="modificarUsuarioModal" tabindex="-1" aria-labelledby="modificarUsuarioModal" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -268,7 +265,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
             </div>
             <div class="modal-body">
-                <form action="#" th:action="@{/modificarUsuario}" th:object="${usuarioModificado}" method="post">
+                <form th:action="@{/modificarUsuario}" th:object="${usuarioModificado}" method="post">
                     <input type="hidden" id="idUsuario" name="id_usuario" th:value="${usuarioModificado.id_usuario}" />
                     <div class="mb-3">
                         <label for="nombreUsuario2" class="form-label">Nombre</label>
@@ -280,14 +277,9 @@
                     </div>
                     <div class="mb-3">
                         <label for="rolUsuario2" class="form-label">Rol</label>
-                        <select class="form-select" id="rolUsuario2" name="rol.id_rol" th:field="*{rol.nombre_rol}" required>
-                            <option th:each="rol : ${listaRoles}"
-                                    th:value="${rol.id_rol}"
-                                    th:text="${rol.nombre_rol}"
-                                    th:selected="${usuario != null and usuario.rol != null and rol.id_rol == usuario.rol.id_rol}">
-                            </option>
+                        <select class="form-select" id="rolUsuario2" th:field="*{rol.id_rol}" required>
+                            <option th:each="rol : ${listaRoles}" th:value="${rol.id_rol}" th:text="${rol.nombre_rol}" th:selected="${usuarioModificado.rol != null and rol.id_rol == usuarioModificado.rol.id_rol}"></option>
                         </select>
-
                     </div>
                     <button type="submit" class="btn btn-primary">Modificar Usuario</button>
                 </form>
