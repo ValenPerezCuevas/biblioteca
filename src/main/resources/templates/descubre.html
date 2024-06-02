@@ -209,7 +209,7 @@
                     <label for="filter-year-to" class="form-label">Año de publicación hasta</label>
                     <input type="number" name="anoHasta" class="form-control" id="filter-year-to" placeholder="Hasta">
                 </div>
-                <button type="submit" class="btn btn-primary" style="margin-top: 2rem !important;">Aplicar filtros
+                <button type="submit" class="btn btn-secondary" style="margin-top: 2rem !important;">Aplicar filtros
                 </button>
             </form>
         </aside>
@@ -227,11 +227,11 @@
                         <div class="card-body">
                             <h5 class="card-title" th:text="${libro.titulo}">Título del libro</h5>
                             <p class="card-text">Autor: <span th:text="${libro.autor}">Autor del libro</span></p>
-                            <button type="button" class="btn btn-info" title="Ver info"
+                            <button type="button" class="btn btn-secondary" title="Ver info"
                                     th:attr="onclick='mostrarPortada(' + ${libro.id_libros} + ')'">
                                 Ver Info
                             </button>
-                            <button type="button" class="btn btn-info" title="Añadir a lista"
+                            <button type="button" class="btn btn-secondary" title="Añadir a lista"
                                     th:attr="onclick='mostrarListas(' + ${libro.id_libros} + ')'">
                                 Añadir a Lista
                             </button>
