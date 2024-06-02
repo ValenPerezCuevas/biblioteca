@@ -18,7 +18,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Controller
 public class controladorLista {
@@ -38,13 +40,27 @@ public class controladorLista {
     @GetMapping("/listas")
     public String obtenerTodasLasListas(Model model, HttpServletRequest request) {
         usuarios usuarioLogueado = (usuarios) request.getSession().getAttribute("usuario");
-        model.addAttribute("listas", listasRepository.findAll());
-        model.addAttribute("listasModificado", new listas());
+        List<listas> todasLasListas = listasRepository.findAll();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+
+        List<Map<String, Object>> listasConFechasFormateadas = todasLasListas.stream().map(lista -> {
+            Map<String, Object> listaMap = new HashMap<>();
+            listaMap.put("id_lista", lista.getId_lista());
+            listaMap.put("nombre_lista", lista.getNombre_lista());
+            listaMap.put("creado_desde", lista.getCreado_desde() != null ? sdf.format(lista.getCreado_desde()) : "No disponible");
+            listaMap.put("actualizado_desde", lista.getActualizado_desde() != null ? sdf.format(lista.getActualizado_desde()) : "No disponible");
+            listaMap.put("nombre_usuario", lista.getUsuario() != null ? lista.getUsuario().getNombre() : "Desconocido");
+            listaMap.put("creado_por", lista.getCreado_por() != null ? lista.getCreado_por().toString() : "No disponible");  // Asegúrate de que el valor de creado_por está siendo incluido
+            return listaMap;
+        }).collect(Collectors.toList());
+
+        model.addAttribute("listas", listasConFechasFormateadas);
         model.addAttribute("usuarioLogueado", usuarioLogueado);
         model.addAttribute("requestURI", request.getRequestURI());
 
         return "listas";
     }
+
 
     /**********************************************************************************
      * Método para agregar una lista

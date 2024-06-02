@@ -291,11 +291,10 @@
                         <div class="burnline"></div>
                         <div class="card-body">
                             <div class="text-container">
-                                <h5 class="card-title card__title text-center" th:text="${lista.nombre_lista}"></h5>
-                                <p class="card-text">Fecha creación : <span th:text="${lista.creado_desde}"></span></p>
-                                <p class="card-text">Última actualización <span
-                                        th:text="${lista.actualizado_desde}"></span></p>
-                                <p class="card-text">Creado Por: <span th:text="${lista.usuario?.nombre}"></span></p>
+                                <h5 class="card-title" th:text="${lista.nombre_lista} ?: 'No disponible'"></h5>
+                                <p class="card-text">Fecha de creación: <span th:text="${lista.creado_desde} ?: 'No disponible'"></span></p>
+                                <p class="card-text">Última actualización: <span th:text="${lista.actualizado_desde} ?: 'No disponible'"></span></p>
+                                <p class="card-text">Creado por: <span th:text="${lista.nombre_usuario} ?: 'No disponible'"></span></p>
                                 <div class="btn-group d-flex justify-content-center" role="group" aria-label="Acciones">
                                     <button type="button" class="btn btn-secondary"
                                             data-bs-toggle="modal"
