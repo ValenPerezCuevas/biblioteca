@@ -135,6 +135,7 @@ public class controladorLista {
         }
 
         usuarios usuarioLogueado = (usuarios) request.getSession().getAttribute("usuario");
+        boolean esCreador = lista.getUsuario().getId_usuario().equals(usuarioLogueado.getId_usuario());
 
         Map<String, Object> response = new HashMap<>();
         response.put("nombre_lista", lista.getNombre_lista());
@@ -142,6 +143,7 @@ public class controladorLista {
 
         response.put("creador_lista", lista.getCreado_por());
         response.put("usuario_actual", usuarioLogueado.getId_usuario());
+        response.put("esCreador", esCreador);
 
         return ResponseEntity.ok(response);
     }
