@@ -164,10 +164,10 @@
 </head>
 <body>
 
-<!-- Incluir el encabezado compartido -->
+<!-- encabezado compartido -->
 <div th:replace="header :: header"></div>
 
-<div class="container" style="width: 90%;"> <!-- Contenedor con ancho del 90% -->
+<div class="container" style="width: 90%;">
     <div class="text-animated-container">
         <h1 class="text-center mb-4 text-animated">Pergaminos del saber</h1>
     </div>
@@ -206,19 +206,21 @@
         </div>
     </div>
 
-    <!-- Filtros de búsqueda -->
-    <div id="buscarForm" class="collapse mb-4">
-        <form th:action="@{/listado}" method="get" class="d-flex justify-content-center">
-            <input type="text" name="buscarTitulo" class="form-control" placeholder="Escribe un título" th:value="${buscarTitulo}">
-            <button type="submit" class="btn btn-primary ms-2" style="background-color:  #E3B7A0; color: black; border-color: black">Buscar título</button>
-        </form>
-    </div>
+    <!-- Contenedor Filtros de búsqueda -->
+    <div class="d-flex flex-column align-items-center">
+        <div id="buscarForm" class="collapse mb-4 col-md-5">
+            <form th:action="@{/listado}" method="get" class="d-flex justify-content-center">
+                <input type="text" name="buscarTitulo" class="form-control" placeholder="Escribe un título" th:value="${buscarTitulo}">
+                <button type="submit" class="btn btn-secondary ms-2" >Buscar título</button>
+            </form>
+        </div>
 
-    <div id="buscarForm1" class="collapse mb-4">
-        <form th:action="@{/listado}" method="get" class="d-flex justify-content-center">
-            <input type="text" name="buscarAutor" class="form-control" placeholder="Escribe un autor" th:value="${buscarAutor}">
-            <button type="submit" class="btn btn-primary ms-2" style="background-color:  #E3B7A0; color: black; border-color: black">Buscar autor</button>
-        </form>
+        <div id="buscarForm1" class="collapse mb-4 col-md-5">
+            <form th:action="@{/listado}" method="get" class="d-flex justify-content-center">
+                <input type="text" name="buscarAutor" class="form-control" placeholder="Escribe un autor" th:value="${buscarAutor}">
+                <button type="submit" class="btn btn-secondary ms-2">Buscar autor</button>
+            </form>
+        </div>
     </div>
 
     <div class="container table-responsive">
