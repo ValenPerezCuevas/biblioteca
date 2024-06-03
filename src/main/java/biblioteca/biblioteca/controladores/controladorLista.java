@@ -8,6 +8,7 @@ import biblioteca.biblioteca.repositorios.LibroRepository;
 import biblioteca.biblioteca.repositorios.Libros_listasRepository;
 import biblioteca.biblioteca.repositorios.ListasRepository;
 import biblioteca.biblioteca.repositorios.UsuarioRepository;
+import biblioteca.biblioteca.servicios.ListaService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -28,6 +29,9 @@ public class controladorLista {
 
     @Value("${ruta.imagenes}")
     private String rutaImagenes;
+
+    @Autowired
+    private ListaService listaService;
 
     @Autowired
     public controladorLista(ListasRepository listasRepository,  Libros_listasRepository librosListasRepository) {
@@ -82,8 +86,8 @@ public class controladorLista {
                 return "redirect:/listas";
             }
 
-            // Usar el método personalizado para eliminar
-            listasRepository.deleteByIdCustom(id_lista);
+            // Usar el servicio para eliminar la lista y sus registros asociados
+            listaService.eliminarLista(id_lista);
             redirectAttributes.addFlashAttribute("success", "Lista eliminada con éxito");
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("error", "No se pudo eliminar la lista debido a: " + e.getMessage());
