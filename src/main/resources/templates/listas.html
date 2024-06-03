@@ -56,8 +56,8 @@
             position: relative;
             width: 130px;
             height: 50px;
-            margin-left: auto;
-            margin-right: auto;
+            margin-left: 10px;
+            margin-right: 10px;
             overflow: hidden;
             border: 1px solid #000;
             background-color: #BF9270;
@@ -264,13 +264,28 @@
 <div class="text-animated-container">
     <h1 class="text-center mb-4 text-animated">Listas</h1>
 </div>
-<!-----------------------------BOTON "CREAR NUEVA LISTA"--------------------------------->
-<div class="button-container-subrayado ">
-    <span class="mas">Crear Nueva Lista</span>
-    <button type="button" name="Hover" data-bs-toggle="modal" data-bs-target="#crearListaModal">
-        Crear Nueva Lista
-    </button>
+<!-----------------------------BOTONES--------------------------------------------------->
+<div class="d-flex justify-content-center mb-4">
+    <div class="button-container-subrayado">
+        <span class="mas">Crear Nueva Lista</span>
+        <button type="button" name="Hover" data-bs-toggle="modal" data-bs-target="#crearListaModal">
+            Crear Nueva Lista
+        </button>
+    </div>
+    <div class="button-container-subrayado">
+        <span class="mas">Ver mis listas</span>
+        <button type="button" name="Hover" onclick="window.location.href='/listas?misListas=true'">
+            Ver mis listas
+        </button>
+    </div>
+    <div class="button-container-subrayado">
+        <span class="mas">Ver todas las listas</span>
+        <button type="button" name="Hover" onclick="window.location.href='/listas'">
+            Ver todas las listas
+        </button>
+    </div>
 </div>
+
 <br><br>
 <!---------------------------------DISTORSION PERGAMINO----------------------------------->
 <svg class="filter">
@@ -292,9 +307,8 @@
                         <div class="card-body">
                             <div class="text-container">
                                 <h5 class="card-title card__title text-center" th:text="${lista.nombre_lista}"></h5>
-                                <p class="card-text">Fecha creación : <span th:text="${lista.creado_desde}"></span></p>
-                                <p class="card-text">Última actualización <span
-                                        th:text="${lista.actualizado_desde}"></span></p>
+                                <p class="card-text">Fecha creación : <span class="fecha-formato" th:text="${lista.creado_desde}"></span></p>
+                                <p class="card-text">Última actualización : <span class="fecha-formato" th:text="${lista.actualizado_desde}"></span></p>
                                 <p class="card-text">Creado Por: <span th:text="${lista.usuario?.nombre}"></span></p>
                                 <div class="btn-group d-flex justify-content-center" role="group" aria-label="Acciones">
                                     <button type="button" class="btn btn-secondary"
@@ -393,7 +407,23 @@
             var idLista = e.relatedTarget.getAttribute('data-id');
             cargarLibros(idLista);
         });
+        // Formatea las fechas en la lista de tarjetas al cargar la página
+        document.querySelectorAll('.fecha-formato').forEach(function (element) {
+            element.textContent = formatearFecha(new Date(element.textContent));
+        });
     });
+
+    function formatearFecha(fecha) {
+        const opciones = {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            hour12: false // Si prefieres formato 24 horas
+        };
+        return fecha.toLocaleString('es-ES', opciones).replace(',', '');
+    }
 
     function cargarLibros(idLista) {
         const tablaLibros = document.getElementById('tabla-libros');
@@ -404,13 +434,9 @@
             .then(response => response.json())
             .then(data => {
                 console.log(data);
-
                 const nombre_lista = data.nombre_lista;
                 const libros = data.libros;
                 const esCreador = data.esCreador;
-                // const creadorLista = data.creador_lista;
-                // const usuarioActual = data.usuario_actual;
-
                 modalTitle.textContent = `Libros en la lista: ${nombre_lista}`;
                 // Mostrar u ocultar el botón "Añadir libros"
                 if (esCreador) {
