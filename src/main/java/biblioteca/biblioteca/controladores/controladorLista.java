@@ -40,10 +40,16 @@ public class controladorLista {
     }
 
     @GetMapping("/listas")
-    public String obtenerTodasLasListas(Model model, HttpServletRequest request) {
+    public String obtenerTodasLasListas(Model model, HttpServletRequest request,
+                                        @RequestParam(name = "misListas", required = false) String misListas) {
         usuarios usuarioLogueado = (usuarios) request.getSession().getAttribute("usuario");
-        // PRUEBA
-        model.addAttribute("listas", listasRepository.findAll());
+        List<listas> listas;
+        if (misListas != null && !misListas.isEmpty()){
+            listas = listasRepository.findByUsuario(usuarioLogueado);
+        } else {
+            listas = listasRepository.findAll();
+        }
+        model.addAttribute("listas", listas);
         model.addAttribute("listasModificado", new listas());
         model.addAttribute("usuarioLogueado", usuarioLogueado);
         model.addAttribute("requestURI", request.getRequestURI());

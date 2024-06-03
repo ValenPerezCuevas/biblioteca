@@ -56,8 +56,8 @@
             position: relative;
             width: 130px;
             height: 50px;
-            margin-left: auto;
-            margin-right: auto;
+            margin-left: 10px;
+            margin-right: 10px;
             overflow: hidden;
             border: 1px solid #000;
             background-color: #BF9270;
@@ -264,13 +264,28 @@
 <div class="text-animated-container">
     <h1 class="text-center mb-4 text-animated">Listas</h1>
 </div>
-<!-----------------------------BOTON "CREAR NUEVA LISTA"--------------------------------->
-<div class="button-container-subrayado ">
-    <span class="mas">Crear Nueva Lista</span>
-    <button type="button" name="Hover" data-bs-toggle="modal" data-bs-target="#crearListaModal">
-        Crear Nueva Lista
-    </button>
+<!-----------------------------BOTONES--------------------------------------------------->
+<div class="d-flex justify-content-center mb-4">
+    <div class="button-container-subrayado">
+        <span class="mas">Crear Nueva Lista</span>
+        <button type="button" name="Hover" data-bs-toggle="modal" data-bs-target="#crearListaModal">
+            Crear Nueva Lista
+        </button>
+    </div>
+    <div class="button-container-subrayado">
+        <span class="mas">Ver mis listas</span>
+        <button type="button" name="Hover" onclick="window.location.href='/listas?misListas=true'">
+            Ver mis listas
+        </button>
+    </div>
+    <div class="button-container-subrayado">
+        <span class="mas">Ver todas las listas</span>
+        <button type="button" name="Hover" onclick="window.location.href='/listas'">
+            Ver todas las listas
+        </button>
+    </div>
 </div>
+
 <br><br>
 <!---------------------------------DISTORSION PERGAMINO----------------------------------->
 <svg class="filter">
