@@ -141,9 +141,8 @@ public class controladorLista {
         Map<String, Object> response = new HashMap<>();
         response.put("nombre_lista", lista.getNombre_lista());
         response.put("libros", librosInfo);
-
-        response.put("creador_lista", lista.getCreado_por());
-        response.put("usuario_actual", usuarioLogueado.getId_usuario());
+//        response.put("creador_lista", lista.getCreado_por());
+//        response.put("usuario_actual", usuarioLogueado.getId_usuario());
         response.put("esCreador", esCreador);
 
         return ResponseEntity.ok(response);

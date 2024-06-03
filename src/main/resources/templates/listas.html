@@ -377,7 +377,7 @@
                     </table>
                 </div>
                 <div class="d-flex justify-content-end">
-                    <a href="/descubre" th:if="${creadorLista == usuarioLogueado.id_usuario}" class="btn btn-primary">Añadir libros</a>
+                    <a href="/descubre" id="anadirLibros" class="btn btn-primary">Añadir libros</a>
                 </div>
             </div>
         </div>
@@ -407,11 +407,17 @@
 
                 const nombre_lista = data.nombre_lista;
                 const libros = data.libros;
-                const creadorLista = data.creador_lista;
-                const usuarioActual = data.usuario_actual;
+                const esCreador = data.esCreador;
+                // const creadorLista = data.creador_lista;
+                // const usuarioActual = data.usuario_actual;
 
                 modalTitle.textContent = `Libros en la lista: ${nombre_lista}`;
-
+                // Mostrar u ocultar el botón "Añadir libros"
+                if (esCreador) {
+                    anadirLibros.style.display = 'block';
+                } else {
+                    anadirLibros.style.display = 'none';
+                }
                 tablaLibros.innerHTML = '';
                 if (libros && libros.length > 0) {
                     libros.forEach(libro => {
@@ -423,7 +429,7 @@
                         <td class="col-year">${libro.anoPublicacion || 'N/A'}</td>
                         <td class="col-editorial">${libro.editorial || 'N/A'}</td>
                         <td>
-                            ${creadorLista === usuarioActual ? `
+                            ${esCreador ? `
                                 <button type="button" title="Eliminar libro de la lista"
                                         class="btn btn-danger"
                                         onclick="eliminarLibroDeLista(${idLista}, ${libro.id})">
