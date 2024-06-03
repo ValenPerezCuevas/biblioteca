@@ -38,6 +38,7 @@ public class controladorLista {
     @GetMapping("/listas")
     public String obtenerTodasLasListas(Model model, HttpServletRequest request) {
         usuarios usuarioLogueado = (usuarios) request.getSession().getAttribute("usuario");
+        // PRUEBA
         model.addAttribute("listas", listasRepository.findAll());
         model.addAttribute("listasModificado", new listas());
         model.addAttribute("usuarioLogueado", usuarioLogueado);
