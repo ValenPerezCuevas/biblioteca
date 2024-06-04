@@ -83,5 +83,18 @@ ADD CONSTRAINT fk_listas_actualizado_por
 FOREIGN KEY (actualizado_por) REFERENCES usuarios(id_usuario)
 ON DELETE CASCADE;
 
---Modificación en base de datos:
-ALTER TABLE libros_listas ADD CONSTRAINT fk_libros_listas_id_lista FOREIGN KEY (id_lista) REFERENCES listas(id_lista) ON DELETE CASCADE;
+-- Elimina las claves externas actuales
+
+ALTER TABLE libros_listas DROP FOREIGN KEY libros_listas_ibfk_1;
+ALTER TABLE libros_listas DROP FOREIGN KEY libros_listas_ibfk_2;
+
+
+-- Agrega las claves externas con ON DELETE CASCADE
+ALTER TABLE libros_listas ADD CONSTRAINT libros_listas_ibfk_1 FOREIGN KEY (id_libro) REFERENCES libros (id_libros) ON DELETE CASCADE,
+ADD CONSTRAINT libros_listas_ibfk_2 FOREIGN KEY (id_lista) REFERENCES listas (id_lista) ON DELETE CASCADE;
+
+
+
+
+
+
