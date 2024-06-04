@@ -40,7 +40,6 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* 200px como mínimo, con el ancho restante distribuido igualmente */
             gap: 20px;
-            justify-content: center/* Espacio entre las tarjetas */
         }
 
         .card-img-top {
@@ -113,7 +112,7 @@
 <div class="container-fluid ">
     <div class="row justify-content-evenly">
         <!-- Aside en la parte izquierda -->
-        <aside class="col-md-3">
+        <aside class="col-sm-3">
             <h3>Filtros de búsqueda</h3>
             <form id="filters-form" th:action="@{/descubre/filtrar}" method="get">
                 <!-- Filtro por título -->
@@ -214,7 +213,7 @@
         </aside>
 
         <!-- Contenido principal para libros -->
-        <div class="col-md-9">
+        <div class="col-sm-9">
             <div class="cards-container">
                 <!-- ALERTA no resultados -->
                 <div th:if="${noResultados}" class="alert alert-warning" role="alert">
