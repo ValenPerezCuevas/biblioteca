@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <title>Alexandría</title>
@@ -8,13 +8,15 @@
     <link href="/css/bootstrap-grid.css" rel="stylesheet">
     <link href="/css/bootstrap-reboot.css" rel="stylesheet">
     <link href="/css/bootstrap-utilities.css" rel="stylesheet">
+    <link rel="shortcut icon" href="/imagenes/favicon.ico" type="image/x-icon">
 
     <style>
         /*@import url('https://fonts.googleapis.com/css2?family=Caesar+Dressing&display=swap');*/
-        .full-height {
-            margin-top:-20px;
-        }
+
         /***********************Estilos de carrusel*******************/
+        body{
+            overflow: hidden;
+        }
         .carousel-inner{
             height: 100vh;
         }
@@ -28,15 +30,19 @@
         @media (max-width: 767px) {
             .carousel-inner img {
                 /* Ajustar la altura automática en dispositivos móviles */
-                height: auto;
+                height: 800px;
 
             }
             .carousel-inner{
-                height: 70vh; /* Ajusta la altura del carrusel para dispositivos móviles */
+                height: 70vh;
+                background-color: pink;
             }
         }
         /* Ajustar el tamaño del carrusel en tablets y pantallas más grandes */
         @media (min-width: 768px) {
+            .full-height {
+                margin-top:-20px;
+            }
             .carousel-inner img {
                 height: 100%; /* Ajustar la altura al 100% en tablets y pantallas más grandes */
             }
@@ -63,6 +69,7 @@
             max-width: 600px;
             margin: auto;
         }
+        /* Ajustar el tamaño en dispositivos móviles */
         @media (max-width: 767px) {
             .saludo{
                 width: 70%;
@@ -70,7 +77,7 @@
                 font-size: 13px;
             }
         }
-        .saludo h1, .saludo p, .saludo blockquote {
+        .saludo * {
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Sombra de texto */
         }
         .saludo h1 {
@@ -80,11 +87,11 @@
         .saludo p {
             margin-bottom: 15px; /* Margen inferior para separación */
         }
-
         .saludo blockquote {
             font-style: italic; /* Texto en cursiva para la cita */
         }
-        /*****clases css para mejora del texto saludo******/
+
+        /*************clases css para mejora del texto saludo********/
         .focus-in-contract-bck {
             -webkit-animation: focus-in-contract-bck 3s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
             animation: focus-in-contract-bck 3s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
@@ -191,7 +198,7 @@
         </button>
     </div>
 </div>
-
+<!----------------------------------------SCRIPTS--------------------------------->
 <script src="/js/bootstrap.bundle.js"></script>
 <script src="/js/bootstrap.esm.js"></script>
 <script src="/js/bootstrap.js"></script>
@@ -204,7 +211,7 @@
             ride: 'carousel'
         });
 
-        // Preload images
+        // Precarga de imagenes
         var images = ['/imagenes/carrusel2.jpg', '/imagenes/carrusel1.jpg', '/imagenes/carrusel3.jpg'];
         images.forEach(function(src) {
             var img = new Image();
