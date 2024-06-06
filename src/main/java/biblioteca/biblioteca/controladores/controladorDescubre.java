@@ -145,9 +145,15 @@ public class controladorDescubre {
         // Configurar la paginación
         Pageable pageable = PageRequest.of(pagina, tamanio);
 
+        Page<libros> paginaLibros;
+
         // Filtrar los libros según los criterios especificados
-        Page<libros> paginaLibros = libroRepository.findByFiltros
-                (titulo, autor, editorial, genero, anoDesde, anoHasta, pageable);
+        if ((genero == null || genero.isEmpty()) && (titulo == null || titulo.isEmpty()) && (autor == null || autor.isEmpty()) && (editorial == null || editorial.isEmpty()) && anoDesde == null && anoHasta == null) {
+            paginaLibros = libroRepository.findAll(pageable);
+        } else {
+            paginaLibros = libroRepository.findByFiltros(titulo, autor, editorial, genero, anoDesde, anoHasta, pageable);
+        }
+
 
         // Verificar si la lista de libros está vacía
         if (paginaLibros.getContent().isEmpty()) {
@@ -161,6 +167,11 @@ public class controladorDescubre {
         model.addAttribute("totalPaginas", paginaLibros.getTotalPages());
         model.addAttribute("requestURI", request.getRequestURI());
 
+        model.addAttribute("titulo", titulo);
+        model.addAttribute("autor", autor);
+        model.addAttribute("editorial", editorial);
+        model.addAttribute("anoDesde", anoDesde);
+        model.addAttribute("anoHasta", anoHasta);
         model.addAttribute("genero", genero);  // Añadir géneros seleccionados al modelo
 
         return "descubre";
