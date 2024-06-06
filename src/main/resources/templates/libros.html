@@ -294,15 +294,15 @@
     <nav aria-label="Page navigation example" class="d-none d-md-block">
         <ul class="pagination justify-content-center">
             <li class="page-item" th:class="${paginaActual == 0} ? 'disabled'">
-                <a class="page-link" th:href="@{/listado(pagina=0, sortBy=${sortBy}, sortOrder=${sortOrder})}" aria-label="Previous">
+                <a class="page-link" th:href="@{/listado(pagina=0, sortBy=${sortBy}, sortOrder=${sortOrder}, buscarTitulo=${buscarTitulo}, buscarAutor=${buscarAutor})}"  aria-label="Previous">
                     <span aria-hidden="true">&laquo;</span>
                 </a>
             </li>
             <li th:each="num : ${#numbers.sequence(0, totalPaginas - 1)}" class="page-item" th:classappend="${num == paginaActual} ? 'active'">
-                <a class="page-link" th:href="@{/listado(pagina=${num}, sortBy=${sortBy}, sortOrder=${sortOrder})}" th:text="${num + 1}"></a>
+                <a class="page-link" th:href="@{/listado(pagina=${num}, sortBy=${sortBy}, sortOrder=${sortOrder}, buscarTitulo=${buscarTitulo}, buscarAutor=${buscarAutor})}" th:text="${num + 1}"></a>
             </li>
             <li class="page-item" th:class="${paginaActual == totalPaginas - 1} ? 'disabled'">
-                <a class="page-link" th:href="@{/listado(pagina=${totalPaginas - 1}, sortBy=${sortBy}, sortOrder=${sortOrder})}" aria-label="Next">
+                <a class="page-link" th:href="@{/listado(pagina=${paginaActual + 1}, sortBy=${sortBy}, sortOrder=${sortOrder}, buscarTitulo=${buscarTitulo}, buscarAutor=${buscarAutor})}" aria-label="Next">
                     <span aria-hidden="true">&raquo;</span>
                 </a>
             </li>
@@ -313,13 +313,13 @@
     <nav aria-label="Page navigation" class="d-md-none">
         <ul class="pagination justify-content-center">
             <li class="page-item" th:class="${paginaActual == 0} ? 'disabled'">
-                <a class="page-link" th:href="@{/listado(pagina=0, sortBy=${sortBy}, sortOrder=${sortOrder})}" aria-label="Primera">
+                <a class="page-link" th:href="@{/listado(pagina=0, sortBy=${sortBy}, sortOrder=${sortOrder}, buscarTitulo=${buscarTitulo}, buscarAutor=${buscarAutor})}" aria-label="Primera">
                     <span aria-hidden="true">&laquo;&laquo;</span>
                     <span class="visually-hidden">Primera</span>
                 </a>
             </li>
             <li class="page-item" th:class="${paginaActual == 0} ? 'disabled'">
-                <a class="page-link" th:href="@{/listado(pagina=${paginaActual - 1}, sortBy=${sortBy}, sortOrder=${sortOrder})}" aria-label="Anterior">
+                <a class="page-link" th:href="@{/listado(pagina=${paginaActual - 1}, sortBy=${sortBy}, sortOrder=${sortOrder}, buscarTitulo=${buscarTitulo}, buscarAutor=${buscarAutor})}" aria-label="Anterior">
                     <span aria-hidden="true">&laquo;</span>
                     <span class="visually-hidden">Anterior</span>
                 </a>
@@ -328,13 +328,13 @@
                 <span class="page-link" th:text="${paginaActual + 1} + ' de ' + ${totalPaginas}"></span>
             </li>
             <li class="page-item" th:class="${paginaActual == totalPaginas - 1} ? 'disabled'">
-                <a class="page-link" th:href="@{/listado(pagina=${paginaActual + 1}, sortBy=${sortBy}, sortOrder=${sortOrder})}" aria-label="Siguiente">
+                <a class="page-link" th:href="@{/listado(pagina=${paginaActual + 1}, sortBy=${sortBy}, sortOrder=${sortOrder}, buscarTitulo=${buscarTitulo}, buscarAutor=${buscarAutor})}" aria-label="Siguiente">
                     <span aria-hidden="true">&raquo;</span>
                     <span class="visually-hidden">Siguiente</span>
                 </a>
             </li>
             <li class="page-item" th:class="${paginaActual == totalPaginas - 1} ? 'disabled'">
-                <a class="page-link" th:href="@{/listado(pagina=${totalPaginas - 1}, sortBy=${sortBy}, sortOrder=${sortOrder})}" aria-label="Última">
+                <a class="page-link" th:href="@{/listado(pagina=${totalPaginas - 1}, sortBy=${sortBy}, sortOrder=${sortOrder}, buscarTitulo=${buscarTitulo}, buscarAutor=${buscarAutor})}" aria-label="Última">
                     <span aria-hidden="true">&raquo;&raquo;</span>
                     <span class="visually-hidden">Última</span>
                 </a>
