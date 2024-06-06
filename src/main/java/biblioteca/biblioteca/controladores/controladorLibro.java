@@ -72,6 +72,9 @@ public class controladorLibro {
         model.addAttribute("libroModificado", new libros());
         model.addAttribute("requestURI", request.getRequestURI());
 
+        model.addAttribute("buscarTitulo", buscarTitulo);  // Añadir buscarTitulo al modelo
+        model.addAttribute("buscarAutor", buscarAutor);    // Añadir buscarAutor al modelo
+
         return "libros";
     }
 
