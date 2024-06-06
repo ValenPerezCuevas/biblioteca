@@ -316,7 +316,7 @@
                                             onclick="cargarLibros(this.getAttribute('data-id'))">
                                         Ver Libros
                                     </button>
-                                    <form th:if="${lista.creado_por == usuarioLogueado.id_usuario}"
+                                    <form th:if="${lista.creado_por == usuarioLogueado.id_usuario || usuarioLogueado.rol.id_rol == 1 }"
                                           th:action="@{'/eliminarLista/' + ${lista.id_lista}}"
                                           method="post"
                                           onsubmit="return confirmAndBurn(this);">

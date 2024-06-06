@@ -111,7 +111,6 @@
 </head>
 <body>
 
-<!-- Incluir el encabezado compartido -->
 <div th:replace="header :: header"></div>
 
 <div class="container-fluid ">
@@ -539,7 +538,6 @@
                     // Filtrar las listas por idUsuario
                     let listasFiltradas = data.filter(lista => lista.id_usuario === parseInt(idUsuario));
 
-                    // Asegúrate de que `listasFiltradas` es un array de listas
                     if (Array.isArray(listasFiltradas)) {
                         listasFiltradas.forEach(lista => {
                             let option = document.createElement('option');
@@ -563,11 +561,9 @@
             });
         }
 
-
         function anadirLibroALista() {
             let listaId = document.getElementById('selectLista').value;
-            let libroId = document.getElementById('libroId').value; // Asegúrate de que este campo se llena correctamente al abrir el modal
-
+            let libroId = document.getElementById('libroId').value;
             $.ajax({
                 url: '/descubre/anadirLibroALista',
                 method: 'POST',
@@ -576,7 +572,6 @@
                     listaId: listaId
                 },
                 success: function (response) {
-
                     console.log(response);
                     $('#mensajeConfirmacion').show(); // Mostrar mensaje de confirmación
                     setTimeout(function () {

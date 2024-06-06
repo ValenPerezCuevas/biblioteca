@@ -43,10 +43,10 @@ public class controladorUsuario {
             @RequestParam(defaultValue = "asc") String sortOrder
     ) {
         String[] sortProperties = sortBy.split(",");
-
         List<Sort.Order> orders = new ArrayList<>();
         for (String property : sortProperties) {
-            Sort.Direction direction = sortOrder.equalsIgnoreCase("asc") ? Sort.Direction.ASC : Sort.Direction.DESC;
+            Sort.Direction direction =
+                    sortOrder.equalsIgnoreCase("asc") ? Sort.Direction.ASC : Sort.Direction.DESC;
             orders.add(new Sort.Order(direction, property));
         }
         Sort sort = Sort.by(orders);
