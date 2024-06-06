@@ -795,8 +795,6 @@
             window.location.hash = 'register-form';
         });
 
-        var activeTab = document.getElementById('activeTab') ? document.getElementById('activeTab').value : '';
-
         // Verificar el hash al cargar la página
         if (window.location.hash === '#register-form' || /* Check activeTab */ document.getElementById('errorRegistro')) {
             showRegisterForm();
