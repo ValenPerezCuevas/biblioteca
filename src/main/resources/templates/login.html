@@ -716,35 +716,61 @@
     function setAction(action) {
         document.getElementById('form-enter').setAttribute('action', action);
     }
+
+    function showRegisterForm() {
+        var buttonToggle = document.getElementsByClassName('button-reg')[0];
+        buttonToggle.classList.add('button');
+        var submitReg = document.querySelector('.submit-reg');
+        var submitEnter = document.querySelector('.submit-enter');
+        var checkCondiciones = document.querySelector('.check-conditions');
+        var DeAcuerdo = document.querySelector('.agree');
+
+        submitReg.style.display = 'inline-block';
+        checkCondiciones.style.display = 'inline-block';
+        DeAcuerdo.style.display = 'inline-block';
+        submitEnter.style.display = 'none';
+        checkCondiciones.required = true;
+        setAction('/registrar');
+    }
+
+    function showLoginForm() {
+        var buttonToggle = document.getElementsByClassName('button-reg')[0];
+        buttonToggle.classList.remove('button');
+        var submitReg = document.querySelector('.submit-reg');
+        var submitEnter = document.querySelector('.submit-enter');
+        var checkCondiciones = document.querySelector('.check-conditions');
+        var DeAcuerdo = document.querySelector('.agree');
+
+        submitEnter.style.display = 'inline-block';
+        submitReg.style.display = 'none';
+        checkCondiciones.style.display = 'none';
+        DeAcuerdo.style.display = 'none';
+        setAction('/login');
+    }
     // Función para cambiar las clases al hacer clic en el botón de registro
     (function() {
         var buttonToggle = document.getElementsByClassName('button-reg')[0];
 
         buttonToggle.addEventListener('click', function toggleClasses() {
-            buttonToggle.classList.toggle('button');
-            var submitReg = document.querySelector('.submit-reg');
-            var submitEnter = document.querySelector('.submit-enter');
-
-            var checkCondiciones = document.querySelector('.check-conditions');
-            var DeAcuerdo = document.querySelector('.agree');
-
             if (buttonToggle.classList.contains('button')) {
-                submitReg.style.display = 'inline-block';
-                checkCondiciones.style.display = 'inline-block';
-                DeAcuerdo.style.display = 'inline-block';
-                submitEnter.style.display = 'none';
-                // Eliminar validación required
-                checkCondiciones.required = true;
-                setAction('/registrar');
+                showLoginForm();
+                // Quitar el hash de la URL cuando se muestra el formulario de login
+                history.pushState("", document.title, window.location.pathname + window.location.search);
             } else {
-                submitEnter.style.display = 'inline-block';
-                submitReg.style.display = 'none';
-                checkCondiciones.style.display = 'none';
-                DeAcuerdo.style.display = 'none';
-                setAction('/login');
+                showRegisterForm();
+                window.location.hash = 'register-form';
             }
         });
+
+        // Verificar el hash al cargar la página
+        if (window.location.hash === '#register-form') {
+            showRegisterForm();
+        } else {
+            showLoginForm();
+
+        }
     })();
+
 </script>
 
 </body>

@@ -39,12 +39,6 @@ public class AuthController {
         return "redirect:/";
     }
 
-    @GetMapping("/crearUsuario")
-    public String showCreateUserForm(Model model) {
-        model.addAttribute("usuario", new usuarios());
-        return "redirect:/login";
-    }
-
     @PostMapping("/registrar")
     public String registerUser(@ModelAttribute usuarios usuario, Model model) {
         if (usuarioRepository.findByNombre(usuario.getNombre()) != null) {
