@@ -12,10 +12,4 @@ public class controladorPrincipal {
         model.addAttribute("requestURI", request.getRequestURI());
         return "home";
     }
-
-    @GetMapping("/admin")
-    public String adminitrar(HttpServletRequest request, Model model) {
-        model.addAttribute("requestURI", request.getRequestURI());
-        return "admin";
-    }
 }
