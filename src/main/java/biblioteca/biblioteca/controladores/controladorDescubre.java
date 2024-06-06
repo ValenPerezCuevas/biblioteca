@@ -129,11 +129,6 @@ public class controladorDescubre {
         }
     }
 
-
-
-
-
-
     @GetMapping("/descubre/filtrar")
     public String filtrar(
             @RequestParam(name = "titulo", required = false) String titulo,
@@ -163,6 +158,8 @@ public class controladorDescubre {
         model.addAttribute("paginaActual", pagina);
         model.addAttribute("totalPaginas", paginaLibros.getTotalPages());
         model.addAttribute("requestURI", request.getRequestURI());
+
+        model.addAttribute("genero", genero);  // Añadir géneros seleccionados al modelo
 
         return "descubre";
     }

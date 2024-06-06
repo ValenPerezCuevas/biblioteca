@@ -56,7 +56,11 @@
             gap: 15px;
         }
 
-    /*    estilos checkbox (sin aplicar) */
+    /*    Estilos de los checkboxes (SELECCION SUBRAYADO) */
+
+        .checkbox-wrapper label{
+            height: 30px;
+        }
         .checkbox-wrapper input[type="checkbox"] {
             visibility: hidden;
             display: none;
@@ -77,6 +81,7 @@
 
         .checkbox-wrapper .label {
             cursor: pointer;
+            font-size: 2.8vh;
         }
 
         .checkbox-wrapper .check {
@@ -136,61 +141,162 @@
                 <!-- Filtro por género -->
                 <div class="mb-3">
                     <label class="form-label">Género</label>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="genero" value="novela" id="gen-novela">
-                        <label class="form-check-label" for="gen-novela">Novela</label>
+                    <div class="form-check checkbox-wrapper">
+                        <input class="form-check-input check" type="checkbox" name="genero" value="novela" id="gen-novela"
+                               th:checked="${genero != null and genero.contains('novela')}" />
+                        <label class="form-check-label label" for="gen-novela">
+                            <svg width="45" height="45" viewBox="0 0 95 95">
+                                <rect x="30" y="20" width="50" height="50" stroke="black" fill="none"></rect>
+                                <g transform="translate(0,-952.36222)">
+                                    <path d="m 56,963 c -102,122 6,9 7,9 17,-5 -66,69 -38,52 122,-77 -7,14 18,4 29,-11 45,-43 23,-4" stroke="black" stroke-width="3" fill="none" class="path1"></path>
+                                </g>
+                            </svg>
+                            <span>Novela</span>
+                        </label>
                     </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="genero" value="novela negra"
-                               id="gen-novela-negra">
-                        <label class="form-check-label" for="gen-novela-negra">Novela negra</label>
+                    <div class="form-check checkbox-wrapper">
+                        <input class="form-check-input check" type="checkbox" name="genero" value="novela negra" id="gen-novela-negra"
+                               th:checked="${genero != null and genero.contains('novela negra')}"/>
+                        <label class="form-check-label label" for="gen-novela-negra">
+                            <svg width="45" height="45" viewBox="0 0 95 95">
+                                <rect x="30" y="20" width="50" height="50" stroke="black" fill="none"></rect>
+                                <g transform="translate(0,-952.36222)">
+                                    <path d="m 56,963 c -102,122 6,9 7,9 17,-5 -66,69 -38,52 122,-77 -7,14 18,4 29,-11 45,-43 23,-4" stroke="black" stroke-width="3" fill="none" class="path1"></path>
+                                </g>
+                            </svg>
+                            <span>Novela negra</span>
+                        </label>
                     </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="genero" value="ficción" id="gen-ficcion">
-                        <label class="form-check-label" for="gen-ficcion">Ficción</label>
+                    <div class="form-check checkbox-wrapper">
+                        <input class="form-check-input check" type="checkbox" name="genero" value="ficción" id="gen-ficcion"
+                               th:checked="${genero != null and genero.contains('ficción')}"/>
+                        <label class="form-check-label label" for="gen-ficcion">
+                            <svg width="45" height="45" viewBox="0 0 95 95">
+                                <rect x="30" y="20" width="50" height="50" stroke="black" fill="none"></rect>
+                                <g transform="translate(0,-952.36222)">
+                                    <path d="m 56,963 c -102,122 6,9 7,9 17,-5 -66,69 -38,52 122,-77 -7,14 18,4 29,-11 45,-43 23,-4" stroke="black" stroke-width="3" fill="none" class="path1"></path>
+                                </g>
+                            </svg>
+                            <span>Ficción</span>
+                        </label>
                     </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="genero" value="ciencia ficción"
-                               id="gen-ciencia-ficcion">
-                        <label class="form-check-label" for="gen-ciencia-ficcion">Ciencia Ficción</label>
+                    <div class="form-check checkbox-wrapper">
+                        <input class="form-check-input check" type="checkbox" name="genero" value="ciencia ficción"
+                               id="gen-ciencia-ficcion" th:checked="${genero != null and genero.contains('ciencia ficción')}"/>
+                        <label class="form-check-label label" for="gen-ciencia-ficcion">
+                            <svg width="45" height="45" viewBox="0 0 95 95">
+                                <rect x="30" y="20" width="50" height="50" stroke="black" fill="none"></rect>
+                                <g transform="translate(0,-952.36222)">
+                                    <path d="m 56,963 c -102,122 6,9 7,9 17,-5 -66,69 -38,52 122,-77 -7,14 18,4 29,-11 45,-43 23,-4" stroke="black" stroke-width="3" fill="none" class="path1"></path>
+                                </g>
+                            </svg>
+                            <span>Ciencia Ficción</span>
+                        </label>
                     </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="genero" value="fantasía"
-                               id="gen-fantasia">
-                        <label class="form-check-label" for="gen-fantasia">Fantasía</label>
+                    <div class="form-check checkbox-wrapper">
+                        <input class="form-check-input check" type="checkbox" name="genero" value="fantasía"
+                               id="gen-fantasia" th:checked="${genero != null and genero.contains('fantasía')}"/>
+                        <label class="form-check-label label" for="gen-fantasia">
+                            <svg width="45" height="45" viewBox="0 0 95 95">
+                                <rect x="30" y="20" width="50" height="50" stroke="black" fill="none"></rect>
+                                <g transform="translate(0,-952.36222)">
+                                    <path d="m 56,963 c -102,122 6,9 7,9 17,-5 -66,69 -38,52 122,-77 -7,14 18,4 29,-11 45,-43 23,-4" stroke="black" stroke-width="3" fill="none" class="path1"></path>
+                                </g>
+                            </svg>
+                            <span>Fantasía</span>
+                        </label>
                     </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="genero" value="terror" id="gen-terror">
-                        <label class="form-check-label" for="gen-terror">Terror</label>
+                    <div class="form-check checkbox-wrapper">
+                        <input class="form-check-input check" type="checkbox" name="genero" value="terror" id="gen-terror"
+                               th:checked="${genero != null and genero.contains('terror')}"/>
+                        <label class="form-check-label label" for="gen-terror">
+                            <svg width="45" height="45" viewBox="0 0 95 95">
+                                <rect x="30" y="20" width="50" height="50" stroke="black" fill="none"></rect>
+                                <g transform="translate(0,-952.36222)">
+                                    <path d="m 56,963 c -102,122 6,9 7,9 17,-5 -66,69 -38,52 122,-77 -7,14 18,4 29,-11 45,-43 23,-4" stroke="black" stroke-width="3" fill="none" class="path1"></path>
+                                </g>
+                            </svg>
+                            <span>Terror</span>
+                        </label>
                     </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="genero" value="suspense"
-                               id="gen-suspense">
-                        <label class="form-check-label" for="gen-suspense">Suspense</label>
+                    <div class="form-check checkbox-wrapper">
+                        <input class="form-check-input check" type="checkbox" name="genero" value="suspense"
+                               id="gen-suspense"   th:checked="${genero != null and genero.contains('suspense')}"/>
+                        <label class="form-check-label label" for="gen-suspense">
+                            <svg width="45" height="45" viewBox="0 0 95 95">
+                                <rect x="30" y="20" width="50" height="50" stroke="black" fill="none"></rect>
+                                <g transform="translate(0,-952.36222)">
+                                    <path d="m 56,963 c -102,122 6,9 7,9 17,-5 -66,69 -38,52 122,-77 -7,14 18,4 29,-11 45,-43 23,-4" stroke="black" stroke-width="3" fill="none" class="path1"></path>
+                                </g>
+                            </svg>
+                            <span>Suspense</span>
+                        </label>
+
                     </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="genero" value="autoayuda"
-                               id="gen-autoayuda">
-                        <label class="form-check-label" for="gen-autoayuda">Autoayuda</label>
+                    <div class="form-check checkbox-wrapper">
+                        <input class="form-check-input check" type="checkbox" name="genero" value="autoayuda"
+                               id="gen-autoayuda"  th:checked="${genero != null and genero.contains('autoayuda')}"/>
+                        <label class="form-check-label label" for="gen-autoayuda">
+                            <svg width="45" height="45" viewBox="0 0 95 95">
+                                <rect x="30" y="20" width="50" height="50" stroke="black" fill="none"></rect>
+                                <g transform="translate(0,-952.36222)">
+                                    <path d="m 56,963 c -102,122 6,9 7,9 17,-5 -66,69 -38,52 122,-77 -7,14 18,4 29,-11 45,-43 23,-4" stroke="black" stroke-width="3" fill="none" class="path1"></path>
+                                </g>
+                            </svg>
+                            <span>Autoayuda</span>
+                        </label>
                     </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="genero" value="filosofia"
-                               id="gen-filosofia">
-                        <label class="form-check-label" for="gen-filosofia">Filosofía</label>
+                    <div class="form-check checkbox-wrapper">
+                        <input class="form-check-input check" type="checkbox" name="genero" value="filosofia"
+                               id="gen-filosofia" th:checked="${genero != null and genero.contains('filosofia')}"/>
+                        <label class="form-check-label label" for="gen-filosofia">
+                            <svg width="45" height="45" viewBox="0 0 95 95">
+                                <rect x="30" y="20" width="50" height="50" stroke="black" fill="none"></rect>
+                                <g transform="translate(0,-952.36222)">
+                                    <path d="m 56,963 c -102,122 6,9 7,9 17,-5 -66,69 -38,52 122,-77 -7,14 18,4 29,-11 45,-43 23,-4" stroke="black" stroke-width="3" fill="none" class="path1"></path>
+                                </g>
+                            </svg>
+                            <span>Filosofía</span>
+                        </label>
                     </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="genero" value="juvenil" id="gen-juvenil">
-                        <label class="form-check-label" for="gen-juvenil">Juvenil</label>
+                    <div class="form-check checkbox-wrapper">
+                        <input class="form-check-input check" type="checkbox" name="genero" value="juvenil" id="gen-juvenil"
+                               th:checked="${genero != null and genero.contains('juvenil')}"/>
+                        <label class="form-check-label label" for="gen-juvenil">
+                            <svg width="45" height="45" viewBox="0 0 95 95">
+                                <rect x="30" y="20" width="50" height="50" stroke="black" fill="none"></rect>
+                                <g transform="translate(0,-952.36222)">
+                                    <path d="m 56,963 c -102,122 6,9 7,9 17,-5 -66,69 -38,52 122,-77 -7,14 18,4 29,-11 45,-43 23,-4" stroke="black" stroke-width="3" fill="none" class="path1"></path>
+                                </g>
+                            </svg>
+                            <span>Juvenil</span>
+                        </label>
                     </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="genero" value="programacion"
-                               id="gen-programacion">
-                        <label class="form-check-label" for="gen-programacion">Programación</label>
+                    <div class="form-check checkbox-wrapper">
+                        <input class="form-check-input check" type="checkbox" name="genero" value="programacion"
+                               id="gen-programacion"   th:checked="${genero != null and genero.contains('programacion')}"/>
+                        <label class="form-check-label label" for="gen-programacion">
+                            <svg width="45" height="45" viewBox="0 0 95 95">
+                                <rect x="30" y="20" width="50" height="50" stroke="black" fill="none"></rect>
+                                <g transform="translate(0,-952.36222)">
+                                    <path d="m 56,963 c -102,122 6,9 7,9 17,-5 -66,69 -38,52 122,-77 -7,14 18,4 29,-11 45,-43 23,-4" stroke="black" stroke-width="3" fill="none" class="path1"></path>
+                                </g>
+                            </svg>
+                            <span>Programación</span>
+                        </label>
                     </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="genero" value="no ficcion"
-                               id="gen-no-ficción">
-                        <label class="form-check-label" for="gen-no-ficción">No ficción</label>
+                    <div class="form-check checkbox-wrapper">
+                        <input class="form-check-input check" type="checkbox" name="genero" value="no ficcion"
+                               id="gen-no-ficción"  th:checked="${genero != null and genero.contains('no ficcion')}"/>
+                        <label class="form-check-label label" for="gen-no-ficción">
+                            <svg width="45" height="45" viewBox="0 0 95 95">
+                                <rect x="30" y="20" width="50" height="50" stroke="black" fill="none"></rect>
+                                <g transform="translate(0,-952.36222)">
+                                    <path d="m 56,963 c -102,122 6,9 7,9 17,-5 -66,69 -38,52 122,-77 -7,14 18,4 29,-11 45,-43 23,-4" stroke="black" stroke-width="3" fill="none" class="path1"></path>
+                                </g>
+                            </svg>
+                            <span>No ficción</span>
+                        </label>
                     </div>
                     <!-- Campo de texto para otro género -->
                     <div class="mt-2">
@@ -249,19 +355,19 @@
     <nav aria-label="Page navigation example" class="d-none d-md-block" style="background-color: transparent">
         <ul class="pagination justify-content-center">
             <li class="page-item" th:class="${paginaActual == 0} ? 'disabled'">
-                <a class="page-link" th:href="@{/descubre(pagina=0, sortBy=${sortBy}, sortOrder=${sortOrder})}"
+                <a class="page-link" th:href="@{/descubre/filtrar(pagina=0, sortBy=${sortBy}, sortOrder=${sortOrder}, titulo=${titulo}, autor=${autor}, editorial=${editorial}, genero=${genero}, anoDesde=${anoDesde}, anoHasta=${anoHasta})}"
                    aria-label="Previous">
                     <span aria-hidden="true">&laquo;</span>
                 </a>
             </li>
             <li th:each="num : ${#numbers.sequence(0, totalPaginas - 1)}" class="page-item"
                 th:classappend="${num == paginaActual} ? 'active'">
-                <a class="page-link" th:href="@{/descubre(pagina=${num}, sortBy=${sortBy}, sortOrder=${sortOrder})}"
+                <a class="page-link" th:href="@{/descubre/filtrar(pagina=${num}, sortBy=${sortBy}, sortOrder=${sortOrder}, titulo=${titulo}, autor=${autor}, editorial=${editorial}, genero=${genero}, anoDesde=${anoDesde}, anoHasta=${anoHasta})}"
                    th:text="${num + 1}"></a>
             </li>
             <li class="page-item" th:class="${paginaActual == totalPaginas - 1} ? 'disabled'">
                 <a class="page-link"
-                   th:href="@{/descubre(pagina=${totalPaginas - 1}, sortBy=${sortBy}, sortOrder=${sortOrder})}"
+                   th:href="@{/descubre/filtrar(pagina=${totalPaginas - 1}, sortBy=${sortBy}, sortOrder=${sortOrder}, titulo=${titulo}, autor=${autor}, editorial=${editorial}, genero=${genero}, anoDesde=${anoDesde}, anoHasta=${anoHasta})}"
                    aria-label="Next">
                     <span aria-hidden="true">&raquo;</span>
                 </a>
@@ -273,7 +379,7 @@
     <nav aria-label="Page navigation" class="d-md-none">
         <ul class="pagination justify-content-center">
             <li class="page-item" th:class="${paginaActual == 0} ? 'disabled'">
-                <a class="page-link" th:href="@{/descubre(pagina=0, sortBy=${sortBy}, sortOrder=${sortOrder})}"
+                <a class="page-link" th:href="@{/descubre/filtrar(pagina=0, sortBy=${sortBy}, sortOrder=${sortOrder}, titulo=${titulo}, autor=${autor}, editorial=${editorial}, genero=${genero}, anoDesde=${anoDesde}, anoHasta=${anoHasta})}"
                    aria-label="Primera">
                     <span aria-hidden="true">&laquo;&laquo;</span>
                     <span class="visually-hidden">Primera</span>
@@ -281,7 +387,7 @@
             </li>
             <li class="page-item" th:class="${paginaActual == 0} ? 'disabled'">
                 <a class="page-link"
-                   th:href="@{/descubre(pagina=${paginaActual - 1}, sortBy=${sortBy}, sortOrder=${sortOrder})}"
+                   th:href="@{/descubre/filtrar(pagina=${paginaActual - 1}, sortBy=${sortBy}, sortOrder=${sortOrder}, titulo=${titulo}, autor=${autor}, editorial=${editorial}, genero=${genero}, anoDesde=${anoDesde}, anoHasta=${anoHasta})}"
                    aria-label="Anterior">
                     <span aria-hidden="true">&laquo;</span>
                     <span class="visually-hidden">Anterior</span>
@@ -292,7 +398,7 @@
             </li>
             <li class="page-item" th:class="${paginaActual == totalPaginas - 1} ? 'disabled'">
                 <a class="page-link"
-                   th:href="@{/descubre(pagina=${paginaActual + 1}, sortBy=${sortBy}, sortOrder=${sortOrder})}"
+                   th:href="@{/descubre/filtrar(pagina=${paginaActual + 1}, sortBy=${sortBy}, sortOrder=${sortOrder}, titulo=${titulo}, autor=${autor}, editorial=${editorial}, genero=${genero}, anoDesde=${anoDesde}, anoHasta=${anoHasta})}"
                    aria-label="Siguiente">
                     <span aria-hidden="true">&raquo;</span>
                     <span class="visually-hidden">Siguiente</span>
@@ -300,7 +406,7 @@
             </li>
             <li class="page-item" th:class="${paginaActual == totalPaginas - 1} ? 'disabled'">
                 <a class="page-link"
-                   th:href="@{/descubre(pagina=${totalPaginas - 1}, sortBy=${sortBy}, sortOrder=${sortOrder})}"
+                   th:href="@{/descubre/filtrar(pagina=${totalPaginas - 1}, sortBy=${sortBy}, sortOrder=${sortOrder}, titulo=${titulo}, autor=${autor}, editorial=${editorial}, genero=${genero}, anoDesde=${anoDesde}, anoHasta=${anoHasta})}"
                    aria-label="Última">
                     <span aria-hidden="true">&raquo;&raquo;</span>
                     <span class="visually-hidden">Última</span>
