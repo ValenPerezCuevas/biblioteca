@@ -129,11 +129,6 @@ public class controladorDescubre {
         }
     }
 
-
-
-
-
-
     @GetMapping("/descubre/filtrar")
     public String filtrar(
             @RequestParam(name = "titulo", required = false) String titulo,
@@ -156,7 +151,9 @@ public class controladorDescubre {
 
         // Verificar si la lista de libros está vacía
         if (paginaLibros.getContent().isEmpty()) {
-            model.addAttribute("noResultados", "No se encontraron libros con los filtros seleccionados.");
+            model.addAttribute("noResultados",
+                    "No se encontraron libros con los filtros seleccionados.");
+
         }
 
         model.addAttribute("libros", paginaLibros.getContent());
