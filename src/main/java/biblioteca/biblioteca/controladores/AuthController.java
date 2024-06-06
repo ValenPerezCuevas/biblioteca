@@ -42,8 +42,8 @@ public class AuthController {
     @PostMapping("/registrar")
     public String registerUser(@ModelAttribute usuarios usuario, Model model) {
         if (usuarioRepository.findByNombre(usuario.getNombre()) != null) {
-            model.addAttribute("error", "El nombre de usuario ya está en uso");
-            return "redirect:/login";
+            model.addAttribute("errorRegistro", "El nombre de usuario ya está en uso");
+            return "login";// Vuelve a la vista de login con el mensaje de error
         }
         roles rolUsuario = new roles();
         rolUsuario.setId_rol(2);
