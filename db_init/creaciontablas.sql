@@ -1,6 +1,8 @@
 -- Crear la base de datos biblioteca si no existe
 CREATE DATABASE IF NOT EXISTS biblioteca;
 
+ALTER DATABASE biblioteca CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
+
 -- Seleccionar la base de datos biblioteca
 USE biblioteca;
 

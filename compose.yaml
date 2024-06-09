@@ -6,6 +6,9 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: admin
       MYSQL_DATABASE: biblioteca
+      MYSQL_INITDB_SKIP_TZINFO: 1
+      TZ: UTC
+      MYSQL_COLLATION: utf8mb4_unicode_ci
     ports:
       - "3307:3306"
     volumes:
@@ -22,7 +25,7 @@ services:
     depends_on:
       - db
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql_db:3306/biblioteca
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql_db:3306/biblioteca?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: admin
       SERVER_PORT: 443
@@ -30,40 +33,9 @@ services:
       SERVER_SSL_KEY_STORE: /ssl/cert.p12
       SERVER_SSL_KEY_STORE_PASSWORD: alexandria
       SERVER_SSL_KEY_STORE_TYPE: PKCS12
-
+      LANG: es_ES.UTF-8
+      LANGUAGE: es_ES:es
+      LC_ALL: es_ES.UTF-8
+      JAVA_TOOL_OPTIONS: "-Dfile.encoding=UTF-8"
 volumes:
   mysql_data:
-
-# The commented out section below is an example of how to define a PostgreSQL
-# database that your application can use. `depends_on` tells Docker Compose to
-# start the database before your application. The `db-data` volume persists the
-# database data between container restarts. The `db-password` secret is used
-# to set the database password. You must create `db/password.txt` and add
-# a password of your choosing to it before running `docker-compose up`.
-#     depends_on:
-#       db:
-#         condition: service_healthy
-#   db:
-#     image: postgres
-#     restart: always
-#     user: postgres
-#     secrets:
-#       - db-password
-#     volumes:
-#       - db-data:/var/lib/postgresql/data
-#     environment:
-#       - POSTGRES_DB=example
-#       - POSTGRES_PASSWORD_FILE=/run/secrets/db-password
-#     expose:
-#       - 5432
-#     healthcheck:
-#       test: [ "CMD", "pg_isready" ]
-#       interval: 10s
-#       timeout: 5s
-#       retries: 5
-# volumes:
-#   db-data:
-# secrets:
-#   db-password:
-#     file: db/password.txt
-
