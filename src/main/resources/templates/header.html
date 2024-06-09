@@ -35,10 +35,12 @@
                     <!--  Si el usuario es admin, se muestran: -->
                     <th:block th:if="${session.usuario != null && session.usuario.rol.id_rol == 1}">
                         <li class="nav-item">
-                            <a class="nav-link" th:classappend="${requestURI == '/usuarios' ? 'active' : ''}" href="/usuarios">Usuarios</a>
+                            <a class="nav-link" th:classappend="${requestURI == '/usuarios' ? 'active' : ''}" href="/usuarios">
+                                Usuarios</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" th:classappend="${requestURI == '/listado' ? 'active' : ''}" href="/listado">Libros</a>
+                            <a class="nav-link" th:classappend="${requestURI == '/listado' ? 'active' : ''}" href="/listado">
+                                Libros</a>
                         </li>
                     </th:block>
                 </ul>
